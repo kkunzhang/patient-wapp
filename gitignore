@@ -1,0 +1,12 @@
+node_modules
+/dist
+vue.config.js
+package-lock.json
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+.history
+*.iml
