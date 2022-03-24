@@ -72,6 +72,12 @@
       "style": {
         "navigationBarTitleText": "报告查询"
       }
+    },
+    {
+      "path": "pages/seeReport/detail",
+      "style": {
+        "navigationBarTitleText": "报告详情"
+      }
     }
     // {
     // 	"path": "pages/consultationinfo/index",

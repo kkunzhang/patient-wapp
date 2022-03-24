@@ -5,7 +5,6 @@
       mode="bottom"
       :closeable="true"
       @close="close"
-      @open="open"
       closeIconPos="top-left"
       :safeAreaInsetBottom="true"
     >
@@ -87,7 +86,7 @@ export default {
     },
   },
   methods: {
-    radioChange: function (evt) {
+    radioChange(evt) {
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i].value === evt.detail.value) {
           this.current = i

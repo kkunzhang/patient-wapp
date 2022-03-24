@@ -16,7 +16,7 @@
           </view>
         </view>
         <!-- 卡片文字结束 -->
-        <slot><view>></view></slot>
+        <slot><view class="gl"></view></slot>
       </view>
     </uni-card>
   </view>
@@ -72,4 +72,5 @@ export default {
     }
   }
 }
+
 </style>

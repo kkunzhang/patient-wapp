@@ -10,26 +10,37 @@
         styleType="button"
       ></uni-segmented-control>
 
-      <view v-show="current === 0">
+      <view v-show="current === 0" @click="onClick()">
         <view v-for="(item, index) in info1" :key="index" class="box-content">
-          <view>
-            <button class="mini-btn" type="primary" size="mini">已生成</button>
+          <view class="box-content-item">
+            <view>
+              <button class="mini-btn" type="primary" size="mini">
+                已生成
+              </button>
+            </view>
+            <view class="box-content-title">
+              <view> 颅脑CT扫描 </view>
+              <view>2022-01-02 11:44 </view>
+            </view>
           </view>
-          <view class="box-content-title">
-            <view> 颅脑CT扫描 </view>
-            <view>2022-01-02 11:44 </view>
-          </view>
+
+          <view class="gl"></view>
         </view>
       </view>
-      <view v-show="current === 1">
+      <view v-show="current === 1" @click="onClick()">
         <view v-for="(item, index) in info1" :key="index" class="box-content">
-          <view>
-            <button class="mini-btn" type="primary" size="mini">已生成</button>
+          <view class="box-content-item">
+            <view>
+              <button class="mini-btn" type="primary" size="mini">
+                已生成
+              </button>
+            </view>
+            <view class="box-content-title">
+              <view> 颅脑CT扫描2</view>
+              <view>2022-01-02 11:44 </view>
+            </view>
           </view>
-          <view class="box-content-title">
-            <view> 颅脑CT扫描2 </view>
-            <view>2021-01-02 11:44 </view>
-          </view>
+          <view class="gl"></view>
         </view>
       </view>
     </uni-card>
@@ -38,8 +49,8 @@
 </template>
 
 <script>
-import cardItem from './cardItem.vue'
 import cardPop from './cardPop.vue'
+import cardItem from './cardItem.vue'
 export default {
   data() {
     return {
@@ -55,6 +66,11 @@ export default {
       if (this.current != e.currentIndex) {
         this.current = e.currentIndex
       }
+    },
+    onClick(e) {
+      uni.navigateTo({
+        url: '/pages/seeReport/detail',
+      })
     },
     onlineinfo() {
       // wx.navigateTo({
@@ -82,6 +98,11 @@ export default {
   flex-direction: row;
   background-color: rgba(242, 242, 242, 1);
   align-items: center;
+  justify-content: space-between;
+  .box-content-item {
+    display: flex;
+    align-items: center;
+  }
   .box-content-title {
     margin-left: 20rpx;
     color: #333333;

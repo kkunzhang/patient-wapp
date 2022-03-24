@@ -25,11 +25,22 @@ export default {
 page {
   background-color: #f5f5f5;
 }
-.my-uni-card {
-  margin: 10px !important;
-  padding: 0px 10px !important;
-  border-radius: 10px !important;
-  border: 1px solid #fff !important;
+// .my-uni-card {
+//   margin: 10px !important;
+//   padding: 0px 10px !important;
+//   border-radius: 10px !important;
+//   border: 1px solid #fff !important;
+// }
+.gl:before {
+  content: ' ';
+  display: inline-block;
+  height: 20rpx;
+  width: 20rpx;
+  border-width: 0 0 4rpx 4rpx;
+  // border-color: #000;
+  border-style: solid;
+  -webkit-transform: matrix(-0.71, 0.71, 0.71, 0.71, 0, 0);
+  transform: matrix(-0.71, 0.71, 0.71, 0.71, 0, 0);
 }
 /* #endif */
 .example-info {
