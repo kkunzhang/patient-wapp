@@ -102,21 +102,25 @@ export default {
       indexBackgroundImage: '/static/images/logo@2x.png',
       navs: [
         {
+          id: 1,
           icon: 'iconfont icon-ziyuan',
           title: '预约挂号',
           path: '/static/images/appintment.png',
         },
         {
+          id: 2,
           icon: 'iconfont icon-guanyuwomen',
           title: '在线缴费',
           path: '/static/images/payment.png',
         },
         {
+          id: 3,
           icon: 'iconfont icon-tupian',
           title: '报告查询',
           path: '/static/images/report.png',
         },
         {
+          id: 4,
           icon: 'iconfont icon-shipin',
           title: '云药房',
           path: '/static/images/drugstore.png',
@@ -251,9 +255,29 @@ export default {
     },
     onClick(item, index) {
       console.log(item)
-      uni.navigateTo({
-        url: '/pages/registration/index',
-      })
+      switch (item.id) {
+        case 1:
+          uni.navigateTo({
+            url: '/pages/registration/index',
+          })
+          break
+        case 2:
+          uni.navigateTo({
+            url: '/pages/onlinepayment/index',
+          })
+          break
+        case 3:
+          uni.navigateTo({
+            url: '/pages/seeReport/index',
+          })
+          break
+        default:
+          console.log(item.id)
+          uni.navigateTo({
+            url: '/pages/registration/index',
+          })
+      }
+
       // this.isShow = !this.isShow
       // this.$tools.toast('回答已删除',"suc")
       // this.$tools.message('回答已删除', 'suc')

@@ -72,6 +72,7 @@ export default {
     async leftClickHandle(index, id) {
       this.active = index
       this.secondData = []
+
       this.secondData.push(this.secondData1[index])
     },
     //预览图片

@@ -19,42 +19,25 @@
       showIcon="true"
       scrollable="true"
       single="true"
-      speed="50"
+      :speed="50"
       text="医生出诊时间      08:00-12:00    14:30-17:30"
     ></uni-notice-bar>
     <!-- 医生号源信息 -->
-    <uni-card>
-      <view class="doctor-num-card">
-        <view>
-          <u-avatar :src="src" size="80"></u-avatar>
-        </view>
-        <view class="head-user-info">
-          <view class="top-title">
-            <uni-title
-              type="h1"
-              color="#ffffff"
-              class="user-name"
-              :title="user_name"
-            ></uni-title>
-            <uni-title
-              type="h3"
-              color="#ffffff"
-              class="user-phone"
-              :title="user_phone"
-            ></uni-title>
-          </view>
-        </view>
-      </view>
-    </uni-card>
+    <view v-for="(item, index) in info1" :key="index">
+      <card @onClick="order"></card>
+    </view>
   </view>
 </template>
-
 <script>
+import card from '@/components/doctor/card.vue'
 export default {
+  components: {
+    card,
+  },
   data() {
     return {
       active: 0,
-      src: '/static/images/doctor.jpeg',
+      info1: [{ id: 1 }, { id: 2 }],
       info: [
         {
           id: 1,
@@ -97,14 +80,12 @@ export default {
       ],
     }
   },
-  components: {},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options)
   },
-
   methods: {
     getMyClass(index, item) {
       let boxClass
@@ -116,6 +97,12 @@ export default {
         boxClass = 'box-outside'
       }
       return boxClass
+    },
+    order(val) {
+      console.log(val)
+      uni.navigateTo({
+        url: '/pages/messageConfirm/index',
+      })
     },
     async onClick(index, id) {
       this.active = index
@@ -146,29 +133,6 @@ export default {
   .activeUnUse {
     background: rgb(170, 170, 170) !important;
     color: #fff;
-  }
-}
-.doctor-num-card {
-  .head-pic {
-    border-radius: 50%;
-    width: 140rpx;
-    height: 140rpx;
-  }
-  .head-user-info {
-    padding-left: 20rpx;
-    width: 500rpx;
-    height: 140rpx;
-    .top-title {
-      display: flex;
-      flex-wrap: nowrap;
-      flex-direction: column;
-    }
-    .user-name {
-      margin-top: -24rpx;
-    }
-    .user-phone {
-      margin-top: -60rpx;
-    }
   }
 }
 </style>

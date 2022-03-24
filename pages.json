@@ -42,6 +42,36 @@
       "style": {
         "navigationBarTitleText": "选择号源"
       }
+    },
+    {
+      "path": "pages/messageConfirm/index",
+      "style": {
+        "navigationBarTitleText": "信息确认"
+      }
+    },
+    {
+      "path": "pages/addVisit/index",
+      "style": {
+        "navigationBarTitleText": "添加就诊人"
+      }
+    },
+    {
+      "path": "pages/registrationInfo/index",
+      "style": {
+        "navigationBarTitleText": "挂号详情"
+      }
+    },
+    {
+      "path": "pages/onlinepayment/index",
+      "style": {
+        "navigationBarTitleText": "在线缴费"
+      }
+    },
+    {
+      "path": "pages/seeReport/index",
+      "style": {
+        "navigationBarTitleText": "报告查询"
+      }
     }
     // {
     // 	"path": "pages/consultationinfo/index",

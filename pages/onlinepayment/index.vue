@@ -1,78 +1,50 @@
 <template>
-  <view style="width: 100%; overflow-x: hidden">
-    <van-nav-bar
-      title="在线缴费"
-      custom-class="nav-bar"
-      title-class="nav-bar-title"
-      :border="false"
-      fixed
-      placeholder
-      left-arrow
-      @click-left="back"
-    />
-    <view class="centent">
-      <view class="centent-title">
-        <text class="title_time">2021年2月17日</text>
-        <view class="payment">
-          <text>待支付</text>
-          <van-count-down use-slot :time="time" @change="onChange">
-            <text class="item">{{ timeData.minutes }}</text>
-            <text class="item">:</text>
-            <text class="item">{{ timeData.seconds }}</text>
-          </van-count-down>
+  <view>
+    <view v-for="(item, index) in info1" :key="index">
+      <uni-card class="my-uni-card">
+        <view class="card-item-add" @click="onClick()">
+          <view style="font-size: large">2022年01月14日</view>
+          <view class="right-tips">待支付 09:12</view>
         </view>
-      </view>
-      <view>
-        <text class="titname">患者主诉</text>
-        <text>流鼻涕，发热，全身酸痛</text>
-      </view>
-      <view>
-        <text class="titname">就诊患者</text>
-        <text>赵云</text>
-      </view>
-      <view>
-        <text class="titname">会诊医生</text>
-        <text>流鼻涕，发热，全身酸痛</text>
-      </view>
-      <view>
-        <text class="titname">患者主诉</text>
-        <text>张伟军</text>
-        <text>李小凡</text>
-        <text>李佳轩</text>
-        <text>王小年</text>
-        <text>23徐启明</text>
-      </view>
-      <view>
-        <text class="titname">应付金额</text>
-        <text class="price">￥30.00</text>
-      </view>
-      <view class="footer">
-        <view class="titname">远程会诊</view>
-        <button @tap="gotoinfo">去支付</button>
-      </view>
+        <view class="item-bottom">
+          <view>
+            <text>订单名称</text>
+            <text>远程会诊-视频问诊</text>
+          </view>
+          <view>
+            <text>就诊患者</text>
+            <text>赵云</text>
+          </view>
+          <view>
+            <text>参会医生</text>
+            <text>张围军</text>
+            <text>李小凡</text>
+          </view>
+        </view>
+        <view class="card-num">
+          <view>远程门诊 </view>
+          <view>
+            <button
+              class="mini-btn"
+              @click="onClick()"
+              type="primary"
+              size="mini"
+            >
+              去支付
+            </button>
+          </view>
+        </view>
+      </uni-card>
     </view>
   </view>
 </template>
 
 <script>
-import vanNavBar from '@vant/weapp/nav-bar/index'
-import vanImage from '@vant/weapp/image/index'
-import vanIcon from '@vant/weapp/icon/index'
-import vanButton from '@vant/weapp/button/index'
-import vanCard from '@vant/weapp/card/index'
-import vanCountDown from '@vant/weapp/count-down/index'
-// pages/user/index.js
 export default {
-  components: {
-    vanNavBar,
-    vanImage,
-    vanIcon,
-    vanButton,
-    vanCard,
-    vanCountDown,
-  },
+  components: {},
   data() {
     return {
+      info1: [{ id: 1 }, { id: 2 }],
       time: 30 * 60 * 60 * 1000,
       timeData: {
         minutes: '',
@@ -130,7 +102,7 @@ export default {
       })
     },
 
-    onChange(e) {
+    onClick(e) {
       this.setData({
         timeData: e.detail,
       })
@@ -138,6 +110,33 @@ export default {
   },
 }
 </script>
-<style>
-@import './index.css';
+<style lang="scss">
+.card-item-add {
+  display: flex;
+  justify-content: space-between;
+  .right-tips {
+    height: 50rpx;
+    font-size: 36rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    color: #f68834;
+  }
+}
+.item-bottom view {
+  margin-top: 30rpx;
+  color: rgba(96, 102, 114, 1);
+}
+.item-bottom view text {
+  margin-right: 20rpx;
+}
+.card-num {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 45rpx;
+  text {
+    margin: 4rpx;
+  }
+  .mini-btn {
+    border-radius: 30rpx !important;
+  }
+}
 </style>
