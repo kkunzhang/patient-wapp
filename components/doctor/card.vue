@@ -1,10 +1,9 @@
 <template>
   <view>
     <!-- 医生号源信息 -->
-
-    <uni-card class="my-uni-card">
+    <uni-card :isFull="isFull" class="my-uni-card" :border="false">
       <view class="doctor-card">
-        <view class="doctor-card-pic">
+        <view class="doctor-card-pic" @click="onClick('detail')">
           <u-avatar :src="avatar" size="70"></u-avatar>
           <view class="card-message">
             <view>
@@ -12,7 +11,16 @@
               <text>主任医师</text>
               <text>内科</text>
             </view>
-            <view class="uni-lastmsg"> 擅长：对高血压，冠心病，心力衰歇… </view>
+            <view class="uni-lastmsg"> 中国人民解放军总医院 301 医院 </view>
+
+            <view class="uni-lastmsg">
+              擅长：对高血压，冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇
+            </view>
+            <view class="message-tips" v-if="isShowOther">
+              <view>好评率 98%</view>
+              <view>已服务 123</view>
+              <view>平均响应 慢</view>
+            </view>
           </view>
         </view>
         <view class="card-num" v-if="isShow">
@@ -21,13 +29,24 @@
           <view>
             <button
               class="mini-btn"
-              @click="onClick()"
+              @click="onClick('order')"
               type="primary"
               size="mini"
             >
               预约
             </button>
           </view>
+        </view>
+
+        <view class="card-num" v-if="isShowOther">
+          <view>远程门诊 ￥15.00</view>
+          <view>远程门诊 ￥15.00</view>
+          <view> 远程门诊 ￥15.00</view>
+        </view>
+        <view class="card-num" v-if="isShowOther">
+          <view>远程门诊 ￥15.00</view>
+          <view>远程门诊 ￥15.00</view>
+          <view> 远程门诊 ￥15.00</view>
         </view>
       </view>
     </uni-card>
@@ -48,12 +67,29 @@ export default {
       type: Boolean,
       default: true,
     },
+    isFull: {
+      type: Boolean,
+      default: false,
+    },
+    isShowOther: {
+      type: Boolean,
+      default: false,
+    },
+    isShowDetail: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
-    onClick() {
-      let item = 'true123'
-      console.log(item)
-
+    onClick(val) {
+      let item
+      if (val == 'order') {
+        item = 'true123'
+        console.log(item)
+      } else {
+        item = 'vvv'
+        console.log(item)
+      }
       this.$emit('onClick', item)
     },
   },
@@ -85,16 +121,23 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 1; //可设置显示的行数
+        -webkit-line-clamp: 2; //可设置显示的行数
         line-clamp: 2;
         -webkit-box-orient: vertical;
+      }
+      .message-tips {
+        margin-top: 20rpx;
+        display: flex;
+        justify-content: space-between;
       }
     }
   }
   .card-num {
     display: flex;
     justify-content: space-between;
-    margin-top: 45rpx;
+    &:nth-child(2) {
+      margin-top: 45rpx;
+    }
     text {
       margin: 4rpx;
     }

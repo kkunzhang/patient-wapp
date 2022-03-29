@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view>
+    <view :class="[isBackground == true ? 'search_11' : '']">
       <uni-search-bar
         @confirm="search"
         :focus="true"
@@ -24,10 +24,11 @@ export default {
   data() {
     return {
       searchValue: '',
+      search_11: '',
     }
   },
   props: {
-    fill: {
+    isBackground: {
       type: Boolean,
       default: false,
     },
@@ -67,8 +68,9 @@ export default {
   },
 }
 </script>
-
-
 <style lang="scss">
+.search_11 {
+  background-color: #fff;
+}
 </style>
 

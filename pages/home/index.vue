@@ -26,6 +26,7 @@
         <text>{{ item.title }}</text>
       </view>
     </view>
+
     <!--线上服务-->
     <uni-card>
       <view class="card-title">线上服务</view>
@@ -89,16 +90,19 @@
 <script>
 import search from '@/components/search/search.vue'
 import mySwiper from '@/components/swiper/mySwiper.vue'
+import modal from '@/components/modal/modal.vue'
 import { getUserDefaultSetting } from '@api/user'
 export default {
   components: {
     search,
     mySwiper,
+    modal,
   },
   data() {
     return {
       isShow: false,
       isShowIndexModal: false,
+      showPop: true,
       indexBackgroundImage: '/static/images/logo@2x.png',
       navs: [
         {
@@ -120,7 +124,7 @@ export default {
           path: '/static/images/report.png',
         },
         {
-          id: 4,
+          id: 5,
           icon: 'iconfont icon-shipin',
           title: '云药房',
           path: '/static/images/drugstore.png',
@@ -128,16 +132,19 @@ export default {
       ],
       navs2: [
         {
+          id: 6,
           icon: 'iconfont icon-ziyuan',
           title: '远程门诊',
           path: '/static/images/outpatient.png',
         },
         {
+          id: 6,
           icon: 'iconfont icon-guanyuwomen',
           title: '远程会诊',
           path: '/static/images/consultation.png',
         },
         {
+          id: 4,
           icon: 'iconfont icon-tupian',
           title: '全国医生',
           path: '/static/images/doctor.png',
@@ -271,6 +278,15 @@ export default {
             url: '/pages/seeReport/index',
           })
           break
+        case 4:
+          uni.navigateTo({
+            url: '/pages/doctorList/index',
+          })
+          break
+        case 6:
+          this.showPop = true
+
+          break
         default:
           console.log(item.id)
           uni.navigateTo({
@@ -299,7 +315,9 @@ export default {
         })
       }, 800)
     },
-
+    toHandlePopModal(val) {
+      conosle.log(val)
+    },
     // 预约挂号
     appointment() {
       appointment({}).then((res) => {
@@ -325,8 +343,6 @@ export default {
         console.log('退款单列表', res)
       })
     },
-
-    // 【2.3.0】医生列表（远程门诊、预约手术、面诊）
     getDoctorList() {
       getDoctorList({
         serviceType: '05',

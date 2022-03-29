@@ -78,6 +78,24 @@
       "style": {
         "navigationBarTitleText": "报告详情"
       }
+    },
+    {
+      "path": "pages/doctorList/index",
+      "style": {
+        "navigationBarTitleText": "全国医生"
+      }
+    },
+    {
+      "path": "pages/doctorList/detail",
+      "style": {
+        "navigationBarTitleText": "医生详情"
+      }
+    },
+    {
+      "path": "pages/allOrders/index",
+      "style": {
+        "navigationBarTitleText": "全部订单"
+      }
     }
     // {
     // 	"path": "pages/consultationinfo/index",

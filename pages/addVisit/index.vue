@@ -4,42 +4,49 @@
       <view class="example">
         <!-- 基础表单校验 -->
         <uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
-          <uni-forms-item label="工单号" required name="name">
+          <uni-forms-item label="姓名" required name="name">
             <uni-easyinput
-              placeholder="请输入工单号"
+              placeholder="请输入姓名"
               class="input-bg"
-              placeholder-style=" color: #999;font-size: 30rpx;font-weight: 400;"
+              placeholder-style="color: rgb(192, 196, 204);font-size: 30rpx;font-weight: 400;"
               v-model="valiFormData.name"
             />
           </uni-forms-item>
-          <uni-forms-item label="物料编码" required name="age1">
-            <uni-easyinput
-              placeholder="请输入物料编码"
-              class="input-bg"
-              placeholder-style=" color: #999;font-size: 30rpx;font-weight: 400;"
-              v-model="valiFormData.age"
-            />
+          <uni-forms-item label="证件类型" required name="cardType">
+            <choice-selected
+              :choiceContent="choiceContent"
+              :choiceIndex="choiceIndex"
+              :choiceList="choiceList"
+              @onChoiceClick="onChoiceClick"
+            ></choice-selected>
           </uni-forms-item>
-          <uni-forms-item label="数量" required name="age2">
-            <uni-easyinput
-              placeholder="请输入数量"
-              class="input-bg"
-              placeholder-style=" color: #999;font-size: 30rpx;font-weight: 400;"
-              v-model="valiFormData.age"
-            />
+          <uni-forms-item
+            label="身份证"
+            type="number"
+            required
+            name="cardNumber"
+          >
+            <u--input
+              placeholder="请输入身份证号"
+              border="surround"
+              clearable
+              v-model="valiFormData.cardNumber"
+              type="number"
+              @blur="Listeningfocus()"
+            ></u--input>
           </uni-forms-item>
-          <uni-forms-item label="钢卷号" required name="age3">
-            <uni-easyinput
-              placeholder="请输入钢卷号"
-              class="input-bg"
-              placeholder-style=" color: #999;font-size: 30rpx;font-weight: 400;"
-              v-model="valiFormData.age"
-            />
+          <uni-forms-item label="手机号" type="number" required name="phone">
+            <u--input
+              placeholder="请输入手机号"
+              border="surround"
+              clearable
+              v-model="valiFormData.phone"
+              type="number"
+              @blur="Listeningfocus(1)"
+            ></u--input>
           </uni-forms-item>
-          <uni-forms-item label="类型" required name="age4">
-            <button class="mini-btn" type="default">
-              {{ valiFormData.statusText }}
-            </button>
+          <uni-forms-item label="性别" required name="sexs">
+            <uni-data-checkbox v-model="valiFormData.sex" :localdata="sexs" />
           </uni-forms-item>
         </uni-forms>
       </view>
@@ -53,27 +60,42 @@
 </template>
 
 <script>
+import choiceSelected from '@/components/selected/selected.vue'
 export default {
+  components: {
+    choiceSelected,
+  },
   data() {
     return {
-      inputData: '',
+      sexs: [
+        {
+          text: '男',
+          value: 0,
+        },
+        {
+          text: '女',
+          value: 1,
+        },
+      ],
+      choiceList: [
+        {
+          choiceItemId: '0',
+          choiceItemContent: '大陆身份证',
+        },
+        // {
+        //   choiceItemId: '1',
+        //   choiceItemContent: '苹果',
+        // },
+      ],
+      choiceContent: '大陆身份证', //选择的内容
+      choiceIndex: 0, //选择位置
       // 校验表单数据
       valiFormData: {
         name: '',
         age: '',
-        introduction: '',
-        id: 0,
-        name: '制单人:王五',
-        home: '到货时间:2012-12-12',
-        level: '制单时间:2012-12-12',
-        age: '顺达广州机械公司',
-        subtotal: '23',
-        numberBox: '到货单号:DH12312312312312312',
-        checked: false,
-        statusText: '不良',
+        cardNumber: '',
+        phone: '',
       },
-      input1: '',
-      input2: '',
       // 校验规则
       rules: {
         name: {
@@ -84,15 +106,46 @@ export default {
             },
           ],
         },
-        age: {
+        sexs: {
           rules: [
             {
               required: true,
-              errorMessage: '年龄不能为空',
+              errorMessage: '性别不能为空',
+            },
+          ],
+        },
+        cardNumber: {
+          rules: [
+            {
+              required: true,
+              errorMessage: '身份证号不能为空',
             },
             {
-              format: 'number',
-              errorMessage: '年龄只能输入数字',
+              validateFunction: function (rule, value, data, callback) {
+                const reg =
+                  /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+                if (reg.test(value) === false && value) {
+                  callback('请输入正确格式的身份证号码')
+                }
+                return true
+              },
+            },
+          ],
+        },
+        phone: {
+          rules: [
+            {
+              required: true,
+              errorMessage: '手机号不能为空',
+            },
+            {
+              validateFunction: function (rule, value, data, callback) {
+                const reg = /^1[34578]\d{9}$/
+                if (reg.test(value) === false && value) {
+                  callback('请输入正确格式的手机号码')
+                }
+                return true
+              },
             },
           ],
         },
@@ -101,6 +154,48 @@ export default {
   },
   computed: {},
   methods: {
+    onChoiceClick: function (position) {
+      console.log('+++++++' + position)
+
+      var _this = this
+
+      _this.choiceIndex = position
+
+      _this.choiceContent = _this.choiceList[position].choiceItemContent
+    },
+    // 1、监听身份证输入
+    Listeningfocus(isPhone = '') {
+      if (this.valiFormData.cardNumber != '') {
+        this.getCardTypeNumber(this.valiFormData.cardNumber, isPhone)
+      }
+    },
+    // 2、检验身份证是否正确
+    getCardTypeNumber(value, isPhone) {
+      if (isPhone) {
+        const reg = /^1[34578]\d{9}$/
+        if (reg.test(value) === false && value) {
+          let msg = '请输入正确格式的手机号码'
+          uni.showToast({
+            icon: 'none',
+            title: msg,
+            duration: 2000,
+            position: 'top',
+          })
+        }
+      } else {
+        const reg =
+          /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+        if (reg.test(value) === false && value) {
+          let msg = '请输入正确格式的身份证号码'
+          uni.showToast({
+            icon: 'none',
+            title: msg,
+            duration: 2000,
+            position: 'top',
+          })
+        }
+      }
+    },
     submit(ref) {
       this.$refs[ref]
         .validate()
@@ -130,33 +225,13 @@ export default {
 </script>
 
 <style lang="scss">
-.main {
-  background-color: #f7f7f7;
-  padding-bottom: 180rpx;
-  .list-item {
-    cursor: pointer;
-    background-color: #fff;
-    border-radius: 10rpx;
-    margin-top: 20rpx;
-    .l-line {
-      line-height: 45rpx;
-      border-bottom: 2rpx #d6d6d6 dashed;
-      padding: 10rpx 0;
-    }
-    .title {
-      line-height: 45rpx;
-      border-bottom: 2rpx #d6d6d6 dashed;
-      padding: 30rpx 0;
-    }
-  }
-}
 .submit-box {
   width: 100%;
   position: fixed;
   bottom: 0;
 }
 .example {
-  padding: 40rpx 100rpx 20rpx 100rpx;
+  padding: 40rpx 50rpx 20rpx 50rpx;
   .input-bg {
     background-color: #fff;
   }

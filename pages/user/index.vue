@@ -75,7 +75,7 @@
     <uni-card>
       <view class="box-tip">
         <view class="card-title">订单管理</view>
-        <view>全部订单></view>
+        <view @click="onClick(0, 0)">全部订单></view>
       </view>
       <view class="box-outside-warp">
         <view
@@ -154,22 +154,22 @@ export default {
       navs2: [
         {
           icon: 'iconfont icon-ziyuan',
-          title: ' 预约挂号 ',
+          title: ' 待支付 ',
           path: '/static/images/register.png',
         },
         {
           icon: 'iconfont icon-guanyuwomen',
-          title: '远程门诊',
+          title: '服务中',
           path: '/static/images/remote-outpatient.png',
         },
         {
           icon: 'iconfont icon-tupian',
-          title: '远程会诊',
+          title: '待评价',
           path: '/static/images/remote-consultation.png',
         },
         {
           icon: 'iconfont icon-shipin',
-          title: '处方订单',
+          title: '退款',
           path: '/static/images/prescription.png',
         },
       ],
@@ -214,41 +214,13 @@ export default {
   },
   // }),
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    // login().then(res => console.log(res))
+  methods: {
+    onClick() {
+      uni.navigateTo({
+        url: '/pages/allOrders/index',
+      })
+    },
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {},
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {},
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {},
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {},
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {},
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {},
-  methods: {},
 }
 </script>
 <style>
