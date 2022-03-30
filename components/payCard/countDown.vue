@@ -41,7 +41,7 @@ export default {
   &__custom {
     width: 22px;
     height: 22px;
-    background-color: #007aff;
+    background-color: #f29100;
     border-radius: 4px;
     /* #ifndef APP-NVUE */
     display: flex;
@@ -57,7 +57,7 @@ export default {
   }
 
   &__doc {
-    color: #007aff;
+    color: #f29100;
     padding: 0px 4px;
   }
 

@@ -1,6 +1,6 @@
 <template>
   <view>
-    <payCard :list="info"></payCard>
+    <payCard :list="info" @onClick="toDetail"></payCard>
   </view>
 </template>
 
@@ -14,9 +14,9 @@ export default {
     }
   },
   methods: {
-    onClick(e) {
-      this.setData({
-        timeData: e.detail,
+    toDetail(val) {
+      uni.navigateTo({
+        url: '/pages/onlinepayment/detail',
       })
     },
   },

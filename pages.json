@@ -68,6 +68,18 @@
       }
     },
     {
+      "path": "pages/onlinepayment/detail",
+      "style": {
+        "navigationBarTitleText": "订单详情"
+      }
+    },
+    {
+      "path": "pages/onlinepayment/imgPreview",
+      "style": {
+        "navigationBarTitleText": "查看图片"
+      }
+    },
+    {
       "path": "pages/seeReport/index",
       "style": {
         "navigationBarTitleText": "报告查询"

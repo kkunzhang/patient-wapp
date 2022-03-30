@@ -16,7 +16,7 @@
       itemStyle="padding-left: 20px; padding-right: 20px; height: 44px;"
       >111
     </u-tabs>
-    <payCard :list="info"></payCard>
+    <pay-card :list="info"></pay-card>
   </view>
 </template>
 

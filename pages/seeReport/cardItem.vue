@@ -16,7 +16,7 @@
           </view>
         </view>
         <!-- 卡片文字结束 -->
-        <slot><view class="gl"></view></slot>
+        <slot><view v-if="isShowButton" class="gl"></view></slot>
       </view>
     </uni-card>
   </view>
@@ -41,6 +41,10 @@ export default {
       default() {
         return {}
       },
+    },
+    isShowButton: {
+      type: Boolean,
+      default: true,
     },
   },
 }
@@ -72,5 +76,4 @@ export default {
     }
   }
 }
-
 </style>

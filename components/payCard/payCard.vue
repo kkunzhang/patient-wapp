@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view v-for="(item, index) in list" :key="index">
+    <view v-for="(item, index) in list" @click="onClick(111)" :key="index">
       <uni-card class="my-uni-card">
         <view class="card-item-add">
           <view style="font-size: large">2022年01月14日</view>
@@ -50,7 +50,11 @@ export default {
     return {}
   },
   methods: {
-    onClick(e) {},
+    onClick(val) {
+      let item
+      item = 'vvv'
+      this.$emit('onClick', item)
+    },
   },
   props: {
     list: {
