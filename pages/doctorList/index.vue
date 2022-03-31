@@ -10,6 +10,8 @@
       :menuList="menuList"
       @result="result"
     ></sl-filter>
+    <!-- :independence="true" -->
+
     <search :isBackground="true" @searchValue="searchValue"></search>
     <!-- 医生号源信息 -->
     <text v-if="info1.length === 0">暂无数据</text>
@@ -18,19 +20,10 @@
         <card @onClick="order" :isShow="false" :isShowOther="true"></card>
       </view>
     </view>
-
-    <!-- <button
-      type="primary"
-      @click="changeMenuListDetailList()"
-      style="margin-top: 10px; width: 90%"
-    >
-      动态修改menuList的detailList
-    </button> -->
   </view>
 </template>
 
 <script>
-// pages/message/index.js
 import card from '@/components/doctor/card.vue'
 import slFilter from '@/components/sl-filter/sl-filter.vue'
 import search from '@/components/search/search.vue'
@@ -46,56 +39,16 @@ export default {
           detailTitle: '请选择科室',
           isMutiple: false,
           key: 'key_1',
-          detailList: [
-            {
-              title: '全部科室',
-              value: '',
-            },
-            {
-              title: '心肺',
-              value: '心肺',
-            },
-            {
-              title: '心脑',
-              value: '心脑',
-            },
-            {
-              title: '心脑',
-              value: '心脑',
-            },
-            {
-              title: '心脑',
-              value: '心脑',
-            },
-            {
-              title: '心脑',
-              value: '心脑',
-            },
-            {
-              title: '心脑',
-              value: '心脑',
-            },
-          ],
+          mySl: true,
+          detailList: [],
         },
         {
           title: '全国',
           detailTitle: '请选择热门城市',
           key: 'key_2',
+          myCity: true,
           isMutiple: false,
-          detailList: [
-            {
-              title: '不限',
-              value: '',
-            },
-            {
-              title: '北京',
-              value: 'val_2_1',
-            },
-            {
-              title: '上海',
-              value: 'val_2_2',
-            },
-          ],
+          detailList: [],
         },
         {
           title: '排序',
@@ -147,6 +100,7 @@ export default {
   },
 
   methods: {
+   
     // 搜索
     searchValue(val) {
       this.keyword = val
