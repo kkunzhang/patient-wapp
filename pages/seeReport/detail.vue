@@ -13,10 +13,10 @@
       </uni-col>
     </uni-row>
     <uni-row class="demo-uni-row">
-      <uni-col :span="12">
+      <uni-col :span="14">
         <view class="demo-uni-col dark">检查时间 2022-01-02 10:23</view>
       </uni-col>
-      <uni-col :span="12" :push="1">
+      <uni-col :span="10">
         <view class="demo-uni-col dark">报告单号 1234567890</view>
       </uni-col>
     </uni-row>
@@ -42,13 +42,20 @@
     </uni-row>
     <u-line color="#2979ff" margin="0 10rpx 20rpx 0"></u-line>
     <uni-row class="demo-uni-row">
-      <uni-col :span="9" :pull="0">
-        <view class="demo-uni-col dark">检查项目 CT</view>
+      <uni-col :span="8" :pull="0">
+        <view class="demo-uni-col dark">检查项目 </view>
+      </uni-col>
+      <uni-col :span="12" :pull="0">
+        <view class="demo-uni-col dark"> CT</view>
       </uni-col>
     </uni-row>
+
     <uni-row class="demo-uni-row">
+      <uni-col :span="8" :pull="0">
+        <view class="demo-uni-col dark">检查部位/方法</view>
+      </uni-col>
       <uni-col :span="16" :pull="0">
-        <view class="demo-uni-col dark">检查部位/方法 颅脑CT螺旋扫描</view>
+        <view style="text-align: left">颅脑CT螺旋扫描</view>
       </uni-col>
     </uni-row>
     <uni-row class="demo-uni-row">
@@ -93,10 +100,10 @@
       </uni-col>
     </uni-row>
     <uni-row class="demo-uni-row">
-      <uni-col :span="12">
+      <uni-col :span="14">
         <view class="demo-uni-col dark">检查时间 2022-01-02 10:23</view>
       </uni-col>
-      <uni-col :span="12" :push="0">
+      <uni-col :span="10" :push="0">
         <view class="demo-uni-col dark">报告单号 1234567890</view>
       </uni-col>
     </uni-row>
@@ -126,7 +133,8 @@ export default {
 </script>
 <style lang="scss">
 .page {
-  text-align: center;
+  margin-left: 10px;
+  // text-align: center;
   .demo-uni-row {
     margin-bottom: 10px;
     /* QQ、字节小程序文档写有 :host，但实测不生效 */
@@ -153,14 +161,6 @@ export default {
   }
   .dark_deep {
     background-color: #99a9bf;
-  }
-
-  .dark {
-    // background-color: #d3dce6;
-  }
-
-  .light {
-    // background-color: #e5e9f2;
   }
 }
 </style>

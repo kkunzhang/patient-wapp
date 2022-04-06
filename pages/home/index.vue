@@ -6,14 +6,6 @@
     <search @searchValue="searchValue"></search>
     <!--轮播图-->
     <my-swiper></my-swiper>
-    <!-- <button
-      class="sys_btn"
-      open-type="getUserInfo"
-      lang="zh_CN"
-      @getuserinfo="appLoginWx"
-    >
-      小程序登录授权
-    </button> -->
     <!-- 导航区域 -->
     <view class="fast-enter">
       <view
@@ -44,12 +36,7 @@
         </view>
       </view>
     </uni-card>
-    <!-- <view
-      v-show="isShow"
-      style="margin-top: 100px; width: 400px; height: 400px"
-    >
-      <image mode="widthFix" src="/static/images/1.jpeg"></image>
-    </view> -->
+
     <!--预约服务-->
     <uni-card>
       <view class="card-title">预约服务</view>
@@ -84,6 +71,7 @@
         </view>
       </view>
     </uni-card>
+    <!-- 弹出框 -->
     <!-- .sync修饰符:当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。 -->
     <!-- 通过 ref 为子组件赋予一个 ID 引用,访问子组件实例 -->
     <yz-canvas-poster
@@ -96,8 +84,6 @@
       :textHead="textHead"
     >
     </yz-canvas-poster>
-
-    <!-- 探矿 -->
   </view>
 </template>
 
@@ -115,7 +101,6 @@ export default {
   data() {
     return {
       isShow: false,
-      isShowIndexModal: false,
       indexBackgroundImage: '/static/images/logo@2x.png',
       navs: [
         {
@@ -242,11 +227,9 @@ export default {
     canvasShow() {
       //打印下面日志手机端控制台会报错，但不影响运行，原因未明。
       // console.log('mycanvas', this.$refs.mycanvas);
-
       //获取画布的尺寸大小
       this.canvasHight = this.$refs.mycanvas.canvasHeight
       this.canvasWidth = this.$refs.mycanvas.canvasWidth
-
       // 如下，以canvasHight、canvasWidth为单位进行计算，达到动态布局以适应不同尺寸的手机
       this.imageBg = '/static/images/bg.jpg'
       this.imageHead = [
@@ -270,11 +253,9 @@ export default {
         'black',
         '20',
       ]
-
       //canvas的父级如果被隐藏,canvas的width、height则都为0;
       //当父元素出现，canvas的高度也就有了，但是canvas并不会绘制显示。动态修改 canvas 大小后需要重新绘制;
       this.ifShow = true // 显示画布
-
       //解决方法：可以将绘制方法写在异步方法中;
       //同时要注意组件的生命周期，确保实例挂载成功之后再执行,一般延时50ms（经验值，与硬件处理速度有关）执行即可。
       let tempTimeOut = setTimeout(() => {
@@ -289,41 +270,6 @@ export default {
       }
       const data = await this.$api.getArriveOrderItem(params)
       this.list = data.results
-    },
-    appLoginWx() {
-      // #ifdef MP-WEIXIN
-      uni.getProvider({
-        service: 'oauth',
-        success: function (res) {
-          if (~res.provider.indexOf('weixin')) {
-            uni.login({
-              provider: 'weixin',
-              success: (res2) => {
-                uni.getUserInfo({
-                  provider: 'weixin',
-                  success: (info) => {
-                    //这里请求接口
-                    console.log(res2)
-                    console.log(info)
-                  },
-                  fail: () => {
-                    uni.showToast({ title: '微信登录授权失败', icon: 'none' })
-                  },
-                })
-              },
-              fail: () => {
-                uni.showToast({ title: '微信登录授权失败', icon: 'none' })
-              },
-            })
-          } else {
-            uni.showToast({
-              title: '请先安装微信或升级版本',
-              icon: 'none',
-            })
-          }
-        },
-      })
-      //#endif
     },
     onClick(item, index) {
       console.log(item)
@@ -423,44 +369,7 @@ export default {
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    this.isShowIndexModal = this.$store.state.showIndexModal
-    const context = this
-
-    // getUserDefaultSetting()
-    //       .then(({ obj }) => {
-    //         if (!obj) {
-    //           uni.showModal({
-    //             title: '温馨提示',
-    //             content: '系统未检测到您的绑定信息，是否立即前往绑定？',
-    //             success: function (res) {
-    //               if (res.confirm) {
-    //                 context.$Router.replaceAll({
-    //                   name: 'AddUser',
-    //                   query: { hasUser: true },
-    //                 })
-    //               }
-    //             },
-    //           })
-    //         }
-    //         this.updateUserInfo(obj)
-    //         uni.setStorageSync('userInfo', obj)
-    //       })
-    //       .catch((err) => {
-    //         const context = this
-    //         if (err.state.includes('TOKEN')) {
-    //           uni.showModal({
-    //             title: '温馨提示',
-    //             content: '您当前的授权信息已过期，是否重新授权。',
-    //             success: function (res) {
-    //               if (res.confirm) {
-    //                 context.$Router.replaceAll({ name: 'login' })
-    //               }
-    //             },
-    //           })
-    //         }
-    //       })
-
-    // this.addDoctorList(this.pages)
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

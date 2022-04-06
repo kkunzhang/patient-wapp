@@ -8,7 +8,24 @@ import store from './store/index'
 Vue.prototype.$tools = tools
 Vue.use(uView);
 Vue.config.productionTip = false
-
+// 封装全局登录函数
+Vue.prototype.checkLogin = function (backpage, backtype) {
+  var uid = uni.getStorageSync('uid');
+  var nickName = uni.getStorageSync('nickName');
+  var avatarUrl = uni.getStorageSync('avatarUrl');
+  var regtime = uni.getStorageSync('regtime');
+  var phone = uni.getStorageSync('phone');
+  if (uid == '') {
+    uni.redirectTo({ url: '/pages/login/login?backpage=' + backpage + '&backtype=' + backtype });
+    return false;
+  }
+  if (phone == '') {
+    uni.redirectTo({ url: '/pages/login/loginPhone?backpage=' + backpage + '&backtype=' + backtype });
+    return false;
+  }
+  // 登录成功、已经登录返回数组 [用户 id, 用户随机码, 用户昵称, 用户表情]
+  return [uid, nickName, avatarUrl, regtime];
+}
 App.mpType = 'app'
 
 const app = new Vue({

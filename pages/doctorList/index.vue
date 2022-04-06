@@ -13,6 +13,8 @@
     <!-- :independence="true" -->
 
     <search :isBackground="true" @searchValue="searchValue"></search>
+    <!-- todo测试 -->
+    <button @click="onClick2()">清缓存</button>
     <!-- 医生号源信息 -->
     <text v-if="info1.length === 0">暂无数据</text>
     <view v-else>
@@ -98,9 +100,19 @@ export default {
     search,
     card,
   },
-
+  onLoad() {
+    // getApp().globalData.token = '3333'
+    // console.log(getApp().globalData.token)
+    // uni.navigateTo({
+    //   url: '/pages/login/login',
+    // })
+    var loginRes = this.checkLogin('/pages/doctorList/index', 2)
+    // 没有登录成功，返回空
+    if (!loginRes) {
+      return
+    }
+  },
   methods: {
-   
     // 搜索
     searchValue(val) {
       this.keyword = val
@@ -114,6 +126,12 @@ export default {
     },
     async onClick(index, id) {
       this.active = index
+    },
+    async onClick2(index, id) {
+      uni.setStorageSync('uid', '')
+      uni.setStorageSync('nickName', '')
+      uni.setStorageSync('avatarUrl', '')
+      uni.setStorageSync('regtime', '')
     },
     changeMenuListDetailList() {
       let tempDetailList = [
