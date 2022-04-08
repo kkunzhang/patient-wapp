@@ -26,12 +26,6 @@ page {
   background-color: #f5f5f5;
   color: #606672;
 }
-// .my-uni-card {
-//   margin: 10px !important;
-//   padding: 0px 10px !important;
-//   border-radius: 10px !important;
-//   border: 1px solid #fff !important;
-// }
 .gl:before {
   content: ' ';
   display: inline-block;

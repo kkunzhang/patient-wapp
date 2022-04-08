@@ -3,13 +3,18 @@
     <!--顶部卡片 -->
     <card :isShow="false"></card>
     <!--添加就诊人 -->
-    <uni-card class="my-uni-card">
-      <view class="card-item-add" @click="onClick()">
-        <view><uni-icons type="plus-filled" size="40"></uni-icons></view>
-        <text>添加就诊人</text>
-      </view>
-    </uni-card>
-    <uni-card class="my-uni-card">
+    <view>
+      <uni-card>
+        <view class="card-item-add" @click="onAdd()">
+          <view><uni-icons type="plus-filled" size="40"></uni-icons></view>
+          <text>添加就诊人</text>
+        </view>
+      </uni-card>
+      <!-- 已有就诊人，非第一次添加 -->
+      <card-item @openPop="onOpen"> </card-item>
+    </view>
+    <!-- 订单名称 -->
+    <uni-card>
       <view class="item-bottom">
         <view>
           <text>订单名称</text>
@@ -26,7 +31,8 @@
         </view>
       </view>
     </uni-card>
-    <uni-card class="my-uni-card">
+    <!-- 支付信息 -->
+    <uni-card>
       <view style="font-size: large">支付信息</view>
       <view class="payment-item">
         <view>
@@ -56,8 +62,8 @@
         </view>
       </view>
     </uni-card>
-
-    <uni-card class="my-uni-card">
+    <!-- 支付方式 -->
+    <uni-card>
       <view>支付方式</view>
       <view class="weicat">
         <view class="weicat-item">
@@ -66,18 +72,22 @@
         </view>
       </view>
     </uni-card>
+    <!-- 提交 -->
     <view class="submit-box">
       <button type="primary" @click="onSubmit()">确认挂号</button>
     </view>
+    <!-- 弹窗 -->
+    <card-pop :isShow="show" @closePop="onClose"></card-pop>
   </view>
 </template>
 <script>
 import card from '@/components/doctor/card.vue'
+import cardPop from '../seeReport/cardPop.vue'
+import cardItem from '../seeReport/cardItem.vue'
 export default {
-  components: { card },
+  components: { card, cardPop, cardItem },
   data() {
     return {
-      radio: '1',
       show: false,
       lever: true,
     }
@@ -86,34 +96,6 @@ export default {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {},
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {},
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {},
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {},
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {},
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {},
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {},
   methods: {
     onSubmit() {
       console.log('跳转去支付')
@@ -121,29 +103,17 @@ export default {
         url: '/pages/registrationInfo/index',
       })
     },
-    onClick() {
+    onAdd() {
       console.log('2222')
       uni.navigateTo({
         url: '/pages/addVisit/index',
       })
     },
-    onChange(event) {
-      console.log(event)
-      this.setData({
-        radio: event.detail,
-      })
+    onOpen(val) {
+      this.show = true
     },
-    showFun() {
-      this.setData({
-        show: true,
-      })
-      console.log(11)
-    },
-
-    onClose() {
-      this.setData({
-        show: false,
-      })
+    onClose(val) {
+      this.show = false
     },
   },
 }
@@ -161,9 +131,9 @@ export default {
 .item-bottom view {
   margin-top: 30rpx;
   color: rgba(96, 102, 114, 1);
-}
-.item-bottom view text {
-  margin-right: 20rpx;
+  text {
+    margin-right: 20rpx;
+  }
 }
 .payment-item {
   display: flex;
@@ -180,9 +150,9 @@ export default {
     padding: 5rpx 10rpx;
     line-height: auto;
   }
-}
-.payment-item > view > text {
-  margin-right: 20rpx;
+  view > text {
+    margin-right: 20rpx;
+  }
 }
 .payment-footer {
   box-sizing: border-box;
@@ -195,22 +165,22 @@ export default {
     font-size: 35rpx;
   }
 }
-
 .weicat {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 20rpx;
+  & image {
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 15rpx;
+  }
+  .weicat-item {
+    display: flex;
+    align-items: center;
+  }
 }
-.weicat image {
-  width: 50rpx;
-  height: 50rpx;
-  margin-right: 15rpx;
-}
-.weicat-item {
-  display: flex;
-  align-items: center;
-}
+
 .submit-box {
   width: 100%;
   position: fixed;

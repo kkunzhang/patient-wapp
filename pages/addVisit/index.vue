@@ -45,15 +45,32 @@
               @blur="Listeningfocus(1)"
             ></u--input>
           </uni-forms-item>
-          <uni-forms-item label="性别" required name="sexs">
-            <uni-data-checkbox v-model="valiFormData.sex" :localdata="sexs" />
+          <uni-forms-item label="验证码" type="number" required name="code">
+            <view class="code-box">
+              <u--input
+                @input="shuma"
+                v-model="valiFormData.code"
+                type="number"
+                class="code-input"
+                placeholder="请输入您收到的验证码"
+                border="surround"
+                clearable
+              ></u--input>
+              <button
+                type="primary"
+                class="send-code-btn"
+                size="mini"
+                @click="get_code"
+              >
+                {{ time }}{{ text }}
+              </button>
+            </view>
           </uni-forms-item>
         </uni-forms>
       </view>
     </uni-section>
 
     <view class="submit-box">
-      <!-- <button type="primary" @click="settlement">提交</button> -->
       <button type="primary" @click="submit('valiForm')">提交</button>
     </view>
   </view>
@@ -67,16 +84,6 @@ export default {
   },
   data() {
     return {
-      sexs: [
-        {
-          text: '男',
-          value: 0,
-        },
-        {
-          text: '女',
-          value: 1,
-        },
-      ],
       choiceList: [
         {
           choiceItemId: '0',
@@ -95,7 +102,12 @@ export default {
         age: '',
         cardNumber: '',
         phone: '',
+        code: '',
       },
+      time: '',
+      text: '获取验证码',
+      disabled: false,
+      isCanClick: false,
       // 校验规则
       rules: {
         name: {
@@ -104,13 +116,14 @@ export default {
               required: true,
               errorMessage: '姓名不能为空',
             },
-          ],
-        },
-        sexs: {
-          rules: [
             {
-              required: true,
-              errorMessage: '性别不能为空',
+              validateFunction: function (rule, value, data, callback) {
+                const reg = /^(?:[\u4e00-\u9fa5·]{2,16})$/
+                if (reg.test(value) === false && value) {
+                  callback('请输入正确的姓名信息')
+                }
+                return true
+              },
             },
           ],
         },
@@ -149,38 +162,50 @@ export default {
             },
           ],
         },
+        code: {
+          rules: [
+            {
+              required: true,
+              errorMessage: '验证码不能为空',
+            },
+          ],
+        },
       },
     }
   },
   computed: {},
   methods: {
     onChoiceClick: function (position) {
-      console.log('+++++++' + position)
-
       var _this = this
-
       _this.choiceIndex = position
-
       _this.choiceContent = _this.choiceList[position].choiceItemContent
     },
     // 1、监听身份证输入
     Listeningfocus(isPhone = '') {
-      if (this.valiFormData.cardNumber != '') {
-        this.getCardTypeNumber(this.valiFormData.cardNumber, isPhone)
+      if (isPhone) {
+        this.getCardTypeNumber(this.valiFormData.phone, isPhone)
+      } else {
+        this.getCardTypeNumber(this.valiFormData.cardNumber, '')
       }
     },
     // 2、检验身份证是否正确
     getCardTypeNumber(value, isPhone) {
       if (isPhone) {
-        const reg = /^1[34578]\d{9}$/
-        if (reg.test(value) === false && value) {
+        const rex =
+          /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/
+        if (rex.test(value) === false && value) {
           let msg = '请输入正确格式的手机号码'
+          this.isCanClick = false
           uni.showToast({
             icon: 'none',
             title: msg,
             duration: 2000,
             position: 'top',
           })
+        } else {
+          if (value) {
+            this.isCanClick = true
+          }
         }
       } else {
         const reg =
@@ -209,9 +234,43 @@ export default {
           console.log('err', err)
         })
     },
-    settlement() {
-      uni.navigateBack({
-        delta: 1,
+    //获取验证码
+    async get_code() {
+      if (this.isCanClick) {
+        if (this.disabled) {
+          return
+        }
+        this.disabled = true
+        this.setInterValFunc()
+      } else {
+        uni.showToast({
+          icon: 'none',
+          title: '请输入正确格式的手机号码',
+          duration: 2000,
+          position: 'top',
+        })
+      }
+    },
+    setInterValFunc() {
+      this.time = 60
+      this.text = '秒'
+      this.setTime = setInterval(() => {
+        if (this.time - 1 == 0) {
+          this.time = ''
+          this.text = '重新获取'
+          this.code = ''
+          this.disabled = false
+          clearInterval(this.setTime)
+        } else {
+          this.time--
+        }
+      }, 1000)
+    },
+    // 验证码输入框
+    shuma(e) {
+      e = e.match(/^\d{0,6}/g)[0] || ''
+      this.$nextTick(() => {
+        this.valiFormData.code = e
       })
     },
   },
@@ -235,5 +294,13 @@ export default {
   .input-bg {
     background-color: #fff;
   }
+}
+.code-box {
+  display: flex;
+  align-items: center;
+}
+.send-code-btn {
+  width: 35%;
+  margin-left: 35rpx;
 }
 </style>
