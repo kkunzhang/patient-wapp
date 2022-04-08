@@ -110,7 +110,6 @@ page {
     height: 100%;
     border-right: 1px solid #f2f2f2;
     background-color: #f2f2f2;
-
     view {
       height: 60px;
       line-height: 60px;
@@ -127,7 +126,7 @@ page {
   .right {
     height: 100%;
     width: 520rpx;
-    margin: 10rpx auto;
+    margin: 1rpx auto;
     background: #fff;
     .item {
       image {

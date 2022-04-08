@@ -16,7 +16,7 @@
     {
       "path": "pages/login/loginPhone",
       "style": {
-        "navigationBarTitleText": "授权登陆",
+        "navigationBarTitleText": "授权手机号",
         "onReachBottomDistance": 50
       }
     },

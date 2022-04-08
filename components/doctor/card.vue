@@ -99,6 +99,7 @@ export default {
 .doctor-card {
   .doctor-card-pic {
     display: flex;
+    align-items: center;
     .card-message {
       display: flex;
       flex-wrap: nowrap;

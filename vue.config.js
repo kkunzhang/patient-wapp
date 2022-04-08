@@ -19,6 +19,7 @@ module.exports = {
         "@api": resolve("/api"),
         // "@components": resolve("src/components"),
         "@uni": resolve("uni_modules"),
+        "@utils": resolve('/utils')
       },
     },
   },

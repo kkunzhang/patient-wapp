@@ -113,6 +113,7 @@
 
 <script>
 const globalData = getApp().globalData
+import { throttle, debounce } from '@utils/utils'
 export default {
   components: {},
   // inster({
@@ -125,15 +126,6 @@ export default {
       src: '/static/images/doctor.jpeg',
       user_name: '赵云',
       user_phone: '138****1234',
-      userInfo: [
-        {
-          url: '/static/images/service-notification.png',
-          title: '内容 A',
-          subTitle: '明天到医院,我看看你的情况',
-          extra: '昨天',
-          patient: '李逵',
-        },
-      ],
       navs: [
         {
           icon: 'iconfont icon-ziyuan',
@@ -153,21 +145,25 @@ export default {
       ],
       navs2: [
         {
+          id: 1,
           icon: 'iconfont icon-ziyuan',
           title: ' 待支付 ',
           path: '/static/images/register.png',
         },
         {
+          id: 1,
           icon: 'iconfont icon-guanyuwomen',
           title: '服务中',
           path: '/static/images/remote-outpatient.png',
         },
         {
+          id: 1,
           icon: 'iconfont icon-tupian',
           title: '待评价',
           path: '/static/images/remote-consultation.png',
         },
         {
+          id: 1,
           icon: 'iconfont icon-shipin',
           title: '退款',
           path: '/static/images/prescription.png',
@@ -220,12 +216,20 @@ export default {
         url: '/pages/allOrders/index',
       })
     },
+    onClick: throttle(function (item) {
+      switch (item.id) {
+        case 1:
+          uni.navigateTo({
+            url: '/pages/allOrders/index',
+          })
+          break
+        default:
+          this.$tools.toast('敬请期待')
+      }
+    }),
   },
 }
 </script>
-<style>
-/* @import './index.css'; */
-</style>
 <style lang="scss">
 .head-warpe {
   height: 280rpx;

@@ -7,7 +7,6 @@
         v-for="(item, index) in info"
         :key="index"
       >
-        <!--  -->
         <view :class="[getMyClass(index, item)]">
           <view>{{ item.time }}</view>
           <view>{{ item.week }}</view>
@@ -122,17 +121,17 @@ export default {
     align-items: center;
     padding: 0 25rpx;
     // width: 8vw;
-    background-color: lightskyblue;
+    background-color: #87cefa;
     border-radius: 15rpx;
     box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.12), 0 2rpx 4rpx rgba(0, 0, 0, 0.24);
   }
   .active {
-    background: rgb(0, 121, 254) !important;
+    background: #007aff !important;
     color: #fff;
   }
   .activeUnUse {
-    background: rgb(170, 170, 170) !important;
-    color: #fff;
+    background: #dddddd !important;
+    color: #c0c0c0;
   }
 }
 </style>
