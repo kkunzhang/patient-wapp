@@ -7,18 +7,26 @@
     <card :isShow="false"></card>
 
     <uni-card class="my-uni-card">
-      <view style="margin: 5px"
+      <view style="margin: 12rpx"
         ><text style="font-size: large">患者主诉: </text
         ><text>
           嗓子疼嗓子疼嗓子疼嗓子疼嗓子疼嗓子疼嗓子疼嗓子疼嗓子疼嗓子疼嗓子疼
         </text></view
       >
-      <view style="margin: 5px"
+      <view style="margin: 12rpx"
         ><text style="font-size: large">症状图片: </text></view
       >
-      <view style="display: flex; flex-wrap: wrap">
+      <view
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          align-content: stretch;
+          justify-content: space-around
+          align-items: flex-end;
+        "
+      >
         <view v-for="(item, index) in urls" :key="index">
-          <view class="imgList">
+          <view>
             <image
               class="in-img"
               :src="item"
@@ -87,6 +95,7 @@
 import payCard from '@/components/payCard/payCard2.vue'
 import cardItem from '../seeReport/cardItem.vue'
 import card from '@/components/doctor/card.vue'
+
 export default {
   components: { card, payCard, cardItem },
   data() {
@@ -117,7 +126,6 @@ export default {
     },
     previewImg(item, index) {
       console.log(item, index)
-
       uni.setStorageSync('currentImgIndex', index) // 当前下标
       uni.setStorageSync('imgPreviewPicList', item) // 当前数组
       uni.navigateTo({
@@ -165,21 +173,7 @@ export default {
     font-size: 35rpx;
   }
 }
-.weicat {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 20rpx;
-  &image {
-    width: 50rpx;
-    height: 50rpx;
-    margin-right: 15rpx;
-  }
-}
-.weicat-item {
-  display: flex;
-  align-items: center;
-}
+
 .submit-box {
   width: 100%;
   position: fixed;
@@ -190,6 +184,6 @@ export default {
   width: 150rpx;
   height: 150rpx;
   border-radius: 5px;
-  margin: 5rpx;
+  margin-top: 10rpx;
 }
 </style>

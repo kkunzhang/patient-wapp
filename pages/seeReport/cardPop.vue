@@ -11,8 +11,32 @@
       <view class="center" :style="{ height: height + 65 + 'px' }">
         <!-- 循环 -->
         <view v-for="(item, index) in items" :key="item.value">
-          <uni-card
-            class="my-uni-card"
+          <!-- <uni-card
+            :style="{ backgroundColor: index === current ? color : colorOther }"
+          >
+            <view class="center-item">
+              <view>
+                <view class="card-item-add">
+                  <text>赵云</text>
+                  <view>12312312312</view>
+                </view>
+                <view class="fir-card-top">
+                  <text>男 </text>
+                  <text>32 </text>
+                  <text>1993年11月12日 </text>
+                </view>
+              </view>
+              <radio-group @change="radioChange">
+                <label class="uni-list-cell uni-list-cell-pd">
+                  <view class="radio-right">
+                    <radio :value="item.value" :checked="index === current" />
+                  </view>
+                </label>
+              </radio-group>
+            </view>
+          </uni-card> -->
+          <view
+            class="card-user-info"
             :style="{ backgroundColor: index === current ? color : colorOther }"
           >
             <view class="center-item">
@@ -40,7 +64,7 @@
               </radio-group>
               <!-- 选中按钮结束 -->
             </view>
-          </uni-card>
+          </view>
         </view>
       </view>
       <view class="submit-box">
@@ -136,6 +160,19 @@ export default {
         font-size: 34rpx;
       }
     }
+  }
+  .card-user-info {
+    margin: 20rpx;
+    padding: 0 16rpx;
+    border-radius: 20rpx;
+    overflow: hidden;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+      Microsoft YaHei, SimSun, sans-serif;
+    background-color: #fff;
+    flex: 1;
+    border: 2rpx solid #dcdcdc;
+    // height: 140rpx;
+    line-height: 66rpx;
   }
 }
 
