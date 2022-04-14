@@ -92,8 +92,8 @@
   </view>
 </template>
 <script>
-import payCard from '@/components/payCard/payCard2.vue'
-import cardItem from '../seeReport/cardItem.vue'
+import payCard from '@/components/payCard/payCardStatus.vue'
+import cardItem from '@/components/card-item/card-item.vue'
 import card from '@/components/doctor/card.vue'
 
 export default {

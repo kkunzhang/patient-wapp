@@ -1,9 +1,7 @@
 <template>
   <view class="page">
-    <!--最上方卡片-->
     <uni-card class="my-uni-card">
       <view @click="onClick()" class="center-item">
-        <!-- 卡片文字 -->
         <view>
           <view class="card-item-add">
             <text>赵云</text>
@@ -15,7 +13,6 @@
             <text>1993年11月12日 </text>
           </view>
         </view>
-        <!-- 卡片文字结束 -->
         <slot><view v-if="isShowButton" class="gl"></view></slot>
       </view>
     </uni-card>
@@ -28,9 +25,6 @@ export default {
     return {}
   },
   methods: {
-    onlineinfo() {
-      console.log('跳转消息详情')
-    },
     onClick() {
       this.$emit('openPop', 1)
     },

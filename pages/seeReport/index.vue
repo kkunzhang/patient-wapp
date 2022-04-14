@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import cardPop from './cardPop.vue'
-import cardItem from './cardItem.vue'
+import cardPop from '@/components/card-pop/card-pop.vue'
+import cardItem from '@/components/card-item/card-item.vue'
 export default {
   data() {
     return {

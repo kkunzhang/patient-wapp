@@ -11,30 +11,6 @@
       <view class="center" :style="{ height: height + 65 + 'px' }">
         <!-- 循环 -->
         <view v-for="(item, index) in items" :key="item.value">
-          <!-- <uni-card
-            :style="{ backgroundColor: index === current ? color : colorOther }"
-          >
-            <view class="center-item">
-              <view>
-                <view class="card-item-add">
-                  <text>赵云</text>
-                  <view>12312312312</view>
-                </view>
-                <view class="fir-card-top">
-                  <text>男 </text>
-                  <text>32 </text>
-                  <text>1993年11月12日 </text>
-                </view>
-              </view>
-              <radio-group @change="radioChange">
-                <label class="uni-list-cell uni-list-cell-pd">
-                  <view class="radio-right">
-                    <radio :value="item.value" :checked="index === current" />
-                  </view>
-                </label>
-              </radio-group>
-            </view>
-          </uni-card> -->
           <view
             class="card-user-info"
             :style="{ backgroundColor: index === current ? color : colorOther }"
@@ -53,7 +29,6 @@
                 </view>
               </view>
               <!-- 卡片文字结束 -->
-
               <!-- 选中按钮 -->
               <radio-group @change="radioChange">
                 <label class="uni-list-cell uni-list-cell-pd">
@@ -66,16 +41,18 @@
             </view>
           </view>
         </view>
+        <add-visiter></add-visiter>
       </view>
       <view class="submit-box">
         <button type="primary" @click="onSubmit()">确认</button>
       </view>
     </u-popup>
-    <!-- <u-button @click="onClick()">打开</u-button> -->
   </view>
 </template>
 <script>
+import addVisiter from '@/components/add-visiter/add-visiter.vue'
 export default {
+  components: { addVisiter },
   data() {
     return {
       items: [
@@ -85,6 +62,14 @@ export default {
         },
         {
           value: 'FRA',
+          name: '法国',
+        },
+        {
+          value: '2',
+          name: '法国',
+        },
+        {
+          value: '3',
           name: '法国',
         },
       ],
@@ -123,6 +108,7 @@ export default {
     },
     onSubmit() {
       console.log('提交')
+      console.log(this.current)
       this.$tools.toast('操作成功', 'suc')
       this.$emit('closePop', 0)
       // this.$tools.message('回答已删除', 'suc')

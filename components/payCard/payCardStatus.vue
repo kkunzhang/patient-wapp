@@ -1,7 +1,7 @@
 <template>
   <view>
     <view v-for="(item, index) in list" @click="onClick(111)" :key="index">
-      <uni-card class="my-uni-card" :isFull="isFull">
+      <view class="card-user-info">
         <view class="card-item-add">
           <view style="display: flex">
             <view class="right-tips" v-if="item.id == 1">待支付 </view>
@@ -23,14 +23,13 @@
               v-if="item.id == 1"
               class="mini-btn"
               @click="onClick()"
-              type="primary"
               size="mini"
             >
               去支付
             </button>
           </view>
         </view>
-      </uni-card>
+      </view>
     </view>
   </view>
 </template>
@@ -64,8 +63,15 @@ export default {
 }
 </script>
 <style lang="scss">
-.my-uni-card {
+.card-user-info {
+  padding: 20rpx 30rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+    Microsoft YaHei, SimSun, sans-serif;
   background-color: #19be6b;
+  border: 1rpx solid #dcdcdc;
+  line-height: 50rpx;
   view {
     color: #ffffff;
   }
@@ -86,7 +92,6 @@ export default {
       margin: 4rpx;
     }
     .mini-btn {
-      border-radius: 30rpx !important;
     }
   }
 }

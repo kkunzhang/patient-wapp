@@ -24,7 +24,7 @@ export default {
 // 设置整个项目的背景色
 page {
   background-color: #f5f5f5;
-  color: #606672;
+  color: #3a3a3a;
 }
 .gl:before {
   content: ' ';
@@ -32,15 +32,9 @@ page {
   height: 20rpx;
   width: 20rpx;
   border-width: 0 0 4rpx 4rpx;
-  // border-color: #000;
   border-style: solid;
   -webkit-transform: matrix(-0.71, 0.71, 0.71, 0.71, 0, 0);
   transform: matrix(-0.71, 0.71, 0.71, 0.71, 0, 0);
 }
 /* #endif */
-.example-info {
-  font-size: 14px;
-  color: #333;
-  padding: 10px;
-}
 </style>

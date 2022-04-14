@@ -4,12 +4,7 @@
     <card :isShow="false"></card>
     <!--添加就诊人 -->
     <view>
-      <uni-card>
-        <view class="card-item-add" @click="onAdd()">
-          <view><uni-icons type="plus-filled" size="40"></uni-icons></view>
-          <text>添加就诊人</text>
-        </view>
-      </uni-card>
+      <add-visiter></add-visiter>
       <!-- 已有就诊人，非第一次添加 -->
       <card-item @openPop="onOpen"> </card-item>
     </view>
@@ -82,10 +77,11 @@
 </template>
 <script>
 import card from '@/components/doctor/card.vue'
-import cardPop from '../seeReport/cardPop.vue'
-import cardItem from '../seeReport/cardItem.vue'
+import cardPop from '@/components/card-pop/card-pop.vue'
+import cardItem from '@/components/card-item/card-item.vue'
+import addVisiter from '@/components/add-visiter/add-visiter.vue'
 export default {
-  components: { card, cardPop, cardItem },
+  components: { card, cardPop, cardItem, addVisiter },
   data() {
     return {
       show: false,
@@ -103,12 +99,6 @@ export default {
         url: '/pages/registrationInfo/index',
       })
     },
-    onAdd() {
-      console.log('2222')
-      uni.navigateTo({
-        url: '/pages/addVisit/index',
-      })
-    },
     onOpen(val) {
       this.show = true
     },
@@ -119,15 +109,6 @@ export default {
 }
 </script>
 <style lang="scss">
-.card-item-add {
-  display: flex;
-  height: 80rpx;
-  line-height: 80rpx;
-  text {
-    font-size: 38rpx;
-    font-weight: 500;
-  }
-}
 .item-bottom view {
   margin-top: 30rpx;
   color: rgba(96, 102, 114, 1);

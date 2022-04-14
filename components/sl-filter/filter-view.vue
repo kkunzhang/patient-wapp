@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import selectList from '@/components/doctor/selectList.vue'
+import selectList from '@/components/doctor/select-list.vue'
 import selectCity from '@/components/ss-select-city/index.vue'
 
 export default {
