@@ -93,6 +93,12 @@
       }
     },
     {
+      "path": "pages/seeReport/list",
+      "style": {
+        "navigationBarTitleText": "报告查询"
+      }
+    },
+    {
       "path": "pages/seeReport/index",
       "style": {
         "navigationBarTitleText": "报告查询"
@@ -120,6 +126,30 @@
       "path": "pages/allOrders/index",
       "style": {
         "navigationBarTitleText": "全部订单"
+      }
+    },
+    {
+      "path": "pages/user/myDoctor/index",
+      "style": {
+        "navigationBarTitleText": "我的医生"
+      }
+    },
+    {
+      "path": "pages/user/myWith/index",
+      "style": {
+        "navigationBarTitleText": "我的关注"
+      }
+    },
+    {
+      "path": "pages/user/manage/index",
+      "style": {
+        "navigationBarTitleText": "就诊人管理"
+      }
+    },
+    {
+      "path": "pages/user/manage/changePhone",
+      "style": {
+        "navigationBarTitleText": "修改号码"
       }
     }
     // {

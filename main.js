@@ -7,7 +7,9 @@ import tools from '@/utils/tools'
 import store from './store/index'
 Vue.prototype.$tools = tools
 Vue.use(uView);
-Vue.config.productionTip = false
+if (process.env.NODE_ENV === 'development') {
+  Vue.config.productionTip = false
+}
 // 封装全局登录函数
 Vue.prototype.checkLogin = function (backpage, backtype) {
   var uid = uni.getStorageSync('uid');

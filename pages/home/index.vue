@@ -78,7 +78,7 @@
 import search from '@/components/search/search.vue'
 import mySwiper from '@/components/swiper/mySwiper.vue'
 import modal from '@/components/modal/modal.vue'
-import { getUserDefaultSetting } from '@api/user'
+// import { getUserDefaultSetting } from '@api/user'
 import { throttle, debounce } from '@utils/utils'
 export default {
   components: {

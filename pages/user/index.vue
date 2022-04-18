@@ -5,7 +5,7 @@
         <u-avatar :src="src" size="80"></u-avatar>
       </view>
       <view class="head-user-info">
-        <view class="top-title">
+        <view v-if="1 == 0" class="top-title">
           <uni-title
             type="h1"
             color="#ffffff"
@@ -19,15 +19,22 @@
             :title="user_phone"
           ></uni-title>
         </view>
+        <view v-else class="login-bt">
+          <button
+            style="width: 300rpx; border-radius: 20rpx; margin-right: 170rpx"
+          >
+            请登录
+          </button>
+        </view>
       </view>
     </view>
     <!--就诊人管理-->
     <uni-card>
       <view class="box-tip">
         <view class="card-title">就诊人管理</view>
-        <view>全部></view>
+        <view v-if="1 == 0">全部></view>
       </view>
-      <view class="box-outside-warp">
+      <view v-if="1 == 0" class="box-outside-warp">
         <view class="fir-card-top-warp">
           <view class="fir-card-top">
             <view class="fir-card-top-item">
@@ -69,6 +76,14 @@
           </view>
         </view>
       </view>
+      <view v-else>
+        <uni-card :border="false">
+          <view class="card-item-add" @click="onAdd()">
+            <view><uni-icons type="plus-filled" size="40"></uni-icons></view>
+            <text> <slot> 添加就诊人</slot></text>
+          </view>
+        </uni-card>
+      </view>
     </uni-card>
 
     <!--订单管理-->
@@ -96,7 +111,6 @@
       <view class="card-title">常用工具</view>
       <view class="box-outside-warp">
         <view
-          class="padding-sm"
           @click="onClick(item, index)"
           v-for="(item, index) in navs3"
           :key="index"
@@ -171,11 +185,13 @@ export default {
       ],
       navs3: [
         {
+          id: 2,
           icon: 'iconfont icon-ziyuan',
           title: '我的医生',
           path: '/static/images/my-doctor.png',
         },
         {
+          id: 3,
           icon: 'iconfont icon-guanyuwomen',
           title: '我的关注',
           path: '/static/images/my-follow.png',
@@ -216,11 +232,26 @@ export default {
         url: '/pages/allOrders/index',
       })
     },
-    onClick: throttle(function (item) {
+    onAdd() {
+      uni.navigateTo({
+        url: '/pages/user/manage/index',
+      })
+    },
+    onClick: debounce(function (item) {
       switch (item.id) {
         case 1:
           uni.navigateTo({
             url: '/pages/allOrders/index',
+          })
+          break
+        case 2:
+          uni.navigateTo({
+            url: '/pages/user/myDoctor/index',
+          })
+          break
+        case 3:
+          uni.navigateTo({
+            url: '/pages/user/myWith/index',
           })
           break
         default:
@@ -246,6 +277,11 @@ export default {
       display: flex;
       flex-wrap: nowrap;
       flex-direction: column;
+    }
+    .login-bt {
+      display: flex;
+      height: 140rpx;
+      align-items: center;
     }
     .user-name {
       margin-top: -24rpx;
@@ -305,6 +341,16 @@ export default {
     .mini-btn {
       border-radius: 15px !important;
     }
+  }
+}
+.card-item-add {
+  display: flex;
+  height: 70rpx;
+  line-height: 70rpx;
+  justify-content: center;
+  text {
+    font-size: 38rpx;
+    font-weight: 500;
   }
 }
 </style>

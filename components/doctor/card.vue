@@ -37,16 +37,15 @@
             </button>
           </view>
         </view>
-
         <view class="card-num" v-if="isShowOther">
           <view>远程门诊 ￥15.00</view>
           <view>远程门诊 ￥15.00</view>
-          <view> 远程门诊 ￥15.00</view>
+          <view>远程门诊 ￥15.00</view>
         </view>
         <view class="card-num" v-if="isShowOther">
           <view>远程门诊 ￥15.00</view>
           <view>远程门诊 ￥15.00</view>
-          <view> 远程门诊 ￥15.00</view>
+          <view>远程门诊 ￥15.00</view>
         </view>
       </view>
     </uni-card>
@@ -75,10 +74,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    isShowDetail: {
-      type: Boolean,
-      default: false,
-    },
+    
   },
   methods: {
     onClick(val) {

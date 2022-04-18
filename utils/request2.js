@@ -1,10 +1,6 @@
 
 import store from '../store/index'
-const BASE_URL =
-  process.env.NODE_ENV === 'development'
-    ? 'https://ihuphtdq.ngrok.do-it.cn'
-    : 'https://ihuphtdq.ngrok.do-it.cn'
-
+import config from '@/utils/config.js'
 const showToast = (title) => {
   uni.showToast({
     title: title,
@@ -22,13 +18,13 @@ const showModal = (content) => {
   })
 }
 /** 请求接口
- * @method http
+ * @method request
  * @param {String} url 接口地址
  * @param {Object} data 接口参数
  * @param {Object} option 接口配置信息，可选
  * @return {Object} Promise
  */
-const http = (url, data = {}, option = {}) => {
+const request = (url, data = {}, option = {}) => {
   console.log(option)
   const hideLoading = option.hideLoading || false // 是否显示 loading
   const hideMsg = option.hideMsg || false // 是否隐藏错误提示
@@ -43,7 +39,7 @@ const http = (url, data = {}, option = {}) => {
   }
   return new Promise((resolve, reject) => {
     uni.request({
-      url: BASE_URL + url,
+      url: config.BASE_URL + url,
       method: method, // 默认 post 请求
       header: {
         // 'Authorization': token,
@@ -82,5 +78,5 @@ const http = (url, data = {}, option = {}) => {
     })
   })
 }
-export default http
+export default request
 

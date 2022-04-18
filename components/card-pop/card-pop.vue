@@ -41,7 +41,7 @@
             </view>
           </view>
         </view>
-        <add-visiter></add-visiter>
+        <add-visiter v-if="isShowAdd"></add-visiter>
       </view>
       <view class="submit-box">
         <button type="primary" @click="onSubmit()">确认</button>
@@ -85,6 +85,10 @@ export default {
     isShow: {
       type: Boolean,
       default: false,
+    },
+    isShowAdd: {
+      type: Boolean,
+      default: true,
     },
   },
   watch: {

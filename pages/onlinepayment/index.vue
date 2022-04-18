@@ -5,7 +5,7 @@
       >选择就诊人</add-visiter
     >
     <view class="button">
-      <button type="primary">查询</button>
+      <button type="primary" @click="onClick()">查询</button>
     </view>
     <view class="bt-bottom">
       <span v-html="content"> {{ content }} </span>
@@ -36,9 +36,9 @@ export default {
     }
   },
   methods: {
-    toDetail(val) {
+    onClick(val) {
       uni.navigateTo({
-        url: '/pages/onlinepayment/detail',
+        url: '/pages/onlinepayment/list',
       })
     },
     isShowItemList(val) {
