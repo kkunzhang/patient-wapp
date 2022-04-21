@@ -1,7 +1,7 @@
 const BASE_URL =
   process.env.NODE_ENV === 'development'
-    ? 'https://hy.frp.dr1997.com/'
-    : 'https://ihuphtdq.ngrok.do-it.cn'
+    ? 'http://testapi.jiukangguoji.cn/gateway/his-xfqrmyy'
+    : 'http://testapi.jiukangguoji.cn/gateway/his-xfqrmyy'
 
 const config = {
   modalColor: '#5271FF', //弹窗颜色 

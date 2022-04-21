@@ -29,6 +29,8 @@
 </template>
 <script>
 import card from '@/components/doctor/card.vue'
+import { formatDate } from '@utils/utils'
+import { getDept, getDoctor, getReservation } from '@/api/modules/registration'
 export default {
   components: {
     card,
@@ -37,46 +39,7 @@ export default {
     return {
       active: 0,
       info1: [{ id: 1 }, { id: 2 }],
-      info: [
-        {
-          id: 1,
-          time: '11',
-          week: '周2',
-          status: 0,
-        },
-        {
-          id: 1,
-          time: '12',
-          week: '周3',
-          status: 1,
-        },
-        {
-          id: 1,
-          time: '13',
-          week: '周4',
-          status: 0,
-        },
-        {
-          id: 1,
-          time: '14',
-          week: '周5',
-        },
-        {
-          id: 1,
-          time: '15',
-          week: '周六',
-        },
-        {
-          id: 1,
-          time: '16',
-          week: '周日',
-        },
-        {
-          id: 1,
-          time: '17',
-          week: '周一',
-        },
-      ],
+      info: [],
     }
   },
   /**
@@ -84,8 +47,60 @@ export default {
    */
   onLoad: function (options) {
     console.log(options)
+    this.getDate(options)
   },
   methods: {
+    getDate() {
+      const today = new Date()
+      const nextDay = new Date(today)
+      // this.info.forEach((element, index) => {
+      //   nextDay.setDate(today.getDate() + index)
+      //   const week = this.getWeek(nextDay.getDay())
+      //   const isToday = this.getWeek(today.getDay())
+      //   element.week = isToday == week ? '今天' : week
+      //   element.time = nextDay.getDate()
+      // })
+      const info = []
+      for (let index = 0; index < 7; index++) {
+        const infoChild = {}
+        nextDay.setDate(today.getDate() + index)
+        const week = this.getWeek(nextDay.getDay())
+        const isToday = this.getWeek(today.getDay())
+        infoChild.week = isToday == week ? '今天' : week
+        infoChild.time = nextDay.getDate()
+        infoChild.id = index
+        info.push(infoChild)
+      }
+      this.info = info
+      console.log(info)
+    },
+    getWeek(days) {
+      let week
+      switch (days) {
+        case 1:
+          week = '周一'
+          break
+        case 2:
+          week = '周二'
+          break
+        case 3:
+          week = '周三'
+          break
+        case 4:
+          week = '周四'
+          break
+        case 5:
+          week = '周五'
+          break
+        case 6:
+          week = '周六'
+          break
+        case 0:
+          week = '周日'
+          break
+      }
+      return week
+    },
     getMyClass(index, item) {
       let boxClass
       if (this.active === index && !item.status) {
@@ -105,6 +120,7 @@ export default {
     },
     async onClick(index, id) {
       this.active = index
+      this.getDate(index)
     },
   },
 }

@@ -6,6 +6,7 @@ export default {
     baseUrl: configInfo.BASE_URL,
     header: {
       'Content-Type': 'application/x-www-form-urlencoded',
+      // 'Authorization': 'Bearer 01ba9cf7-cfcf-495a-bd7b-b9ef459f748f'
     },
     data: {},
     method: 'GET',
@@ -41,14 +42,10 @@ export default {
     options.url = options.baseUrl + options.url;
     options.data = options.data || {};
     options.method = options.method || this.config.method;
-    let requestType = options.url.split('/');
-    let typeVal = requestType[requestType.length - 1];
-    if (typeVal !== 'apiLogin') {
-      // this.config.header.Authorization = 'Bearer ' + token;
-      this.config.header.Authorization = 'Basic ' + token;
-    } else {
-      delete this.config.header.Authorization;
-    }
+    // this.config.header.Authorization = 'Basic ' + token;
+    this.config.header.Authorization = 'Bearer 01ba9cf7-cfcf-495a-bd7b-b9ef459f748f';
+    console.log(this.config.header);
+
     // 基于 Promise 的网络请求
     return new Promise((resolve, reject) => {
       uni.request({
@@ -57,11 +54,13 @@ export default {
         header: this.config.header,
         method: options.method,
         success: (response) => {
+          console.log(response);
+
           let res = response.data;
-          if (res.code === 200) {
+          if (res.code === 10000) {
             resolve(res)
           } else { // 返回值非 200，强制显示提示信息
-            showToast('[' + res.code + '] 系统处理失败')
+            this.showToast('[' + res.code + '] 系统处理失败')
             reject('[' + res.code + '] 系统处理失败')
           }
         },

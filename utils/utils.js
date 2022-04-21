@@ -5,10 +5,10 @@
  * @param options 立即执行
  * options中  leading：false 表示禁用第一次执行 trailing: false 表示禁用停止触发的回调
  */
-function throttle(fn, wait = 500, options = {}) {
+function throttle (fn, wait = 500, options = {}) {
   let timer = null
   let previous = 0
-  const throttled = function() {
+  const throttled = function () {
     const now = +new Date()
     // remaining 不触发下一次函数的剩余时间
     if (!previous && options.leading === false) previous = now
@@ -37,9 +37,9 @@ function throttle(fn, wait = 500, options = {}) {
  * @param wait 间隔时间
  * @param immediate 立即执行
  */
-function debounce(fn, wait = 500, immediate) {
+function debounce (fn, wait = 500, immediate) {
   let timer = null
-  return function() {
+  return function () {
     if (timer) clearTimeout(timer)
     if (immediate) {
       // 如果已经执行过，不再执行
@@ -62,7 +62,7 @@ function debounce(fn, wait = 500, immediate) {
  * @param idCard 用户身份证号码
  * @returns {userInfo}
  */
-function getIdCardInfo(idCard) {
+function getIdCardInfo (idCard) {
   const info = {
     sex: '',
     age: 0,
@@ -119,7 +119,7 @@ function getIdCardInfo(idCard) {
  * @hour12[可选,默认:false]          Boolean     是否返回12小时制时间   例: true:返回12小时制时间   false:返回24小时制时间
  * @return   '2019-11-25 15:05:54'  String    返回示例
  * **/
-function dateTimeFliter(
+function dateTimeFliter (
   time,
   part = 0,
   dateComplete = true,
@@ -195,10 +195,10 @@ function dateTimeFliter(
  * @object[必填]    需要判断类型元素
  * @return   string/boolean/number...    返回示例
  * **/
-function getType(object) {
+function getType (object) {
   let result = null
   return ((result = typeof (object)) === 'object' ? object === null && 'null' ||
-      Object.prototype.toString.call(object).slice(8, -1) : result)
+    Object.prototype.toString.call(object).slice(8, -1) : result)
     .toLowerCase()
 }
 
@@ -208,7 +208,7 @@ function getType(object) {
  * @format[可选,默认：s]
  * @return   '800'  String    返回示例
  * **/
-function dateSurplus(startTime, endTime = '0', format = '秒') {
+function dateSurplus (startTime, endTime = '0', format = '秒') {
   const start = new Date(startTime).getTime() / 1000
   let end = 0
   if (endTime) {
@@ -224,7 +224,7 @@ function dateSurplus(startTime, endTime = '0', format = '秒') {
 * @param arr 需要拍平的数组
 * @return Array 返回拍平后的数组
 * */
-function flatten(arr) {
+function flatten (arr) {
   let result = []
   for (let i = 0, len = arr.length; i < len; i++) {
     if (Array.isArray(arr[i])) {
@@ -240,7 +240,7 @@ function flatten(arr) {
 * @param arr 需要拍平的数组
 * @return Array 返回拍平后的数组
 * */
-function unique(arr) {
+function unique (arr) {
   const appeard = new Set()
   return arr.filter(item => {
     // 创建一个可以唯一标识对象的字符串id
@@ -254,6 +254,127 @@ function unique(arr) {
   })
 }
 
+/**
+ * 时间戳转指定格式时间
+ * @param {string} 时间分隔符,如':'
+ * @param {num} 时间戳
+ * @param {string} 格式:hms,有h返回小时,有m返回时间,有s返回秒
+ */
+const timestampFormat = (t, f, format) => {
+  var jsdate = t ? new Date(t * 1000) : new Date();
+  var pad = function (n, c) {
+    if ((n = n + '').length < c) {
+      return new Array(++c - n.length).join('0') + n;
+    } else {
+      return n;
+    }
+  };
+  var hours = pad(jsdate.getHours(), 2);
+  var mins = pad(jsdate.getMinutes(), 2);
+  var secs = pad(jsdate.getSeconds(), 2);
+  switch (format) {
+    case 'hms':
+      return hours + f + mins + f + secs;
+    case 'hm':
+      return hours + f + mins;
+    case 'ms':
+      return parseInt(hours) * 60 + parseInt(mins) + f + secs;
+  }
+};
+/**
+ * 返回各种格式时间
+ * @param date：DateTime对象
+ * @param fmt   时间格式
+ * @returns {}格式化后的时间字符串
+ */
+const formatDate = (date, fmt) => {
+  var date = new Date(parseInt(date) * 1000);
+  if (fmt == 'yyMMddhhmmss') {
+    var nYear = date.getFullYear(),
+      nMonth = date.getMonth() + 1,
+      nDay = date.getDate(),
+      nHours = date.getHours(), //小时
+      nMinutes = date.getMinutes(), //分
+      nSeconds = date.getSeconds();
+
+    nMonth = (nMonth < 10 ? '0' + nMonth : nMonth).toString();
+    nDay = (nDay < 10 ? '0' + nDay : nDay).toString();
+    nHours = (nHours < 10 ? '0' + nHours : nHours).toString();
+    nMinutes = (nMinutes < 10 ? '0' + nMinutes : nMinutes).toString();
+
+    //return nYear + nMonth + nDay + nHours + nMinutes;
+    return nYear + nMonth + nDay + '_' + nHours + nMinutes;
+  } else if (fmt == 'yyyyMMdd_hhmm') {
+    var nYear = date.getFullYear(),
+      nMonth = date.getMonth() + 1,
+      nDay = date.getDate(),
+      nHours = date.getHours(), //小时
+      nMinutes = date.getMinutes(), //分
+      nSeconds = date.getSeconds();
+
+    nMonth = (nMonth < 10 ? '0' + nMonth : nMonth).toString();
+    nDay = (nDay < 10 ? '0' + nDay : nDay).toString();
+    nHours = (nHours < 10 ? '0' + nHours : nHours).toString();
+    nMinutes = (nMinutes < 10 ? '0' + nMinutes : nMinutes).toString();
+
+    return nYear + nMonth + nDay + '_' + nHours + nMinutes;
+  } else {
+    var o = {
+      'M+': date.getMonth() + 1, //月份
+      'd+': date.getDate(), //日
+      'h+': date.getHours(), //小时
+      'm+': date.getMinutes(), //分
+      's+': date.getSeconds(), //秒
+      'q+': Math.floor((date.getMonth() + 3) / 3), //季度
+      S: date.getMilliseconds(), //毫秒
+    };
+
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(
+        RegExp.$1,
+        (date.getFullYear() + '').substr(4 - RegExp.$1.length)
+      );
+    }
+
+    for (var k in o) {
+      if (new RegExp('(' + k + ')').test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          RegExp.$1.length == 1
+            ? o[k]
+            : ('00' + o[k]).substr(('' + o[k]).length)
+        );
+      }
+    }
+    return fmt;
+  }
+};
+// function formatDate (date, format = 'yyyy/MM/dd hh:mm:ss') {
+//   if (!date && date !== 0) {
+//     return ''
+//   }
+//   date = getDate(date)
+//   const dateObj = {
+//     year: date.getFullYear(),
+//     month: date.getMonth() + 1,
+//     day: date.getDate(),
+//     hour: date.getHours(),
+//     minute: date.getMinutes(),
+//     second: date.getSeconds(),
+//     millisecond: date.getMilliseconds()
+//   }
+//   const tokenRegExp = /yyyy|yy|MM|M|dd|d|hh|h|mm|m|ss|s|SSS|SS|S/
+//   let flag = true
+//   let result = format
+//   while (flag) {
+//     flag = false
+//     result = result.replace(tokenRegExp, function (matched) {
+//       flag = true
+//       return parser[matched](dateObj)
+//     })
+//   }
+//   return result
+// }
 module.exports = {
   throttle,
   debounce,
@@ -262,5 +383,7 @@ module.exports = {
   dateTimeFliter,
   dateSurplus,
   flatten, // 数组拍平
-  unique // 数组去重复
+  unique, // 数组去重复
+  formatDate,
+  timestampFormat
 }
