@@ -78,6 +78,7 @@
 
 <script>
 import choiceSelected from '@/components/selected/selected.vue'
+import { getIdCardInfo } from '@utils/utils'
 export default {
   components: {
     choiceSelected,
@@ -98,11 +99,14 @@ export default {
       choiceIndex: 0, //选择位置
       // 校验表单数据
       valiFormData: {
-        name: '',
+        name: '张琨',
+        age: '16',
+        cardNumber: '220602199311091235',
+        phone: '17610229358',
+        code: '1234',
         age: '',
-        cardNumber: '',
-        phone: '',
-        code: '',
+        birthday: '',
+        sex: '',
       },
       time: '',
       text: '获取验证码',
@@ -221,19 +225,7 @@ export default {
         }
       }
     },
-    submit(ref) {
-      this.$refs[ref]
-        .validate()
-        .then((res) => {
-          console.log('success', res)
-          uni.showToast({
-            title: `校验通过`,
-          })
-        })
-        .catch((err) => {
-          console.log('err', err)
-        })
-    },
+
     //获取验证码
     async get_code() {
       if (this.isCanClick) {
@@ -272,6 +264,29 @@ export default {
       this.$nextTick(() => {
         this.valiFormData.code = e
       })
+    },
+
+    submit(ref) {
+      this.$refs[ref]
+        .validate()
+        .then((res) => {
+          console.log(res)
+          uni.showToast({
+            title: `校验通过`,
+          })
+          this.getCardInfo(res.caredNumbr)
+        })
+        .catch((err) => {
+          console.log('err', err)
+        })
+    },
+    getCardInfo(card) {
+      const ret = getIdCardInfo(card)
+      if (ret) {
+        this.valiFormData.age = ret.age
+        this.valiFormData.birthday = ret.birthday
+        this.valiFormData.sex = ret.sex
+      }
     },
   },
   props: {

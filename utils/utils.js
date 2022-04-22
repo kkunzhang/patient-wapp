@@ -350,29 +350,61 @@ const formatDate = (date, fmt) => {
   }
 };
 /**
+ * 返回周
+ * @returns {}格式化后的时间字符串
+ */
+const getWeek = (days) => {
+  let week
+  switch (days) {
+    case 1:
+      week = '周一'
+      break
+    case 2:
+      week = '周二'
+      break
+    case 3:
+      week = '周三'
+      break
+    case 4:
+      week = '周四'
+      break
+    case 5:
+      week = '周五'
+      break
+    case 6:
+      week = '周六'
+      break
+    case 0:
+      week = '周日'
+      break
+  }
+  return week
+};
+/**
  * 获取七天后的星期，日期
  * @param date：DateTime对象
  * @param fmt   时间格式
  * @returns {}格式化后的时间字符串
  */
-const formatWeekInfo = (info = []) => {
+const formatWeekInfo = () => {
   const today = new Date()
   const nextDay = new Date(today)
+  const info = []
   for (let index = 0; index < 7; index++) {
     const infoChild = {}
     nextDay.setDate(today.getDate() + index)
     //获取星期
-    const week = this.getWeek(nextDay.getDay())
-    const isToday = this.getWeek(today.getDay())
+    const week = getWeek(nextDay.getDay())
+    const isToday = getWeek(today.getDay())
     infoChild.week = isToday == week ? '今天' : week
     //获取日期
     infoChild.time = nextDay.getDate()
     //获取具体日期
     infoChild.infoTime =
       nextDay.getFullYear() +
-      '/' +
+      '-' +
       (nextDay.getMonth() + 1) +
-      '/' +
+      '-' +
       nextDay.getDate()
     infoChild.id = index
     info.push(infoChild)
