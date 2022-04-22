@@ -144,7 +144,7 @@ export default {
     .fir-card-top {
       display: flex;
       flex-wrap: wrap;
-      margin-top: 20rpx;
+      margin-top: 14rpx;
       text {
         margin-right: 30rpx;
         font-size: 34rpx;
@@ -153,7 +153,7 @@ export default {
   }
   .card-user-info {
     margin: 20rpx;
-    padding: 0 16rpx;
+    padding: 8rpx 60rpx;
     border-radius: 20rpx;
     overflow: hidden;
     font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,

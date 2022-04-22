@@ -9,7 +9,7 @@
           </view>
           <view class="fir-card-top">
             <text>男 </text>
-            <text>32 </text>
+            <text>32岁 </text>
             <text>1993年11月12日 </text>
           </view>
         </view>
@@ -51,7 +51,7 @@ export default {
   .card-item-add {
     display: flex;
     text {
-      font-size: 38rpx;
+      font-size: 35rpx;
       color: #333333;
       font-weight: 500;
       margin-right: 30rpx;
@@ -63,7 +63,7 @@ export default {
   .fir-card-top {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20rpx;
+    margin-top: 14rpx;
     text {
       margin-right: 30rpx;
       font-size: 34rpx;

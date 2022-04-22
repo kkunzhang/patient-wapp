@@ -1,7 +1,7 @@
 <template>
   <view>
     <!--顶部卡片 -->
-    <card :isShow="false"></card>
+    <card :isShow="false" :info="doctorInfo"></card>
     <!--添加就诊人 -->
     <view>
       <add-visiter></add-visiter>
@@ -10,19 +10,23 @@
     </view>
     <!-- 订单名称 -->
     <uni-card>
+      <view style="font-size: large">预约信息</view>
       <view class="item-bottom">
         <view>
-          <text>订单名称</text>
-          <text>远程会诊-视频问诊</text>
+          <text>就诊日期</text>
+          <text>{{ doctorInfo.registerDate }}</text>
         </view>
         <view>
-          <text>就诊患者</text>
-          <text>赵云</text>
+          <text>就诊科室</text>
+          <text>{{ doctorInfo.location }}</text>
         </view>
         <view>
-          <text>参会医生</text>
-          <text>张围军</text>
-          <text>李小凡</text>
+          <text>就诊地址</text>
+          <text>{{ doctorInfo.location }}</text>
+        </view>
+        <view>
+          <text>就诊费用</text>
+          <text>￥{{ doctorInfo.registerFee }}</text>
         </view>
       </view>
     </uni-card>
@@ -32,16 +36,16 @@
       <view class="payment-item">
         <view>
           <text>订单总额</text>
-          <text>￥30.00</text>
+          <text>￥{{ doctorInfo.registerFee }}</text>
         </view>
       </view>
-      <view class="payment-item">
+      <!-- <view class="payment-item">
         <view>
           <text>医保报销</text>
           <text v-if="lever == true">-￥5.00</text>
           <text v-if="lever === false">就诊人未绑定医保卡</text>
         </view>
-      </view>
+      </view> -->
       <view class="payment-item">
         <view>
           <text>优惠券</text>
@@ -53,7 +57,7 @@
       <view class="payment-footer">
         <view>
           应付
-          <text class="price">￥25.00</text>
+          <text class="price">￥{{ doctorInfo.registerFee }}</text>
         </view>
       </view>
     </uni-card>
@@ -63,7 +67,7 @@
       <view class="weicat">
         <view class="weicat-item">
           <image src="/static/images/weixinzhifu.png"></image>
-          <text>微信支付1</text>
+          <text>微信支付</text>
         </view>
       </view>
     </uni-card>
@@ -85,13 +89,15 @@ export default {
   data() {
     return {
       show: false,
-      lever: true,
+      lever: false,
+      doctorInfo: '',
     }
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {},
+
+  onLoad(options) {
+    let data = JSON.parse(decodeURIComponent(options.data))
+    this.doctorInfo = data
+  },
   methods: {
     onSubmit() {
       console.log('跳转去支付')

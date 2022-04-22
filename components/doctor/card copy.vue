@@ -3,13 +3,16 @@
     <!-- 医生号源信息 -->
     <uni-card :isFull="isFull" class="my-uni-card" :border="false">
       <view class="doctor-card">
-        <view class="doctor-card-pic">
+        <view class="doctor-card-pic" @click="onClick('detail')">
           <u-avatar :src="avatar" size="70"></u-avatar>
           <view class="card-message">
             <view>
-              <text>{{ info.doctorName }}</text>
-              <text>{{ info.doctorTag }}</text>
+              <text>徐景明</text>
+              <text>主任医师</text>
+              <text>内科</text>
             </view>
+            <view class="uni-lastmsg"> 中国人民解放军总医院 301 医院 </view>
+
             <view class="uni-lastmsg">
               擅长：对高血压，冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇
             </view>
@@ -21,26 +24,14 @@
           </view>
         </view>
         <view class="card-num" v-if="isShow">
-          <view>剩余号源：{{ info.regLeaveCount }} </view>
-          <view v-if="info.toatlFee">￥{{ info.toatlFee }}</view>
-          <view v-else>免费</view>
+          <view>剩余号源：15 </view>
+          <view>￥15.00</view>
           <view>
             <button
-              v-if="info.regLeaveCount > 0"
               class="mini-btn"
               @click="onClick('order')"
               type="primary"
               size="mini"
-            >
-              预约
-            </button>
-            <button
-              v-else
-              class="mini-btn"
-              @click="onClick('order')"
-              type="primary"
-              size="mini"
-              :disabled="true"
             >
               预约
             </button>
@@ -61,12 +52,9 @@
   </view>
 </template>  
 <script>
-import { debounce } from '@utils/utils'
 export default {
   data() {
-    return {
-      isDisabled: false,
-    }
+    return {}
   },
   onLoad() {},
   props: {
@@ -86,20 +74,20 @@ export default {
       type: Boolean,
       default: false,
     },
-    info: {
-      type: Object,
-      default() {
-        return {}
-      },
-    },
+    
   },
   methods: {
-    onClick: debounce(function (val) {
+    onClick(val) {
+      let item
       if (val == 'order') {
+        item = 'true123'
+        console.log(item)
       } else {
+        item = 'vvv'
+        console.log(item)
       }
-      this.$emit('onClick', this.info)
-    }),
+      this.$emit('onClick', item)
+    },
   },
 }
 </script>
@@ -108,21 +96,20 @@ export default {
   .doctor-card-pic {
     display: flex;
     align-items: center;
-    margin-top: 20rpx;
     .card-message {
       display: flex;
       flex-wrap: nowrap;
       flex-direction: column;
       justify-content: space-evenly;
       margin-left: 20rpx;
-      margin-top: 10rpx;
+      margin-top: 20rpx;
       text {
         margin: 4rpx;
         color: #333;
         font-size: 35rpx;
       }
       text:first-child {
-        font-size: 45rpx;
+        font-size: 50rpx;
         font-family: PingFangSC-Medium, PingFang SC;
         font-weight: 500;
       }
@@ -131,10 +118,9 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 1; //可设置显示的行数
+        -webkit-line-clamp: 2; //可设置显示的行数
         line-clamp: 2;
         -webkit-box-orient: vertical;
-        margin-top: 6rpx;
       }
       .message-tips {
         margin-top: 20rpx;
@@ -147,7 +133,7 @@ export default {
     display: flex;
     justify-content: space-between;
     &:nth-child(2) {
-      margin-top: 25rpx;
+      margin-top: 45rpx;
     }
     text {
       margin: 4rpx;

@@ -27,7 +27,7 @@ export const getReservation = (data) => {
   return http.get({
     url: '/register/reservation',
     data,
-    // hideLoading: false
+    // hideLoading: true
   });
 };
 

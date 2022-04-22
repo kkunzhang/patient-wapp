@@ -6,7 +6,7 @@ export default {
     baseUrl: configInfo.BASE_URL,
     header: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      // 'Authorization': 'Bearer 01ba9cf7-cfcf-495a-bd7b-b9ef459f748f'
+      'Authorization': 'Bearer 01ba9cf7-cfcf-495a-bd7b-b9ef459f748f'
     },
     data: {},
     method: 'GET',
@@ -25,7 +25,6 @@ export default {
     response: null,
   },
   request (options) {
-    console.log(options)
     // const token = uni.getStorageSync('token') // 登录鉴权获得的 token
     if (!options) {
       options = {};
@@ -43,9 +42,6 @@ export default {
     options.data = options.data || {};
     options.method = options.method || this.config.method;
     // this.config.header.Authorization = 'Basic ' + token;
-    this.config.header.Authorization = 'Bearer 01ba9cf7-cfcf-495a-bd7b-b9ef459f748f';
-    console.log(this.config.header);
-
     // 基于 Promise 的网络请求
     return new Promise((resolve, reject) => {
       uni.request({
@@ -54,13 +50,11 @@ export default {
         header: this.config.header,
         method: options.method,
         success: (response) => {
-          console.log(response);
-
           let res = response.data;
           if (res.code === 10000) {
             resolve(res)
           } else { // 返回值非 200，强制显示提示信息
-            this.showToast('[' + res.code + '] 系统处理失败')
+            this.showToast(response)
             reject('[' + res.code + '] 系统处理失败')
           }
         },

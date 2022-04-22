@@ -2,7 +2,7 @@
   <view>
     <uni-card :border="false">
       <view class="card-item-add" @click="onAdd()">
-        <view><uni-icons type="plus-filled" size="40"></uni-icons></view>
+        <view><uni-icons type="plus-filled" size="30"></uni-icons></view>
         <text> <slot> 添加就诊人</slot></text>
       </view>
     </uni-card>

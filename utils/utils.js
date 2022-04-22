@@ -349,32 +349,37 @@ const formatDate = (date, fmt) => {
     return fmt;
   }
 };
-// function formatDate (date, format = 'yyyy/MM/dd hh:mm:ss') {
-//   if (!date && date !== 0) {
-//     return ''
-//   }
-//   date = getDate(date)
-//   const dateObj = {
-//     year: date.getFullYear(),
-//     month: date.getMonth() + 1,
-//     day: date.getDate(),
-//     hour: date.getHours(),
-//     minute: date.getMinutes(),
-//     second: date.getSeconds(),
-//     millisecond: date.getMilliseconds()
-//   }
-//   const tokenRegExp = /yyyy|yy|MM|M|dd|d|hh|h|mm|m|ss|s|SSS|SS|S/
-//   let flag = true
-//   let result = format
-//   while (flag) {
-//     flag = false
-//     result = result.replace(tokenRegExp, function (matched) {
-//       flag = true
-//       return parser[matched](dateObj)
-//     })
-//   }
-//   return result
-// }
+/**
+ * 获取七天后的星期，日期
+ * @param date：DateTime对象
+ * @param fmt   时间格式
+ * @returns {}格式化后的时间字符串
+ */
+const formatWeekInfo = (info = []) => {
+  const today = new Date()
+  const nextDay = new Date(today)
+  for (let index = 0; index < 7; index++) {
+    const infoChild = {}
+    nextDay.setDate(today.getDate() + index)
+    //获取星期
+    const week = this.getWeek(nextDay.getDay())
+    const isToday = this.getWeek(today.getDay())
+    infoChild.week = isToday == week ? '今天' : week
+    //获取日期
+    infoChild.time = nextDay.getDate()
+    //获取具体日期
+    infoChild.infoTime =
+      nextDay.getFullYear() +
+      '/' +
+      (nextDay.getMonth() + 1) +
+      '/' +
+      nextDay.getDate()
+    infoChild.id = index
+    info.push(infoChild)
+  }
+  return info
+};
+
 module.exports = {
   throttle,
   debounce,
@@ -385,5 +390,6 @@ module.exports = {
   flatten, // 数组拍平
   unique, // 数组去重复
   formatDate,
-  timestampFormat
+  timestampFormat,
+  formatWeekInfo
 }
