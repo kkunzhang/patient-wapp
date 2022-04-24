@@ -30,4 +30,15 @@ export const getReservation = (data) => {
     // hideLoading: true
   });
 };
+/**
+ *  挂号生成订单
+ *  @return {Array}
+ */
+export const reservationLock = (data) => {
+  return http.post({
+    url: '/register/reservation/lock',
+    data,
+    // hideLoading: true
+  });
+};
 

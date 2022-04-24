@@ -8,11 +8,10 @@
           <view class="card-message">
             <view>
               <text>{{ info.doctorName }}</text>
-              <text>{{ info.doctorTag }}</text>
+              <text>{{ info.doctorTitle }}</text>
+              <text>{{ info.deptName }}</text>
             </view>
-            <view class="uni-lastmsg">
-              擅长：对高血压，冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇冠心病，心力衰歇
-            </view>
+            <!-- <view class="uni-lastmsg"> 擅长：{{ doctorSkill }} </view> -->
             <view class="message-tips" v-if="isShowOther">
               <view>好评率 98%</view>
               <view>已服务 123</view>
@@ -119,7 +118,7 @@ export default {
       text {
         margin: 4rpx;
         color: #333;
-        font-size: 35rpx;
+        font-size: 45rpx;
       }
       text:first-child {
         font-size: 45rpx;

@@ -50,8 +50,6 @@ export default {
    */
   onLoad(options) {
     this.deptId = options.id
-    //获取日期
-    // this.getDate()
     //获取七天后时间
     const ret = formatWeekInfo()
     this.dataInfo = ret
@@ -75,64 +73,12 @@ export default {
       }
       console.log(this.reservationList)
     },
-    // getDate() {
-    //   const today = new Date()
-    //   const nextDay = new Date(today)
-    //   const info = []
-    //   for (let index = 0; index < 7; index++) {
-    //     const infoChild = {}
-    //     nextDay.setDate(today.getDate() + index)
-    //     //获取星期
-    //     const week = this.getWeek(nextDay.getDay())
-    //     const isToday = this.getWeek(today.getDay())
-    //     infoChild.week = isToday == week ? '今天' : week
-    //     //获取日期
-    //     infoChild.time = nextDay.getDate()
-    //     //获取具体日期
-    //     infoChild.infoTime =
-    //       nextDay.getFullYear() +
-    //       '-' +
-    //       (nextDay.getMonth() + 1) +
-    //       '-' +
-    //       nextDay.getDate()
-    //     infoChild.id = index
-    //     info.push(infoChild)
-    //   }
-    //   this.dataInfo = info
-    //   console.log(this.dataInfo)
-    // },
-    // getWeek(days) {
-    //   let week
-    //   switch (days) {
-    //     case 1:
-    //       week = '周一'
-    //       break
-    //     case 2:
-    //       week = '周二'
-    //       break
-    //     case 3:
-    //       week = '周三'
-    //       break
-    //     case 4:
-    //       week = '周四'
-    //       break
-    //     case 5:
-    //       week = '周五'
-    //       break
-    //     case 6:
-    //       week = '周六'
-    //       break
-    //     case 0:
-    //       week = '周日'
-    //       break
-    //   }
-    //   return week
-    // },
     getMyClass(index, item) {
       let boxClass
       if (this.active === index && !item.status) {
         boxClass = 'box-outside active'
       } else if (item.status) {
+        //置灰
         boxClass = 'box-outside activeUnUse'
       } else {
         boxClass = 'box-outside'

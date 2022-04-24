@@ -8,7 +8,7 @@
       <!-- 已有就诊人，非第一次添加 -->
       <card-item @openPop="onOpen"> </card-item>
     </view>
-    <!-- 订单名称 -->
+    <!-- 预约信息 -->
     <uni-card>
       <view style="font-size: large">预约信息</view>
       <view class="item-bottom">
@@ -18,7 +18,7 @@
         </view>
         <view>
           <text>就诊科室</text>
-          <text>{{ doctorInfo.location }}</text>
+          <text>{{ doctorInfo.doctorTag }}</text>
         </view>
         <view>
           <text>就诊地址</text>
@@ -84,6 +84,8 @@ import card from '@/components/doctor/card.vue'
 import cardPop from '@/components/card-pop/card-pop.vue'
 import cardItem from '@/components/card-item/card-item.vue'
 import addVisiter from '@/components/add-visiter/add-visiter.vue'
+import { reservationLock } from '@/api/modules/registration'
+import { debounce } from '@utils/utils'
 export default {
   components: { card, cardPop, cardItem, addVisiter },
   data() {
@@ -91,19 +93,94 @@ export default {
       show: false,
       lever: false,
       doctorInfo: '',
+      orderList: {
+        registrationId: 1,
+        registrationNo: '0000000001',
+        userId: null,
+        patientId: '005155',
+        registrationStatus: null,
+        registerData: 1651161600000,
+        deptCode: 194,
+        deptName: '专家门诊三',
+        deptAddress: '专家门诊三',
+        registerType: '免挂号费',
+        doctorId: '100306',
+        doctorScheduleId: '20220421055900',
+        doctorTitle: null,
+        doctorName: '杨有川',
+        hisRegisterId: '20220421312604',
+        examinationFee: 0,
+        registerFee: 0,
+        totalFee: null,
+        discountFee: null,
+        paidFee: null,
+        paidTime: null,
+        paymentMethod: null,
+        createTime: 1644221332548,
+        updateTime: 1644221332548,
+      },
     }
   },
-
   onLoad(options) {
     let data = JSON.parse(decodeURIComponent(options.data))
     this.doctorInfo = data
   },
   methods: {
-    onSubmit() {
-      console.log('跳转去支付')
-      uni.navigateTo({
-        url: '/pages/registrationInfo/index',
-      })
+    onSubmit: debounce(function () {
+      this.order()
+      // uni.navigateTo({
+      //   url: '/pages/registrationInfo/index',
+      // })
+    }),
+    async order() {
+      let params = {
+        //todo 更换
+        doctorScheduleId: '20220421055900',
+        // doctorScheduleId: this.doctorInfo.doctorScheduleId,
+        //todo 更换
+        patientId: '005155',
+        //todo 更换
+        deptId: '0000000194',
+        // deptId: this.doctorInfo.deptId,
+        doctorId: this.doctorInfo.doctorId,
+        registerData: this.doctorInfo.registerDate,
+      }
+      // let a = {
+      //   code: 10000,
+      //   msg: '',
+      //   data: {
+      //     registrationId: 1,
+      //     registrationNo: '0000000001',
+      //     userId: null,
+      //     patientId: '005155',
+      //     registrationStatus: null,
+      //     registerData: 1651161600000,
+      //     deptCode: 194,
+      //     deptName: '专家门诊三',
+      //     deptAddress: '专家门诊三',
+      //     registerType: '免挂号费',
+      //     doctorId: '100306',
+      //     doctorScheduleId: '20220421055900',
+      //     doctorTitle: null,
+      //     doctorName: '杨有川',
+      //     hisRegisterId: '20220421312604',
+      //     examinationFee: 0,
+      //     registerFee: 0,
+      //     totalFee: null,
+      //     discountFee: null,
+      //     paidFee: null,
+      //     paidTime: null,
+      //     paymentMethod: null,
+      //     createTime: 1644221332548,
+      //     updateTime: 1644221332548,
+      //   },
+      // }
+      //todo dakai
+      // reservationLock(JSON.stringify(params)).then((data) => {
+      //   if (data.data.length > 0) {
+      //     this.orderList = data.data
+      //   }
+      // })
     },
     onOpen(val) {
       this.show = true
