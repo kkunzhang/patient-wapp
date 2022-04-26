@@ -152,18 +152,6 @@
         "navigationBarTitleText": "修改号码"
       }
     }
-    // {
-    // 	"path": "pages/consultationinfo/index",
-    // 	"style": {}
-    // },
-    // {
-    // 	"path": "pages/onlinepayment/index",
-    // 	"style": {}
-    // },
-    // {
-    // 	"path": "pages/orderlist/index",
-    // 	"style": {}
-    // }
   ],
   "tabBar": {
     "color": "#7A7E83",
@@ -222,5 +210,11 @@
         "query": "id=16"
       }
     ]
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^cp-(.*)": "@/components/cp-$1/cp-$1.vue"
+    }
   }
 }
