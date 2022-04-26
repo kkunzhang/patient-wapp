@@ -27,7 +27,7 @@ export default {
       infoData: [],
       params: {
         deptId: '',
-        data: '',
+        date: '',
       },
       list: [],
     }
@@ -45,7 +45,6 @@ export default {
     async leftClickHandle(index, id) {
       this.active = index
       this.infoData = this.list[index]
-      console.log(this.infoData)
     },
     onClick(item) {
       uni.navigateTo({
@@ -76,7 +75,7 @@ page {
       line-height: 60px;
       color: #333;
       text-align: center;
-      font-size: 30rpx;
+      font-size: $uni-font-size-h3;
       border-top: 1px solid #eee;
     }
     .active {
@@ -90,12 +89,11 @@ page {
     margin: 1rpx auto;
     background: #fff;
     .item {
-      font-size: 60rpx;
       height: 60px;
       line-height: 60px;
       color: #333;
       text-align: center;
-      font-size: 35rpx;
+      font-size: $uni-font-size-h3;
       margin-left: 20px;
     }
   }

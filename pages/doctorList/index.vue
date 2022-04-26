@@ -12,7 +12,7 @@
     ></sl-filter>
     <!-- :independence="true" -->
 
-    <search :isBackground="true" @searchValue="searchValue"></search>
+    <cp-search :isBackground="true" @searchValue="searchValue"></cp-search>
     <!-- todo测试 -->
     <button @click="onClick2()">清缓存</button>
     <!-- 医生号源信息 -->
@@ -28,7 +28,7 @@
 <script>
 import card from '@/components/doctor/card.vue'
 import slFilter from '@/components/sl-filter/sl-filter.vue'
-import search from '@/components/search/search.vue'
+
 export default {
   data() {
     return {
@@ -97,7 +97,6 @@ export default {
   },
   components: {
     slFilter,
-    search,
     card,
   },
   onLoad() {

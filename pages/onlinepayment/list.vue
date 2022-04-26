@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import payCard from '@/components/payCard/payCard.vue'
+import payCard from '@/components/pay-card/pay-card.vue'
 export default {
   components: { payCard },
   data() {

@@ -1,26 +1,38 @@
 <template>
   <view class="page">
     <view>
+      <pay-card :list="info" :isFull="true"></pay-card>
       <uni-card class="my-uni-card">
         <view class="card-item-add" @click="onClick()">
           <view><text> 挂号成功</text></view>
           <view>请按时就诊，号源当日有效，过期作废</view>
         </view>
       </uni-card>
-      <uni-card class="my-uni-card">
-        <view class="item-bottom">
+      <!-- 挂号信息 -->
+      <registration-card :info="info"></registration-card>
+      <!-- 订单信息 -->
+      <order-card :info="info"></order-card>
+      <!-- 支付信息 -->
+      <uni-card>
+        <view style="font-size: large">结算信息</view>
+        <view class="payment-item">
           <view>
-            <text>订单名称</text>
-            <text>远程会诊-视频问诊</text>
+            <text>订单金额</text>
+            <text>￥33</text>
           </view>
+        </view>
+        <view class="payment-item">
           <view>
-            <text>就诊患者</text>
-            <text>赵云</text>
+            <text>优惠券</text>
+            <text>未使用</text>
+            <text class="coupon">无可用券</text>
           </view>
+        </view>
+
+        <view class="payment-footer">
           <view>
-            <text>参会医生</text>
-            <text>张围军</text>
-            <text>李小凡</text>
+            实付
+            <text class="price">￥33</text>
           </view>
         </view>
       </uni-card>
@@ -29,24 +41,23 @@
 </template>
 
 <script>
-// pages/message/index.js
+import payCard from '@/components/pay-card/pay-card-status.vue'
+import registrationCard from './components/registration-card.vue'
+import orderCard from './components/order-card.vue'
 export default {
   data() {
-    return {}
+    return {
+      info: {
+        registerDate: '1111',
+        doctorTag: '1111',
+        location: '1111',
+        registerFee: '1111',
+      },
+      info: [{ id: 1 }],
+    }
   },
-  components: {},
-
-  methods: {
-    /**
-     * 页面的初始数据
-     */
-    onlineinfo() {
-      // wx.navigateTo({
-      //   url: '/pages/onlinepayment/index',
-      //   })
-      console.log('跳转消息详情')
-    },
-  },
+  components: { payCard, registrationCard, orderCard },
+  methods: {},
 }
 </script>
 <style lang="scss">
@@ -56,11 +67,5 @@ export default {
     font-weight: 500;
   }
 }
-.item-bottom view {
-  margin-top: 30rpx;
-  color: rgba(96, 102, 114, 1);
-}
-.item-bottom view text {
-  margin-right: 20rpx;
-}
+
 </style>

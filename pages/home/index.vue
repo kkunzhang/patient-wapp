@@ -1,11 +1,9 @@
 <template>
   <view class="container">
-    <!--导航栏-->
-    <!-- <navbar></navbar> -->
     <!--搜索-->
-    <search @searchValue="searchValue"></search>
+    <cp-search @searchValue="searchValue"></cp-search>
     <!--轮播图-->
-    <my-swiper></my-swiper>
+    <cp-swiper></cp-swiper>
     <!-- 导航区域 -->
     <view class="fast-enter">
       <view
@@ -18,7 +16,6 @@
         <text>{{ item.title }}</text>
       </view>
     </view>
-
     <!--线上服务-->
     <uni-card>
       <view class="card-title">线上服务</view>
@@ -36,7 +33,6 @@
         </view>
       </view>
     </uni-card>
-
     <!--预约服务-->
     <uni-card>
       <view class="card-title">预约服务</view>
@@ -73,44 +69,30 @@
     </uni-card>
   </view>
 </template>
-
 <script>
-import search from '@/components/search/search.vue'
-import mySwiper from '@/components/swiper/mySwiper.vue'
-import modal from '@/components/modal/modal.vue'
-// import { getUserDefaultSetting } from '@api/user'
-import { throttle, debounce } from '@utils/utils'
+import { throttle } from '@utils/utils'
 export default {
-  components: {
-    search,
-    mySwiper,
-    modal,
-  },
   data() {
     return {
       isShow: false,
       indexBackgroundImage: '/static/images/logo@2x.png',
       navs: [
         {
-          id: 1,
           icon: 'iconfont icon-ziyuan',
           title: '预约挂号',
           path: '/static/images/appintment.png',
         },
         {
-          id: 2,
           icon: 'iconfont icon-guanyuwomen',
           title: '在线缴费',
           path: '/static/images/payment.png',
         },
         {
-          id: 3,
           icon: 'iconfont icon-tupian',
           title: '报告查询',
           path: '/static/images/report.png',
         },
         {
-          id: 5,
           icon: 'iconfont icon-shipin',
           title: '云药房',
           path: '/static/images/drugstore.png',
@@ -118,19 +100,16 @@ export default {
       ],
       navs2: [
         {
-          id: 6,
           icon: 'iconfont icon-ziyuan',
           title: '远程门诊',
           path: '/static/images/outpatient.png',
         },
         {
-          id: 6,
           icon: 'iconfont icon-guanyuwomen',
           title: '远程会诊',
           path: '/static/images/consultation.png',
         },
         {
-          id: 4,
           icon: 'iconfont icon-tupian',
           title: '全国医生',
           path: '/static/images/doctor.png',
@@ -212,28 +191,31 @@ export default {
       this.list = data.results
     },
     onClick: throttle(function (item) {
-      switch (item.id) {
-        case 1:
+      switch (item.title) {
+        case '预约挂号':
           uni.navigateTo({
             url: '/pages/registration/index',
           })
           break
-        case 2:
+        case '在线缴费':
           uni.navigateTo({
             url: '/pages/onlinepayment/index',
           })
           break
-        case 3:
+        case '报告查询':
           uni.navigateTo({
             url: '/pages/seeReport/index',
           })
           break
-        case 4:
+        case '全国医生':
           uni.navigateTo({
             url: '/pages/doctorList/index',
           })
           break
-        case 6:
+        case '远程会诊':
+          this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')
+          break
+        case '远程会诊':
           this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')
           break
         default:
@@ -245,61 +227,6 @@ export default {
       // this.$tools.message('回答已删除', 'suc')
       // this.$tools.toast('回答已删除', 'suc')
     }),
-
-    // 获取订单列表
-    getorderlist() {
-      // loading提示框
-      uni.showLoading({
-        title: '加载中',
-      })
-      setTimeout(function () {
-        uni.hideLoading()
-        orderlist({
-          page: 1,
-          orderStatus: 40,
-        }).then((res) => {
-          console.log('订单res', res)
-        })
-      }, 800)
-    },
-    toHandlePopModal(val) {
-      conosle.log(val)
-    },
-    // 预约挂号
-    appointment() {
-      appointment({}).then((res) => {
-        console.log(res)
-      })
-    },
-
-    // 查询订单状态
-    orderstatus() {
-      orderstatus({
-        orderNo: '4',
-      }).then((res) => {
-        console.log('订单状态', res)
-      })
-    },
-
-    // 用户-退款单列表
-    refundorder() {
-      refundorder({
-        page: 1,
-        refundStatus: '',
-      }).then((res) => {
-        console.log('退款单列表', res)
-      })
-    },
-    getDoctorList() {
-      getDoctorList({
-        serviceType: '05',
-        memberCode: globalData.uid,
-        page: 1,
-        pageSize: '10',
-      }).then((res) => {
-        console.log('医生列表', res)
-      })
-    },
   },
   /**
    * 生命周期函数--监听页面加载
@@ -329,7 +256,7 @@ export default {
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log('2222')
+    console.log('22232')
   },
   /**
    * 用户点击右上角分享

@@ -132,22 +132,22 @@ export default {
     .card-item-add {
       display: flex;
       text {
-        font-size: 38rpx;
+        font-size: $uni-font-size-h1;
         color: #333333;
         font-weight: 500;
         margin-right: 30rpx;
       }
       view {
-        font-size: 34rpx;
+        font-size: $uni-font-size-h3;
       }
     }
     .fir-card-top {
       display: flex;
       flex-wrap: wrap;
-      margin-top: 14rpx;
+      margin-top: 1rpx;
       text {
         margin-right: 30rpx;
-        font-size: 34rpx;
+        font-size: $uni-font-size-h3;
       }
     }
   }
@@ -162,7 +162,7 @@ export default {
     flex: 1;
     border: 2rpx solid #dcdcdc;
     // height: 140rpx;
-    line-height: 66rpx;
+    line-height: 62rpx;
   }
 }
 

@@ -47,7 +47,7 @@ export default {
   height: 80rpx;
   line-height: 80rpx;
   text {
-    font-size: 38rpx;
+    font-size: 35rpx;
     font-weight: 500;
   }
 }

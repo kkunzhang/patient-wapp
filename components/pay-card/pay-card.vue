@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import countDown from './countDown.vue'
+import countDown from './count-down.vue'
 export default {
   components: { countDown },
   data() {

@@ -11,7 +11,9 @@
               <text>{{ info.doctorTitle }}</text>
               <text>{{ info.deptName }}</text>
             </view>
-            <!-- <view class="uni-lastmsg"> 擅长：{{ doctorSkill }} </view> -->
+            <!-- <view class="uni-lastmsg"> 西峰区人民医院</view> -->
+            <view class="uni-lastmsg"> 擅长： </view>
+            <!-- {{ doctorSkill }} -->
             <view class="message-tips" v-if="isShowOther">
               <view>好评率 98%</view>
               <view>已服务 123</view>
@@ -107,7 +109,6 @@ export default {
   .doctor-card-pic {
     display: flex;
     align-items: center;
-    margin-top: 20rpx;
     .card-message {
       display: flex;
       flex-wrap: nowrap;
@@ -118,10 +119,10 @@ export default {
       text {
         margin: 4rpx;
         color: #333;
-        font-size: 45rpx;
+        font-size: $uni-font-size-h3;
       }
       text:first-child {
-        font-size: 45rpx;
+        font-size: $uni-font-size-h1;
         font-family: PingFangSC-Medium, PingFang SC;
         font-weight: 500;
       }
@@ -133,7 +134,7 @@ export default {
         -webkit-line-clamp: 1; //可设置显示的行数
         line-clamp: 2;
         -webkit-box-orient: vertical;
-        margin-top: 6rpx;
+        margin: 4rpx;
       }
       .message-tips {
         margin-top: 20rpx;

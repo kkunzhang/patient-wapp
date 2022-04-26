@@ -388,10 +388,10 @@ const getWeek = (days) => {
  */
 const formatWeekInfo = () => {
   const today = new Date()
-  const nextDay = new Date(today)
   const info = []
   for (let index = 0; index < 7; index++) {
     const infoChild = {}
+    const nextDay = new Date(today)
     nextDay.setDate(today.getDate() + index)
     //获取星期
     const week = getWeek(nextDay.getDay())
@@ -402,9 +402,9 @@ const formatWeekInfo = () => {
     //获取具体日期
     infoChild.infoTime =
       nextDay.getFullYear() +
-      '-' +
+      '/' +
       (nextDay.getMonth() + 1) +
-      '-' +
+      '/' +
       nextDay.getDate()
     infoChild.id = index
     info.push(infoChild)

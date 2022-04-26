@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import countDown from './countDown.vue'
+import countDown from './count-down.vue'
 export default {
   components: { countDown },
   data() {
@@ -92,6 +92,7 @@ export default {
       margin: 4rpx;
     }
     .mini-btn {
+      border-radius: 30rpx !important;
     }
   }
 }

@@ -92,7 +92,7 @@
   </view>
 </template>
 <script>
-import payCard from '@/components/payCard/payCardStatus.vue'
+import payCard from '@/components/pay-card/pay-card-status.vue'
 import cardItem from '@/components/card-item/card-item.vue'
 import card from '@/components/doctor/card.vue'
 
