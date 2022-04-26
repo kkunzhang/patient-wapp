@@ -1,7 +1,7 @@
 <template>
   <view class="page">
     <view>
-      <pay-card :list="info" :isFull="true"></pay-card>
+      <pay-card :list="info1" :isFull="true"></pay-card>
       <uni-card class="my-uni-card">
         <view class="card-item-add" @click="onClick()">
           <view><text> 挂号成功</text></view>
@@ -12,30 +12,8 @@
       <registration-card :info="info"></registration-card>
       <!-- 订单信息 -->
       <order-card :info="info"></order-card>
-      <!-- 支付信息 -->
-      <uni-card>
-        <view style="font-size: large">结算信息</view>
-        <view class="payment-item">
-          <view>
-            <text>订单金额</text>
-            <text>￥33</text>
-          </view>
-        </view>
-        <view class="payment-item">
-          <view>
-            <text>优惠券</text>
-            <text>未使用</text>
-            <text class="coupon">无可用券</text>
-          </view>
-        </view>
-
-        <view class="payment-footer">
-          <view>
-            实付
-            <text class="price">￥33</text>
-          </view>
-        </view>
-      </uni-card>
+      <!-- 结算信息 -->
+      <cp-pay-type></cp-pay-type>
     </view>
   </view>
 </template>
@@ -53,7 +31,7 @@ export default {
         location: '1111',
         registerFee: '1111',
       },
-      info: [{ id: 1 }],
+      info1: [{ id: 1 }],
     }
   },
   components: { payCard, registrationCard, orderCard },
@@ -67,5 +45,4 @@ export default {
     font-weight: 500;
   }
 }
-
 </style>

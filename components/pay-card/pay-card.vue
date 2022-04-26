@@ -1,10 +1,10 @@
 <template>
   <view>
-    <view v-for="(item, index) in list" @click="onClick(111)" :key="index">
+    <view v-for="(item, index) in list" @click="onClick(item)" :key="index">
       <uni-card class="my-uni-card">
         <view class="card-item-add">
           <view style="font-size: large">2022年01月14日</view>
-          <view style="display: flex">
+          <view style="display: flex" v-if="isShowPayTime">
             <view class="right-tips">待支付 </view>
             <count-down></count-down>
           </view>
@@ -26,7 +26,7 @@
         </view>
         <view class="card-num">
           <view>远程门诊 </view>
-          <view>
+          <view v-if="isShowPayTime">
             <button
               class="mini-btn"
               @click="onClick()"
@@ -51,9 +51,7 @@ export default {
   },
   methods: {
     onClick(val) {
-      let item
-      item = 'vvv'
-      this.$emit('onClick', item)
+      this.$emit('onClick', val)
     },
   },
   props: {
@@ -61,6 +59,12 @@ export default {
       type: Array,
       default() {
         return {}
+      },
+    },
+    isShowPayTime: {
+      type: Boolean,
+      default() {
+        true
       },
     },
   },

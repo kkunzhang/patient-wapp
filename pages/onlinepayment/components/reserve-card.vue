@@ -1,9 +1,11 @@
 <template>
   <view>
-    <!-- 挂号信息 -->
+    <!-- 预约信息 -->
     <uni-card>
-      <view style="font-size: large">挂号信息</view>
-      <view class="item">
+      <view style="font-size: large">
+        <slot>预约信息 </slot>
+      </view>
+      <view class="item-bottom">
         <view>
           <text>就诊日期</text>
           <text>{{ info.registerDate }}</text>
@@ -41,7 +43,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.item view {
+.item-bottom view {
   margin-top: 30rpx;
   color: rgba(96, 102, 114, 1);
   text {

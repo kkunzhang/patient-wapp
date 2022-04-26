@@ -1,6 +1,10 @@
 <template>
   <view>
-    <pay-card :list="info" @onClick="toDetail"></pay-card>
+    <pay-card
+      :list="info"
+      @onClick="toDetail"
+      :isShowPayTime="false"
+    ></pay-card>
   </view>
 </template>
 

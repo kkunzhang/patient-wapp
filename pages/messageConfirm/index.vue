@@ -12,7 +12,7 @@
     <!-- 支付信息 -->
     <price-card :info="doctorInfo"></price-card>
     <!-- 支付方式 -->
-    <my-pay-type></my-pay-type>
+    <cp-pay-type></cp-pay-type>
     <!-- 提交 -->
     <view class="submit-box">
       <button type="primary" @click="onSubmit()">确认挂号</button>
@@ -26,8 +26,7 @@ import card from '@/components/doctor/card.vue'
 import cardPop from '@/components/card-pop/card-pop.vue'
 import cardItem from '@/components/card-item/card-item.vue'
 import addVisiter from '@/components/add-visiter/add-visiter.vue'
-import priceCard from './components/my-price-card.vue'
-import payType from './components/my-pay-type.vue'
+import priceCard from '@/components/pay-card/price-card.vue'
 import reserveCard from './components/reserve-card.vue'
 import { reservationLock } from '@/api/modules/registration'
 import { debounce } from '@utils/utils'
@@ -38,7 +37,6 @@ export default {
     cardItem,
     addVisiter,
     priceCard,
-    payType,
     reserveCard,
   },
   data() {
