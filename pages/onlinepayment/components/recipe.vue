@@ -12,19 +12,19 @@
             <uni-th width="20" align="left">总额</uni-th>
           </uni-tr>
           <!-- 表格数据行 -->
-          <uni-tr>
-            <uni-td>{{ info.itemName }}</uni-td>
-            <uni-td>{{ info.price }}</uni-td>
-            <uni-td>{{ info.number }}</uni-td>
-            <uni-td>{{ info.itemiFee }}</uni-td>
+
+          <uni-tr v-for="(item, index) in info" :key="index">
+            <uni-td>{{ item.itemName }}</uni-td>
+            <uni-td>{{ item.price }}</uni-td>
+            <uni-td>{{ item.number }}</uni-td>
+            <uni-td>{{ item.itemiFee }}</uni-td>
           </uni-tr>
         </uni-table>
       </view>
-
       <view class="payment-footer">
         <view>
           <text>合计 :</text>
-          <text class="price">￥{{ info.itemiFee }}</text>
+          <text class="price">￥{{ info.totalFee }}</text>
         </view>
       </view>
     </uni-card>
@@ -38,9 +38,9 @@ export default {
   methods: {},
   props: {
     info: {
-      type: Object,
+      type: Array,
       default() {
-        return {}
+        return []
       },
     },
   },

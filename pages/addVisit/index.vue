@@ -32,7 +32,7 @@
               clearable
               v-model="valiFormData.cardNumber"
               type="number"
-              @blur="Listeningfocus()"
+              @blur="listeningFocus()"
             />
           </uni-forms-item>
           <uni-forms-item label="手机号" type="number" required name="phone">
@@ -42,20 +42,20 @@
               clearable
               v-model="valiFormData.phone"
               type="number"
-              @blur="Listeningfocus(1)"
+              @blur="listeningFocus(1)"
             />
           </uni-forms-item>
           <uni-forms-item label="验证码" type="number" required name="code">
             <view class="code-box">
-              <uni-easyinput
-                @input="shuma"
-                v-model="valiFormData.code"
-                type="number"
-                class="code-input"
-                placeholder="请输入您收到的验证码"
-                border="surround"
-                clearable
-              />
+              <view>
+                <uni-easyinput
+                  @input="shuma"
+                  v-model="valiFormData.code"
+                  type="number"
+                  placeholder="请输入您收到的验证码"
+                  border="surround"
+                  clearable
+              /></view>
               <button
                 type="primary"
                 class="send-code-btn"
@@ -182,7 +182,7 @@ export default {
       _this.choiceContent = _this.choiceList[position].choiceItemContent
     },
     // 1、监听身份证输入
-    Listeningfocus(isPhone = '') {
+    listeningFocus(isPhone = '') {
       if (isPhone) {
         this.getCardTypeNumber(this.valiFormData.phone, isPhone)
       } else {
@@ -225,6 +225,7 @@ export default {
 
     //获取验证码
     async get_code() {
+      this.listeningFocus(1)
       if (this.isCanClick) {
         if (this.disabled) {
           return
@@ -305,8 +306,7 @@ export default {
 .code-box {
   display: flex;
   align-items: center;
-}
-.send-code-btn {
-  margin-left: 35rpx;
+  .code-input {
+  }
 }
 </style>

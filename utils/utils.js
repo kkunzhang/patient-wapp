@@ -76,9 +76,9 @@ function getIdCardInfo (idCard) {
   // idCard.substring(6, 10) + "-" + idCard.substring(10, 12) + "-" + idCard.substring(12, 14);
   // 获取性别
   if (parseInt(idCard.substr(16, 1)) % 2 === 1) {
-    info.sex = '男'
+    info.sex = '0'
   } else {
-    info.sex = '女'
+    info.sex = '1'
   }
   // 获取年龄
   const myDate = new Date()

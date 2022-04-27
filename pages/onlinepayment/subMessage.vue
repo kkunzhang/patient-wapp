@@ -42,7 +42,7 @@ export default {
   onLoad(options) {
     this.reserveInfo = JSON.parse(decodeURIComponent(options.data))
     console.log(this.reserveInfo)
-    this.drugDetailDto = this.reserveInfo.drugDetailDto[0]
+    this.drugDetailDto = this.reserveInfo.drugDetailDto
     console.log(this.drugDetailDto)
   },
 }

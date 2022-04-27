@@ -53,7 +53,7 @@ export default {
       const data = await getPayDetail(params)
       if (data.code == 10000) {
         this.info = { ...data.data, ...params }
-        this.drugDetailDto = this.info.drugDetailDto[0]
+        this.drugDetailDto = this.info.drugDetailDto
       }
     },
     onLoad(options) {
