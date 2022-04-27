@@ -58,11 +58,11 @@ export default {
   align-items: center;
 
   &__custom {
-    width: 22px;
-    height: 22px;
+    width: 40rpx;
+    height: 40rpx;
     background-color: #007aff;
     // background-color: #f29100;
-    border-radius: 4px;
+    border-radius: 8rpx;
     /* #ifndef APP-NVUE */
     display: flex;
     /* #endif */
@@ -71,20 +71,20 @@ export default {
 
     &__item {
       color: #fff;
-      font-size: 12px;
+      font-size: 24rpx;
       text-align: center;
     }
   }
 
   &__doc {
     color: #007aff;
-    padding: 0px 4px;
+    padding: 0rpx 8rpx;
   }
 
   &__item {
     color: #606266;
-    font-size: 15px;
-    margin-right: 4px;
+    font-size: 30rpx;
+    margin-right: 8rpx;
   }
 }
 </style>

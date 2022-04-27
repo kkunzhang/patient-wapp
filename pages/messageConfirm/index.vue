@@ -14,9 +14,7 @@
     <!-- 支付方式 -->
     <cp-pay-type></cp-pay-type>
     <!-- 提交 -->
-    <view class="submit-box">
-      <button type="primary" @click="onSubmit()">确认挂号</button>
-    </view>
+    <cp-button @onSubmit="onSubmit">确认挂号</cp-button>
     <!-- 弹窗 -->
     <card-pop :isShow="show" @closePop="onClose"></card-pop>
   </view>
@@ -113,9 +111,4 @@ export default {
 }
 </script>
 <style lang="scss">
-.submit-box {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-}
 </style>

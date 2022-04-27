@@ -3,14 +3,22 @@
     <!-- 挂号信息 -->
     <uni-card>
       <view style="font-size: large">挂号信息</view>
-      <view class="item">
+      <view class="item-font-spacing">
         <view>
-          <text>就诊日期</text>
+          <text>就诊患者</text>
+          <text>{{ info.registerDate }}</text>
+        </view>
+        <view>
+          <text>就诊医生</text>
           <text>{{ info.registerDate }}</text>
         </view>
         <view>
           <text>就诊科室</text>
           <text>{{ info.doctorTag }}</text>
+        </view>
+        <view>
+          <text>就诊日期</text>
+          <text>{{ info.registerDate }}</text>
         </view>
         <view>
           <text>就诊地址</text>
@@ -41,11 +49,4 @@ export default {
 }
 </script>
 <style lang="scss">
-.item view {
-  margin-top: 30rpx;
-  color: rgba(96, 102, 114, 1);
-  text {
-    margin-right: 20rpx;
-  }
-}
 </style>

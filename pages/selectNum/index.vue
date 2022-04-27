@@ -14,7 +14,9 @@
     <view v-for="(item, index) in reservationList" :key="index">
       <card :info="item" @onClick="order"></card>
     </view>
-    <text v-if="reservationList.length === 0">暂无号源</text>
+    <text v-if="reservationList.length === 0">暂无号源
+      
+    </text>
   </view>
 </template>
 <script>

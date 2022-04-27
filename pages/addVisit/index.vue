@@ -26,28 +26,28 @@
             required
             name="cardNumber"
           >
-            <u--input
+            <uni-easyinput
               placeholder="请输入身份证号"
               border="surround"
               clearable
               v-model="valiFormData.cardNumber"
               type="number"
               @blur="Listeningfocus()"
-            ></u--input>
+            />
           </uni-forms-item>
           <uni-forms-item label="手机号" type="number" required name="phone">
-            <u--input
+            <uni-easyinput
               placeholder="请输入手机号"
               border="surround"
               clearable
               v-model="valiFormData.phone"
               type="number"
               @blur="Listeningfocus(1)"
-            ></u--input>
+            />
           </uni-forms-item>
           <uni-forms-item label="验证码" type="number" required name="code">
             <view class="code-box">
-              <u--input
+              <uni-easyinput
                 @input="shuma"
                 v-model="valiFormData.code"
                 type="number"
@@ -55,7 +55,7 @@
                 placeholder="请输入您收到的验证码"
                 border="surround"
                 clearable
-              ></u--input>
+              />
               <button
                 type="primary"
                 class="send-code-btn"
@@ -69,10 +69,7 @@
         </uni-forms>
       </view>
     </uni-section>
-
-    <view class="submit-box">
-      <button type="primary" @click="submit('valiForm')">提交</button>
-    </view>
+    <cp-button @onSubmit="onSubmit('valiForm')">提交</cp-button>
   </view>
 </template>
 
@@ -103,7 +100,7 @@ export default {
         age: '16',
         cardNumber: '220602199311091235',
         phone: '17610229358',
-        code: '1234',
+        code: '',
         age: '',
         birthday: '',
         sex: '',
@@ -266,7 +263,7 @@ export default {
       })
     },
 
-    submit(ref) {
+    onSubmit(ref) {
       this.$refs[ref]
         .validate()
         .then((res) => {
@@ -299,11 +296,6 @@ export default {
 </script>
 
 <style lang="scss">
-.submit-box {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-}
 .example {
   padding: 40rpx 50rpx 20rpx 50rpx;
   .input-bg {
@@ -315,7 +307,6 @@ export default {
   align-items: center;
 }
 .send-code-btn {
-  width: 35%;
   margin-left: 35rpx;
 }
 </style>

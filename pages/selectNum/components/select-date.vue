@@ -60,7 +60,7 @@ export default {
     justify-content: flex-end;
     flex-direction: column;
     align-items: center;
-    padding: 0 25rpx;
+    padding: 0 16rpx;
     // width: 8vw;
     background-color: #87cefa;
     border-radius: 15rpx;

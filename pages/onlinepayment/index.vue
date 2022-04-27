@@ -60,7 +60,7 @@ export default {
     font-weight: 700;
     font-style: normal;
     padding: 200rpx 20rpx 60rpx;
-    font-size: 80rpx;
+    font-size: 60rpx;
   }
   .button {
     margin: 22rpx;

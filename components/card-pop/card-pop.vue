@@ -28,7 +28,6 @@
                   <text>1993年11月12日 </text>
                 </view>
               </view>
-              <!-- 卡片文字结束 -->
               <!-- 选中按钮 -->
               <radio-group @change="radioChange">
                 <label class="uni-list-cell uni-list-cell-pd">
@@ -43,9 +42,7 @@
         </view>
         <add-visiter v-if="isShowAdd"></add-visiter>
       </view>
-      <view class="submit-box">
-        <button type="primary" @click="onSubmit()">确认</button>
-      </view>
+      <cp-button @onSubmit="onSubmit">提交</cp-button>
     </u-popup>
   </view>
 </template>

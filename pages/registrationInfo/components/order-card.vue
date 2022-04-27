@@ -2,7 +2,7 @@
   <view>
     <uni-card>
       <view style="font-size: large">订单信息</view>
-      <view class="item">
+      <view class="item-font-spacing">
         <view>
           <text>订单编号</text>
           <text>333</text>
@@ -44,11 +44,4 @@ export default {
 }
 </script>
 <style lang="scss">
-.item view {
-  margin-top: 30rpx;
-  color: rgba(96, 102, 114, 1);
-  text {
-    margin-right: 20rpx;
-  }
-}
 </style>

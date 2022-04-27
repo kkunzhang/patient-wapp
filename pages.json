@@ -65,7 +65,7 @@
     {
       "path": "pages/registrationInfo/index",
       "style": {
-        "navigationBarTitleText": "挂号详情"
+        "navigationBarTitleText": "订单详情"
       }
     },
     {
@@ -82,6 +82,12 @@
     },
     {
       "path": "pages/onlinepayment/detail",
+      "style": {
+        "navigationBarTitleText": "信息确认"
+      }
+    },
+    {
+      "path": "pages/onlinepayment/subMessage",
       "style": {
         "navigationBarTitleText": "订单详情"
       }
@@ -195,7 +201,7 @@
     "backgroundTextStyle": "light",
     "navigationStyle": "default",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "西峰区人民医院互联网医院",
+    "navigationBarTitleText": "西峰区人民医院",
     "navigationBarBackgroundColor": "#F8F8F8",
     "renderingMode": "seperated", // 仅微信小程序，webrtc 无法正常时尝试强制关闭同层渲染
     "pageOrientation": "portrait" //横屏配置，全局屏幕旋转设置(仅 APP/微信/QQ小程序)，支持 auto / portrait / landscape

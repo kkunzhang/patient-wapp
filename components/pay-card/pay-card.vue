@@ -3,30 +3,33 @@
     <view v-for="(item, index) in list" @click="onClick(item)" :key="index">
       <uni-card class="my-uni-card">
         <view class="card-item-add">
-          <view style="font-size: large">2022年01月14日</view>
-          <view style="display: flex" v-if="isShowPayTime">
+          <view style="font-size: large">{{ item.prescriptionTime }}</view>
+          <view style="display: flex">
             <view class="right-tips">待支付 </view>
-            <count-down></count-down>
+            <!-- <count-down v-if="isShowPayTime"></count-down> -->
           </view>
         </view>
-        <view class="item-bottom">
+        <view class="item-font-spacing">
           <view>
-            <text>订单名称</text>
-            <text>远程会诊-视频问诊</text>
+            <text>处方编号</text>
+            <text>{{ item.prescriptionId }}</text>
           </view>
           <view>
-            <text>就诊患者</text>
-            <text>赵云</text>
+            <text>开单科室</text>
+            <text>{{ item.deptName }}</text>
           </view>
           <view>
-            <text>参会医生</text>
-            <text>张围军</text>
-            <text>李小凡</text>
+            <text>执行科室</text>
+            <text>{{ item.materialDeptName }}</text>
+          </view>
+          <view>
+            <text>订单金额</text>
+            <text>￥{{ item.totalFee }}</text>
           </view>
         </view>
         <view class="card-num">
-          <view>远程门诊 </view>
-          <view v-if="isShowPayTime">
+          <view>{{ item.type }} </view>
+          <!-- <view v-if="isShowPayTime">
             <button
               class="mini-btn"
               @click="onClick()"
@@ -35,7 +38,7 @@
             >
               去支付
             </button>
-          </view>
+          </view> -->
         </view>
       </uni-card>
     </view>
@@ -76,23 +79,18 @@ export default {
   justify-content: space-between;
   .right-tips {
     font-size: 32rpx;
-    // font-family: PingFangSC-Medium, PingFang SC;
+    font-family: PingFangSC-Medium, PingFang SC;
     margin-right: 4rpx;
   }
-}
-.item-bottom view {
-  margin-top: 30rpx;
-  color: rgba(96, 102, 114, 1);
-}
-.item-bottom view text {
-  margin-right: 20rpx;
 }
 .card-num {
   display: flex;
   justify-content: space-between;
-  margin-top: 45rpx;
+  margin-top: 35rpx;
   text {
     margin: 4rpx;
+    color: #909399;
+    font-weight: 400;
   }
   .mini-btn {
     border-radius: 30rpx !important;

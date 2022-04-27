@@ -26,6 +26,13 @@ page {
   background-color: #f5f5f5;
   color: #3a3a3a;
 }
+.item-font-spacing view {
+  margin-top: $uni-top;
+  color: rgba(96, 102, 114, 1);
+  text {
+    margin-right: 20rpx;
+  }
+}
 .gl:before {
   content: ' ';
   display: inline-block;

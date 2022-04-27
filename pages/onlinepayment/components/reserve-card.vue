@@ -3,24 +3,32 @@
     <!-- 预约信息 -->
     <uni-card>
       <view style="font-size: large">
-        <slot>预约信息 </slot>
+        <slot>处方信息 </slot>
       </view>
-      <view class="item-bottom">
+      <view class="item-font-spacing">
         <view>
-          <text>就诊日期</text>
-          <text>{{ info.registerDate }}</text>
+          <text>处方编号</text>
+          <text>{{ info.prescriptionId }}</text>
         </view>
         <view>
-          <text>就诊科室</text>
-          <text>{{ info.doctorTag }}</text>
+          <text>处方类型</text>
+          <text>{{ info.type }}</text>
         </view>
         <view>
-          <text>就诊地址</text>
+          <text>开单科室</text>
+          <text>{{ info.deptName }}</text>
+        </view>
+        <view>
+          <text>执行科室</text>
+          <text>{{ info.materialDeptName }}</text>
+        </view>
+        <view>
+          <text>科室地址</text>
           <text>{{ info.location }}</text>
         </view>
         <view>
-          <text>就诊费用</text>
-          <text>￥{{ info.registerFee }}</text>
+          <text>开单时间</text>
+          <text>{{ info.prescriptionTime }}</text>
         </view>
       </view>
     </uni-card>
@@ -43,11 +51,4 @@ export default {
 }
 </script>
 <style lang="scss">
-.item-bottom view {
-  margin-top: 30rpx;
-  color: rgba(96, 102, 114, 1);
-  text {
-    margin-right: 20rpx;
-  }
-}
 </style>

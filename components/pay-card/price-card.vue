@@ -2,7 +2,7 @@
   <view>
     <!-- 支付信息 -->
     <uni-card>
-      <view style="font-size: large">支付信息</view>
+      <view style="font-size: large"> <slot>支付信息</slot></view>
       <view class="payment-item">
         <view>
           <text>订单总额</text>
@@ -26,7 +26,7 @@
 
       <view class="payment-footer">
         <view>
-          应付
+          <text>实付 :</text>
           <text class="price">￥{{ info.registerFee }}</text>
         </view>
       </view>
@@ -55,7 +55,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  margin-top: 30rpx;
+  margin-top: $uni-top;
   .coupon {
     margin-left: 10rpx;
     color: rgba(145, 149, 158, 0.79);

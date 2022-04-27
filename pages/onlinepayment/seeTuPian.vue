@@ -37,8 +37,6 @@
         </view>
       </view>
     </uni-card>
-  
-
 
     <view class="submit-box">
       <button type="primary" @click="onSubmit()">确定</button>
@@ -90,13 +88,6 @@ export default {
 }
 </script>
 <style lang="scss">
-.item-bottom view {
-  margin-top: 30rpx;
-  color: rgba(96, 102, 114, 1);
-}
-.item-bottom view text {
-  margin-right: 20rpx;
-}
 .payment-item {
   display: flex;
   align-items: center;

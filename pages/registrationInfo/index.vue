@@ -2,19 +2,14 @@
   <view class="page">
     <view>
       <pay-card :list="info1" :isFull="true"></pay-card>
-      <uni-card class="my-uni-card">
-        <view class="card-item-add" @click="onClick()">
-          <view><text> 挂号成功</text></view>
-          <view>请按时就诊，号源当日有效，过期作废</view>
-        </view>
-      </uni-card>
       <!-- 挂号信息 -->
       <registration-card :info="info"></registration-card>
       <!-- 订单信息 -->
       <order-card :info="info"></order-card>
       <!-- 结算信息 -->
-      <cp-pay-type></cp-pay-type>
+      <price-card :info="info">结算信息</price-card>
     </view>
+    <cp-button @onSubmit="onSubmit" v-if="isShow">去支付</cp-button>
   </view>
 </template>
 
@@ -22,6 +17,7 @@
 import payCard from '@/components/pay-card/pay-card-status.vue'
 import registrationCard from './components/registration-card.vue'
 import orderCard from './components/order-card.vue'
+import priceCard from '@/components/pay-card/price-card.vue'
 export default {
   data() {
     return {
@@ -32,17 +28,12 @@ export default {
         registerFee: '1111',
       },
       info1: [{ id: 1 }],
+      isShow: true,
     }
   },
-  components: { payCard, registrationCard, orderCard },
+  components: { payCard, registrationCard, orderCard, priceCard },
   methods: {},
 }
 </script>
 <style lang="scss">
-.card-item-add {
-  text {
-    font-size: 38rpx;
-    font-weight: 500;
-  }
-}
 </style>
