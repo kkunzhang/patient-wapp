@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view v-for="(item, index) in list" :key="index">
+    <view>
       <view class="card-user-info">
         <view class="card-item-add">
           <view style="display: flex">
@@ -34,7 +34,7 @@ export default {
   },
   methods: {},
   props: {
-    list: {
+    item: {
       type: Object,
       default() {
         return {}

@@ -78,7 +78,7 @@ export default {
     onSubmit: debounce(function () {
       this.order()
       uni.navigateTo({
-        url: '/pages/registrationInfo/index',
+        url: `/pages/registrationInfo/index?patientId=${this.orderList.patientId}&registrationId=${this.orderList.registrationId}`,
       })
     }),
     async order() {

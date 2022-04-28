@@ -1,7 +1,7 @@
 <template>
   <view class="page">
     <view>
-      <pay-card :list="info1" :isFull="true"></pay-card>
+      <pay-card :item="info1" :isFull="true"></pay-card>
       <!-- 挂号信息 -->
       <registration-card :info="info"></registration-card>
       <!-- 订单信息 -->
@@ -46,7 +46,7 @@ export default {
     },
   },
   onLoad(options) {
-    this.reservationDetail(options.patientId, options.registrationId)
+    // this.reservationDetail(options.patientId, options.registrationId)
   },
   components: { payCard, registrationCard, orderCard, priceCard },
 }
