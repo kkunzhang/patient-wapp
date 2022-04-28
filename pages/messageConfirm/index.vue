@@ -94,7 +94,7 @@ export default {
         doctorId: this.doctorInfo.doctorId,
         registerData: this.doctorInfo.registerDate,
       }
-      //todo dakai  锁号。返回锁号信息
+      //todo 打开。返回订单信息
       // reservationLock(JSON.stringify(params)).then((data) => {
       //   if (data.data.length > 0) {
       //     this.orderList = data.data

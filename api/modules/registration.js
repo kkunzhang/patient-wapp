@@ -41,4 +41,26 @@ export const reservationLock = (data) => {
     // hideLoading: true
   });
 };
+/**
+ *  查挂号记录
+ *  @return {Array}
+ */
+export const reservationList = (data) => {
+  return http.get({
+    url: '/register/reservation/list',
+    data,
+    // hideLoading: true
+  });
+};
+/**
+ *  查挂号记录详情
+ *  @return {Array}
+ */
+export const reservationDetail = (data) => {
+  return http.get({
+    url: '/register/reservation/details',
+    data,
+    // hideLoading: true
+  });
+};
 

@@ -129,9 +129,10 @@
       }
     },
     {
-      "path": "pages/allOrders/index",
+      "path": "pages/registrationOrders/index",
       "style": {
-        "navigationBarTitleText": "全部订单"
+        "enablePullDownRefresh": true,
+        "navigationBarTitleText": "预约挂号"
       }
     },
     {

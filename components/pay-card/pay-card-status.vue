@@ -35,7 +35,7 @@ export default {
   methods: {},
   props: {
     list: {
-      type: Array,
+      type: Object,
       default() {
         return {}
       },

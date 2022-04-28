@@ -5,7 +5,7 @@
         <u-avatar :src="src" size="80"></u-avatar>
       </view>
       <view class="head-user-info">
-        <view v-if="1 == 0" class="top-title">
+        <view v-if="1 == type" class="top-title">
           <uni-title
             type="h1"
             color="#ffffff"
@@ -19,22 +19,16 @@
             :title="user_phone"
           ></uni-title>
         </view>
-        <view v-else class="login-bt">
-          <button
-            style="width: 300rpx; border-radius: 20rpx; margin-right: 170rpx"
-          >
-            请登录
-          </button>
-        </view>
+        <view v-else class="login-bt"> 登录/注册 </view>
       </view>
     </view>
     <!--就诊人管理-->
     <uni-card>
       <view class="box-tip">
         <view class="card-title">就诊人管理</view>
-        <view v-if="1 == 0">全部></view>
+        <view v-if="1 == type">全部></view>
       </view>
-      <view v-if="1 == 0" class="box-outside-warp">
+      <view v-if="1 == type" class="box-outside-warp">
         <view class="fir-card-top-warp">
           <view class="fir-card-top">
             <view class="fir-card-top-item">
@@ -76,13 +70,17 @@
           </view>
         </view>
       </view>
-      <view v-else>
-        <uni-card :border="false">
-          <view class="card-item-add" @click="onAdd()">
-            <view><uni-icons type="plus-filled" size="40"></uni-icons></view>
-            <text> <slot> 添加就诊人</slot></text>
-          </view>
-        </uni-card>
+      <view v-else class="card-item-add-bt">
+        <button type="primary" plain="true" @click="onAdd()">
+          <view class="card-item-add"
+            ><uni-icons
+              type="plus-filled"
+              color="#1aad19"
+              size="36"
+            ></uni-icons>
+            添加就诊人</view
+          >
+        </button>
       </view>
     </uni-card>
 
@@ -90,7 +88,6 @@
     <uni-card>
       <view class="box-tip">
         <view class="card-title">订单管理</view>
-        <view @click="onClick(0, 0)">全部订单></view>
       </view>
       <view class="box-outside-warp">
         <view
@@ -140,6 +137,7 @@ export default {
       src: '/static/images/doctor.jpeg',
       user_name: '赵云',
       user_phone: '138****1234',
+      type: 0,
       navs: [
         {
           icon: 'iconfont icon-ziyuan',
@@ -159,39 +157,33 @@ export default {
       ],
       navs2: [
         {
-          id: 1,
           icon: 'iconfont icon-ziyuan',
-          title: ' 待支付 ',
+          title: '预约挂号',
           path: '/static/images/register.png',
         },
         {
-          id: 1,
           icon: 'iconfont icon-guanyuwomen',
-          title: '服务中',
+          title: '远程门诊',
           path: '/static/images/remote-outpatient.png',
         },
         {
-          id: 1,
           icon: 'iconfont icon-tupian',
-          title: '待评价',
+          title: '远程会诊',
           path: '/static/images/remote-consultation.png',
         },
         {
-          id: 1,
           icon: 'iconfont icon-shipin',
-          title: '退款',
+          title: '处方订单',
           path: '/static/images/prescription.png',
         },
       ],
       navs3: [
         {
-          id: 2,
           icon: 'iconfont icon-ziyuan',
           title: '我的医生',
           path: '/static/images/my-doctor.png',
         },
         {
-          id: 3,
           icon: 'iconfont icon-guanyuwomen',
           title: '我的关注',
           path: '/static/images/my-follow.png',
@@ -225,31 +217,25 @@ export default {
     }
   },
   // }),
-
   methods: {
-    onClick() {
-      uni.navigateTo({
-        url: '/pages/allOrders/index',
-      })
-    },
     onAdd() {
       uni.navigateTo({
         url: '/pages/user/manage/index',
       })
     },
     onClick: debounce(function (item) {
-      switch (item.id) {
-        case 1:
+      switch (item.title) {
+        case '预约挂号':
           uni.navigateTo({
-            url: '/pages/allOrders/index',
+            url: '/pages/registrationOrders/index',
           })
           break
-        case 2:
+        case '我的医生':
           uni.navigateTo({
             url: '/pages/user/myDoctor/index',
           })
           break
-        case 3:
+        case '我的关注':
           uni.navigateTo({
             url: '/pages/user/myWith/index',
           })
@@ -282,6 +268,8 @@ export default {
       display: flex;
       height: 140rpx;
       align-items: center;
+      color: white;
+      font-size: 40rpx;
     }
     .user-name {
       margin-top: -24rpx;
@@ -339,18 +327,18 @@ export default {
       padding-bottom: 20rpx;
     }
     .mini-btn {
-      border-radius: 15px !important;
+      border-radius: 30rpx !important;
     }
   }
 }
-.card-item-add {
-  display: flex;
-  height: 70rpx;
-  line-height: 70rpx;
-  justify-content: center;
-  text {
-    font-size: 38rpx;
-    font-weight: 500;
+.card-item-add-bt {
+  margin-top: 40rpx;
+  .card-item-add {
+    display: flex;
+    height: 100rpx;
+    line-height: 100rpx;
+    justify-content: center;
+    border-radius: 10rpx;
   }
 }
 </style>

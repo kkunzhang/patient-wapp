@@ -3,42 +3,38 @@
     <view v-for="(item, index) in list" @click="onClick(item)" :key="index">
       <uni-card class="my-uni-card">
         <view class="card-item-add">
-          <view style="font-size: large">{{ item.prescriptionTime }}</view>
+          <view style="font-size: large">{{ item.registerData }}</view>
           <view style="display: flex">
-            <view class="right-tips">待支付</view>
-            <!-- <count-down v-if="isShowPayTime"></count-down> -->
+            <view class="right-tips">{{
+              item.registrationStatus | filterType
+            }}</view>
+            <count-down
+              v-if="isShowPayTime && item.registrationStatus == 10"
+            ></count-down>
           </view>
         </view>
         <view class="item-font-spacing">
           <view>
-            <text>处方编号</text>
-            <text>{{ item.prescriptionId }}</text>
+            <text>订单编号</text>
+            <text>{{ item.registrationNo }}</text>
           </view>
           <view>
-            <text>开单科室</text>
-            <text>{{ item.deptName }}</text>
+            <text>就诊患者</text>
+            <text>{{ item.patientName }}</text>
           </view>
           <view>
-            <text>执行科室</text>
-            <text>{{ item.materialDeptName }}</text>
+            <text>就诊医生</text>
+            <text
+              >{{ item.doctorName }} {{ item.doctorTitle }} {{ item.deptName }}
+            </text>
           </view>
           <view>
             <text>订单金额</text>
-            <text>￥{{ item.totalFee }}</text>
+            <text>￥{{ item.paidFee }}</text>
           </view>
         </view>
         <view class="card-num">
-          <view>{{ item.type }} </view>
-          <!-- <view v-if="isShowPayTime">
-            <button
-              class="mini-btn"
-              @click="onClick()"
-              type="primary"
-              size="mini"
-            >
-              去支付
-            </button>
-          </view> -->
+          {{ item.registerType }}
         </view>
       </uni-card>
     </view>
@@ -46,7 +42,7 @@
 </template>
 
 <script>
-import countDown from './count-down.vue'
+import countDown from '@/components/pay-card/count-down.vue'
 export default {
   components: { countDown },
   data() {
@@ -55,6 +51,19 @@ export default {
   methods: {
     onClick(val) {
       this.$emit('onClick', val)
+    },
+  },
+  filters: {
+    filterType(value) {
+      let type
+      if (value == 10) {
+        type = '待付款'
+      } else if (value == 20) {
+        type = '已取消'
+      } else if (value == 50) {
+        type = '已完成'
+      }
+      return type
     },
   },
   props: {

@@ -18,6 +18,8 @@ import payCard from '@/components/pay-card/pay-card-status.vue'
 import registrationCard from './components/registration-card.vue'
 import orderCard from './components/order-card.vue'
 import priceCard from '@/components/pay-card/price-card.vue'
+import { reservationDetail } from '@/api/modules/registration'
+
 export default {
   data() {
     return {
@@ -27,12 +29,26 @@ export default {
         location: '1111',
         registerFee: '1111',
       },
-      info1: [{ id: 1 }],
+      info1: { id: 1 },
       isShow: true,
     }
   },
+  methods: {
+    async reservationDetail(patientId, registrationId) {
+      let params = {
+        patientId: patientId,
+        registrationId: registrationId,
+      }
+      const data = await reservationDetail(JSON.stringify(params))
+      if (data.data.length > 0) {
+        this.info = data.data
+      }
+    },
+  },
+  onLoad(options) {
+    this.reservationDetail(options.patientId, options.registrationId)
+  },
   components: { payCard, registrationCard, orderCard, priceCard },
-  methods: {},
 }
 </script>
 <style lang="scss">

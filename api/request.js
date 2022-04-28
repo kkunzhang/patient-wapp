@@ -7,7 +7,7 @@ export default {
     header: {
       // 'Content-Type': 'application/x-www-form-urlencoded',
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer 01ba9cf7-cfcf-495a-bd7b-b9ef459f748f'
+      'Authorization': 'Bearer 4d08a4de-a4c7-4105-9475-1fd2de705bb1'
     },
     data: {},
     method: 'GET',

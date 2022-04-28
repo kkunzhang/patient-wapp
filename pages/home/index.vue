@@ -215,7 +215,7 @@ export default {
         case '远程会诊':
           this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')
           break
-        case '远程会诊':
+        case '远程门诊':
           this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')
           break
         default:

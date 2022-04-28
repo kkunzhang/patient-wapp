@@ -50,15 +50,15 @@ export default {
   methods: {},
 }
 </script>
-<style less="scss">
+<style lang="scss" scoped>
 .holder {
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-.tips {
-  color: #ccc;
-  font-size: 22px;
-  padding-top: 30px;
+  .tips {
+    color: #ccc;
+    font-size: 22px;
+    padding-top: 30px;
+  }
 }
 </style>
