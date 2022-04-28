@@ -12,7 +12,6 @@
             <uni-th width="20" align="left">总额</uni-th>
           </uni-tr>
           <!-- 表格数据行 -->
-
           <uni-tr v-for="(item, index) in info" :key="index">
             <uni-td>{{ item.itemName }}</uni-td>
             <uni-td>{{ item.price }}</uni-td>

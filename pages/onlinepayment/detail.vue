@@ -28,6 +28,31 @@ export default {
       show: false,
       lever: true,
       info: {},
+      info: {
+        prescriptionId: '2022F013E7',
+        type: '一般处方',
+        deptName: '药库',
+        materialDeptName: '西药房',
+        location: '门诊一楼',
+        prescriptionTime: '2022/04/27 14:27:29',
+        drugDetailDto: [
+          {
+            prescriptionId: '2022F013E3',
+            itemName: '5%葡萄糖注射液',
+            price: '1.265',
+            number: '1',
+            itemiFee: '1.27',
+          },
+          {
+            prescriptionId: '2022F013E3',
+            itemName: '普通门诊诊查费',
+            price: '3.600',
+            number: '1',
+            itemiFee: '3.60',
+          },
+        ],
+      },
+
       data: {
         prescriptionId: '',
         patientId: '',

@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view style="margin-bottom: 120rpx">
     <uni-card class="bottom-pay">
       <view>支付方式</view>
       <view class="weicat">

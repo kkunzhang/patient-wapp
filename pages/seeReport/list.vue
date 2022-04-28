@@ -10,8 +10,13 @@
         styleType="button"
       ></uni-segmented-control>
 
-      <view v-show="current === 0" @click="onClick()">
-        <view v-for="(item, index) in info1" :key="index" class="box-content">
+      <view v-show="current === 0">
+        <view
+          v-for="(item, index) in info1"
+          :key="index"
+          @click="onClick(item, 1)"
+          class="box-content"
+        >
           <view class="box-content-item">
             <view>
               <button class="mini-btn" type="primary" size="mini">
@@ -27,8 +32,13 @@
           <view class="gl"></view>
         </view>
       </view>
-      <view v-show="current === 1" @click="onClick()">
-        <view v-for="(item, index) in info1" :key="index" class="box-content">
+      <view v-show="current === 1">
+        <view
+          v-for="(item, index) in info1"
+          :key="index"
+          @click="onClick(item, 2)"
+          class="box-content"
+        >
           <view class="box-content-item">
             <view>
               <button class="mini-btn" type="primary" size="mini">
@@ -67,16 +77,12 @@ export default {
         this.current = e.currentIndex
       }
     },
-    onClick(e) {
+    onClick(item, type) {
       uni.navigateTo({
-        url: '/pages/seeReport/detail',
+        url: `/pages/seeReport/detail?data=${encodeURIComponent(
+          JSON.stringify(item)
+        )}&type=${type}`,
       })
-    },
-    onlineinfo() {
-      // wx.navigateTo({
-      //   url: '/pages/onlinepayment/index',
-      //   })
-      console.log('跳转消息详情')
     },
     openPop(val) {
       this.show = true
