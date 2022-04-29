@@ -230,6 +230,11 @@ export default {
             url: '/pages/registrationOrders/index',
           })
           break
+        case '处方订单':
+          uni.navigateTo({
+            url: '/pages/prescriptionOrders/index',
+          })
+          break
         case '我的医生':
           uni.navigateTo({
             url: '/pages/user/myDoctor/index',

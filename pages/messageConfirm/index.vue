@@ -43,10 +43,10 @@ export default {
       lever: false,
       doctorInfo: '',
       orderList: {
-        registrationId: 1,
+        registrationId: '212',
         registrationNo: '0000000001',
         userId: null,
-        patientId: '005155',
+        patientId: '2',
         registrationStatus: null,
         registerData: 1651161600000,
         deptCode: 194,

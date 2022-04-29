@@ -131,8 +131,15 @@
     {
       "path": "pages/registrationOrders/index",
       "style": {
-        "enablePullDownRefresh": true,
+        // "enablePullDownRefresh": true,
         "navigationBarTitleText": "预约挂号"
+      }
+    },
+    {
+      "path": "pages/prescriptionOrders/index",
+      "style": {
+        // "enablePullDownRefresh": true,
+        "navigationBarTitleText": "处方订单"
       }
     },
     {

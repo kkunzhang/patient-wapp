@@ -6,27 +6,27 @@
       <view class="item-font-spacing">
         <view>
           <text>就诊患者</text>
-          <text>{{ info.registerDate }}</text>
+          <text>{{ info.patientName }}</text>
         </view>
         <view>
           <text>就诊医生</text>
-          <text>{{ info.registerDate }}</text>
+          <text>{{ info.doctorName }}</text>
         </view>
         <view>
           <text>就诊科室</text>
-          <text>{{ info.doctorTag }}</text>
+          <text>{{ info.deptName }}</text>
         </view>
         <view>
           <text>就诊日期</text>
-          <text>{{ info.registerDate }}</text>
+          <text>{{ info.registerData }}</text>
         </view>
         <view>
           <text>就诊地址</text>
-          <text>{{ info.location }}</text>
+          <text>{{ info.deptAddress }}</text>
         </view>
         <view>
           <text>就诊费用</text>
-          <text>￥{{ info.registerFee }}</text>
+          <text>￥{{ info.totalFee }}</text>
         </view>
       </view>
     </uni-card>

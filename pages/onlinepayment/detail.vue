@@ -81,9 +81,9 @@ export default {
         this.drugDetailDto = this.info.drugDetailDto
       }
     },
-    onLoad(options) {
-      this.getPayDetail(options.prescriptionId, options.patientId)
-    },
+  },
+  onLoad(options) {
+    this.getPayDetail(options.prescriptionId, options.patientId)
   },
 }
 </script>

@@ -25,8 +25,7 @@
           <view>
             <text>就诊医生</text>
             <text
-              >{{ item.doctorName }}&nbsp;&nbsp;&nbsp;
-              {{ item.doctorTitle }}&nbsp;&nbsp;&nbsp; {{ item.deptName }}
+              >{{ item.doctorName }} {{ item.doctorTitle }} {{ item.deptName }}
             </text>
           </view>
           <view>

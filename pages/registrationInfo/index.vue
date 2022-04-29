@@ -1,7 +1,7 @@
 <template>
   <view class="page">
     <view>
-      <pay-card :item="info1" :isFull="true"></pay-card>
+      <pay-card :item="payStatus" :isFull="true"></pay-card>
       <!-- 挂号信息 -->
       <registration-card :info="info"></registration-card>
       <!-- 订单信息 -->
@@ -17,20 +17,18 @@
 import payCard from '@/components/pay-card/pay-card-status.vue'
 import registrationCard from './components/registration-card.vue'
 import orderCard from './components/order-card.vue'
-import priceCard from '@/components/pay-card/price-card.vue'
+import priceCard from './components/price-card.vue'
 import { reservationDetail } from '@/api/modules/registration'
 
 export default {
   data() {
     return {
-      info: {
-        registerDate: '1111',
-        doctorTag: '1111',
-        location: '1111',
-        registerFee: '1111',
+      info: {},
+      payStatus: {
+        endTime: '',
+        id: '',
       },
-      info1: { id: 1 },
-      isShow: true,
+      isShow: false,
     }
   },
   methods: {
@@ -39,14 +37,22 @@ export default {
         patientId: patientId,
         registrationId: registrationId,
       }
-      const data = await reservationDetail(JSON.stringify(params))
-      if (data.data.length > 0) {
+      const data = await reservationDetail(params)
+      console.log(data.data)
+      if (data.data) {
         this.info = data.data
+        this.payStatus.endTime = this.info.waitPaidTime
+        this.payStatus.id = this.info.registrationStatus
+        console.log(this.payStatu)
       }
     },
   },
   onLoad(options) {
-    // this.reservationDetail(options.patientId, options.registrationId)
+    this.isShow = false
+    if (options.registrationStatus == 10) {
+      this.isShow = true
+    }
+    this.reservationDetail(options.patientId, options.registrationId)
   },
   components: { payCard, registrationCard, orderCard, priceCard },
 }

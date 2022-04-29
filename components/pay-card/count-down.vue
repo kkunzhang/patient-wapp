@@ -38,16 +38,25 @@ export default {
       // seconds: 56
     },
     runBack() {
-      console.log('222')
-      var end = 1649663471073
-      var nowDate = new Date()
-      var now = nowDate.getTime()
-      now = 1649661671000
-      this.expirationTime = end - now //计算两日期之间相差的毫秒数
+      console.log('倒计时created')
+      const nowDate = new Date()
+      let now = nowDate.getTime()
+      //   // var endTime = 1649663471073
+      //  // now = 1649661671000
+      //todo 打开
+      // this.expirationTime = endTime - now //计算两日期之间相差的毫秒数
     },
   },
   created() {
     this.runBack()
+  },
+  props: {
+    endTime: {
+      type: String,
+      default() {
+        return ''
+      },
+    },
   },
 }
 </script>

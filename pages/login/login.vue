@@ -200,8 +200,16 @@ export default {
   },
   onLoad(options) {
     // 接收跳转的参数
-    this.pageOption = options //默认加载
-    this.login()
+    // this.pageOption = options //默认加载
+    // this.login()
+    uni.redirectTo({
+      url:
+        '/pages/login/loginPhone?backpage=' +
+        this.pageOption.backpage +
+        '&backtype=' +
+        this.pageOption.backtype,
+    })
+
     // 测试用
     // uni.setStorageSync('uid', 1)
     // uni.setStorageSync('nickName', 2)

@@ -28,6 +28,7 @@
         @onClick="getInfo"
         :isShowPayTime="true"
       ></pay-card>
+      <view class="isOver" v-if="flag">-----我是有底线的-----</view>
     </view>
   </view>
 </template>
@@ -38,219 +39,7 @@ export default {
   components: { payCard },
   data() {
     return {
-      info: {
-        code: 10000,
-        msg: '',
-        data: {
-          records: [
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-            {
-              registrationId: 273,
-              registrationNo: '0000000001',
-              registerData: '2022-04-29 00:00:00',
-              patientId: '123',
-              patientName: null,
-              doctorTitle: '主任医师',
-              doctorName: '杨有川',
-              deptName: '专家门诊三',
-              paidFee: 12,
-              registerType: '免挂号费',
-              registrationStatus: 10,
-            },
-          ],
-          page: 1,
-          pageSize: 10,
-          pageCount: 1,
-          totalCount: 1,
-          hasNext: false,
-        },
-      },
-      // 订单状态：
-      // 10  待付款
-      // 20 已取消
-      // 50 已完成
-      // 不传全部
+      info: [],
       tabBars: [
         {
           name: '全部',
@@ -272,36 +61,43 @@ export default {
       page: '1',
       pageSize: '10',
       flag: false,
-      type: '',
     }
   },
   methods: {
     onClick(item) {
+      //清除数据
+      this.onClean()
       this.getList(item.id)
-      this.type = item.name
-      console.log('222')
+      console.log(item)
+    },
+    onClean() {
+      this.info = []
+      this.page = '1'
     },
     getInfo(item) {
-      //todo 刁刁借口获取全部数句
+      //todo 获取全部数句
       uni.navigateTo({
-        url: `/pages/registrationInfo/index?patientId=${item.patientId}&registrationId=${item.registrationId}`,
+        url: `/pages/registrationInfo/index?patientId=${item.patientId}&registrationId=${item.registrationId}&registrationStatus=${item.registrationStatus}`,
       })
     },
-    async getList(type = '') {
+    async getList(status = '') {
       let params = {
-        registrationStatus: type,
-        page: '1',
-        pageSize: '10',
+        registrationStatus: status,
+        page: this.page,
+        pageSize: this.pageSize,
       }
-      const data = await reservationList(JSON.stringify(params))
-      if (data.data.length > 0) {
-        this.info = data.data.records
+      const data = await reservationList(params)
+      console.log(data)
+      if (data.code == 10000) {
+        this.info = [...this.info, ...data.data.records]
+        console.log(this.info)
       }
     },
     //分页
     onReachBottom() {
       console.log('触底请求下一页')
       if (this.info.length < this.page * this.pageSize) {
+        console.log(this.info.length)
         return (this.flag = true)
       } else {
         this.page++
@@ -310,7 +106,7 @@ export default {
     },
   },
   onLoad(options) {
-    // this.getList()
+    this.getList()
   },
 }
 </script>

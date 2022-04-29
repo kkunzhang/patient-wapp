@@ -41,4 +41,26 @@ export const reservationLock = (data) => {
     // hideLoading: true
   });
 };
+/**
+ *  查询处方缴费列表
+ *  @return {Array}
+ */
+export const prescriptionList = (data) => {
+  return http.get({
+    url: '/prescription/record/list',
+    data,
+    // hideLoading: true
+  });
+};
+/**
+ *  查询处方缴费详情
+ *  @return {Array}
+ */
+export const prescriptionDetail = (data) => {
+  return http.get({
+    url: '/prescription/record/details',
+    data,
+    // hideLoading: true
+  });
+};
 

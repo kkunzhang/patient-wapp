@@ -12,7 +12,7 @@
     <price-card :info="doctorInfo"></price-card>
     <!-- 支付方式 -->
     <cp-pay-type></cp-pay-type>
-    <cp-button @onSubmit="onSubmit">确认缴费</cp-button>
+    <!-- <cp-button @onSubmit="onSubmit">确认缴费</cp-button> -->
   </view>
 </template>
 <script>

@@ -4,27 +4,29 @@
       <view class="card-user-info">
         <view class="card-item-add">
           <view style="display: flex">
-            <view class="right-tips" v-if="item.id == 1">待支付 </view>
+            <view class="right-tips" v-if="item.id == 10">待支付 </view>
+            <view class="right-tips" v-if="item.id == 20">已取消 </view>
+            <view class="right-tips" v-if="item.id == 50">挂号成功 </view>
             <view class="right-tips" v-if="item.id == 2">服务中 </view>
             <view class="right-tips" v-if="item.id == 3">已完成 </view>
-            <view class="right-tips" v-if="item.id == 4">已取消 </view>
-            <view class="right-tips" v-if="item.id == 5">挂号成功 </view>
             <view class="right-tips" v-if="item.id == 6">处理中 </view>
-            <count-down v-if="item.id == 1"></count-down>
+            <count-down
+              v-if="item.id == 1"
+              :endTime="item.endTime"
+            ></count-down>
           </view>
         </view>
         <view class="card-num">
-          <view v-if="item.id == 1">超时未支付自动取消</view>
+          <view v-if="item.id == 10">超时未支付已自动取消 </view>
+          <view v-if="item.id == 20">超时未支付自动取消</view>
+          <view v-if="item.id == 50">请按时就诊，号源当日有效，过期作废 </view>
           <view v-if="item.id == 1">订单金额：￥100.00</view>
           <view v-if="item.id == 3">谨遵医嘱，按时复诊 </view>
-          <view v-if="item.id == 4">超时未支付已自动取消 </view>
-          <view v-if="item.id == 5">请按时就诊，号源当日有效，过期作废 </view>
         </view>
       </view>
     </view>
   </view>
 </template>
-
 <script>
 import countDown from './count-down.vue'
 export default {
