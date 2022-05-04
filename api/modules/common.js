@@ -1,23 +1,23 @@
 import http from '@api/request.js'
 /**
- *  登陆
+ *  微信小程序登录授权（小程序）
  *  @return {Array}
  */
-export const login = (data) => {
+export const login = (data, code) => {
   return http.post({
-    url: '/api/apiLogin',
+    url: `/mem/auth/v1/weChat/applet/auth/${code}`,
     data,
     hideLoading: false
   });
 };
 
 /**
- *  获取到货单详细
+ *  微信小程序授权获取手机号（小程序）
  *  @return {Array}
  */
-export const getArriveOrderItem = (data) => {
-  return http.get({
-    url: '/api/getArriveOrderItem',
+export const phoneLogin = (data, code) => {
+  return http.post({
+    url: `/mem/auth/v1/weChat/applet/phone/${code}`,
     data,
   });
 };

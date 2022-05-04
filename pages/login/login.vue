@@ -28,8 +28,6 @@
 
 <script>
 import { login } from '@api/modules/common'
-import { mapMutations } from 'vuex'
-import config from '@/utils/config.js'
 export default {
   name: 'Login',
   data() {
@@ -37,18 +35,16 @@ export default {
       tips: null,
       isShow: false,
       SessionKey: '',
-      OpenId: '',
-      nickName: null,
-      avatarUrl: null,
-      userInfo: {
-        avatarUrl: '',
-        city: '',
-        country: '',
-        gender: 1,
-        language: '',
-        nickName: '',
+      openid: '',
+      unionid: '',
+      nickName: 'xiaowang',
+      avatarUrl:
+        'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+      code: '',
+      pageOption: {
+        backpage: '/pages/home/index',
+        backtype: '1',
       },
-      pageOption: {},
       isCanUse: uni.getStorageSync('isCanUse') || true, //默认为true
     }
   },
@@ -73,15 +69,11 @@ export default {
               //获取用户信息后向调用信息更新方法
               _this.nickName = infoRes.userInfo.nickName //昵称
               _this.avatarUrl = infoRes.userInfo.avatarUrl //头像
-              // todo 打开
-              // uni.setStorageSync('uid', infoRes.userInfo.uid)
-              // uni.setStorageSync('nickName', infoRes.userInfo.nickName)
-              // uni.setStorageSync('avatarUrl', infoRes.userInfo.avatarUrl)
-              // uni.setStorageSync('regtime', infoRes.userInfo.regtime)
-              // todo 打开
+              uni.setStorageSync('nickName', infoRes.userInfo.nickName)
+              uni.setStorageSync('avatarUrl', infoRes.userInfo.avatarUrl)
               try {
                 uni.setStorageSync('isCanUse', false) //记录是否第一次授权  false:表示不是第一次授权
-                _this.updateUserInfo()
+                _this.updateUserInfo(_this.code)
               } catch (e) {}
             },
             fail: (err) => {
@@ -109,48 +101,8 @@ export default {
       uni.login({
         provider: 'weixin',
         success: function (loginRes) {
-          let code = loginRes.code
-          console.log(code)
+          _this.code = loginRes.code
           uni.hideLoading()
-          if (!_this.isCanUse) {
-            console.log(3333)
-            //非第一次授权获取用户信息///新版方法
-            uni.getUserProfile({
-              desc: 'Wexin', // 这个参数是必须的
-              success: (infoRes) => {
-                console.log(infoRes)
-                //获取用户信息后向调用信息更新方法
-                _this.nickName = infoRes.userInfo.nickName //昵称
-                _this.avatarUrl = infoRes.userInfo.avatarUrl //头像
-                // todo 打开
-                // uni.setStorageSync('uid', infoRes.userInfo.uid)
-                // uni.setStorageSync('nickName', infoRes.userInfo.nickName)
-                // uni.setStorageSync('avatarUrl', infoRes.userInfo.avatarUrl)
-                // uni.setStorageSync('regtime', infoRes.userInfo.regtime)
-                // todo 打开
-                // _this.updateUserInfo() //调用更新信息方法
-              },
-              fail: (err) => {
-                console.log(err)
-              },
-            })
-          }
-          // todo 将用户登录code传递到后台置换用户SessionKey、OpenId等信息
-          // login({ code: loginRes.code })
-          //   .then((res) => {
-          //     uni.hideLoading()
-          //     // openId、或SessionKdy存储//隐藏loading
-          //     uni.setStorageSync('token', res.obj.Authorization)
-          //     _self.openId = res.data.openid
-          //     _self.sessionKey = res.data.session_key // 3.通过 openId 判断用户是否授权
-          //   })
-          //   .catch(() => {
-          //     uni.showToast({
-          //       title: '获取 SesssionKey OpenId 失败',
-          //       icon: 'none',
-          //     })
-          //     return false
-          //   })
         },
         fail(err) {
           console.log('失败')
@@ -165,57 +117,35 @@ export default {
         },
       })
     },
-    //向后台更新信息
-    updateUserInfo() {
+    //向后台更新信息 login
+    async updateUserInfo(code = '') {
       const _this = this
-      uni.request({
-        url: 'url', //服务器端地址
-        data: {
-          appKey: config.appKey,
-          customerId: _this.customerId,
-          nickName: _this.nickName,
-          headUrl: _this.avatarUrl,
-        },
-        method: 'POST',
-        header: {
-          'content-type': 'application/json',
-        },
-        success: (res) => {
-          if (res.data.state == 'success') {
-            // todo 页面到获取手机号
-            uni.redirectTo({
-              url:
-                '/pages/login/loginPhone?backpage=' +
-                this.pageOption.backpage +
-                '&backtype=' +
-                this.pageOption.backtype,
-            })
-          }
-        },
-        fail: () => {
-          uni.showToast({ title: '用户信息操作失败', icon: 'none' })
-        },
-      })
+      const params = {
+        nickName: _this.nickName,
+        headUrl: _this.avatarUrl,
+      }
+      const data = await login(params, code)
+      console.log(data.data)
+      uni.setStorageSync('unionid', data.data.unionid)
+      uni.setStorageSync('openId', data.data.openid)
+      uni.setStorageSync('token', data.data.accessToken)
+      if (!data.data.bindingStatus) {
+        uni.redirectTo({
+          url:
+            '/pages/login/loginPhone?backpage=' +
+            this.pageOption.backpage +
+            '&backtype=' +
+            this.pageOption.backtype,
+        })
+      }
     },
   },
   onLoad(options) {
     // 接收跳转的参数
-    // this.pageOption = options //默认加载
-    // this.login()
-    uni.redirectTo({
-      url:
-        '/pages/login/loginPhone?backpage=' +
-        this.pageOption.backpage +
-        '&backtype=' +
-        this.pageOption.backtype,
-    })
-
-    // 测试用
-    // uni.setStorageSync('uid', 1)
-    // uni.setStorageSync('nickName', 2)
-    // uni.setStorageSync('avatarUrl', 3)
-    // uni.setStorageSync('regtime', 4)
-    // uni.redirectTo({ url: this.pageOption.backpage })
+    if (options) {
+      this.pageOption = options //默认加载
+    }
+    this.login()
   },
 }
 </script>
@@ -225,11 +155,6 @@ export default {
   margin: 200rpx auto 40rpx;
   width: 140rpx;
   height: 140rpx;
-  // border-radius: 50%;
-  // backface-visibility: hidden;
-  // transform: translate3d(0, 0, 0);
-  // box-shadow: 0 0 10rpx #ccc;
-  // overflow: hidden;
 }
 
 .content {

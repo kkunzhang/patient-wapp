@@ -218,11 +218,11 @@
   "condition": {
     "current": 0,
     "list": [
-      {
-        "name": "选择号源",
-        "path": "pages/selectNum/index",
-        "query": "id=16"
-      }
+      // {
+      //   "name": "全国医生",
+      //   "path": "pages/doctorList/index",
+      //   "query": "id=16"
+      // }
     ]
   },
   "easycom": {

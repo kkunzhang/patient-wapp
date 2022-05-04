@@ -5,7 +5,7 @@ import http from '@api/request.js'
  */
 export const add = (data) => {
   return http.post({
-    url: '/patient/add',
+    url: '/his-xfqrmyy/patient/add',
     data,
   });
 };
@@ -15,7 +15,7 @@ export const add = (data) => {
  */
 export const patientDel = (data) => {
   return http.post({
-    url: '/patient/delete',
+    url: '/his-xfqrmyy/patient/delete',
     data,
   });
 };
@@ -25,7 +25,7 @@ export const patientDel = (data) => {
  */
 export const update = (data) => {
   return http.post({
-    url: '/patient/update',
+    url: '/his-xfqrmyy/patient/update',
     data,
     // hideLoading: false
   });

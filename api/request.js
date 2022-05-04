@@ -1,5 +1,9 @@
 // import store from '../store/index'
 import configInfo from '@/utils/config.js'
+/**
+ * X-APP-ID 1：医生端  2：患者端
+ * X-CLIENT-ID  0：安卓APP 1：苹果APP 2：WAP 3：微信小程序 4：web
+ */
 export default {
   config: {
     // 请求的公共url
@@ -7,7 +11,8 @@ export default {
     header: {
       // 'Content-Type': 'application/x-www-form-urlencoded',
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer 4d08a4de-a4c7-4105-9475-1fd2de705bb1'
+      'X-APP-ID': '2',
+      'X-CLIENT-ID': '3',
     },
     data: {},
     method: 'GET',
@@ -26,7 +31,9 @@ export default {
     response: null,
   },
   request (options) {
-    // const token = uni.getStorageSync('token') // 登录鉴权获得的 token
+    // todo h5 和小程序端取的值不一样。
+    const token = uni.getStorageSync('token') // 登录鉴权获得的 token
+    console.log(uni.getStorageSync('token'));
     if (!options) {
       options = {};
     }
@@ -42,7 +49,11 @@ export default {
     options.url = options.baseUrl + options.url;
     options.data = options.data || {};
     options.method = options.method || this.config.method;
-    // this.config.header.Authorization = 'Basic ' + token;
+    if (options.url.indexOf('/mem/') < 0) {
+      this.config.header.Authorization = 'bearer ' + token;
+      // this.config.header.Authorization = 'bearer 4bf9976e-03b3-44fc-b525-339f7ff9bbb2';
+    }
+
     // 基于 Promise 的网络请求
     return new Promise((resolve, reject) => {
       uni.request({
@@ -52,14 +63,20 @@ export default {
         method: options.method,
         success: (response) => {
           let res = response.data;
-          if (res.code === 10000) {
+          console.log(res);
+          if (res.code === 100000 || res.code === 10000) {
             resolve(res)
           } else { // 返回值非 200，强制显示提示信息
-            this.showToast(response)
-            reject('[' + res.code + '] 系统处理失败')
+            if (res.errCode) {
+              this.showToast(res, parseInt(res.errCode))
+            } else {
+              this.showToast(res)
+            }
+            reject('[' + res + '] 系统处理失败')
           }
         },
         fail: (error) => {
+          console.log(error);
           if (error && error.response) {
             reject(error.response);
             this.showToast(error.response);
@@ -91,10 +108,10 @@ export default {
     options.method = 'DELETE';
     return this.request(options);
   },
-  showToast (error) {
+  showToast (error, errorCode) {
     let errorMsg = '';
-    if (error) {
-      switch (error.status) {
+    if (errorCode) {
+      switch (errorCode) {
         case 400:
           errorMsg = '请求参数错误';
           break;
@@ -122,6 +139,16 @@ export default {
           title: '报错信息',
           content: JSON.stringify(error),
           showCancel: false,
+          complete: function () {
+            setTimeout(function () {
+              uni.hideToast();
+              if (errorCode == 401) {
+                uni.navigateTo({
+                  url: '/pages/login/login',
+                })
+              }
+            }, 1000);
+          },
         });
       } else if (process.env.NODE_ENV === 'production') {
         uni.showToast({
@@ -131,7 +158,12 @@ export default {
           complete: function () {
             setTimeout(function () {
               uni.hideToast();
-            }, 3000);
+              if (errorCode == 401) {
+                uni.navigateTo({
+                  url: '/pages/login/login',
+                })
+              }
+            }, 1000);
           },
         });
       }

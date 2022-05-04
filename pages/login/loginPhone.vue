@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import config from '@/utils/config.js'
+import { phoneLogin } from '@api/modules/common'
 export default {
   name: 'Login',
   data() {
@@ -35,109 +35,55 @@ export default {
       OpenId: '',
       nickName: null,
       avatarUrl: null,
-      userInfo: {
-        avatarUrl: '',
-        city: '',
-        country: '',
-        gender: 1,
-        language: '',
-        nickName: '',
-      },
+      code: '',
       pageOption: {},
       isPhoneLogin: uni.getStorageSync('isPhoneLogin') || true,
       phone: '',
     }
   },
   methods: {
-    // 登录
-    login() {
-      const _this = this
-      uni.showLoading({
-        title: '登录中...',
-      })
-      uni.login({
-        provider: 'weixin',
-        success: function (loginRes) {
-          let code = loginRes.code
-          console.log(code)
-          uni.hideLoading()
-          // todo 将用户登录code传递到后台置换用户SessionKey、OpenId等信息
-          // login({ code: loginRes.code })
-          //   .then((res) => {
-          //     uni.hideLoading()
-          //     // openId、或SessionKdy存储//隐藏loading
-          //     uni.setStorageSync('token', res.obj.Authorization)
-          //     _self.openId = res.data.openid
-          //     _self.sessionKey = res.data.session_key // 3.通过 openId 判断用户是否授权
-          //   })
-          //   .catch(() => {
-          //     uni.showToast({
-          //       title: '获取 SesssionKey OpenId 失败',
-          //       icon: 'none',
-          //     })
-          //     return false
-          //   })
-        },
-        fail(err) {
-          console.log('失败')
-          uni.showModal({
-            title: '温馨提示',
-            content: err.errMsg,
-            showCancel: false,
-            success: function (res) {
-              return
-            },
-          })
-        },
-      })
-    },
     getPhoneNumber(e) {
       if (e.detail.errMsg == 'getPhoneNumber:ok') {
-        console.log(e)
         console.log(e.detail.code)
         console.log(e.detail.errMsg)
         console.log(e.detail.iv)
         console.log(e.detail.encryptedData)
         console.log('用户点击了接受')
-        //获取手机号
-        this.api
-          .phone({
-            session_key: this.sessionKey,
-            encryptedData: e.detail.encryptedData,
-            iv: e.detail.iv,
-          })
-          .then((res) => {
-            console.log(res, 2)
-            let data = JSON.parse(res.data.shuju)
-            console.log(data, 34)
-            // let oppenid = uni.getStorageSync('OPPENID')
-            //更新手机号
-            this.api
-              .updateUser({
-                phonenumber: data.phoneNumber,
-              })
-              .then((res1) => {
-                console.log(res1)
-                uni.setStorageSync('isPhoneLogin', false)
-                if (_this.pageOption.backtype == 1) {
-                  uni.redirectTo({ url: _this.pageOption.backpage })
-                } else {
-                  uni.switchTab({ url: _this.pageOption.backpage })
-                }
-              })
-              .catch((err) => {})
-          })
-          .catch((err) => {})
+        this.updateUserInfo(e.detail.code)
       } else {
         console.log('用户点击了拒绝')
+      }
+    },
+    //向后台更新信息 login
+    async updateUserInfo(code = '') {
+      const _this = this
+      const params = {
+        openid: uni.getStorageSync('openId'),
+        unionid: uni.getStorageSync('unionid'),
+      }
+      console.log(params)
+
+      const data = await phoneLogin(params, code)
+      console.log(data.data)
+      if (data.data.bindingStatus && data.data.userInfo.mobile) {
+        uni.setStorageSync('isPhoneLogin', false)
+        uni.setStorageSync('phone', data.data.userInfo.mobile)
+        uni.setStorageSync('token', data.data.accessToken)
+        console.log(data.data.accessToken)
+        if (_this.pageOption.backtype == 1) {
+          console.log('1111')
+          uni.redirectTo({ url: _this.pageOption.backpage })
+        } else {
+          console.log('2222')
+          uni.switchTab({ url: _this.pageOption.backpage })
+        }
       }
     },
   },
   onLoad(options) {
     // 接收跳转的参数
-    const _this = this
     this.pageOption = options //默认加载
-    this.login()
+    console.log(options)
   },
 }
 </script>

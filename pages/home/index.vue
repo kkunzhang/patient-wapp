@@ -193,24 +193,32 @@ export default {
     onClick: throttle(function (item) {
       switch (item.title) {
         case '预约挂号':
-          uni.navigateTo({
-            url: '/pages/registration/index',
-          })
+          if (this.checkLogin('/pages/registration/index', 1)) {
+            uni.navigateTo({
+              url: '/pages/registration/index',
+            })
+          }
           break
         case '在线缴费':
-          uni.navigateTo({
-            url: '/pages/onlinepayment/index',
-          })
+          if (this.checkLogin('/pages/onlinepayment/index', 1)) {
+            uni.navigateTo({
+              url: '/pages/onlinepayment/index',
+            })
+          }
           break
         case '报告查询':
-          uni.navigateTo({
-            url: '/pages/seeReport/index',
-          })
+          if (this.checkLogin('/pages/seeReport/index', 1)) {
+            uni.navigateTo({
+              url: '/pages/seeReport/index',
+            })
+          }
           break
         case '全国医生':
-          uni.navigateTo({
-            url: '/pages/doctorList/index',
-          })
+          if (this.checkLogin('/pages/doctorList/index', 1)) {
+            uni.navigateTo({
+              url: '/pages/doctorList/index',
+            })
+          }
           break
         case '远程会诊':
           this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')

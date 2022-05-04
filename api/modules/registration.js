@@ -5,7 +5,7 @@ import http from '@api/request.js'
  */
 export const getDept = (data) => {
   return http.get({
-    url: '/register/dept',
+    url: '/his-xfqrmyy/register/dept',
     data,
   });
 };
@@ -15,7 +15,7 @@ export const getDept = (data) => {
  */
 export const getDoctor = (data) => {
   return http.get({
-    url: '/register/doctor',
+    url: '/his-xfqrmyy/register/doctor',
     data,
   });
 };
@@ -25,7 +25,7 @@ export const getDoctor = (data) => {
  */
 export const getReservation = (data) => {
   return http.get({
-    url: '/register/reservation',
+    url: '/his-xfqrmyy/register/reservation',
     data,
     // hideLoading: true
   });
@@ -36,7 +36,7 @@ export const getReservation = (data) => {
  */
 export const reservationLock = (data) => {
   return http.post({
-    url: '/register/reservation/lock',
+    url: '/his-xfqrmyy/register/reservation/lock',
     data,
     // hideLoading: true
   });
@@ -47,7 +47,7 @@ export const reservationLock = (data) => {
  */
 export const reservationList = (data) => {
   return http.get({
-    url: '/register/reservation/list',
+    url: '/his-xfqrmyy/register/reservation/list',
     data,
     // hideLoading: true
   });
@@ -58,7 +58,7 @@ export const reservationList = (data) => {
  */
 export const reservationDetail = (data) => {
   return http.get({
-    url: '/register/reservation/details',
+    url: '/his-xfqrmyy/register/reservation/details',
     data,
     // hideLoading: true
   });

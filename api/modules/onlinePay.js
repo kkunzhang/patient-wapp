@@ -5,7 +5,7 @@ import http from '@api/request.js'
  */
 export const getPayList = (data) => {
   return http.get({
-    url: '/prescription/wait/pay',
+    url: '/his-xfqrmyy/prescription/wait/pay',
     data,
   });
 };
@@ -15,7 +15,7 @@ export const getPayList = (data) => {
  */
 export const getPayDetail = (data) => {
   return http.get({
-    url: '/prescription/detail',
+    url: '/his-xfqrmyy/prescription/detail',
     data,
   });
 };
@@ -25,7 +25,7 @@ export const getPayDetail = (data) => {
  */
 export const getReservation = (data) => {
   return http.get({
-    url: '/register/reservation',
+    url: '/his-xfqrmyy/register/reservation',
     data,
     // hideLoading: true
   });
@@ -36,7 +36,7 @@ export const getReservation = (data) => {
  */
 export const reservationLock = (data) => {
   return http.post({
-    url: '/register/reservation/lock',
+    url: '/his-xfqrmyy/register/reservation/lock',
     data,
     // hideLoading: true
   });
@@ -47,7 +47,7 @@ export const reservationLock = (data) => {
  */
 export const prescriptionList = (data) => {
   return http.get({
-    url: '/prescription/record/list',
+    url: '/his-xfqrmyy/prescription/record/list',
     data,
     // hideLoading: true
   });
@@ -58,7 +58,7 @@ export const prescriptionList = (data) => {
  */
 export const prescriptionDetail = (data) => {
   return http.get({
-    url: '/prescription/record/details',
+    url: '/his-xfqrmyy/prescription/record/details',
     data,
     // hideLoading: true
   });

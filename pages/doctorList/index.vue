@@ -11,7 +11,7 @@
       @result="result"
     ></sl-filter>
     <!-- :independence="true" -->
-
+    <!-- 搜索 -->
     <cp-search :isBackground="true" @searchValue="searchValue"></cp-search>
     <!-- todo测试 -->
     <button @click="onClick2()">清缓存</button>
@@ -127,7 +127,6 @@ export default {
       this.active = index
     },
     async onClick2(index, id) {
-      uni.setStorageSync('uid', '')
       uni.setStorageSync('nickName', '')
       uni.setStorageSync('avatarUrl', '')
       uni.setStorageSync('regtime', '')
