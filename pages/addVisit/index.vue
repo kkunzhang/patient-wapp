@@ -47,12 +47,12 @@
           </uni-forms-item>
           <uni-forms-item label="验证码" type="number" required name="code">
             <view class="code-box">
-              <view>
+              <view class="code-input">
                 <uni-easyinput
-                  @input="shuma"
+                  @input="smsCode"
                   v-model="valiFormData.code"
                   type="number"
-                  placeholder="请输入您收到的验证码"
+                  placeholder="请输入验证码"
                   border="surround"
                   clearable
               /></view>
@@ -60,11 +60,23 @@
                 type="primary"
                 class="send-code-btn"
                 size="mini"
-                @click="get_code"
+                @click="getSmsCode"
               >
                 {{ time }}{{ text }}
               </button>
             </view>
+          </uni-forms-item>
+          <uni-forms-item
+            label="是否默认"
+            type="number"
+            required
+            name="isDefault"
+          >
+            <u-switch
+              v-model="valiFormData.isDefault"
+              @change="onSwitchChange"
+              activeColor="#1AAD19"
+            ></u-switch>
           </uni-forms-item>
         </uni-forms>
       </view>
@@ -76,6 +88,7 @@
 <script>
 import choiceSelected from '@/components/selected/selected.vue'
 import { getIdCardInfo } from '@utils/utils'
+import { sendSms, addPatient } from '@/api/modules/user'
 export default {
   components: {
     choiceSelected,
@@ -104,6 +117,7 @@ export default {
         age: '',
         birthday: '',
         sex: '',
+        isDefault: false,
       },
       time: '',
       text: '获取验证码',
@@ -222,15 +236,20 @@ export default {
         }
       }
     },
-
+    onSwitchChange(e) {
+      console.log('change', e)
+      this.valiFormData.isDefault = e
+    },
     //获取验证码
-    async get_code() {
+    getSmsCode() {
+      //先验证电话号
       this.listeningFocus(1)
       if (this.isCanClick) {
         if (this.disabled) {
           return
         }
         this.disabled = true
+        this.sendSmsCode()
         this.setInterValFunc()
       } else {
         uni.showToast({
@@ -241,6 +260,18 @@ export default {
         })
       }
     },
+    //发送验证码
+    async sendSmsCode() {
+      const _this = this
+      const params = {
+        mobile: _this.valiFormData.phone,
+      }
+      const data = await sendSms(params)
+      if (data.code) {
+        this.$tools.message('发送成功', 'suc')
+      }
+    },
+    //定时器
     setInterValFunc() {
       this.time = 60
       this.text = '秒'
@@ -257,13 +288,12 @@ export default {
       }, 1000)
     },
     // 验证码输入框
-    shuma(e) {
+    smsCode(e) {
       e = e.match(/^\d{0,6}/g)[0] || ''
       this.$nextTick(() => {
         this.valiFormData.code = e
       })
     },
-
     onSubmit(ref) {
       this.$refs[ref]
         .validate()
@@ -272,14 +302,40 @@ export default {
           uni.showToast({
             title: `校验通过`,
           })
-          this.getCardInfo(res.caredNumbr)
+          this.addPatient(res.cardNumber)
         })
         .catch((err) => {
           console.log('err', err)
         })
     },
+    //添加就诊人
+    async addPatient(card) {
+      const _this = this
+      _this.getCardInfo(card)
+      const params = {
+        smsCode: _this.valiFormData.code,
+        mobile: _this.valiFormData.phone,
+        name: _this.valiFormData.name,
+        idCard: _this.valiFormData.cardNumber,
+        gender: _this.valiFormData.sex,
+        birthday: _this.valiFormData.birthday,
+        isDefault: _this.valiFormData.isDefault,
+      }
+      console.log(params)
+
+      const data = await addPatient(params)
+      if (data.code == 100000) {
+        this.$tools.message('添加成功', 'suc')
+      }
+      console.log(data)
+    },
+    //获取身份证信息
     getCardInfo(card) {
+      console.log(card)
+
       const ret = getIdCardInfo(card)
+      console.log(ret)
+
       if (ret) {
         this.valiFormData.age = ret.age
         this.valiFormData.birthday = ret.birthday
@@ -307,6 +363,7 @@ export default {
   display: flex;
   align-items: center;
   .code-input {
+    width: 200rpx;
   }
 }
 </style>

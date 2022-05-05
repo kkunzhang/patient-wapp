@@ -4,13 +4,13 @@
       <view @click="onClick()" class="center-item">
         <view>
           <view class="card-item-add">
-            <text>赵云</text>
-            <view>12312312312</view>
+            <text>{{ list.name }}</text>
+            <view>{{ list.phone }}</view>
           </view>
           <view class="fir-card-top">
-            <text>男 </text>
-            <text>32岁 </text>
-            <text>1993年11月12日 </text>
+            <text>{{ list.sex }} </text>
+            <text>{{ list.age }} 岁 </text>
+            <text>{{ list.birthday }} </text>
           </view>
         </view>
         <slot><view v-if="isShowButton" class="gl"></view></slot>
@@ -30,7 +30,7 @@ export default {
     },
   },
   props: {
-    dataList: {
+    list: {
       type: Object,
       default() {
         return {}

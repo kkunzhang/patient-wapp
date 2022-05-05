@@ -10,7 +10,7 @@
     >
       <view class="center" :style="{ height: height + 65 + 'px' }">
         <!-- 循环 -->
-        <view v-for="(item, index) in items" :key="item.value">
+        <view v-for="(item, index) in items" :key="item.index">
           <view
             class="card-user-info"
             :style="{ backgroundColor: index === current ? color : colorOther }"
@@ -19,20 +19,24 @@
               <!-- 卡片文字 -->
               <view>
                 <view class="card-item-add">
-                  <text>赵云</text>
-                  <view>12312312312</view>
+                  <text>{{ item.name }}</text>
+                  <view>{{ item.phone }}</view>
                 </view>
                 <view class="fir-card-top">
-                  <text>男 </text>
-                  <text>32 </text>
-                  <text>1993年11月12日 </text>
+                  <text>{{ item.sex }} </text>
+                  <text>{{ item.age }} 岁 </text>
+                  <text>{{ item.birthday }} </text>
                 </view>
               </view>
+
               <!-- 选中按钮 -->
               <radio-group @change="radioChange">
                 <label class="uni-list-cell uni-list-cell-pd">
                   <view class="radio-right">
-                    <radio :value="item.value" :checked="index === current" />
+                    <radio
+                      :value="item.patientId.toString()"
+                      :checked="index === current"
+                    />
                   </view>
                 </label>
               </radio-group>
@@ -52,30 +56,13 @@ export default {
   components: { addVisiter },
   data() {
     return {
-      items: [
-        {
-          value: 'ENG',
-          name: '英国',
-        },
-        {
-          value: 'FRA',
-          name: '法国',
-        },
-        {
-          value: '2',
-          name: '法国',
-        },
-        {
-          value: '3',
-          name: '法国',
-        },
-      ],
       height: null, //获取的状态栏高度
       color: 'skyblue',
       colorOther: '#f2f2f2',
       value: 0,
       current: 0,
       show: false,
+      defaultPatientList: [],
     }
   },
   props: {
@@ -87,6 +74,12 @@ export default {
       type: Boolean,
       default: true,
     },
+    items: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
   },
   watch: {
     isShow: {
@@ -97,9 +90,13 @@ export default {
   },
   methods: {
     radioChange(evt) {
+      console.log(evt)
       for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i].value === evt.detail.value) {
+        if (this.items[i].patientId == evt.detail.value) {
           this.current = i
+          this.defaultPatientList = this.items[i]
+          console.log(evt.detail)
+
           break
         }
       }
@@ -108,12 +105,10 @@ export default {
       this.$emit('closePop', 0)
     },
     onSubmit() {
-      console.log('提交')
-      console.log(this.current)
-      this.$tools.toast('操作成功', 'suc')
-      this.$emit('closePop', 0)
-      // this.$tools.message('回答已删除', 'suc')
-      // this.$emit('toHandlePopModal', 1)
+      if (this.defaultPatientList.length == 0) {
+        this.defaultPatientList = this.items[0]
+      }
+      this.$emit('submitPatientId', this.defaultPatientList)
     },
   },
 }

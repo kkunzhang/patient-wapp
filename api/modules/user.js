@@ -3,29 +3,29 @@ import http from '@api/request.js'
  *  添加就诊人
  *  @return {Array}
  */
-export const add = (data) => {
+export const addPatient = (data) => {
   return http.post({
-    url: '/his-xfqrmyy/patient/add',
+    url: '/mem/tenant/patient/add',
     data,
   });
 };
 /**
- *  删除就诊人
+ *  获取就诊人列表
  *  @return {Array}
  */
-export const patientDel = (data) => {
-  return http.post({
-    url: '/his-xfqrmyy/patient/delete',
+export const getPatientList = (data) => {
+  return http.get({
+    url: '/mem/tenant/patient',
     data,
   });
 };
 /**
- *  修改就诊人
+ *  添加就诊人发送验证码
  *  @return {Array}
  */
-export const update = (data) => {
+export const sendSms = (data) => {
   return http.post({
-    url: '/his-xfqrmyy/patient/update',
+    url: '/mem/tenant/patient/add/sms',
     data,
     // hideLoading: false
   });

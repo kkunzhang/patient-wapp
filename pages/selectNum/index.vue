@@ -14,9 +14,7 @@
     <view v-for="(item, index) in reservationList" :key="index">
       <card :info="item" @onClick="order"></card>
     </view>
-    <text v-if="reservationList.length === 0">暂无号源
-      
-    </text>
+    <text v-if="reservationList.length === 0">暂无号源 </text>
   </view>
 </template>
 <script>
@@ -45,13 +43,13 @@ export default {
   },
   methods: {
     //获取号源
-    async getReservation(site) {
+    async getReservation(index) {
       this.reservationList = []
       const params = {
         deptId: this.deptId,
         doctorId: '',
-        date: site
-          ? this.dataInfo[site]['infoTime']
+        date: index
+          ? this.dataInfo[index]['infoTime']
           : this.dataInfo[0]['infoTime'],
       }
       const data = await getReservation(params)

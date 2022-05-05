@@ -5,18 +5,18 @@
         <u-avatar :src="src" size="80"></u-avatar>
       </view>
       <view class="head-user-info">
-        <view v-if="1 == type" class="top-title">
+        <view v-if="phone" class="top-title">
           <uni-title
             type="h1"
             color="#ffffff"
             class="user-name"
-            :title="user_name"
+            :title="nickName"
           ></uni-title>
           <uni-title
             type="h3"
             color="#ffffff"
             class="user-phone"
-            :title="user_phone"
+            :title="phone"
           ></uni-title>
         </view>
         <view v-else class="login-bt"> 登录/注册 </view>
@@ -26,9 +26,9 @@
     <uni-card>
       <view class="box-tip">
         <view class="card-title">就诊人管理</view>
-        <view v-if="1 == type">全部></view>
+        <view v-if="phone">全部></view>
       </view>
-      <view v-if="1 == type" class="box-outside-warp">
+      <view v-if="phone" class="box-outside-warp">
         <view class="fir-card-top-warp">
           <view class="fir-card-top">
             <view class="fir-card-top-item">
@@ -125,19 +125,19 @@
 <script>
 const globalData = getApp().globalData
 import { throttle, debounce } from '@utils/utils'
+import { sendSms, getPatientList, addPatient } from '@/api/modules/user'
 export default {
   components: {},
   // inster({
   data() {
     return {
-      phone: '',
       openid: '',
       unionid: '',
       accessToken: globalData.accessToken,
       src: '/static/images/doctor.jpeg',
-      user_name: '赵云',
-      user_phone: '138****1234',
-      type: 0,
+      nickName: uni.getStorageSync('nickName') || false,
+      avatarUrl: uni.getStorageSync('avatarUrl') || false,
+      phone: uni.getStorageSync('phone') || false,
       navs: [
         {
           icon: 'iconfont icon-ziyuan',
@@ -226,29 +226,36 @@ export default {
     onClick: debounce(function (item) {
       switch (item.title) {
         case '预约挂号':
-          uni.navigateTo({
-            url: '/pages/registrationOrders/index',
-          })
+          // todo暂时先又由段验证登录到哪一步，后续再优化，可以直接调用，后端返回401，即跳登录。
+          this.onNavigateTo('/pages/registrationOrders/index')
           break
         case '处方订单':
-          uni.navigateTo({
-            url: '/pages/prescriptionOrders/index',
-          })
+          this.onNavigateTo('/pages/prescriptionOrders/index')
           break
         case '我的医生':
-          uni.navigateTo({
-            url: '/pages/user/myDoctor/index',
-          })
+          this.onNavigateTo('/pages/user/myDoctor/index')
           break
         case '我的关注':
-          uni.navigateTo({
-            url: '/pages/user/myWith/index',
-          })
+          this.onNavigateTo('/pages/user/myWith/index')
           break
         default:
           this.$tools.toast('敬请期待')
       }
     }),
+    onNavigateTo(url) {
+      // #ifdef MP-WEIXIN
+      if (this.checkLogin(url, 1)) {
+        uni.navigateTo({
+          url: url,
+        })
+      }
+      // #endif
+      // #ifdef H5
+      uni.navigateTo({
+        url: url,
+      })
+      // #endif
+    },
   },
 }
 </script>

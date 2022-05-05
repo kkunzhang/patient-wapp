@@ -2,7 +2,7 @@
   <view>
     <view v-if="info.length === 0">
       <view class="holder">
-        <p class="tips">暂无挂号信息</p>
+        <p class="tips">暂无信息</p>
       </view>
     </view>
     <view v-else>

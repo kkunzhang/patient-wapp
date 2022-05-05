@@ -62,10 +62,9 @@ export default {
         unionid: uni.getStorageSync('unionid'),
       }
       console.log(params)
-
       const data = await phoneLogin(params, code)
       console.log(data.data)
-      if (data.data.bindingStatus && data.data.userInfo.mobile) {
+      if (data.data.userInfo.mobile) {
         uni.setStorageSync('isPhoneLogin', false)
         uni.setStorageSync('phone', data.data.userInfo.mobile)
         uni.setStorageSync('token', data.data.accessToken)

@@ -193,32 +193,16 @@ export default {
     onClick: throttle(function (item) {
       switch (item.title) {
         case '预约挂号':
-          if (this.checkLogin('/pages/registration/index', 1)) {
-            uni.navigateTo({
-              url: '/pages/registration/index',
-            })
-          }
+          this.onNavigateTo('/pages/registration/index')
           break
         case '在线缴费':
-          if (this.checkLogin('/pages/onlinepayment/index', 1)) {
-            uni.navigateTo({
-              url: '/pages/onlinepayment/index',
-            })
-          }
+          this.onNavigateTo('/pages/onlinepayment/index')
           break
         case '报告查询':
-          if (this.checkLogin('/pages/seeReport/index', 1)) {
-            uni.navigateTo({
-              url: '/pages/seeReport/index',
-            })
-          }
+          this.onNavigateTo('/pages/seeReport/index')
           break
         case '全国医生':
-          if (this.checkLogin('/pages/doctorList/index', 1)) {
-            uni.navigateTo({
-              url: '/pages/doctorList/index',
-            })
-          }
+          this.onNavigateTo('/pages/doctorList/index')
           break
         case '远程会诊':
           this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')
@@ -235,6 +219,20 @@ export default {
       // this.$tools.message('回答已删除', 'suc')
       // this.$tools.toast('回答已删除', 'suc')
     }),
+    onNavigateTo(url) {
+      // #ifdef MP-WEIXIN
+      if (this.checkLogin(url, 1)) {
+        uni.navigateTo({
+          url: url,
+        })
+      }
+      // #endif
+      // #ifdef H5
+      uni.navigateTo({
+        url: url,
+      })
+      // #endif
+    },
   },
   /**
    * 生命周期函数--监听页面加载

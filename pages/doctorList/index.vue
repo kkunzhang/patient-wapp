@@ -129,7 +129,8 @@ export default {
     async onClick2(index, id) {
       uni.setStorageSync('nickName', '')
       uni.setStorageSync('avatarUrl', '')
-      uni.setStorageSync('regtime', '')
+      uni.setStorageSync('phone', '')
+      uni.setStorageSync('token', '')
     },
     changeMenuListDetailList() {
       let tempDetailList = [

@@ -220,7 +220,7 @@
     "list": [
       // {
       //   "name": "全国医生",
-      //   "path": "pages/doctorList/index",
+      //   "path": "pages/addVisit/index",
       //   "query": "id=16"
       // }
     ]

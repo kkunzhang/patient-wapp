@@ -93,6 +93,9 @@ export default {
     },
   },
   onLoad(options) {
+    const _this = this
+    let list = JSON.parse(decodeURIComponent(options.data))
+    _this.data.patientId = list.patientId
     this.getList()
   },
 }

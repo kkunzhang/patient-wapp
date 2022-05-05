@@ -49,11 +49,18 @@ export default {
     options.url = options.baseUrl + options.url;
     options.data = options.data || {};
     options.method = options.method || this.config.method;
-    if (options.url.indexOf('/mem/') < 0) {
+    console.log(options);
+    // #ifdef MP-WEIXIN
+    if (options.url.indexOf('/mem/auth/') < 0 && token) {
       this.config.header.Authorization = 'bearer ' + token;
-      // this.config.header.Authorization = 'bearer 4bf9976e-03b3-44fc-b525-339f7ff9bbb2';
-    }
+      console.log('333333');
+      console.log(token);
 
+    }
+    // #endif
+    // #ifdef H5
+    this.config.header.Authorization = 'bearer ' + '87903b8c-ff8b-4439-90fe-4bd8e5318b68';
+    // #endif
     // 基于 Promise 的网络请求
     return new Promise((resolve, reject) => {
       uni.request({
@@ -69,6 +76,8 @@ export default {
           } else { // 返回值非 200，强制显示提示信息
             if (res.errCode) {
               this.showToast(res, parseInt(res.errCode))
+            } else if (res.code === 500000) {
+              this.showToast(res, res.code)
             } else {
               this.showToast(res)
             }
@@ -110,6 +119,8 @@ export default {
   },
   showToast (error, errorCode) {
     let errorMsg = '';
+    console.log(error, errorCode);
+
     if (errorCode) {
       switch (errorCode) {
         case 400:

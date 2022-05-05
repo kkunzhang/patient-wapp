@@ -3,7 +3,7 @@ export default {
   install (Vue) {
     Vue.prototype.$tools = tools
     /**
-     *  封装全局登录函数
+     *  封装全局登录函数,目前后端的接口格式限制
      * @param {跳转路径} backpage 
      * @param {跳转方式} backtype 
      * @returns 
@@ -20,7 +20,6 @@ export default {
         uni.redirectTo({ url: '/pages/login/loginPhone?backpage=' + backpage + '&backtype=' + backtype });
         return false;
       }
-      // 登录成功、已经登录返回数组 [用户 id, 用户随机码, 用户昵称, 用户表情]
       return [phone, nickName, avatarUrl];
     }
     // Vue.prototype.$utils = { //全局方法

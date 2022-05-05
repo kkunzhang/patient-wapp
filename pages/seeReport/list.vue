@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <card-item @openPop="openPop"> </card-item>
+    <card-item :isShowButton="false" :list="defaultPatientList"> </card-item>
     <!--选项卡-->
     <uni-card class="my-uni-card">
       <uni-segmented-control
@@ -54,12 +54,12 @@
         </view>
       </view>
     </uni-card>
-    <card-pop :isShow="show" @closePop="closePop"></card-pop>
+    <!-- <card-pop :isShow="show" @closePop="closePop"></card-pop> -->
   </view>
 </template>
 
 <script>
-import cardPop from '@/components/card-pop/card-pop.vue'
+// import cardPop from '@/components/card-pop/card-pop.vue'
 import cardItem from '@/components/card-item/card-item.vue'
 export default {
   data() {
@@ -68,9 +68,11 @@ export default {
       current: 0,
       info1: [{ id: 1 }, { id: 2 }],
       show: false,
+      patientId: '',
+      defaultPatientList: [],
     }
   },
-  components: { cardPop, cardItem },
+  components: { cardItem },
   methods: {
     onClickItem(e) {
       if (this.current != e.currentIndex) {
@@ -84,12 +86,15 @@ export default {
         )}&type=${type}`,
       })
     },
-    openPop(val) {
-      this.show = true
+    //获取就诊人信息
+    getPatientInfo(options) {
+      let data = JSON.parse(decodeURIComponent(options.data))
+      console.log(data)
+      this.defaultPatientList = data
     },
-    closePop(val) {
-      this.show = false
-    },
+  },
+  onLoad(options) {
+    this.getPatientInfo(options)
   },
 }
 </script>

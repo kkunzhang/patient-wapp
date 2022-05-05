@@ -137,6 +137,8 @@ export default {
             '&backtype=' +
             this.pageOption.backtype,
         })
+      } else {
+        uni.redirectTo({ url: this.pageOption.backpage })
       }
     },
   },

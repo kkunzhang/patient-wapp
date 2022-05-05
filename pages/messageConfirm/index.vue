@@ -4,9 +4,12 @@
     <card :isShow="false" :info="doctorInfo"></card>
     <!--添加就诊人 -->
     <view>
-      <add-visiter></add-visiter>
-      <!-- 已有就诊人，非第一次添加 -->
-      <card-item @openPop="onOpen"> </card-item>
+      <u-skeleton rows="2" :loading="loading" :animate="true" :title="false">
+        <add-visiter v-if="!patientId"></add-visiter>
+        <!-- 已有就诊人，非第一次添加 -->
+        <card-item v-else @openPop="onOpen" :list="defaultPatientList">
+        </card-item>
+      </u-skeleton>
     </view>
     <reserve-card :info="doctorInfo"></reserve-card>
     <!-- 支付信息 -->
@@ -16,7 +19,12 @@
     <!-- 提交 -->
     <cp-button @onSubmit="onSubmit">确认挂号</cp-button>
     <!-- 弹窗 -->
-    <card-pop :isShow="show" @closePop="onClose"></card-pop>
+    <card-pop
+      :isShow="show"
+      @closePop="onClose"
+      @submitPatientId="submitPatientId"
+      :items="patientList"
+    ></card-pop>
   </view>
 </template>
 <script>
@@ -28,6 +36,7 @@ import priceCard from '@/components/pay-card/price-card.vue'
 import reserveCard from './components/reserve-card.vue'
 import { reservationLock } from '@/api/modules/registration'
 import { debounce } from '@utils/utils'
+import { getPatientList } from '@/api/modules/user'
 export default {
   components: {
     card,
@@ -42,6 +51,28 @@ export default {
       show: false,
       lever: false,
       doctorInfo: '',
+      patientId: '',
+      loading: true,
+      patientList: [
+        {
+          age: 12,
+          isDefault: true,
+          name: 'zhangfei',
+          patientId: 1234,
+          phone: 17610229358,
+          sex: '男',
+          birthday: '1993-12-01',
+        },
+        {
+          age: 12,
+          isDefault: false,
+          name: 'wangpeng',
+          patientId: 2,
+          phone: 112312312312,
+          sex: 1,
+        },
+      ],
+      defaultPatientList: [],
       orderList: {
         registrationId: '212',
         registrationNo: '0000000001',
@@ -71,8 +102,8 @@ export default {
     }
   },
   onLoad(options) {
-    let data = JSON.parse(decodeURIComponent(options.data))
-    this.doctorInfo = data
+    this.getDoctorInfo(options)
+    this.getTenantPatientList()
   },
   methods: {
     onSubmit: debounce(function () {
@@ -81,6 +112,39 @@ export default {
         url: `/pages/registrationInfo/index?patientId=${this.orderList.patientId}&registrationId=${this.orderList.registrationId}`,
       })
     }),
+    //获取医生预约等详细信息
+    getDoctorInfo(options) {
+      let data = JSON.parse(decodeURIComponent(options.data))
+      console.log(data)
+      this.doctorInfo = data
+    },
+    //获取就诊人列表
+    async getTenantPatientList() {
+      const params = {}
+      const data = await getPatientList(params)
+      if (data.data.records) {
+        //todo 打开
+        // this.patientList = data.data.records
+        this.checkDefaultPatient(data.data.records)
+      }
+      console.log(data)
+    },
+    //判断默认就诊人
+    checkDefaultPatient(data) {
+      this.patientId = ''
+      data.forEach((element) => {
+        if (element.isDefault) {
+          this.patientId = element.patientId
+          this.defaultPatientList = element
+          return
+        }
+      })
+      if (!this.patientId) {
+        this.patientId = data[0].patientId
+        this.defaultPatientList = data[0]
+      }
+      this.loading = false
+    },
     async order() {
       let params = {
         //todo 更换
@@ -101,11 +165,19 @@ export default {
       //   }
       // })
     },
-    onOpen(val) {
+    onOpen() {
       this.show = true
     },
-    onClose(val) {
+    onClose() {
       this.show = false
+    },
+    submitPatientId(val) {
+      console.log(val)
+      if (val) {
+        this.defaultPatientList = val
+      }
+      this.show = false
+      this.$tools.toast('操作成功', 'suc')
     },
   },
 }
