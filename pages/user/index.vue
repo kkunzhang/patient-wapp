@@ -1,5 +1,6 @@
 <template>
   <view>
+    <!-- 患者头像姓名手机号卡片 -->
     <view class="head-warpe">
       <view>
         <u-avatar :src="src" size="80"></u-avatar>
@@ -19,45 +20,19 @@
             :title="phone"
           ></uni-title>
         </view>
-        <view v-else class="login-bt"> 登录/注册 </view>
+        <view v-else class="login-bt" @click="onLogin"> 登录/注册 </view>
       </view>
     </view>
     <!--就诊人管理-->
     <uni-card>
       <view class="box-tip">
         <view class="card-title">就诊人管理</view>
-        <view v-if="phone">全部></view>
+        <view v-if="phone" @click="onEdit()">全部></view>
       </view>
-      <view v-if="phone" class="box-outside-warp">
-        <view class="fir-card-top-warp">
-          <view class="fir-card-top">
-            <view class="fir-card-top-item">
-              <uni-title type="h1" color="black" title="赵云"></uni-title>
-            </view>
-            <view class="fir-card-top-item">
-              <uni-tag
-                text="已经绑定医保卡"
-                type="success"
-                :circle="true"
-                inverted
-              ></uni-tag>
-            </view>
-            <view class="fir-card-top-item">
-              <uni-tag
-                text="默认"
-                inverted
-                type="error"
-                :circle="true"
-              ></uni-tag>
-            </view>
-          </view>
-          <view class="fir-card-top">
-            <text class="sec-card-top-item">男 </text>
-            <text class="sec-card-top-item">32 </text>
-            <text class="sec-card-top-item">12312312312 </text>
-          </view>
-        </view>
-
+      <view v-if="phone && !loading" class="box-outside-warp">
+        <!-- 就诊卡片 -->
+        <patien-card :defaultPatientList="defaultPatientList"></patien-card>
+        <!-- 卡片按钮 -->
         <view
           @click="onClick(item, index)"
           v-for="(item, index) in navs"
@@ -71,7 +46,7 @@
         </view>
       </view>
       <view v-else class="card-item-add-bt">
-        <button type="primary" plain="true" @click="onAdd()">
+        <button type="primary" plain="true" @click="onEdit()">
           <view class="card-item-add"
             ><uni-icons
               type="plus-filled"
@@ -124,10 +99,12 @@
 
 <script>
 const globalData = getApp().globalData
-import { throttle, debounce } from '@utils/utils'
-import { sendSms, getPatientList, addPatient } from '@/api/modules/user'
+import { debounce } from '@utils/utils'
+import { getTenantPatientList } from '@/utils/mixin.js'
+import { patienCard } from './components/patien-card.vue'
 export default {
-  components: {},
+  components: { patienCard },
+  mixins: [getTenantPatientList],
   // inster({
   data() {
     return {
@@ -138,6 +115,7 @@ export default {
       nickName: uni.getStorageSync('nickName') || false,
       avatarUrl: uni.getStorageSync('avatarUrl') || false,
       phone: uni.getStorageSync('phone') || false,
+      // phone: false,
       navs: [
         {
           icon: 'iconfont icon-ziyuan',
@@ -218,10 +196,8 @@ export default {
   },
   // }),
   methods: {
-    onAdd() {
-      uni.navigateTo({
-        url: '/pages/user/manage/index',
-      })
+    onEdit() {
+      this.onNavigateTo('/pages/user/manage/index')
     },
     onClick: debounce(function (item) {
       switch (item.title) {
@@ -242,6 +218,12 @@ export default {
           this.$tools.toast('敬请期待')
       }
     }),
+    //去登录
+    onLogin() {
+      uni.navigateTo({
+        url: '/pages/login/login',
+      })
+    },
     onNavigateTo(url) {
       // #ifdef MP-WEIXIN
       if (this.checkLogin(url, 1)) {

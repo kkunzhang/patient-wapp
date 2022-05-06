@@ -53,9 +53,7 @@ export default {
     // #ifdef MP-WEIXIN
     if (options.url.indexOf('/mem/auth/') < 0 && token) {
       this.config.header.Authorization = 'bearer ' + token;
-      console.log('333333');
       console.log(token);
-
     }
     // #endif
     // #ifdef H5

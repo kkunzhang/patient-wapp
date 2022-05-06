@@ -1,57 +1,36 @@
 <template>
   <view>
     <add-visiter></add-visiter>
-    <uni-card v-for="(item, index) in navs" :key="index">
-      <view class="box-outside-warp">
-        <view class="fir-card-top-warp">
-          <view class="fir-card-top">
-            <view class="fir-card-top-item">
-              <uni-title type="h1" color="black" title="赵云"></uni-title>
+    <view v-if="!loading">
+      <uni-card v-for="(cardItem, i) in patientList" :key="i">
+        <view class="box-outside-warp">
+          <!-- 就诊卡片 -->
+          <patien-card :list="cardItem"></patien-card>
+          <view
+            @click="onClick(item, cardItem)"
+            v-for="(item, index) in navs"
+            :key="index"
+          >
+            <view class="box-outside" style="margin-top: -40rpx">
+              <button class="mini-btn" type="primary" size="mini">
+                {{ item.title }}
+              </button>
             </view>
-            <view class="fir-card-top-item">
-              <uni-tag
-                text="已经绑定医保卡"
-                type="success"
-                :circle="true"
-                inverted
-              ></uni-tag>
-            </view>
-            <view class="fir-card-top-item">
-              <uni-tag
-                text="默认"
-                inverted
-                type="error"
-                :circle="true"
-              ></uni-tag>
-            </view>
-          </view>
-          <view class="fir-card-top">
-            <text class="sec-card-top-item">男 </text>
-            <text class="sec-card-top-item">32 </text>
-            <text class="sec-card-top-item">12312312312 </text>
           </view>
         </view>
-
-        <view
-          @click="onClick(item, index)"
-          v-for="(item, index) in navs"
-          :key="index"
-        >
-          <view class="box-outside" style="margin-top: -40rpx">
-            <button class="mini-btn" type="primary" size="mini">
-              {{ item.title }}
-            </button>
-          </view>
-        </view>
-      </view>
-    </uni-card>
+      </uni-card>
+    </view>
   </view>
 </template>
 <script>
 import addVisiter from '@/components/add-visiter/add-visiter.vue'
-import { throttle, debounce } from '@utils/utils'
+import { throttle } from '@utils/utils'
+import { patienCard } from '../components/patien-card.vue'
+import { deletePatient, setPatient } from '@/api/modules/patientUser'
+import { getTenantPatientList } from '@/utils/mixin.js'
 export default {
-  components: { addVisiter },
+  components: { addVisiter, patienCard },
+  mixins: [getTenantPatientList],
   data() {
     return {
       show: false,
@@ -59,7 +38,7 @@ export default {
       navs: [
         {
           icon: 'iconfont icon-ziyuan',
-          title: ' 就诊卡 ',
+          title: '就诊卡',
           path: '/static/images/register.png',
         },
         {
@@ -74,7 +53,7 @@ export default {
         },
         {
           icon: 'iconfont icon-ziyuan',
-          title: ' 设为默认 ',
+          title: '设为默认',
           path: '/static/images/register.png',
         },
         {
@@ -91,30 +70,51 @@ export default {
     }
   },
   methods: {
-    onClick: throttle(function (item) {
+    onClick: throttle(function (item, cardItem) {
       switch (item.title) {
         case '删除患者':
           this.$tools.showModal('', '确认删除该患者?').then((res) => {
             if (res) {
-              console.log('去删除')
+              this.deletePatient(cardItem.patientId)
             }
           })
           break
         case '更改号码':
-          uni.navigateTo({
-            url: '/pages/user/manage/changePhone',
-          })
+          this.editPhone(cardItem)
+          break
+        case '设为默认':
+          if (cardItem.isDefault) {
+            this.$tools.message('该就诊人已是默认就诊人', 'suc')
+          } else {
+            this.$tools.showModal('', '确认设置为默认?').then((res) => {
+              if (res) {
+                this.setPatient(cardItem.patientId)
+              }
+            })
+          }
           break
         default:
           this.$tools.toast('敬请期待')
       }
-      // console.log(index)
-      // const flag = await this.$tools.showModal('', '确认删除该患者?')
-      // if (flag) {
-      //   //  去删除
-      //   console.log('去删除')
-      // }
     }),
+    editPhone() {
+      uni.navigateTo({
+        url: `/pages/user/manage/changePhone?patientID=${item.patientId}`,
+      })
+    },
+    async setPatient(patientId) {
+      const data = await setPatient({}, patientId)
+      if (data.code == 100000) {
+        this.$tools.toast('设置成功', 'suc')
+      }
+    },
+    async deletePatient(patientId) {
+      const data = await deletePatient({}, patientId)
+      if (data.code == 100000) {
+        this.$tools.toast('删除成功', 'suc')
+      }
+    },
+    // todo 修改手机号,还有这两个刷新页面, 不能点击删除
   },
 }
 </script>
@@ -156,3 +156,4 @@ export default {
   }
 }
 </style>
+

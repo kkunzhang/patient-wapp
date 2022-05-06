@@ -88,7 +88,7 @@
 <script>
 import choiceSelected from '@/components/selected/selected.vue'
 import { getIdCardInfo } from '@utils/utils'
-import { sendSms, addPatient } from '@/api/modules/user'
+import { sendSms, addPatient } from '@/api/modules/patientUser'
 export default {
   components: {
     choiceSelected,

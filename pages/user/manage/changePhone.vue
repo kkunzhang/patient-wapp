@@ -44,8 +44,12 @@
     </view>
   </view>
 </template>
-
 <script>
+import {
+  editPatientMobile,
+  deletePatient,
+  setDefaultPatient,
+} from '@/api/modules/patientUser'
 export default {
   components: {},
   data() {
@@ -167,6 +171,13 @@ export default {
       e = e.match(/^\d{0,6}/g)[0] || ''
       this.$nextTick(() => {
         this.valiFormData.code = e
+      })
+    },
+    async editPatientMobile() {
+      this.$tools.showModal('', '确认更改号码?').then((res) => {
+        if (res) {
+          console.log('去删除')
+        }
       })
     },
   },
