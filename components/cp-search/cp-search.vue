@@ -3,7 +3,7 @@
     <view :class="[isBackground == true ? 'search_11' : '']">
       <uni-search-bar
         @confirm="search"
-        :focus="true"
+        :focus="false"
         v-model="searchValue"
         @input="input"
         @cancel="cancel"

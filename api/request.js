@@ -57,7 +57,7 @@ export default {
     }
     // #endif
     // #ifdef H5
-    this.config.header.Authorization = 'bearer ' + '87903b8c-ff8b-4439-90fe-4bd8e5318b68';
+    this.config.header.Authorization = 'bearer ' + '720100d0-de37-4683-a3e8-cd8c5e24cf37';
     // #endif
     // 基于 Promise 的网络请求
     return new Promise((resolve, reject) => {

@@ -10,7 +10,7 @@ export const getReportResult = (data) => {
   });
 };
 /**
- *  查询检查报告详情
+ *  查询检验报告详情
  *  @return {Array}
  */
 export const getReportLisDetail = (data) => {
@@ -20,7 +20,7 @@ export const getReportLisDetail = (data) => {
   });
 };
 /**
- *  查询检验报告详情
+ *  查询检查报告详情
  *  @return {Array}
  */
 export const getReportPacsDetail = (data) => {

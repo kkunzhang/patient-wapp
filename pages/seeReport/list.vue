@@ -9,81 +9,51 @@
         @clickItem="onClickItem"
         styleType="button"
       ></uni-segmented-control>
-
+      <!-- 检查报告 0-->
       <view v-show="current === 0">
-        <view
-          v-for="(item, index) in info1"
-          :key="index"
-          @click="onClick(item, 1)"
-          class="box-content"
-        >
-          <view class="box-content-item">
-            <view>
-              <button class="mini-btn" type="primary" size="mini">
-                已生成
-              </button>
-            </view>
-            <view class="box-content-title">
-              <view> 颅脑CT扫描 </view>
-              <view>2022-01-02 11:44 </view>
-            </view>
-          </view>
-
-          <view class="gl"></view>
-        </view>
+        <contro-list :info="info" @onClick="onClick"></contro-list>
       </view>
+      <!-- 检验报告 1-->
       <view v-show="current === 1">
-        <view
-          v-for="(item, index) in info1"
-          :key="index"
-          @click="onClick(item, 2)"
-          class="box-content"
-        >
-          <view class="box-content-item">
-            <view>
-              <button class="mini-btn" type="primary" size="mini">
-                已生成
-              </button>
-            </view>
-            <view class="box-content-title">
-              <view> 颅脑CT扫描2</view>
-              <view>2022-01-02 11:44 </view>
-            </view>
-          </view>
-          <view class="gl"></view>
-        </view>
+        <contro-list :info="info" @onClick="onClick"></contro-list>
       </view>
     </uni-card>
-    <!-- <card-pop :isShow="show" @closePop="closePop"></card-pop> -->
   </view>
 </template>
 
 <script>
-// import cardPop from '@/components/card-pop/card-pop.vue'
+import controList from './components/contro-list.vue'
 import cardItem from '@/components/card-item/card-item.vue'
+import {
+  getReportResult,
+  getReportLisDetail,
+  getReportPacsDetail,
+} from '@api/modules/report'
 export default {
   data() {
     return {
       items: ['检查报告', '检验报告'],
       current: 0,
-      info1: [{ id: 1 }, { id: 2 }],
+      info: [],
       show: false,
       patientId: '',
-      defaultPatientList: [],
+      defaultPatientList: {},
     }
   },
-  components: { cardItem },
+  components: { cardItem, controList },
   methods: {
     onClickItem(e) {
+      console.log(e)
       if (this.current != e.currentIndex) {
         this.current = e.currentIndex
       }
+      this.getReportList()
     },
-    onClick(item, type) {
+    onClick(item) {
       uni.navigateTo({
         url: `/pages/seeReport/detail?data=${encodeURIComponent(
           JSON.stringify(item)
-        )}&type=${type}`,
+        )}&type=${this.current}&patientId=${this.defaultPatientList.patientId}`,
       })
     },
     //获取就诊人信息
@@ -91,6 +61,19 @@ export default {
       let data = JSON.parse(decodeURIComponent(options.data))
       console.log(data)
       this.defaultPatientList = data
+      this.getReportList()
+    },
+    async getReportList() {
+      const _this = this
+      const params = {
+        type: _this.current,
+        // patientId: this.defaultPatientList.patientId,
+        // todo删除假数据
+        patientId: '005155',
+      }
+      const data = await getReportResult(params)
+      _this.info = data.data
+      console.log(data.data)
     },
   },
   onLoad(options) {
@@ -98,27 +81,4 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-.box-content {
-  display: flex;
-  padding: 40rpx;
-  box-sizing: border-box;
-  border-radius: 20rpx;
-  background-color: #fff;
-  margin: 20rpx 0;
-  flex-direction: row;
-  background-color: rgba(242, 242, 242, 1);
-  align-items: center;
-  justify-content: space-between;
-  .box-content-item {
-    display: flex;
-    align-items: center;
-  }
-  .box-content-title {
-    margin-left: 20rpx;
-    color: #333333;
-    font-size: 35rpx;
-    font-family: PingFangSC-Medium, PingFang SC;
-  }
-}
-</style>
+
