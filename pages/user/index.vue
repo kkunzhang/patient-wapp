@@ -31,7 +31,7 @@
       </view>
       <view v-if="phone && !loading" class="box-outside-warp">
         <!-- 就诊卡片 -->
-        <patien-card :defaultPatientList="defaultPatientList"></patien-card>
+        <patien-card :list="defaultPatientList"></patien-card>
         <!-- 卡片按钮 -->
         <view
           @click="onClick(item, index)"
@@ -298,9 +298,9 @@ export default {
         margin: 15rpx;
       }
       .sec-card-top-item {
-        margin: 15rpx;
+        margin: 15rpx 0 15rpx 12rpx;
         position: relative;
-        top: -60rpx;
+        top: -40rpx;
         font-size: 34rpx;
       }
     }

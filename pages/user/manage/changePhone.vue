@@ -11,25 +11,25 @@
               clearable
               v-model="valiFormData.phone"
               type="number"
-              @blur="listeningfocus()"
+              @blur="listeningFocus()"
             ></u--input>
           </uni-forms-item>
           <uni-forms-item label="验证码" type="number" required name="code">
             <view class="code-box">
-              <u--input
-                @input="inputCode"
-                v-model="valiFormData.code"
-                type="number"
-                class="code-input"
-                placeholder="请输入您收到的验证码"
-                border="surround"
-                clearable
-              ></u--input>
+              <view class="code-input">
+                <uni-easyinput
+                  @input="smsCode"
+                  v-model="valiFormData.code"
+                  type="number"
+                  placeholder="请输入验证码"
+                  border="surround"
+                  clearable
+              /></view>
               <button
                 type="primary"
                 class="send-code-btn"
                 size="mini"
-                @click="get_code"
+                @click="getSmsCode"
               >
                 {{ time }}{{ text }}
               </button>
@@ -40,16 +40,12 @@
     </uni-section>
 
     <view class="submit-box">
-      <button type="primary" @click="submit('valiForm')">提交</button>
+      <button type="primary" @click="onSubmit('valiForm')">提交</button>
     </view>
   </view>
 </template>
 <script>
-import {
-  editPatientMobile,
-  deletePatient,
-  setDefaultPatient,
-} from '@/api/modules/patientUser'
+import { editPatientMobile, sendSms } from '@/api/modules/patientUser'
 export default {
   components: {},
   data() {
@@ -66,6 +62,7 @@ export default {
       text: '获取验证码',
       disabled: false,
       isCanClick: false,
+      patientId: '',
       // 校验规则
       rules: {
         phone: {
@@ -99,7 +96,7 @@ export default {
   computed: {},
   methods: {
     // 1、监听输入
-    listeningfocus() {
+    listeningFocus() {
       this.getCardTypeNumber(this.valiFormData.phone)
     },
     // 2、检验是否正确
@@ -121,26 +118,26 @@ export default {
         }
       }
     },
-    submit(ref) {
+    onSubmit(ref) {
       this.$refs[ref]
         .validate()
         .then((res) => {
-          console.log('success', res)
-          uni.showToast({
-            title: `校验通过`,
-          })
+          this.editPhone()
         })
         .catch((err) => {
           console.log('err', err)
         })
     },
     //获取验证码
-    async get_code() {
+    getSmsCode() {
+      //先验证电话号
+      this.listeningFocus(1)
       if (this.isCanClick) {
         if (this.disabled) {
           return
         }
         this.disabled = true
+        this.sendSmsCode()
         this.setInterValFunc()
       } else {
         uni.showToast({
@@ -149,6 +146,17 @@ export default {
           duration: 2000,
           position: 'top',
         })
+      }
+    },
+    //发送验证码
+    async sendSmsCode() {
+      const _this = this
+      const params = {
+        mobile: _this.valiFormData.phone,
+      }
+      const data = await sendSms(params)
+      if (data.code) {
+        this.$tools.message('发送成功', 'suc')
       }
     },
     setInterValFunc() {
@@ -167,17 +175,34 @@ export default {
       }, 1000)
     },
     // 验证码输入框
-    inputCode(e) {
+    smsCode(e) {
       e = e.match(/^\d{0,6}/g)[0] || ''
       this.$nextTick(() => {
         this.valiFormData.code = e
       })
     },
-    async editPatientMobile() {
+    editPhone() {
       this.$tools.showModal('', '确认更改号码?').then((res) => {
         if (res) {
-          console.log('去删除')
+          this.editPatientMobile()
         }
+      })
+    },
+    async editPatientMobile() {
+      const _this = this
+      const params = {
+        mobile: _this.valiFormData.phone,
+        smsCode: _this.valiFormData.code,
+      }
+      const data = await editPatientMobile(params, this.patientId)
+      if (data.code == 100000) {
+        this.$tools.message('修改成功', 'suc')
+        this.back()
+      }
+    },
+    back() {
+      uni.navigateTo({
+        url: 'bankcard',
       })
     },
   },
@@ -186,6 +211,9 @@ export default {
       type: Number,
       default: 0,
     },
+  },
+  onLoad(options) {
+    this.patientId = options.patientId
   },
 }
 </script>
@@ -205,9 +233,8 @@ export default {
 .code-box {
   display: flex;
   align-items: center;
-}
-.send-code-btn {
-  width: 35%;
-  margin-left: 35rpx;
+  .code-input {
+    width: 200rpx;
+  }
 }
 </style>

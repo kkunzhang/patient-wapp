@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "select-list": "/components/doctor/select-list",
+    "select-city": "/components/ss-select-city/index"
+  }
+}

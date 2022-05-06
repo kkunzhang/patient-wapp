@@ -1,0 +1,1 @@
+<view><pay-card vue-id="b8def95a-1" list="{{info}}" isShowPayTime="{{false}}" data-event-opts="{{[['^onClick',[['toDetail']]]]}}" bind:onClick="__e" bind:__l="__l"></pay-card></view>

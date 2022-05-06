@@ -47,7 +47,7 @@ export const setPatient = (data, patientId) => {
  */
 export const editPatientMobile = (data, patientId) => {
   return http.post({
-    url: `/tenant/patient/mobile/${patientId}`,
+    url: `/mem/tenant/patient/mobile/${patientId}`,
     data,
   });
 };
@@ -57,7 +57,7 @@ export const editPatientMobile = (data, patientId) => {
  */
 export const deletePatient = (data, patientId) => {
   return http.delete({
-    url: `/tenant/patient/${patientId}`,
+    url: `/mem/tenant/patient/${patientId}`,
     data,
   });
 };

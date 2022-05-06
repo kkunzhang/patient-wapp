@@ -63,7 +63,7 @@ export default {
     onClick(val) {
       uni.navigateTo({
         url:
-          href +
+          this.href +
           '?data=' +
           encodeURIComponent(JSON.stringify(this.defaultPatientList)),
       })
@@ -87,7 +87,7 @@ export default {
       this.$tools.toast('操作成功', 'suc')
     },
   },
-  
+
   props: {
     href: {
       type: String,

@@ -97,21 +97,23 @@ export default {
           this.$tools.toast('敬请期待')
       }
     }),
-    editPhone() {
+    editPhone(cardItem) {
       uni.navigateTo({
-        url: `/pages/user/manage/changePhone?patientID=${item.patientId}`,
+        url: `/pages/user/manage/changePhone?patientId=${cardItem.patientId}`,
       })
     },
     async setPatient(patientId) {
       const data = await setPatient({}, patientId)
       if (data.code == 100000) {
         this.$tools.toast('设置成功', 'suc')
+        this.getTenantPatientList()
       }
     },
     async deletePatient(patientId) {
       const data = await deletePatient({}, patientId)
       if (data.code == 100000) {
         this.$tools.toast('删除成功', 'suc')
+        this.getTenantPatientList()
       }
     },
     // todo 修改手机号,还有这两个刷新页面, 不能点击删除
@@ -133,9 +135,9 @@ export default {
         margin: 15rpx;
       }
       .sec-card-top-item {
-        margin: 15rpx;
+        margin: 15rpx 0 15rpx 12rpx;
         position: relative;
-        top: -60rpx;
+        top: -40rpx;
         font-size: 34rpx;
       }
     }

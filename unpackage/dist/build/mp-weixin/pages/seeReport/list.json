@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "报告查询",
+  "usingComponents": {
+    "card-item": "/components/card-item/card-item",
+    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
+    "uni-segmented-control": "/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control"
+  }
+}

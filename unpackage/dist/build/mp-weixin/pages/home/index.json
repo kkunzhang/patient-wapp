@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "default",
+  "usingComponents": {
+    "cp-search": "/components/cp-search/cp-search",
+    "cp-swiper": "/components/cp-swiper/cp-swiper",
+    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card"
+  }
+}

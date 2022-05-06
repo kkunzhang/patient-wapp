@@ -1,7 +1,7 @@
 const BASE_URL =
   process.env.NODE_ENV === 'development'
-    ? 'http://testapi.jiukangguoji.cn/gateway'
-    : 'http://testapi.jiukangguoji.cn/gateway'
+    ? 'https://testapi.jiukangguoji.cn/gateway'
+    : 'https://testapi.jiukangguoji.cn/gateway'
 
 const config = {
   modalColor: '#5271FF', //弹窗颜色 

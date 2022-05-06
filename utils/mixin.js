@@ -14,14 +14,7 @@ export const getTenantPatientList = {
           sex: '男',
           birthday: '1993-12-01',
         },
-        {
-          age: 12,
-          isDefault: false,
-          name: 'wangpeng',
-          patientId: 2,
-          phone: 112312312312,
-          sex: 1,
-        },
+
       ],
       loading: true,
     };

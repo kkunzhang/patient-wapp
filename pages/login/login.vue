@@ -129,17 +129,17 @@ export default {
       uni.setStorageSync('unionid', data.data.unionid)
       uni.setStorageSync('openId', data.data.openid)
       uni.setStorageSync('token', data.data.accessToken)
-      if (!data.data.bindingStatus) {
-        uni.redirectTo({
-          url:
-            '/pages/login/loginPhone?backpage=' +
-            this.pageOption.backpage +
-            '&backtype=' +
-            this.pageOption.backtype,
-        })
-      } else {
-        uni.redirectTo({ url: this.pageOption.backpage })
-      }
+      // if (!data.data.bindingStatus) {
+      uni.redirectTo({
+        url:
+          '/pages/login/loginPhone?backpage=' +
+          this.pageOption.backpage +
+          '&backtype=' +
+          this.pageOption.backtype,
+      })
+      // } else {
+      //   uni.redirectTo({ url: this.pageOption.backpage })
+      // }
     },
   },
   onLoad(options) {

@@ -1,0 +1,1 @@
+<view><card-item bind:openPop="__e" vue-id="3b81f79d-1" data-event-opts="{{[['^openPop',[['onOpen']]]]}}" bind:__l="__l"></card-item><card vue-id="3b81f79d-2" isShow="{{false}}" bind:__l="__l"></card><card-pop vue-id="3b81f79d-3" isShow="{{show}}" isShowAdd="{{false}}" data-event-opts="{{[['^closePop',[['onClose']]]]}}" bind:closePop="__e" bind:__l="__l"></card-pop></view>

@@ -1,0 +1,80 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/login/login",
+    "pages/login/loginPhone",
+    "pages/message/index",
+    "pages/location/index",
+    "pages/user/index",
+    "pages/registration/index",
+    "pages/selectNum/index",
+    "pages/messageConfirm/index",
+    "pages/addVisit/index",
+    "pages/registrationInfo/index",
+    "pages/onlinepayment/index",
+    "pages/onlinepayment/list",
+    "pages/onlinepayment/detail",
+    "pages/onlinepayment/subMessage",
+    "pages/onlinepayment/imgPreview",
+    "pages/seeReport/list",
+    "pages/seeReport/index",
+    "pages/seeReport/detail",
+    "pages/doctorList/index",
+    "pages/doctorList/detail",
+    "pages/registrationOrders/index",
+    "pages/prescriptionOrders/index",
+    "pages/user/myDoctor/index",
+    "pages/user/myWith/index",
+    "pages/user/manage/index",
+    "pages/user/manage/changePhone"
+  ],
+  "subPackages": [],
+  "window": {
+    "backgroundColor": "#F5F6F8",
+    "backgroundTextStyle": "light",
+    "navigationStyle": "default",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "西峰区人民医院",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "renderingMode": "seperated",
+    "pageOrientation": "portrait"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "height": "50px",
+    "fontSize": "10px",
+    "iconWidth": "24px",
+    "spacing": "3px",
+    "list": [
+      {
+        "text": "首页",
+        "iconPath": "static/images/tab-home.png",
+        "selectedIconPath": "static/images/tab-home-active.png",
+        "pagePath": "pages/home/index"
+      },
+      {
+        "text": "消息",
+        "iconPath": "static/images/tab-message.png",
+        "selectedIconPath": "static/images/tab-message-active.png",
+        "pagePath": "pages/message/index"
+      },
+      {
+        "text": "院内导航",
+        "iconPath": "static/images/tab-location.png",
+        "selectedIconPath": "static/images/tab-location-active.png",
+        "pagePath": "pages/location/index"
+      },
+      {
+        "text": "我",
+        "iconPath": "static/images/tab-user.png",
+        "selectedIconPath": "static/images/tab-user-active.png",
+        "pagePath": "pages/user/index"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "全国医生",
+  "usingComponents": {
+    "sl-filter": "/components/sl-filter/sl-filter",
+    "cp-search": "/components/cp-search/cp-search",
+    "card": "/components/doctor/card"
+  }
+}
