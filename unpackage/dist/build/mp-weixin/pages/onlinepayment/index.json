@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "在线缴费",
-  "usingComponents": {
-    "cp-get-patient-list": "/components/cp-get-patient-list/cp-get-patient-list"
-  }
-}

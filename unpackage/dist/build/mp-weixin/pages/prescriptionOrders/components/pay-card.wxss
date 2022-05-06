@@ -1,1 +1,0 @@
-.card-item-add{display:flex;justify-content:space-between}.card-item-add .right-tips{font-size:32rpx;font-family:PingFangSC-Medium,PingFang SC;margin-right:4rpx}.card-num{display:flex;justify-content:space-between;margin-top:35rpx}.card-num text{margin:4rpx;color:#909399;font-weight:400}.card-num .mini-btn{border-radius:30rpx!important}

@@ -125,21 +125,21 @@ export default {
         headUrl: _this.avatarUrl,
       }
       const data = await login(params, code)
-      console.log(data.data)
-      uni.setStorageSync('unionid', data.data.unionid)
-      uni.setStorageSync('openId', data.data.openid)
-      uni.setStorageSync('token', data.data.accessToken)
-      // if (!data.data.bindingStatus) {
-      uni.redirectTo({
-        url:
-          '/pages/login/loginPhone?backpage=' +
-          this.pageOption.backpage +
-          '&backtype=' +
-          this.pageOption.backtype,
-      })
-      // } else {
-      //   uni.redirectTo({ url: this.pageOption.backpage })
-      // }
+      if (data.data) {
+        console.log(data.data)
+        uni.setStorageSync('unionid', data.data.unionid)
+        uni.setStorageSync('openId', data.data.openid)
+        uni.setStorageSync('token', data.data.accessToken)
+        uni.redirectTo({
+          url:
+            '/pages/login/loginPhone?backpage=' +
+            this.pageOption.backpage +
+            '&backtype=' +
+            this.pageOption.backtype,
+        })
+      } else {
+        this.$tools.message('登陆接口错误')
+      }
     },
   },
   onLoad(options) {

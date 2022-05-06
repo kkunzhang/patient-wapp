@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "u-count-down": "/uni_modules/uview-ui/components/u-count-down/u-count-down"
-  }
-}

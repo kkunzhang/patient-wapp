@@ -137,6 +137,9 @@ export default {
           errorMsg = '服务器异常';
           break;
         case 401:
+          uni.navigateTo({
+            url: '/pages/login/login',
+          })
           errorMsg = '未授权，请重新登录';
           break;
         default:
@@ -176,6 +179,15 @@ export default {
           },
         });
       }
+    } else {
+      //todo 后期删除
+      uni.showModal({
+        title: '接口报错',
+        content: JSON.stringify(error),
+        showCancel: false,
+        complete: function () {
+        },
+      });
     }
     return null;
   },

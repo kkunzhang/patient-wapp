@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "缴费列表",
-  "usingComponents": {
-    "pay-card": "/components/pay-card/pay-card"
-  }
-}

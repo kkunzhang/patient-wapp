@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
-    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar"
-  }
-}

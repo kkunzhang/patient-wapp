@@ -1,1 +1,0 @@
-.time{display:flex;flex-direction:row;align-items:center}.time__custom{width:40rpx;height:40rpx;background-color:#007aff;border-radius:8rpx;display:flex;justify-content:center;align-items:center}.time__custom__item{color:#fff;font-size:24rpx;text-align:center}.time__doc{color:#007aff;padding:0rpx 8rpx}.time__item{color:#606266;font-size:30rpx;margin-right:8rpx}

@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
-    "count-down": "/components/pay-card/count-down"
-  }
-}

@@ -1,1 +1,0 @@
-<view style="padding-bottom:120rpx;"><uni-card class="bottom-pay" vue-id="bb91317c-1" bind:__l="__l" vue-slots="{{['default']}}"><view>支付方式</view><view class="weicat"><view class="weicat-item"><image src="/static/images/weixinzhifu.png"></image><text>微信支付</text></view></view></uni-card></view>
