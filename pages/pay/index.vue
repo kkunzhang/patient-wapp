@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { pay } from '@api/modules/pay'
 export default {
   data() {
     return {

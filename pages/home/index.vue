@@ -219,9 +219,9 @@ export default {
       // this.$tools.message('回答已删除', 'suc')
       // this.$tools.toast('回答已删除', 'suc')
     }),
-    onNavigateTo(url) {
+    onNavigateTo(url, type = '2') {
       // #ifdef MP-WEIXIN
-      if (this.checkLogin(url, 1)) {
+      if (this.checkLogin(url, type)) {
         uni.navigateTo({
           url: url,
         })

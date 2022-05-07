@@ -1,7 +1,7 @@
 <template>
   <view>
     <!-- #ifdef MP-WEIXIN -->
-    <view v-if="isCanUse">
+    <view>
       <view class="header">
         <!-- 用户微信头像 -->
         <!-- <open-data type="userAvatarUrl"></open-data> -->
@@ -19,7 +19,7 @@
         lang="zh_CN"
         @click="wxGetUserInfo"
       >
-        新版请登录
+        登录
       </button>
     </view>
     <!-- #endif -->
@@ -38,14 +38,13 @@ export default {
       openid: '',
       unionid: '',
       nickName: '',
-      avatarUrl:
-        'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+      avatarUrl: '',
       code: '',
       pageOption: {
         backpage: '/pages/home/index',
         backtype: '1',
       },
-      isCanUse: uni.getStorageSync('isCanUse') || true, //默认为true
+      phone: uni.getStorageSync('phone') || false,
     }
   },
   methods: {
@@ -71,10 +70,7 @@ export default {
               _this.avatarUrl = infoRes.userInfo.avatarUrl //头像
               uni.setStorageSync('nickName', infoRes.userInfo.nickName)
               uni.setStorageSync('avatarUrl', infoRes.userInfo.avatarUrl)
-              try {
-                uni.setStorageSync('isCanUse', false) //记录是否第一次授权  false:表示不是第一次授权
-                _this.updateUserInfo(_this.code)
-              } catch (e) {}
+              _this.updateUserInfo(_this.code)
             },
             fail: (err) => {
               console.log(err)
@@ -127,15 +123,25 @@ export default {
       const data = await login(params, code)
       if (data.data) {
         console.log(data.data)
+        uni.setStorageSync('token', data.data.accessToken)
         uni.setStorageSync('unionid', data.data.unionid)
         uni.setStorageSync('openId', data.data.openid)
-        uni.redirectTo({
-          url:
-            '/pages/login/loginPhone?backpage=' +
-            this.pageOption.backpage +
-            '&backtype=' +
-            this.pageOption.backtype,
-        })
+        if (!data.data.bindingStatus || !this.phone) {
+          uni.redirectTo({
+            url:
+              '/pages/login/loginPhone?backpage=' +
+              _this.pageOption.backpage +
+              '&backtype=' +
+              _this.pageOption.backtype,
+          })
+        } else {
+          console.log(_this.pageOption.backpage)
+          if (_this.pageOption.backtype == 1) {
+            uni.switchTab({ url: _this.pageOption.backpage })
+          } else {
+            uni.redirectTo({ url: _this.pageOption.backpage })
+          }
+        }
       } else {
         this.$tools.message('登陆接口错误')
       }

@@ -61,9 +61,9 @@ export default {
     order(val) {
       console.log(val)
       uni.navigateTo({
-        url:
-          `/pages/messageConfirm/index?data=` +
-          encodeURIComponent(JSON.stringify(val)),
+        url: `/pages/messageConfirm/index?data=${encodeURIComponent(
+          JSON.stringify(val)
+        )}&deptId=${this.deptId}`,
       })
     },
     onClickDate(index) {

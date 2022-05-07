@@ -31,9 +31,6 @@ export default {
     response: null,
   },
   request (options) {
-    // todo h5 和小程序端取的值不一样。
-    const token = uni.getStorageSync('token') // 登录鉴权获得的 token
-    console.log(uni.getStorageSync('token'));
     if (!options) {
       options = {};
     }
@@ -51,14 +48,18 @@ export default {
     options.method = options.method || this.config.method;
     console.log(options);
     // #ifdef MP-WEIXIN
-    if (options.url.indexOf('/mem/auth/') < 0 && token) {
+    if (options.url.indexOf('/mem/auth/') < 0) {
+      const token = uni.getStorageSync('token') // 登录鉴权获得的 token
       this.config.header.Authorization = 'bearer ' + token;
       console.log(token);
+    } else {
+      this.config.header.Authorization = ''
     }
     // #endif
     // #ifdef H5
-    this.config.header.Authorization = 'bearer ' + '720100d0-de37-4683-a3e8-cd8c5e24cf37';
+    this.config.header.Authorization = 'bearer ' + 'b3375221-2455-44f5-8533-319be4ff13b6';
     // #endif
+    console.log(this.config.header);
     // 基于 Promise 的网络请求
     return new Promise((resolve, reject) => {
       uni.request({
@@ -137,7 +138,7 @@ export default {
           break;
         case 401:
           errorMsg = '未授权，请重新登录';
-          uni.navigateTo({
+          uni.redirectTo({
             url: '/pages/login/login',
           })
           return;

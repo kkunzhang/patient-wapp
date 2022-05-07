@@ -16,57 +16,10 @@ export default {
   data() {
     return {
       data: {
-        userId: 0,
-        patientId: '005155',
+        patientId: '',
+        hospitalPatientId: '',
       },
-      // info: [],
-      info: [
-        {
-          patientId: '005155',
-          prescriptionTime: '2022/04/27 14:24:07',
-          prescriptionId: '2022F013E3',
-          deptName: '药库',
-          materialDeptName: '西药房',
-          type: '一般处方',
-          totalFee: '4.90',
-        },
-        {
-          patientId: '005155',
-          prescriptionTime: '2022/04/27 14:24:34',
-          prescriptionId: '2022F013E4',
-          deptName: '药库',
-          materialDeptName: '中药房',
-          type: '草药处方',
-          totalFee: '24.60',
-        },
-        {
-          patientId: '005155',
-          prescriptionTime: '2022/04/27 14:25:54',
-          prescriptionId: '2022F013E5',
-          deptName: '药库',
-          materialDeptName: '西药房',
-          type: '一般处方',
-          totalFee: '48.30',
-        },
-        {
-          patientId: '005155',
-          prescriptionTime: '2022/04/27 14:27:07',
-          prescriptionId: '2022F013E6',
-          deptName: '药库',
-          materialDeptName: '西药房',
-          type: '一般处方',
-          totalFee: '1.70',
-        },
-        {
-          patientId: '005155',
-          prescriptionTime: '2022/04/27 14:27:29',
-          prescriptionId: '2022F013E7',
-          deptName: '药库',
-          materialDeptName: '西药房',
-          type: '一般处方',
-          totalFee: '7.40',
-        },
-      ],
+      info: [],
     }
   },
   methods: {
@@ -83,8 +36,7 @@ export default {
     async getList(site) {
       this.reservationList = []
       const params = {
-        userId: this.data.userId,
-        patientId: this.data.patientId,
+        patientId: this.data.hospitalPatientId,
       }
       const data = await getPayList(params)
       if (data.data.length > 0) {
@@ -96,6 +48,7 @@ export default {
     const _this = this
     let list = JSON.parse(decodeURIComponent(options.data))
     _this.data.patientId = list.patientId
+    _this.data.hospitalPatientId = list.hospitalPatientId
     this.getList()
   },
 }

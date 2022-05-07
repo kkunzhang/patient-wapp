@@ -1,7 +1,7 @@
 <template>
   <view>
     <!-- #ifdef MP-WEIXIN -->
-    <view v-if="isPhoneLogin">
+    <view>
       <view class="header">
         <u-avatar src="/static/images/logo@2x.png" size="80"></u-avatar>
       </view>
@@ -38,19 +38,14 @@ export default {
       code: '',
       pageOption: {
         backpage: '/pages/home/index',
-        backtype: '2',
+        backtype: '1',
       },
-      isPhoneLogin: uni.getStorageSync('isPhoneLogin') || true,
       phone: '',
     }
   },
   methods: {
     getPhoneNumber(e) {
       if (e.detail.errMsg == 'getPhoneNumber:ok') {
-        console.log(e.detail.code)
-        console.log(e.detail.errMsg)
-        console.log(e.detail.iv)
-        console.log(e.detail.encryptedData)
         console.log('用户点击了接受')
         this.updateUserInfo(e.detail.code)
       } else {
@@ -64,21 +59,22 @@ export default {
         openid: uni.getStorageSync('openId'),
         unionid: uni.getStorageSync('unionid'),
       }
-      console.log(params)
       const data = await phoneLogin(params, code)
       console.log(data.data)
       if (data.data.userInfo.mobile) {
-        uni.setStorageSync('isPhoneLogin', false)
         uni.setStorageSync('phone', data.data.userInfo.mobile)
         uni.setStorageSync('token', data.data.accessToken)
         console.log(data.data.accessToken)
+        console.log(_this.pageOption.backpage)
         if (_this.pageOption.backtype == 1) {
           console.log(_this.pageOption.backpage)
+          //tableTab
           uni.switchTab({ url: _this.pageOption.backpage })
         } else {
-          console.log('2222')
           uni.redirectTo({ url: _this.pageOption.backpage })
         }
+      } else {
+        this.$tools.message('获取手机号接口错误')
       }
     },
   },

@@ -53,7 +53,9 @@ export default {
       uni.navigateTo({
         url: `/pages/seeReport/detail?data=${encodeURIComponent(
           JSON.stringify(item)
-        )}&type=${this.current}&patientId=${this.defaultPatientList.patientId}`,
+        )}&type=${this.current}&patientId=${
+          this.defaultPatientList.hospitalPatientId
+        }`,
       })
     },
     //获取就诊人信息
@@ -67,9 +69,7 @@ export default {
       const _this = this
       const params = {
         type: _this.current,
-        // patientId: this.defaultPatientList.patientId,
-        // todo删除假数据
-        patientId: '005155',
+        patientId: this.defaultPatientList.hospitalPatientId,
       }
       const data = await getReportResult(params)
       _this.info = data.data

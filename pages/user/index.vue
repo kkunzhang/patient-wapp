@@ -3,7 +3,7 @@
     <!-- 患者头像姓名手机号卡片 -->
     <view class="head-warpe">
       <view>
-        <u-avatar :src="src" size="80"></u-avatar>
+        <u-avatar :src="avatarUrl" size="70"></u-avatar>
       </view>
       <view class="head-user-info">
         <view v-if="phone" class="top-title">
@@ -113,7 +113,7 @@ export default {
       accessToken: globalData.accessToken,
       src: '/static/images/doctor.jpeg',
       nickName: uni.getStorageSync('nickName') || false,
-      avatarUrl: uni.getStorageSync('avatarUrl') || false,
+      avatarUrl: uni.getStorageSync('avatarUrl'),
       phone: uni.getStorageSync('phone') || false,
       // phone: false,
       navs: [
@@ -197,7 +197,7 @@ export default {
   // }),
   methods: {
     onEdit() {
-      this.onNavigateTo('/pages/user/manage/index')
+      this.onNavigateTo('/pages/user/manage/index', 2)
     },
     onClick: debounce(function (item) {
       switch (item.title) {
@@ -220,18 +220,18 @@ export default {
     }),
     //去登录
     onLogin() {
-      this.onNavigateTo('/pages/user/index')
+      this.onNavigateTo('/pages/user/index', 1)
     },
-    onNavigateTo(url) {
+    onNavigateTo(url, type = 2) {
       // #ifdef MP-WEIXIN
-      if (this.checkLogin(url, 1)) {
-        uni.redirectTo({
+      if (this.checkLogin(url, type)) {
+        uni.navigateTo({
           url: url,
         })
       }
       // #endif
       // #ifdef H5
-      uni.redirectTo({
+      uni.navigateTo({
         url: url,
       })
       // #endif

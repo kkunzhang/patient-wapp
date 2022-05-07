@@ -52,69 +52,42 @@ export default {
       show: false,
       lever: false,
       doctorInfo: '',
-      orderList: {
-        registrationId: '212',
-        registrationNo: '0000000001',
-        userId: null,
-        patientId: '2',
-        registrationStatus: null,
-        registerData: 1651161600000,
-        deptCode: 194,
-        deptName: '专家门诊三',
-        deptAddress: '专家门诊三',
-        registerType: '免挂号费',
-        doctorId: '100306',
-        doctorScheduleId: '20220421055900',
-        doctorTitle: null,
-        doctorName: '杨有川',
-        hisRegisterId: '20220421312604',
-        examinationFee: 0,
-        registerFee: 0,
-        totalFee: null,
-        discountFee: null,
-        paidFee: null,
-        paidTime: null,
-        paymentMethod: null,
-        createTime: 1644221332548,
-        updateTime: 1644221332548,
-      },
+      orderList: {},
+      //科室编码
+      deptId: '',
     }
   },
   onLoad(options) {
     this.getDoctorInfo(options)
   },
   methods: {
-    onSubmit: debounce(function () {
-      this.order()
-      uni.navigateTo({
-        url: `/pages/registrationInfo/index?patientId=${this.orderList.patientId}&registrationId=${this.orderList.registrationId}`,
-      })
-    }),
     //获取医生预约等详细信息
     getDoctorInfo(options) {
       let data = JSON.parse(decodeURIComponent(options.data))
+      this.deptId = options.deptId
       console.log(data)
       this.doctorInfo = data
     },
+    onSubmit: debounce(function () {
+      this.order()
+    }),
     async order() {
       let params = {
-        //todo 更换
-        doctorScheduleId: '20220421055900',
-        // doctorScheduleId: this.doctorInfo.doctorScheduleId,
-        //todo 更换
-        patientId: '005155',
-        //todo 更换
-        deptId: '0000000194',
-        // deptId: this.doctorInfo.deptId,
+        doctorScheduleId: this.doctorInfo.doctorScheduleId,
+        patientId: this.defaultPatientList.hospitalPatientId,
+        deptId: this.deptId,
         doctorId: this.doctorInfo.doctorId,
         registerData: this.doctorInfo.registerDate,
       }
-      //todo 打开。返回订单信息
-      // reservationLock(JSON.stringify(params)).then((data) => {
-      //   if (data.data.length > 0) {
-      //     this.orderList = data.data
-      //   }
-      // })
+      console.log(params)
+      const data = await reservationLock(JSON.stringify(params))
+      console.log(data)
+      if (data.data.length > 0) {
+        this.orderList = data.data
+        uni.navigateTo({
+          url: `/pages/registrationInfo/index?patientId=${this.defaultPatientList.hospitalPatientId}&registrationId=${this.orderList.registrationId}`,
+        })
+      }
     },
     onOpen() {
       this.show = true
@@ -123,10 +96,10 @@ export default {
       this.show = false
     },
     submitPatientId(val) {
-      console.log(val)
       if (val) {
         this.defaultPatientList = val
       }
+      console.log(val)
       this.show = false
       this.$tools.toast('操作成功', 'suc')
     },

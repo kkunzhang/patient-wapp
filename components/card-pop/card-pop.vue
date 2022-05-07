@@ -108,6 +108,7 @@ export default {
       if (this.defaultPatientList.length == 0) {
         this.defaultPatientList = this.items[0]
       }
+      
       this.$emit('submitPatientId', this.defaultPatientList)
     },
   },

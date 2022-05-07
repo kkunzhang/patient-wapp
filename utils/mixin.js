@@ -4,6 +4,7 @@ export const getTenantPatientList = {
     return {
       patientId: '',
       defaultPatientList: [],
+      hospitalPatientId:'',
       patientList: [
         {
           age: 12,
@@ -13,6 +14,7 @@ export const getTenantPatientList = {
           phone: 17610229358,
           sex: '男',
           birthday: '1993-12-01',
+          hospitalPatientId:'11'
         },
 
       ],
@@ -42,6 +44,7 @@ export const getTenantPatientList = {
       })
       if (!this.patientId) {
         this.patientId = data[0].patientId
+        this.hospitalPatientId = data[0].hospitalPatientId
         this.defaultPatientList = data[0]
       }
       this.loading = false
