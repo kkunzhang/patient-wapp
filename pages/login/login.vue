@@ -37,7 +37,7 @@ export default {
       SessionKey: '',
       openid: '',
       unionid: '',
-      nickName: 'xiaowang',
+      nickName: '',
       avatarUrl:
         'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
       code: '',
@@ -129,7 +129,6 @@ export default {
         console.log(data.data)
         uni.setStorageSync('unionid', data.data.unionid)
         uni.setStorageSync('openId', data.data.openid)
-        uni.setStorageSync('token', data.data.accessToken)
         uni.redirectTo({
           url:
             '/pages/login/loginPhone?backpage=' +

@@ -1,0 +1,1 @@
+.bottom-pay .weicat{display:flex;align-items:center;justify-content:space-between;margin-top:20rpx}.bottom-pay .weicat image{width:50rpx;height:50rpx;margin-right:15rpx}.bottom-pay .weicat .weicat-item{display:flex;align-items:center}

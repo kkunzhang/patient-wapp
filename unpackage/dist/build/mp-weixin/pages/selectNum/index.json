@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "选择号源",
+  "usingComponents": {
+    "uni-notice-bar": "/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar",
+    "card": "/components/doctor/card",
+    "select-date": "/pages/selectNum/components/select-date"
+  }
+}

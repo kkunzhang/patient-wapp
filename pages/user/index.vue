@@ -220,20 +220,18 @@ export default {
     }),
     //去登录
     onLogin() {
-      uni.navigateTo({
-        url: '/pages/login/login',
-      })
+      this.onNavigateTo('/pages/user/index')
     },
     onNavigateTo(url) {
       // #ifdef MP-WEIXIN
       if (this.checkLogin(url, 1)) {
-        uni.navigateTo({
+        uni.redirectTo({
           url: url,
         })
       }
       // #endif
       // #ifdef H5
-      uni.navigateTo({
+      uni.redirectTo({
         url: url,
       })
       // #endif

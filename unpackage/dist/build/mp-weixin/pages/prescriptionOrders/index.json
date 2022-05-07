@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "处方订单",
+  "usingComponents": {
+    "pay-card": "/pages/prescriptionOrders/components/pay-card"
+  }
+}

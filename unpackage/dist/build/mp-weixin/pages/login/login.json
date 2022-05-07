@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "授权登陆",
+  "onReachBottomDistance": 50,
+  "usingComponents": {
+    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar"
+  }
+}

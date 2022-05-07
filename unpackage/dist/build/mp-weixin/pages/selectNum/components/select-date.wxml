@@ -1,0 +1,1 @@
+<view><view class="box-outside-warp"><block wx:for="{{$root.l0}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view data-event-opts="{{[['tap',[['onClick',[index,'$0'],[[['dataInfo','',index]]]]]]]}}" bindtap="__e"><view class="{{[item.m0]}}"><view>{{item.$orig.time}}</view><view>{{item.$orig.week}}</view></view></view></block></view></view>

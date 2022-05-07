@@ -50,6 +50,8 @@ export const getTenantPatientList = {
   mounted () {
   },
   created () {
-    this.getTenantPatientList()
+    if (uni.getStorageSync('phone')) {
+      this.getTenantPatientList()
+    }
   },
 };

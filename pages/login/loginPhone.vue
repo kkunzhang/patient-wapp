@@ -36,7 +36,10 @@ export default {
       nickName: null,
       avatarUrl: null,
       code: '',
-      pageOption: {},
+      pageOption: {
+        backpage: '/pages/home/index',
+        backtype: '2',
+      },
       isPhoneLogin: uni.getStorageSync('isPhoneLogin') || true,
       phone: '',
     }
@@ -70,18 +73,20 @@ export default {
         uni.setStorageSync('token', data.data.accessToken)
         console.log(data.data.accessToken)
         if (_this.pageOption.backtype == 1) {
-          console.log('1111')
-          uni.redirectTo({ url: _this.pageOption.backpage })
+          console.log(_this.pageOption.backpage)
+          uni.switchTab({ url: _this.pageOption.backpage })
         } else {
           console.log('2222')
-          uni.switchTab({ url: _this.pageOption.backpage })
+          uni.redirectTo({ url: _this.pageOption.backpage })
         }
       }
     },
   },
   onLoad(options) {
     // 接收跳转的参数
-    this.pageOption = options //默认加载
+    if (options) {
+      this.pageOption = options //默认加载
+    }
     console.log(options)
   },
 }

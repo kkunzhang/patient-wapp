@@ -68,7 +68,6 @@ export default {
         method: options.method,
         success: (response) => {
           let res = response.data;
-          console.log(res);
           if (res.code === 100000 || res.code === 10000) {
             resolve(res)
           } else { // 返回值非 200，强制显示提示信息
@@ -137,10 +136,11 @@ export default {
           errorMsg = '服务器异常';
           break;
         case 401:
+          errorMsg = '未授权，请重新登录';
           uni.navigateTo({
             url: '/pages/login/login',
           })
-          errorMsg = '未授权，请重新登录';
+          return;
           break;
         default:
           errorMsg = '请求失败';
@@ -154,11 +154,6 @@ export default {
           complete: function () {
             setTimeout(function () {
               uni.hideToast();
-              if (errorCode == 401) {
-                uni.navigateTo({
-                  url: '/pages/login/login',
-                })
-              }
             }, 1000);
           },
         });
@@ -170,11 +165,6 @@ export default {
           complete: function () {
             setTimeout(function () {
               uni.hideToast();
-              if (errorCode == 401) {
-                uni.navigateTo({
-                  url: '/pages/login/login',
-                })
-              }
             }, 1000);
           },
         });

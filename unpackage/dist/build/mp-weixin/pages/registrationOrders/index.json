@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "预约挂号",
+  "usingComponents": {
+    "u-tabs": "/uni_modules/uview-ui/components/u-tabs/u-tabs",
+    "pay-card": "/pages/registrationOrders/components/pay-card"
+  }
+}

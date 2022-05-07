@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的医生",
+  "usingComponents": {
+    "card-item": "/components/card-item/card-item",
+    "card-pop": "/components/card-pop/card-pop",
+    "card": "/components/doctor/card"
+  }
+}

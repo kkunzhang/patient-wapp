@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "就诊人管理",
+  "usingComponents": {
+    "add-visiter": "/components/add-visiter/add-visiter",
+    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
+    "patien-card": "/pages/user/components/patien-card"
+  }
+}
