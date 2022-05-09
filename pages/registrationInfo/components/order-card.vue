@@ -28,6 +28,7 @@
   </view>
 </template>
 <script>
+import { formatDate } from '@utils/utils'
 export default {
   data() {
     return {}
@@ -53,6 +54,7 @@ export default {
       }
       return type
     },
+
   },
 }
 </script>

@@ -48,6 +48,7 @@ export default {
       if (e.detail.errMsg == 'getPhoneNumber:ok') {
         console.log('用户点击了接受')
         this.updateUserInfo(e.detail.code)
+        console.log(e)
       } else {
         console.log('用户点击了拒绝')
       }

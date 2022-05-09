@@ -23,7 +23,7 @@
         </view>
         <view class="card-num" v-if="isShow">
           <view>剩余号源：{{ info.regLeaveCount }} </view>
-          <view v-if="info.toatlFee">￥{{ info.toatlFee }}</view>
+          <view v-if="info.registerFee">￥{{ info.registerFee }}</view>
           <view v-else>免费</view>
           <view>
             <button
@@ -69,7 +69,7 @@ export default {
       isDisabled: false,
     }
   },
-  onLoad() {},
+  onLoad() { },
   props: {
     avatar: {
       type: String,

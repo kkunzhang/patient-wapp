@@ -6,7 +6,7 @@
       <view class="payment-item">
         <view>
           <text>订单总额</text>
-          <text>￥{{ info.registerFee }}</text>
+          <text>￥{{ info.totalFee }}</text>
         </view>
       </view>
       <!-- <view class="payment-item">
@@ -27,7 +27,7 @@
       <view class="payment-footer">
         <view>
           <text>实付 :</text>
-          <text class="price">￥{{ info.registerFee }}</text>
+          <text class="price">￥{{ info.realFee }}</text>
         </view>
       </view>
     </uni-card>

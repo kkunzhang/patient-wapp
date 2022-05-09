@@ -21,7 +21,7 @@ export default {
       title: 'Hello',
     }
   },
-  onLoad() {},
+  onLoad() { },
   methods: {
     //在这里不需要获取用户的昵称和头像，直接通过uni.login方法获取code，再获取openid
     getUserOpenId() {

@@ -1,10 +1,10 @@
-import { getPatientList } from '@/api/modules/patientUser'
+import { getPatientList } from '@/api/modules/patientUser';
 export const getTenantPatientList = {
-  data () {
+  data() {
     return {
       patientId: '',
-      defaultPatientList: [],
-      hospitalPatientId:'',
+      defaultPatientList: {},
+      hospitalPatientId: '',
       patientList: [
         {
           age: 12,
@@ -14,47 +14,45 @@ export const getTenantPatientList = {
           phone: 17610229358,
           sex: '男',
           birthday: '1993-12-01',
-          hospitalPatientId:'11'
+          hospitalPatientId: '11',
         },
-
       ],
       loading: true,
     };
   },
   methods: {
     //获取就诊人列表
-    async getTenantPatientList () {
-      const params = {}
-      const data = await getPatientList(params)
+    async getTenantPatientList() {
+      const params = {};
+      const data = await getPatientList(params);
       if (data.data.records) {
-        this.patientList = data.data.records
-        this.checkDefaultPatient(data.data.records)
+        this.patientList = data.data.records;
+        this.checkDefaultPatient(data.data.records);
       }
-      console.log(data)
+      console.log(data);
     },
     //判断默认就诊人
-    checkDefaultPatient (data) {
-      this.patientId = ''
+    checkDefaultPatient(data) {
+      this.patientId = '';
       data.forEach((element) => {
         if (element.isDefault) {
-          this.patientId = element.patientId
-          this.defaultPatientList = element
-          return
+          this.patientId = element.patientId;
+          this.defaultPatientList = element;
+          return;
         }
-      })
+      });
       if (!this.patientId) {
-        this.patientId = data[0].patientId
-        this.hospitalPatientId = data[0].hospitalPatientId
-        this.defaultPatientList = data[0]
+        this.patientId = data[0].patientId;
+        this.hospitalPatientId = data[0].hospitalPatientId;
+        this.defaultPatientList = data[0];
       }
-      this.loading = false
+      this.loading = false;
     },
   },
-  mounted () {
-  },
-  created () {
+  mounted() {},
+  created() {
     if (uni.getStorageSync('phone')) {
-      this.getTenantPatientList()
+      this.getTenantPatientList();
     }
   },
 };

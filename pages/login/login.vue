@@ -44,7 +44,9 @@ export default {
         backpage: '/pages/home/index',
         backtype: '1',
       },
-      phone: uni.getStorageSync('phone') || false,
+      // phone: uni.getStorageSync('phone') || false,
+      //todo  删除
+      phone: uni.getStorageSync('phone') || 17610229358,
     }
   },
   methods: {
@@ -126,6 +128,9 @@ export default {
         uni.setStorageSync('token', data.data.accessToken)
         uni.setStorageSync('unionid', data.data.unionid)
         uni.setStorageSync('openId', data.data.openid)
+        //todo 删除
+        uni.setStorageSync('phone', '17610229358')
+
         if (!data.data.bindingStatus || !this.phone) {
           uni.redirectTo({
             url:

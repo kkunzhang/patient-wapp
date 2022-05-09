@@ -1,13 +1,7 @@
 <template>
   <view>
     <!-- <u-count-down :time="60 * 60 * 1000" format="mm:ss"></u-count-down> -->
-    <u-count-down
-      :time="expirationTime"
-      format="mm:ss"
-      autoStart
-      millisecond
-      @change="onChange"
-    >
+    <u-count-down :time="expirationTime" format="mm:ss" autoStart millisecond @change="onChange">
       <view class="time">
         <view class="time__custom">
           <text class="time__custom__item">{{ timeData.minutes }}</text>
@@ -26,25 +20,30 @@ export default {
   data() {
     return {
       timeData: {},
-      ispay: '',
       expirationTime: 30 * 60 * 1000,
-      // expirationTime: 10,
     }
   },
   methods: {
     onChange(e) {
       this.timeData = e
-      // minutes: 29
-      // seconds: 56
     },
     runBack() {
       console.log('倒计时created')
-      const nowDate = new Date()
-      let now = nowDate.getTime()
-      //   // var endTime = 1649663471073
-      //  // now = 1649661671000
-      //todo 打开
-      // this.expirationTime = endTime - now //计算两日期之间相差的毫秒数
+      this.expirationTime = this.endTime - this.systemTime //计算两日期之间相差的毫秒数
+      console.log(this.expirationTime)
+
+      // const nowDate = new Date()
+      // let now = nowDate.getTime()
+      // // this.expirationTime = endTime - now //计算两日期之间相差的毫秒数
+    },
+  },
+  watch: {
+    expirationTime: {
+      handler(newVal, oldVal) {
+        if (newVal < 0) {
+          this.$emit('isTimeOut', 1)
+        }
+      },
     },
   },
   created() {
@@ -52,9 +51,15 @@ export default {
   },
   props: {
     endTime: {
-      type: String,
+      type: Number,
       default() {
-        return ''
+        return 0
+      },
+    },
+    systemTime: {
+      type: Number,
+      default() {
+        return 0
       },
     },
   },

@@ -3,11 +3,7 @@
     <!---------------------公共部分 ------------------------------->
     <uni-row class="demo-uni-row">
       <uni-col>
-        <uni-title
-          type="h1"
-          align="center"
-          title="庆阳市西峰区人民医院"
-        ></uni-title>
+        <uni-title type="h1" align="center" title="庆阳市西峰区人民医院"></uni-title>
       </uni-col>
       <uni-col>
         <view class="title">{{ info.reportName }}</view>

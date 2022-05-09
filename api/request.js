@@ -1,5 +1,5 @@
 // import store from '../store/index'
-import configInfo from '@/utils/config.js'
+import configInfo from '@/utils/config.js';
 /**
  * X-APP-ID 1：医生端  2：患者端
  * X-CLIENT-ID  0：安卓APP 1：苹果APP 2：WAP 3：微信小程序 4：web
@@ -21,25 +21,25 @@ export default {
     responseType: 'text',
     hideLoading: false,
     hideMsg: false,
-    success () { },
-    fail () { },
-    complete () { },
+    success() {},
+    fail() {},
+    complete() {},
   },
   // 请求拦截器
   interceptor: {
     request: null,
     response: null,
   },
-  request (options) {
+  request(options) {
     if (!options) {
       options = {};
     }
-    const hideLoading = options.hideLoading || false // 是否显示 loading
+    const hideLoading = options.hideLoading || false; // 是否显示 loading
     if (!hideLoading) {
       uni.showLoading({
         title: '加载中...',
-        mask: true
-      })
+        mask: true,
+      });
     }
     options.baseUrl = options.baseUrl || this.config.baseUrl;
     options.dataType = options.dataType || this.config.dataType;
@@ -47,17 +47,20 @@ export default {
     options.data = options.data || {};
     options.method = options.method || this.config.method;
     console.log(options);
+    // todo 删除
+    uni.setStorageSync('phone', '17610229358');
     // #ifdef MP-WEIXIN
     if (options.url.indexOf('/mem/auth/') < 0) {
-      const token = uni.getStorageSync('token') // 登录鉴权获得的 token
+      const token = uni.getStorageSync('token'); // 登录鉴权获得的 token
       this.config.header.Authorization = 'bearer ' + token;
       console.log(token);
     } else {
-      this.config.header.Authorization = ''
+      this.config.header.Authorization = '';
     }
     // #endif
     // #ifdef H5
-    this.config.header.Authorization = 'bearer ' + 'b3375221-2455-44f5-8533-319be4ff13b6';
+    this.config.header.Authorization =
+      'bearer ' + 'd7274696-df28-45c9-a327-002c8163a797';
     // #endif
     console.log(this.config.header);
     // 基于 Promise 的网络请求
@@ -70,16 +73,17 @@ export default {
         success: (response) => {
           let res = response.data;
           if (res.code === 100000 || res.code === 10000) {
-            resolve(res)
-          } else { // 返回值非 200，强制显示提示信息
+            resolve(res);
+          } else {
+            // 返回值非 200，强制显示提示信息
             if (res.errCode) {
-              this.showToast(res, parseInt(res.errCode))
+              this.showToast(res, parseInt(res.errCode));
             } else if (res.code === 500000) {
-              this.showToast(res, res.code)
+              this.showToast(res, res.code);
             } else {
-              this.showToast(res)
+              this.showToast(res);
             }
-            reject('[' + res + '] 系统处理失败')
+            reject('[' + res + '] 系统处理失败');
           }
         },
         fail: (error) => {
@@ -90,32 +94,32 @@ export default {
           }
         },
         complete: () => {
-          if (!hideLoading) uni.hideLoading()
+          if (!hideLoading) uni.hideLoading();
         },
       });
     });
   },
   // get请求
-  get (options = {}) {
+  get(options = {}) {
     options.method = 'GET';
     return this.request(options);
   },
   // post请求
-  post (options = {}) {
+  post(options = {}) {
     options.method = 'POST';
     return this.request(options);
   },
   // put请求
-  put (options = {}) {
+  put(options = {}) {
     options.method = 'PUT';
     return this.request(options);
   },
   // delete请求
-  delete (options = {}) {
+  delete(options = {}) {
     options.method = 'DELETE';
     return this.request(options);
   },
-  showToast (error, errorCode) {
+  showToast(error, errorCode) {
     let errorMsg = '';
     console.log(error, errorCode);
 
@@ -136,15 +140,18 @@ export default {
         case 502:
           errorMsg = '服务器异常';
           break;
+        case 500000:
+          errorMsg = '系统繁忙,请稍后再试';
+          break;
         case 401:
           errorMsg = '未授权，请重新登录';
           uni.redirectTo({
             url: '/pages/login/login',
-          })
+          });
           return;
           break;
         default:
-          errorMsg = '请求失败';
+          errorMsg = '请求失败,请稍后再试';
           break;
       }
       if (process.env.NODE_ENV === 'development') {
@@ -176,11 +183,9 @@ export default {
         title: '接口报错',
         content: JSON.stringify(error),
         showCancel: false,
-        complete: function () {
-        },
+        complete: function () {},
       });
     }
     return null;
   },
-
 };

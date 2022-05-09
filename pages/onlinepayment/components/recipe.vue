@@ -23,7 +23,7 @@
       <view class="payment-footer">
         <view>
           <text>合计 :</text>
-          <text class="price">￥{{ info.totalFee }}</text>
+          <text class="price">￥{{ totalFee }}</text>
         </view>
       </view>
     </uni-card>
@@ -40,6 +40,12 @@ export default {
       type: Array,
       default() {
         return []
+      },
+    },
+    totalFee: {
+      type: String,
+      default() {
+        return ''
       },
     },
   },

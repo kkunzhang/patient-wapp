@@ -7,11 +7,11 @@
       :activeStyle="{
         color: '#303133',
         fontWeight: 'bold',
-        transform: 'scale(1.05)',
+        transform: 'scale(1.05)'
       }"
       :inactiveStyle="{
         color: '#606266',
-        transform: 'scale(1)',
+        transform: 'scale(1)'
       }"
       itemStyle="padding-left: 30px; padding-right: 30px; height: 44px;"
       @click="onClick"
@@ -23,12 +23,11 @@
       </view>
     </view>
     <view v-else>
-      <pay-card
-        :list="info"
-        @onClick="getInfo"
-        :isShowPayTime="true"
-      ></pay-card>
-      <view class="isOver" v-if="flag">-----我是有底线的-----</view>
+      <pay-card :list="info" @onClick="getInfo" :isShowPayTime="true"></pay-card>
+      //todo 加倒计时时间
+      <!-- :endTime="item.endTime"
+              :systemTime="item.systemTime" -->
+      <!-- <view class="isOver" v-if="flag">-----我是有底线的-----</view> -->
     </view>
   </view>
 </template>
@@ -77,7 +76,7 @@ export default {
     getInfo(item) {
       //todo 获取全部数句
       uni.navigateTo({
-        url: `/pages/registrationInfo/index?patientId=${item.patientId}&registrationId=${item.registrationId}&registrationStatus=${item.registrationStatus}`,
+        url: `/pages/registrationInfo/index?registrationNo=${item.registrationNo}`,
       })
     },
     async getList(status = '') {
@@ -88,7 +87,7 @@ export default {
       }
       const data = await reservationList(params)
       console.log(data)
-      if (data.code == 10000) {
+      if (data.code == 100000) {
         this.info = [...this.info, ...data.data.records]
         console.log(this.info)
       }

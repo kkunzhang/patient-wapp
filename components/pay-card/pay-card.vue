@@ -6,7 +6,6 @@
           <view style="font-size: large">{{ item.prescriptionTime }}</view>
           <view style="display: flex">
             <view class="right-tips">待支付</view>
-            <!-- <count-down v-if="isShowPayTime"></count-down> -->
           </view>
         </view>
         <view class="item-font-spacing">
@@ -29,26 +28,13 @@
         </view>
         <view class="card-num">
           <view>{{ item.type }} </view>
-          <!-- <view v-if="isShowPayTime">
-            <button
-              class="mini-btn"
-              @click="onClick()"
-              type="primary"
-              size="mini"
-            >
-              去支付
-            </button>
-          </view> -->
         </view>
       </uni-card>
     </view>
   </view>
 </template>
-
 <script>
-import countDown from './count-down.vue'
 export default {
-  components: { countDown },
   data() {
     return {}
   },

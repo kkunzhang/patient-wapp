@@ -28,7 +28,7 @@ export default {
       radio: '1',
       show: false,
       lever: true,
-      payInfo: { id: 3 },
+      payInfo: { status: 3 },
       doctorInfo: {},
       reserveInfo: {},
       drugDetailDto: {},

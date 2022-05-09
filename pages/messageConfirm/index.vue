@@ -7,8 +7,7 @@
       <u-skeleton rows="2" :loading="loading" :animate="true" :title="false">
         <add-visiter v-if="!patientId"></add-visiter>
         <!-- 已有就诊人，非第一次添加 -->
-        <card-item v-else @openPop="onOpen" :list="defaultPatientList">
-        </card-item>
+        <card-item v-else @openPop="onOpen" :list="defaultPatientList"> </card-item>
       </u-skeleton>
     </view>
     <reserve-card :info="doctorInfo"></reserve-card>
@@ -37,6 +36,7 @@ import reserveCard from './components/reserve-card.vue'
 import { reservationLock } from '@/api/modules/registration'
 import { debounce } from '@utils/utils'
 import { getTenantPatientList } from '@/utils/mixin.js'
+import { toPayMpWeiXin } from '@/utils/pay.js'
 export default {
   components: {
     card,
@@ -46,13 +46,13 @@ export default {
     priceCard,
     reserveCard,
   },
-  mixins: [getTenantPatientList],
+  mixins: [getTenantPatientList, toPayMpWeiXin],
   data() {
     return {
       show: false,
       lever: false,
       doctorInfo: '',
-      orderList: {},
+      registrationNo: '',
       //科室编码
       deptId: '',
     }
@@ -71,6 +71,7 @@ export default {
     onSubmit: debounce(function () {
       this.order()
     }),
+    //下单
     async order() {
       let params = {
         doctorScheduleId: this.doctorInfo.doctorScheduleId,
@@ -83,11 +84,20 @@ export default {
       const data = await reservationLock(JSON.stringify(params))
       console.log(data)
       if (data.data.length > 0) {
-        this.orderList = data.data
-        uni.navigateTo({
-          url: `/pages/registrationInfo/index?patientId=${this.defaultPatientList.hospitalPatientId}&registrationId=${this.orderList.registrationId}`,
-        })
+        this.registrationNo = data.data
+        console.log(this.registrationNo);
+        this.toPay()
       }
+
+    },
+    //支付
+    async toPay() {
+      const payResult = await this.getPayInfo(this.registrationNo)
+      console.log(payResult);
+      uni.navigateTo({
+        url: `/pages/registrationInfo/index?registrationNo=${this.registrationNo}`,
+      })
+
     },
     onOpen() {
       this.show = true

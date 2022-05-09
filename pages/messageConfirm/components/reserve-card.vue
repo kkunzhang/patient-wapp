@@ -18,7 +18,7 @@
         </view>
         <view>
           <text>就诊费用</text>
-          <text>￥{{ info.registerFee }}</text>
+          <text>￥{{ info.examinationFee }}</text>
         </view>
       </view>
     </uni-card>

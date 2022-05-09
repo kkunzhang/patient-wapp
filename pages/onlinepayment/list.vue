@@ -1,10 +1,6 @@
 <template>
   <view>
-    <pay-card
-      :list="info"
-      @onClick="toDetail"
-      :isShowPayTime="false"
-    ></pay-card>
+    <pay-card :list="info" @onClick="toDetail" :isShowPayTime="false"></pay-card>
   </view>
 </template>
 
@@ -29,7 +25,7 @@ export default {
           '/pages/onlinepayment/detail?prescriptionId=' +
           val.prescriptionId +
           '&patientId=' +
-          val.patientId,
+          this.data.hospitalPatientId,
       })
     },
     //获取在线缴费列表

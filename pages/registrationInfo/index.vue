@@ -1,7 +1,7 @@
 <template>
   <view class="page">
     <view>
-      <pay-card :item="payStatus" :isFull="true"></pay-card>
+      <pay-card :item="payStatus" :isFull="true" @isTimeOut="isTimeOut"></pay-card>
       <!-- 挂号信息 -->
       <registration-card :info="info"></registration-card>
       <!-- 订单信息 -->
@@ -17,42 +17,74 @@
 import payCard from '@/components/pay-card/pay-card-status.vue'
 import registrationCard from './components/registration-card.vue'
 import orderCard from './components/order-card.vue'
-import priceCard from './components/price-card.vue'
+import priceCard from '@/components/pay-card/price-card.vue'
 import { reservationDetail } from '@/api/modules/registration'
-
+import { toPayMpWeiXin } from '@/utils/pay.js'
+import { debounce } from '@utils/utils'
 export default {
   data() {
     return {
       info: {},
       payStatus: {
         endTime: '',
-        id: '',
+        status: '',
       },
       isShow: false,
+      registrationNo: ''
     }
   },
+  mixins: [toPayMpWeiXin],
   methods: {
-    async reservationDetail(patientId, registrationId) {
+    onSubmit: debounce(function () {
+      this.toPay()
+    }),
+    //支付
+    async toPay() {
+      if (this.registrationNo) {
+        const payResult = await this.getPayInfo(this.registrationNo)
+        console.log(payResult);
+        uni.navigateTo({
+          url: `/pages/registrationInfo/index?registrationNo=${this.registrationNo}`,
+        })
+      } else {
+        uni.showToast({
+          title: '支付异常,请退出页面重试',
+          duration: 3000,
+        });
+      }
+    },
+    async reservationDetail(registrationNo) {
+      this.isShow = false
       let params = {
-        patientId: patientId,
-        registrationId: registrationId,
+        registrationNo: registrationNo,
       }
       const data = await reservationDetail(params)
       console.log(data.data)
       if (data.data) {
         this.info = data.data
-        this.payStatus.endTime = this.info.waitPaidTime
-        this.payStatus.id = this.info.registrationStatus
-        console.log(this.payStatu)
+        this.payStatus.endTime = this.info.timeout
+        this.payStatus.systemTime = this.info.systemTime
+        this.payStatus.status = this.info.registrationStatus
+        this.payStatus.realFee = this.info.realFee
+        if (this.info.registrationStatus == 10) {
+          this.isShow = true
+        }
+        console.log(this.payStatus)
       }
     },
+    isTimeOut(val) {
+      if (val) {
+        this.reservationDetail(this.registrationNo)
+        console.log('重新刷新列表');
+
+      }
+
+    }
   },
   onLoad(options) {
-    this.isShow = false
-    if (options.registrationStatus == 10) {
-      this.isShow = true
-    }
-    this.reservationDetail(options.patientId, options.registrationId)
+    console.log(options);
+    this.registrationNo = options.registrationNo
+    this.reservationDetail(options.registrationNo)
   },
   components: { payCard, registrationCard, orderCard, priceCard },
 }
