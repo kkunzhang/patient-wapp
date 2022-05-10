@@ -11,7 +11,9 @@
       </view>
     </scroll-view>
     <scroll-view class="right" scroll-y>
-      <text class="item" @click="onClick(infoData)">{{ infoData.deptName }}</text>
+      <text class="item" @click="onClick(infoData)">{{
+        infoData.deptName
+      }}</text>
     </scroll-view>
   </view>
 </template>
@@ -51,10 +53,6 @@ export default {
     },
   },
   onLoad() {
-    // todo hsanchu 
-    uni.navigateTo({
-      url: `/pages/registrationInfo/index?registrationNo=RE973249971132305408`,
-    })
     this.getDept()
   },
 }

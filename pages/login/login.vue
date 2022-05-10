@@ -44,9 +44,9 @@ export default {
         backpage: '/pages/home/index',
         backtype: '1',
       },
-      // phone: uni.getStorageSync('phone') || false,
+      phone: uni.getStorageSync('phone') || false,
       //todo  删除
-      phone: uni.getStorageSync('phone') || 17610229358,
+      // phone: uni.getStorageSync('phone') || 17610229358,
     }
   },
   methods: {
@@ -129,8 +129,7 @@ export default {
         uni.setStorageSync('unionid', data.data.unionid)
         uni.setStorageSync('openId', data.data.openid)
         //todo 删除
-        uni.setStorageSync('phone', '17610229358')
-
+        // uni.setStorageSync('phone', '17610229358')
         if (!data.data.bindingStatus || !this.phone) {
           uni.redirectTo({
             url:
@@ -148,7 +147,7 @@ export default {
           }
         }
       } else {
-        this.$tools.message('登陆接口错误')
+        uni.switchTab({ url: '/pages/home/index' })
       }
     },
   },

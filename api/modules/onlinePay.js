@@ -63,4 +63,15 @@ export const prescriptionDetail = (data) => {
     // hideLoading: true
   });
 };
+/**
+ *  保存处方信息
+ *  @return {Array}
+ */
+export const savePrescription = (data) => {
+  return http.post({
+    url: '/his-xfqrmyy/prescription/save/prescription',
+    data,
+    // hideLoading: true
+  });
+};
 

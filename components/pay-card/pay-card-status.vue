@@ -8,7 +8,7 @@
             <count-down
               v-if="item.status == 1 || item.status == 10"
               :endTime="item.endTime"
-              :systemTime="item.systemTime"
+              :createTime="item.createTime"
               @isTimeOut="isTimeOut"
             ></count-down>
             <view class="right-tips" v-if="item.status == 20">已取消 </view>
@@ -21,8 +21,12 @@
         <view class="card-num">
           <view v-if="item.status == 20">超时未支付已自动取消 </view>
           <view v-if="item.status == 10">超时未支付自动取消</view>
-          <view v-if="item.status == 50">请按时就诊，号源当日有效，过期作废 </view>
-          <view v-if="item.status == 1 || item.status == 10">订单金额:￥{{ item.realFee }}</view>
+          <view v-if="item.status == 50"
+            >请按时就诊，号源当日有效，过期作废
+          </view>
+          <view v-if="item.status == 1 || item.status == 10"
+            >订单金额:￥{{ item.realFee }}</view
+          >
           <view v-if="item.status == 3">谨遵医嘱，按时复诊 </view>
         </view>
       </view>
@@ -39,7 +43,7 @@ export default {
   methods: {
     isTimeOut() {
       this.$emit('isTimeOut', 1)
-    }
+    },
   },
   props: {
     item: {
@@ -60,8 +64,8 @@ export default {
   padding: 10rpx 44rpx;
   border-radius: 8rpx;
   overflow: hidden;
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun,
-    sans-serif;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+    Microsoft YaHei, SimSun, sans-serif;
   background-color: #19be6b;
   border: 1rpx solid #dcdcdc;
   line-height: 65rpx;

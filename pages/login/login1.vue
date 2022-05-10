@@ -169,7 +169,6 @@ export default {
       const data = await login(params, code)
       console.log(data.data)
       if (data.data) {
-        // todo 页面到获取手机号
         // uni.redirectTo({
         //   url:
         //     '/pages/login/loginPhone?backpage=' +

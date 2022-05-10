@@ -5,6 +5,6 @@
     "cp-button": "/components/cp-button/cp-button",
     "registration-card": "/pages/registrationInfo/components/registration-card",
     "order-card": "/pages/registrationInfo/components/order-card",
-    "price-card": "/pages/registrationInfo/components/price-card"
+    "price-card": "/components/pay-card/price-card"
   }
 }

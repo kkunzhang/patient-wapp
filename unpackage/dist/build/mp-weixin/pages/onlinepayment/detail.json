@@ -4,7 +4,6 @@
     "card-item": "/components/card-item/card-item",
     "cp-pay-type": "/components/cp-pay-type/cp-pay-type",
     "cp-button": "/components/cp-button/cp-button",
-    "pay-card": "/components/pay-card/pay-card-status",
     "price-card": "/components/pay-card/price-card",
     "reserve-card": "/pages/onlinepayment/components/reserve-card",
     "recipe": "/pages/onlinepayment/components/recipe"

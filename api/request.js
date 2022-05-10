@@ -21,16 +21,16 @@ export default {
     responseType: 'text',
     hideLoading: false,
     hideMsg: false,
-    success() {},
-    fail() {},
-    complete() {},
+    success () { },
+    fail () { },
+    complete () { },
   },
   // 请求拦截器
   interceptor: {
     request: null,
     response: null,
   },
-  request(options) {
+  request (options) {
     if (!options) {
       options = {};
     }
@@ -48,7 +48,7 @@ export default {
     options.method = options.method || this.config.method;
     console.log(options);
     // todo 删除
-    uni.setStorageSync('phone', '17610229358');
+    // uni.setStorageSync('phone', '17610229358');
     // #ifdef MP-WEIXIN
     if (options.url.indexOf('/mem/auth/') < 0) {
       const token = uni.getStorageSync('token'); // 登录鉴权获得的 token
@@ -100,26 +100,26 @@ export default {
     });
   },
   // get请求
-  get(options = {}) {
+  get (options = {}) {
     options.method = 'GET';
     return this.request(options);
   },
   // post请求
-  post(options = {}) {
+  post (options = {}) {
     options.method = 'POST';
     return this.request(options);
   },
   // put请求
-  put(options = {}) {
+  put (options = {}) {
     options.method = 'PUT';
     return this.request(options);
   },
   // delete请求
-  delete(options = {}) {
+  delete (options = {}) {
     options.method = 'DELETE';
     return this.request(options);
   },
-  showToast(error, errorCode) {
+  showToast (error, errorCode) {
     let errorMsg = '';
     console.log(error, errorCode);
 
@@ -183,7 +183,7 @@ export default {
         title: '接口报错',
         content: JSON.stringify(error),
         showCancel: false,
-        complete: function () {},
+        complete: function () { },
       });
     }
     return null;

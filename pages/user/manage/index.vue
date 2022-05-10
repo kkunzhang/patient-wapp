@@ -116,7 +116,6 @@ export default {
         this.getTenantPatientList()
       }
     },
-    // todo 修改手机号,还有这两个刷新页面, 不能点击删除
   },
 }
 </script>

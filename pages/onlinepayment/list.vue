@@ -1,6 +1,10 @@
 <template>
   <view>
-    <pay-card :list="info" @onClick="toDetail" :isShowPayTime="false"></pay-card>
+    <pay-card
+      :list="info"
+      @onClick="toDetail"
+      :isShowPayTime="false"
+    ></pay-card>
   </view>
 </template>
 
@@ -35,6 +39,8 @@ export default {
         patientId: this.data.hospitalPatientId,
       }
       const data = await getPayList(params)
+      console.log(data)
+
       if (data.data.length > 0) {
         this.info = data.data
       }

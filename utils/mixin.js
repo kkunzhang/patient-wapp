@@ -1,6 +1,6 @@
 import { getPatientList } from '@/api/modules/patientUser';
 export const getTenantPatientList = {
-  data() {
+  data () {
     return {
       patientId: '',
       defaultPatientList: {},
@@ -22,7 +22,7 @@ export const getTenantPatientList = {
   },
   methods: {
     //获取就诊人列表
-    async getTenantPatientList() {
+    async getTenantPatientList () {
       const params = {};
       const data = await getPatientList(params);
       if (data.data.records) {
@@ -32,11 +32,12 @@ export const getTenantPatientList = {
       console.log(data);
     },
     //判断默认就诊人
-    checkDefaultPatient(data) {
+    checkDefaultPatient (data) {
       this.patientId = '';
       data.forEach((element) => {
         if (element.isDefault) {
           this.patientId = element.patientId;
+          this.hospitalPatientId = element.hospitalPatientId
           this.defaultPatientList = element;
           return;
         }
@@ -49,9 +50,10 @@ export const getTenantPatientList = {
       this.loading = false;
     },
   },
-  mounted() {},
-  created() {
+  mounted () { },
+  created () {
     if (uni.getStorageSync('phone')) {
+      console.log('获取就怎人');
       this.getTenantPatientList();
     }
   },

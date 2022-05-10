@@ -18,7 +18,7 @@ import cardItem from '@/components/card-item/card-item.vue'
 import priceCard from '@/components/pay-card/price-card.vue'
 import reserveCard from './components/reserve-card.vue'
 import recipe from './components/recipe.vue'
-import { getPayDetail } from '@/api/modules/onlinePay'
+import { getPayDetail, savePrescription } from '@/api/modules/onlinePay'
 import { getTenantPatientList } from '@/utils/mixin.js'
 import { debounce } from '@utils/utils'
 export default {
@@ -31,33 +31,60 @@ export default {
       lever: true,
       info: {},
       drugDetailDto: [],
+      prescriptionId: '',
+      patientId: '',
+      hospitalPatientId: '',
+      orderNum: '',
     }
   },
   methods: {
     onSubmit: debounce(function () {
       console.log('跳转去支付')
+
+      this.savePrescription()
+    }),
+    //保存信息
+    async savePrescription() {
+      const params = {
+        patientId: this.hospitalPatientId,
+        prescriptionId: this.prescriptionId,
+      }
+      const data = await savePrescription(params)
+      if (data.code == 100000) {
+        this.orderNum = data.data
+      } else {
+        uni.showToast({
+          title: '生成缴费单失败',
+          duration: 3000,
+        })
+      }
+      console.log(ret)
+    },
+    toDetail() {
       uni.navigateTo({
         url:
           `/pages/onlinepayment/subMessage?data=` +
           encodeURIComponent(JSON.stringify(this.info)),
       })
-    }),
+    },
     //获取在线缴费列表
     async getPayDetail(prescriptionId, patientId) {
       const params = {
         prescriptionId: prescriptionId,
         patientId: patientId,
       }
+
       const data = await getPayDetail(params)
       if (data.code == 100000) {
         this.info = { ...data.data, ...params }
         this.drugDetailDto = this.info.drugDetailDto
-        console.log(this.info);
-
+        console.log(this.info)
       }
     },
   },
   onLoad(options) {
+    this.prescriptionId = options.prescriptionId
+    console.log(options)
     this.getPayDetail(options.prescriptionId, options.patientId)
   },
 }

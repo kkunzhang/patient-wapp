@@ -11,7 +11,7 @@
         @onClick="getDetail"
         :isShowPayTime="true"
       ></pay-card>
-      <view class="isOver" v-if="flag">-----我是有底线的-----</view>
+      <!-- <view class="isOver" v-if="flag">-----我是有底线的-----</view> -->
     </view>
   </view>
 </template>
@@ -51,7 +51,7 @@ export default {
       }
       const data = await prescriptionDetail(params)
       console.log(data)
-      if (data.code == 10000) {
+      if (data.code == 100000) {
         this.info = { ...data.data, ...params }
         this.goToPage()
       }
@@ -70,7 +70,7 @@ export default {
       }
       const data = await prescriptionList(params)
       console.log(data)
-      if (data.code == 10000) {
+      if (data.code == 100000) {
         this.info = [...this.info, ...data.data.records]
         console.log(this.info)
       }

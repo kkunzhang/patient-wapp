@@ -74,7 +74,7 @@ export default {
     //下单
     async order() {
       let params = {
-        doctorScheduleId: this.doctorInfo.doctorScheduleId,
+        doctorScheduleId: this.doctorInFFo.doctorScheduleId,
         patientId: this.defaultPatientList.hospitalPatientId,
         deptId: this.deptId,
         doctorId: this.doctorInfo.doctorId,
