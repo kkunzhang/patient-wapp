@@ -208,16 +208,16 @@ export default {
           this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')
           break
         case '远程门诊':
-          this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')
+          // todo 删除
+          uni.navigateTo({
+            url: `/pages/addVisit/index`,
+          })
+          // this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')
           break
         default:
           console.log(item.id)
           this.$tools.toast('敬请期待')
       }
-      // this.isShow = !this.isShow
-      // this.$tools.toast('回答已删除',"suc")
-      // this.$tools.message('回答已删除', 'suc')
-      // this.$tools.toast('回答已删除', 'suc')
     }),
     onNavigateTo(url, type = '2') {
       // #ifdef MP-WEIXIN

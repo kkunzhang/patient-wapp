@@ -79,7 +79,7 @@
         </uni-forms>
       </view>
     </uni-section>
-    <cp-button @onSubmit="onSubmit('valiForm')">提交</cp-button>
+    <cp-button @onSubmit="onSubmit">提交</cp-button>
   </view>
 </template>
 
@@ -119,6 +119,7 @@ export default {
       isCanClick: false,
       // 校验规则
       rules: {
+        validateTrigger: 'bind',
         name: {
           rules: [
             {
@@ -163,9 +164,9 @@ export default {
             },
             {
               validateFunction: function (rule, value, data, callback) {
-                const reg = /^1[34578]\d{9}$/
-                if (reg.test(value) === false && value) {
-                  callback('请输入正确格式的手机号码')
+                let iphoneReg = /^1[0-9]{10}$/
+                if (!iphoneReg.test(value)) {
+                  callback('手机号码格式不正确，请重新填写')
                 }
                 return true
               },
@@ -247,8 +248,8 @@ export default {
         this.valiFormData.code = e
       })
     },
-    onSubmit(ref) {
-      this.$refs[ref]
+    onSubmit() {
+      this.$refs.valiForm
         .validate()
         .then((res) => {
           console.log(res)
@@ -285,16 +286,17 @@ export default {
     //获取身份证信息
     getCardInfo(card) {
       console.log(card)
-
       const ret = getIdCardInfo(card)
       console.log(ret)
-
       if (ret) {
         this.valiFormData.age = ret.age
         this.valiFormData.birthday = ret.birthday
         this.valiFormData.sex = ret.sex
       }
     },
+  },
+  onReady() {
+    this.$refs.valiForm.setRules(this.rules)
   },
   props: {
     tabCur: {

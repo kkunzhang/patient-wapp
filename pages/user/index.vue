@@ -202,18 +202,17 @@ export default {
     onClick: debounce(function (item) {
       switch (item.title) {
         case '预约挂号':
-          // todo暂时先又由段验证登录到哪一步，后续再优化，可以直接调用，后端返回401，即跳登录。
           this.onNavigateTo('/pages/registrationOrders/index')
           break
         case '处方订单':
           this.onNavigateTo('/pages/prescriptionOrders/index')
           break
-        case '我的医生':
-          this.onNavigateTo('/pages/user/myDoctor/index')
-          break
-        case '我的关注':
-          this.onNavigateTo('/pages/user/myWith/index')
-          break
+        // case '我的医生':
+        //   this.onNavigateTo('/pages/user/myDoctor/index')
+        //   break
+        // case '我的关注':
+        //   this.onNavigateTo('/pages/user/myWith/index')
+        //   break
         default:
           this.$tools.toast('敬请期待')
       }

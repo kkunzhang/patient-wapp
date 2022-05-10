@@ -220,8 +220,8 @@
     "list": [
       {
         "name": "全国医生",
-        "path": "pages/onlinepayment/subMessage",
-        "query": "prescriptionNo=OP973534310302748672"
+        "path": "pages/addVisit/index",
+        "query": ""
       }
     ]
   },

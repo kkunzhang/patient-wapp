@@ -53,10 +53,8 @@ export default {
     },
   },
   onLoad() {
-    uni.navigateTo({
-      url: `/pages/onlinepayment/subMessage?prescriptionNo=OP973534310302748672`,
-    })
-    // this.getDept()
+    
+    this.getDept()
   },
 }
 </script>

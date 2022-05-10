@@ -76,7 +76,7 @@ export default {
             // 返回值非 200，强制显示提示信息
             if (res.errCode) {
               this.showToast(res, parseInt(res.errCode));
-            } else if (res.code === 500000) {
+            } else if (res.code) {
               this.showToast(res, res.code);
             } else {
               this.showToast(res);
@@ -118,44 +118,18 @@ export default {
     return this.request(options);
   },
   showToast (error, errorCode) {
-    let errorMsg = '';
     console.log(error, errorCode);
-
     if (errorCode) {
-      switch (errorCode) {
-        case 400:
-          errorMsg = '请求参数错误';
-          break;
-        case 403:
-          errorMsg = '跨域拒绝访问';
-          break;
-        case 404:
-          errorMsg = '很抱歉，资源未找到!';
-          break;
-        case 504:
-          errorMsg = '网络超时';
-          break;
-        case 502:
-          errorMsg = '服务器异常';
-          break;
-        case 500000:
-          errorMsg = '系统繁忙,请稍后再试';
-          break;
-        case 401:
-          errorMsg = '未授权，请重新登录';
-          uni.redirectTo({
-            url: '/pages/login/login',
-          });
-          return;
-          break;
-        default:
-          errorMsg = '请求失败,请稍后再试';
-          break;
+      if (errorCode == 401) {
+        uni.redirectTo({
+          url: '/pages/login/login',
+        });
+        return
       }
       if (process.env.NODE_ENV === 'development') {
         uni.showModal({
-          title: '报错信息',
-          content: JSON.stringify(error),
+          title: '错误信息',
+          content: error.msg,
           showCancel: false,
           complete: function () {
             setTimeout(function () {
@@ -165,7 +139,7 @@ export default {
         });
       } else if (process.env.NODE_ENV === 'production') {
         uni.showToast({
-          title: errorMsg,
+          title: error.msg,
           icon: 'none',
           duration: 4000,
           complete: function () {
@@ -176,7 +150,6 @@ export default {
         });
       }
     } else {
-      //todo 后期删除
       uni.showModal({
         title: '接口报错',
         content: JSON.stringify(error),
