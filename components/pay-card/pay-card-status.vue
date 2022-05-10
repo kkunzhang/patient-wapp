@@ -6,9 +6,9 @@
           <view style="display: flex">
             <view class="right-tips" v-if="item.status == 10">待支付 </view>
             <count-down
-              v-if="item.status == 1 || item.status == 10"
+              v-if="(item.status == 1 || item.status == 10) && isShowPayTime"
               :endTime="item.endTime"
-              :createTime="item.createTime"
+              :systemTime="item.systemTime"
               @isTimeOut="isTimeOut"
             ></count-down>
             <view class="right-tips" v-if="item.status == 20">已取消 </view>
@@ -55,6 +55,10 @@ export default {
     isFull: {
       type: Boolean,
       default: false,
+    },
+    isShowPayTime: {
+      type: Boolean,
+      default: true,
     },
   },
 }

@@ -64,7 +64,7 @@ export const prescriptionDetail = (data) => {
   });
 };
 /**
- *  保存处方信息
+ *  获取订单
  *  @return {Array}
  */
 export const savePrescription = (data) => {

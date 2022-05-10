@@ -5,16 +5,23 @@
       :time="expirationTime"
       format="mm:ss"
       autoStart
-      millisecond
       @change="onChange"
     >
       <view class="time">
         <view class="time__custom">
-          <text class="time__custom__item">{{ timeData.minutes }}</text>
+          <text class="time__custom__item">
+            {{
+              timeData.minutes > 9 ? timeData.minutes : '0' + timeData.minutes
+            }}</text
+          >
         </view>
         <text class="time__doc">:</text>
         <view class="time__custom">
-          <text class="time__custom__item">{{ timeData.seconds }}</text>
+          <text class="time__custom__item">
+            {{
+              timeData.seconds > 9 ? timeData.seconds : '0' + timeData.seconds
+            }}</text
+          >
         </view>
       </view>
     </u-count-down>
@@ -35,18 +42,14 @@ export default {
     },
     runBack() {
       console.log('倒计时created')
-      this.expirationTime = this.endTime - this.createTime //计算两日期之间相差的毫秒数
+      this.expirationTime = this.endTime - this.systemTime //计算两日期之间相差的毫秒数
       console.log(this.expirationTime)
-
-      // const nowDate = new Date()
-      // let now = nowDate.getTime()
-      // // this.expirationTime = endTime - now //计算两日期之间相差的毫秒数
     },
   },
   watch: {
     expirationTime: {
       handler(newVal, oldVal) {
-        if (newVal < 0) {
+        if (newVal < 0 && this.endTime) {
           this.$emit('isTimeOut', 1)
         }
       },
@@ -62,7 +65,7 @@ export default {
         return 0
       },
     },
-    createTime: {
+    systemTime: {
       type: Number,
       default() {
         return 0

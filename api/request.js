@@ -47,8 +47,6 @@ export default {
     options.data = options.data || {};
     options.method = options.method || this.config.method;
     console.log(options);
-    // todo 删除
-    // uni.setStorageSync('phone', '17610229358');
     // #ifdef MP-WEIXIN
     if (options.url.indexOf('/mem/auth/') < 0) {
       const token = uni.getStorageSync('token'); // 登录鉴权获得的 token

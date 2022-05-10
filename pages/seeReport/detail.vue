@@ -3,7 +3,11 @@
     <!---------------------公共部分 ------------------------------->
     <uni-row class="demo-uni-row">
       <uni-col>
-        <uni-title type="h1" align="center" title="庆阳市西峰区人民医院"></uni-title>
+        <uni-title
+          type="h1"
+          align="center"
+          title="庆阳市西峰区人民医院"
+        ></uni-title>
       </uni-col>
       <uni-col>
         <view class="title">{{ info.reportName }}</view>
@@ -12,7 +16,7 @@
     <uni-row class="demo-uni-row">
       <uni-col :span="14">
         <view class="demo-uni-col dark"
-          >检查时间 : <text>{{ info.writeDate }}</text></view
+          >检查时间 : <text>{{ info.examDate || info.writeDate }}</text></view
         >
       </uni-col>
       <uni-col :span="10">
@@ -162,9 +166,7 @@ export default {
         patientId: items.patientId,
         reportId: items.reportId,
         endDate: items.endDate,
-        //todo 删除假数据
-        patientId: '005155',
-        // patientId: this.patientId,
+        patientId: this.patientId,
       }
       const data = await getReportPacsDetail(params)
       _this.info = data.data
@@ -177,9 +179,7 @@ export default {
         startDate: items.startDate,
         reportId: items.reportId,
         endDate: items.endDate,
-        //todo 删除假数据
-        patientId: '005155',
-        // patientId: this.patientId,
+        patientId: this.patientId,
       }
       const data = await getReportLisDetail(params)
       _this.info = data.data

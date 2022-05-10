@@ -1,7 +1,11 @@
 <template>
   <view class="page">
     <view>
-      <pay-card :item="payStatus" :isFull="true" @isTimeOut="isTimeOut"></pay-card>
+      <pay-card
+        :item="payStatus"
+        :isFull="true"
+        @isTimeOut="isTimeOut"
+      ></pay-card>
       <!-- 挂号信息 -->
       <registration-card :info="info"></registration-card>
       <!-- 订单信息 -->
@@ -30,7 +34,7 @@ export default {
         status: '',
       },
       isShow: false,
-      registrationNo: ''
+      registrationNo: '',
     }
   },
   mixins: [toPayMpWeiXin],
@@ -42,15 +46,15 @@ export default {
     async toPay() {
       if (this.registrationNo) {
         const payResult = await this.getPayInfo(this.registrationNo)
-        console.log(payResult);
-        uni.navigateTo({
-          url: `/pages/registrationInfo/index?registrationNo=${this.registrationNo}`,
-        })
+        console.log(payResult)
+        if (payResult) {
+          this.reservationDetail(this.registrationNo)
+        }
       } else {
         uni.showToast({
           title: '支付异常,请退出页面重试',
           duration: 3000,
-        });
+        })
       }
     },
     async reservationDetail(registrationNo) {
@@ -64,6 +68,7 @@ export default {
         this.info = data.data
         this.payStatus.endTime = this.info.timeout
         this.payStatus.systemTime = this.info.systemTime
+        this.payStatus.createTime = this.info.createTime
         this.payStatus.status = this.info.registrationStatus
         this.payStatus.realFee = this.info.realFee
         if (this.info.registrationStatus == 10) {
@@ -75,14 +80,12 @@ export default {
     isTimeOut(val) {
       if (val) {
         this.reservationDetail(this.registrationNo)
-        console.log('重新刷新列表');
-
+        console.log('重新刷新列表')
       }
-
-    }
+    },
   },
   onLoad(options) {
-    console.log(options);
+    console.log(options)
     this.registrationNo = options.registrationNo
     this.reservationDetail(options.registrationNo)
   },

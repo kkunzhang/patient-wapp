@@ -3,13 +3,19 @@
     <view v-for="(item, index) in list" @click="onClick(item)" :key="index">
       <uni-card class="my-uni-card">
         <view class="card-item-add">
-          <view style="font-size: large">{{ item.registerData }}</view>
+          <view style="font-size: large">{{ item.createTime | getTime }}</view>
           <view style="display: flex">
             <view class="right-tips">{{
               item.registrationStatus | filterType
             }}</view>
             <count-down
-              v-if="isShowPayTime && item.registrationStatus == 10"
+              v-if="
+                isShowPayTime &&
+                item.registrationStatus == 10 &&
+                item.timeout > item.systemTime
+              "
+              :systemTime="item.systemTime"
+              :endTime="item.timeout"
             ></count-down>
           </view>
         </view>
@@ -43,6 +49,7 @@
 
 <script>
 import countDown from '@/components/pay-card/count-down.vue'
+import { formatDate } from '@utils/utils'
 export default {
   components: { countDown },
   data() {
@@ -64,6 +71,9 @@ export default {
         type = '已完成'
       }
       return type
+    },
+    getTime(value) {
+      return formatDate(value, '1')
     },
   },
   props: {

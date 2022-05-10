@@ -13,7 +13,7 @@
         </view>
         <view>
           <text>下单时间</text>
-          <text>{{ info.createTime }}</text>
+          <text>{{ info.createTime | getTime }}</text>
         </view>
         <view v-if="info.paidTime">
           <text>支付方式</text>
@@ -21,7 +21,7 @@
         </view>
         <view v-if="info.paidTime">
           <text>支付时间</text>
-          <text>{{ info.paidTime }}</text>
+          <text>{{ info.paidTime | getTime }}</text>
         </view>
       </view>
     </uni-card>
@@ -29,6 +29,7 @@
 </template>
 <script>
 import { formatDate } from '@utils/utils'
+
 export default {
   data() {
     return {}
@@ -54,7 +55,9 @@ export default {
       }
       return type
     },
-
+    getTime(value) {
+      return formatDate(value, '1')
+    },
   },
 }
 </script>

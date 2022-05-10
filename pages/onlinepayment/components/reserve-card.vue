@@ -8,27 +8,27 @@
       <view class="item-font-spacing">
         <view>
           <text>处方编号</text>
-          <text>{{ info.prescriptionId }}</text>
+          <text>{{ info.prescriptionId || info.prescriptionId }}</text>
         </view>
         <view>
           <text>处方类型</text>
-          <text>{{ info.type }}</text>
+          <text>{{ info.type || info.prescriptionType }}</text>
         </view>
         <view>
           <text>开单科室</text>
-          <text>{{ info.deptName }}</text>
+          <text>{{ info.deptName || info.deptName }}</text>
         </view>
         <view>
           <text>执行科室</text>
-          <text>{{ info.materialDeptName }}</text>
+          <text>{{ info.materialDeptName || info.materialDeptName }}</text>
         </view>
         <view>
           <text>科室地址</text>
-          <text>{{ info.location }}</text>
+          <text>{{ info.location || info.location }}</text>
         </view>
         <view>
           <text>开单时间</text>
-          <text>{{ info.prescriptionTime }}</text>
+          <text>{{ info.prescriptionTime || info.prescriptionTime }}</text>
         </view>
       </view>
     </uni-card>

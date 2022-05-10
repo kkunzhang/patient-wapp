@@ -11,7 +11,6 @@
         @onClick="getDetail"
         :isShowPayTime="true"
       ></pay-card>
-      <!-- <view class="isOver" v-if="flag">-----我是有底线的-----</view> -->
     </view>
   </view>
 </template>
@@ -45,23 +44,15 @@ export default {
     //获取详细信息
     async getDetail(item) {
       const params = {
-        // prescriptionId: item.prescriptionId,
-        //todo 删除
-        prescriptionId: 1234,
+        prescriptionNo: item.prescriptionNo,
       }
       const data = await prescriptionDetail(params)
-      console.log(data)
       if (data.code == 100000) {
         this.info = { ...data.data, ...params }
-        this.goToPage()
+        uni.navigateTo({
+          url: `/pages/onlinepayment/subMessage?prescriptionNo=${item.prescriptionNo}`,
+        })
       }
-    },
-    goToPage() {
-      uni.navigateTo({
-        url:
-          `/pages/onlinepayment/subMessage?data=` +
-          encodeURIComponent(JSON.stringify(this.info)),
-      })
     },
     async getList() {
       let params = {

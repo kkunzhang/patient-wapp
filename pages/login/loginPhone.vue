@@ -81,8 +81,11 @@ export default {
   },
   onLoad(options) {
     // 接收跳转的参数
-    if (options) {
-      this.pageOption = options //默认加载
+    if (options.backpage) {
+      this.pageOption.backpage = options.backpage //默认加载
+    }
+    if (options.backtype) {
+      this.pageOption.backtype = options.backtype //默认加载
     }
     console.log(options)
   },

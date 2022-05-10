@@ -26,8 +26,6 @@ import controList from './components/contro-list.vue'
 import cardItem from '@/components/card-item/card-item.vue'
 import {
   getReportResult,
-  getReportLisDetail,
-  getReportPacsDetail,
 } from '@api/modules/report'
 export default {
   data() {

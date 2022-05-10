@@ -7,7 +7,8 @@
       <u-skeleton rows="2" :loading="loading" :animate="true" :title="false">
         <add-visiter v-if="!patientId"></add-visiter>
         <!-- 已有就诊人，非第一次添加 -->
-        <card-item v-else @openPop="onOpen" :list="defaultPatientList"> </card-item>
+        <card-item v-else @openPop="onOpen" :list="defaultPatientList">
+        </card-item>
       </u-skeleton>
     </view>
     <reserve-card :info="doctorInfo"></reserve-card>
@@ -74,7 +75,7 @@ export default {
     //下单
     async order() {
       let params = {
-        doctorScheduleId: this.doctorInFFo.doctorScheduleId,
+        doctorScheduleId: this.doctorInfo.doctorScheduleId,
         patientId: this.defaultPatientList.hospitalPatientId,
         deptId: this.deptId,
         doctorId: this.doctorInfo.doctorId,
@@ -85,19 +86,19 @@ export default {
       console.log(data)
       if (data.data.length > 0) {
         this.registrationNo = data.data
-        console.log(this.registrationNo);
+        console.log(this.registrationNo)
         this.toPay()
       }
-
     },
     //支付
     async toPay() {
       const payResult = await this.getPayInfo(this.registrationNo)
-      console.log(payResult);
-      uni.navigateTo({
-        url: `/pages/registrationInfo/index?registrationNo=${this.registrationNo}`,
-      })
-
+      console.log(payResult)
+      if (payResult) {
+        uni.navigateTo({
+          url: `/pages/registrationInfo/index?registrationNo=${this.registrationNo}`,
+        })
+      }
     },
     onOpen() {
       this.show = true

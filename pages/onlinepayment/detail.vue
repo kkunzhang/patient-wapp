@@ -1,7 +1,6 @@
 <template>
   <view>
-    <!-- <pay-card :list="info" :isFull="true"></pay-card> -->
-    <card-item :list="defaultPatientList" :isShowButton="false"> </card-item>
+    <card-item :list="info.patientInfo" :isShowButton="false"> </card-item>
     <!-- 处方信息 -->
     <reserve-card :info="info"> </reserve-card>
     <!-- 处方明细 -->
@@ -21,9 +20,10 @@ import recipe from './components/recipe.vue'
 import { getPayDetail, savePrescription } from '@/api/modules/onlinePay'
 import { getTenantPatientList } from '@/utils/mixin.js'
 import { debounce } from '@utils/utils'
+import { toPayMpWeiXin } from '@/utils/pay.js'
 export default {
   components: { cardItem, priceCard, reserveCard, recipe },
-  mixins: [getTenantPatientList],
+  mixins: [getTenantPatientList, toPayMpWeiXin],
   data() {
     return {
       radio: '1',
@@ -40,10 +40,10 @@ export default {
   methods: {
     onSubmit: debounce(function () {
       console.log('跳转去支付')
-
+      //生成订单
       this.savePrescription()
     }),
-    //保存信息
+    //保存信息,获取订单
     async savePrescription() {
       const params = {
         patientId: this.hospitalPatientId,
@@ -52,19 +52,24 @@ export default {
       const data = await savePrescription(params)
       if (data.code == 100000) {
         this.orderNum = data.data
+        this.toPay()
       } else {
         uni.showToast({
           title: '生成缴费单失败',
           duration: 3000,
         })
       }
-      console.log(ret)
     },
-    toDetail() {
+    //支付
+    async toPay() {
+      const payResult = await this.getPayInfo(this.orderNum)
+      if (payResult) {
+        this.toSubMessage()
+      }
+    },
+    toSubMessage() {
       uni.navigateTo({
-        url:
-          `/pages/onlinepayment/subMessage?data=` +
-          encodeURIComponent(JSON.stringify(this.info)),
+        url: `/pages/onlinepayment/subMessage?prescriptionNo=${this.orderNum}`,
       })
     },
     //获取在线缴费列表
@@ -73,7 +78,6 @@ export default {
         prescriptionId: prescriptionId,
         patientId: patientId,
       }
-
       const data = await getPayDetail(params)
       if (data.code == 100000) {
         this.info = { ...data.data, ...params }

@@ -288,8 +288,8 @@ const timestampFormat = (t, f, format) => {
  * @returns {}格式化后的时间字符串
  */
 const formatDate = (date, fmt) => {
-  var date = new Date(parseInt(date) * 1000);
-  if (fmt == 'yyMMddhhmmss') {
+  var date = new Date(parseInt(date));
+  if (fmt == '1') {
     var nYear = date.getFullYear(),
       nMonth = date.getMonth() + 1,
       nDay = date.getDate(),
@@ -303,7 +303,7 @@ const formatDate = (date, fmt) => {
     nMinutes = (nMinutes < 10 ? '0' + nMinutes : nMinutes).toString();
 
     //return nYear + nMonth + nDay + nHours + nMinutes;
-    return nYear + nMonth + nDay + '_' + nHours + nMinutes;
+    return nYear + '-' + nMonth + '-' + nDay + ' ' + nHours + ':' + nMinutes;
   } else if (fmt == 'yyyyMMdd_hhmm') {
     var nYear = date.getFullYear(),
       nMonth = date.getMonth() + 1,

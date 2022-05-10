@@ -4,13 +4,13 @@
       <view @click="onClick()" class="center-item">
         <view>
           <view class="card-item-add">
-            <text>{{ list.name }}</text>
-            <view>{{ list.phone }}</view>
+            <text>{{ list.name || list.patientName }}</text>
+            <view>{{ list.phone || list.phone }}</view>
           </view>
           <view class="fir-card-top">
-            <text>{{ list.sex }} </text>
-            <text>{{ list.age }} 岁 </text>
-            <text>{{ list.birthday }} </text>
+            <text>{{ list.sex || list.patientGender }} </text>
+            <text>{{ list.age || list.patientAge }} 岁 </text>
+            <text>{{ list.birthday || list.birthday }} </text>
           </view>
         </view>
         <slot><view v-if="isShowButton" class="gl"></view></slot>

@@ -32,6 +32,7 @@
               clearable
               v-model="valiFormData.cardNumber"
               type="number"
+              @blur="listeningFocus('')"
             />
           </uni-forms-item>
           <uni-forms-item label="手机号" type="number" required name="phone">
@@ -41,6 +42,7 @@
               clearable
               v-model="valiFormData.phone"
               type="number"
+              @blur="listeningFocus(1)"
             />
           </uni-forms-item>
           <uni-forms-item label="验证码" type="number" required name="code">
@@ -98,6 +100,10 @@ export default {
           choiceItemId: '0',
           choiceItemContent: '大陆身份证',
         },
+        // {
+        //   choiceItemId: '1',
+        //   choiceItemContent: '苹果',
+        // },
       ],
       choiceContent: '大陆身份证', //选择的内容
       choiceIndex: 0, //选择位置
@@ -144,12 +150,11 @@ export default {
             },
             {
               validateFunction: function (rule, value, data, callback) {
-                // const reg =
-                //   /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
-                // if (reg.test(value) === false && value) {
-                //   callback('请输入正确格式的身份证号码')
-                // }
-                callback('请输入正确格式的身份证号码')
+                const reg =
+                  /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+                if (reg.test(value) === false && value) {
+                  callback('请输入正确格式的身份证号码')
+                }
                 return true
               },
             },
@@ -190,6 +195,48 @@ export default {
       _this.choiceIndex = position
       _this.choiceContent = _this.choiceList[position].choiceItemContent
     },
+    // 1、监听身份证输入
+    listeningFocus(isPhone = '') {
+      if (isPhone) {
+        this.getCardTypeNumber(this.valiFormData.phone, isPhone)
+      } else {
+        this.getCardTypeNumber(this.valiFormData.cardNumber, '')
+      }
+    },
+    // 2、检验身份证是否正确
+    getCardTypeNumber(value, isPhone) {
+      if (isPhone) {
+        const rex =
+          /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/
+        if (rex.test(value) === false && value) {
+          let msg = '请输入正确格式的手机号码'
+          this.isCanClick = false
+          uni.showToast({
+            icon: 'none',
+            title: msg,
+            duration: 2000,
+            position: 'top',
+          })
+        } else {
+          if (value) {
+            this.isCanClick = true
+          }
+        }
+      } else {
+        const reg =
+          /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+
+        if (reg.test(value) === false && value) {
+          let msg = '请输入正确格式的身份证号码'
+          uni.showToast({
+            icon: 'none',
+            title: msg,
+            duration: 2000,
+            position: 'top',
+          })
+        }
+      }
+    },
     onSwitchChange(e) {
       console.log('change', e)
       this.valiFormData.isDefault = e
@@ -197,6 +244,7 @@ export default {
     //获取验证码
     getSmsCode() {
       //先验证电话号
+      this.listeningFocus(1)
       if (this.isCanClick) {
         if (this.disabled) {
           return

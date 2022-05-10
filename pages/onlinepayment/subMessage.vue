@@ -1,49 +1,67 @@
 <template>
   <view>
     <!-- 操作信息 -->
-    <pay-card :list="payInfo" :isFull="true"></pay-card>
+    <pay-card-prescription
+      :item="payStatus"
+      :isFull="true"
+    ></pay-card-prescription>
     <!-- 个人信息 -->
-    <card-item :isShowButton="false"> </card-item>
+    <card-item :isShowButton="false" :list="infoUser"> </card-item>
     <!-- 处方信息 -->
-    <reserve-card :info="reserveInfo"> </reserve-card>
+    <reserve-card :info="info"> </reserve-card>
     <!-- 处方明细 -->
-    <recipe :info="drugDetailDto"> </recipe>
+    <recipe :info="drugDetailDto" :totalFee="info.totalFee"> </recipe>
     <!-- 支付信息 -->
-    <price-card :info="doctorInfo"></price-card>
+    <price-card :info="info"></price-card>
     <!-- 支付方式 -->
     <cp-pay-type></cp-pay-type>
-    <!-- <cp-button @onSubmit="onSubmit">确认缴费</cp-button> -->
   </view>
 </template>
 <script>
-import payCard from '@/components/pay-card/pay-card-status.vue'
+import payCardPrescription from '@/components/pay-card/pay-card-prescription.vue'
 import cardItem from '@/components/card-item/card-item.vue'
 import priceCard from '@/components/pay-card/price-card.vue'
 import reserveCard from './components/reserve-card.vue'
 import recipe from './components/recipe.vue'
+import { prescriptionDetail } from '@/api/modules/onlinePay'
 export default {
-  components: { payCard, cardItem, priceCard, reserveCard, recipe },
+  components: { payCardPrescription, cardItem, priceCard, reserveCard, recipe },
   data() {
     return {
       radio: '1',
       show: false,
       lever: true,
-      payInfo: { status: 3 },
+      payInfo: { status: '' },
       doctorInfo: {},
       reserveInfo: {},
       drugDetailDto: {},
+      payStatus: {
+        endTime: '',
+        status: '',
+      },
+      prescriptionNo: '',
+      infoUser: '',
+      info: '',
     }
   },
   methods: {
-    onSubmit() {
-      console.log('跳转去支付')
+    //获取详细信息
+    async prescriptionDetail() {
+      const params = {
+        prescriptionNo: this.prescriptionNo,
+      }
+      const data = await prescriptionDetail(params)
+      if (data.code == 100000) {
+        this.info = { ...data.data, ...params }
+        this.payStatus.status = this.info.prescriptionStatus
+        this.drugDetailDto = this.info.drugDetailDto
+        this.infoUser = this.info.patientInfo
+      }
     },
   },
   onLoad(options) {
-    this.reserveInfo = JSON.parse(decodeURIComponent(options.data))
-    console.log(this.reserveInfo)
-    this.drugDetailDto = this.reserveInfo.drugDetailDto
-    console.log(this.drugDetailDto)
+    this.prescriptionNo = options.prescriptionNo
+    this.prescriptionDetail()
   },
 }
 </script>
