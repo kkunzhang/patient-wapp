@@ -14,7 +14,13 @@
       <view v-for="item in secondData" :key="item.id">
         <text @click="onClick(item)">{{ item.title }}</text>
       </view>
-      <text v-if="secondData.length === 0">暂无数据</text>
+      <u-empty
+        v-if="secondData.length === 0"
+        mode="data"
+        icon="/static/images/none.png"
+      >
+        暂无数据
+      </u-empty>
     </scroll-view>
   </view>
 </template>

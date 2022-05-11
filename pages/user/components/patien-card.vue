@@ -7,7 +7,7 @@
         </view>
         <view class="fir-card-top-item">
           <uni-tag
-            text="已经绑定医保卡"
+            text="未绑定医保卡"
             type="success"
             :circle="true"
             inverted

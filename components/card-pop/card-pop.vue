@@ -10,13 +10,17 @@
     >
       <view class="center" :style="{ height: height + 65 + 'px' }">
         <!-- 循环 -->
-        <view v-for="(item, index) in items" :key="item.index">
+        <view v-for="(item, index) in items" :key="index">
           <view
             class="card-user-info"
-            :style="{ backgroundColor: index === current ? color : colorOther }"
+            :style="{
+              backgroundColor: item.patientId == patientId ? color : colorOther,
+            }"
           >
+            <!-- :style="{ backgroundColor: index === current ? color : colorOther }" -->
             <view class="center-item">
               <!-- 卡片文字 -->
+
               <view>
                 <view class="card-item-add">
                   <text>{{ item.name }}</text>
@@ -35,8 +39,9 @@
                   <view class="radio-right">
                     <radio
                       :value="item.patientId.toString()"
-                      :checked="index === current"
+                      :checked="item.patientId == patientId"
                     />
+                    <!-- :checked="index === current" -->
                   </view>
                 </label>
               </radio-group>
@@ -60,7 +65,7 @@ export default {
       color: 'skyblue',
       colorOther: '#f2f2f2',
       value: 0,
-      current: 0,
+      current: 1,
       show: false,
       defaultPatientList: [],
     }
@@ -80,6 +85,12 @@ export default {
         return []
       },
     },
+    patientId: {
+      type: Number,
+      default() {
+        return 0
+      },
+    },
   },
   watch: {
     isShow: {
@@ -94,6 +105,7 @@ export default {
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i].patientId == evt.detail.value) {
           this.current = i
+          this.patientId = evt.detail.value
           this.defaultPatientList = this.items[i]
           console.log(evt.detail)
 
@@ -108,7 +120,7 @@ export default {
       if (this.defaultPatientList.length == 0) {
         this.defaultPatientList = this.items[0]
       }
-      
+
       this.$emit('submitPatientId', this.defaultPatientList)
     },
   },

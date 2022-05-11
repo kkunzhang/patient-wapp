@@ -32,6 +32,7 @@
       @closePop="closePop"
       @submitPatientId="submitPatientId"
       :items="patientList"
+      :patientId="defaultPatientList.patientId"
     ></card-pop>
   </view>
 </template>

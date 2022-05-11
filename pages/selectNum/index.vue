@@ -14,7 +14,13 @@
     <view v-for="(item, index) in reservationList" :key="index">
       <card :info="item" @onClick="order"></card>
     </view>
-    <text v-if="reservationList.length === 0">暂无号源 </text>
+    <u-empty
+      v-if="reservationList.length === 0"
+      mode="data"
+      icon="/static/images/none.png"
+    >
+      暂无医生出诊
+    </u-empty>
   </view>
 </template>
 <script>
@@ -32,6 +38,7 @@ export default {
       dataInfo: [],
       deptId: '',
       reservationList: [], //号源列表
+      icon: '/static/images/none.png',
     }
   },
   onLoad(options) {

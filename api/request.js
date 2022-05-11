@@ -141,11 +141,11 @@ export default {
         uni.showToast({
           title: error.msg,
           icon: 'none',
-          duration: 4000,
+          duration: 2800,
           complete: function () {
             setTimeout(function () {
               uni.hideToast();
-            }, 1000);
+            }, 2800);
           },
         });
       }

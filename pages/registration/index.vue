@@ -10,10 +10,8 @@
         {{ item.deptName }}
       </view>
     </scroll-view>
-    <scroll-view class="right" scroll-y>
-      <text class="item" @click="onClick(infoData)">{{
-        infoData.deptName
-      }}</text>
+    <scroll-view class="right" @click="onClick(infoData)" scroll-y>
+      <text class="item">{{ infoData.deptName }}</text>
     </scroll-view>
   </view>
 </template>
@@ -47,13 +45,14 @@ export default {
       this.infoData = this.list[index]
     },
     onClick(item) {
-      uni.navigateTo({
-        url: '/pages/selectNum/index?id=' + item.deptId,
-      })
+      if (item) {
+        uni.navigateTo({
+          url: '/pages/selectNum/index?id=' + item.deptId,
+        })
+      }
     },
   },
   onLoad() {
-    
     this.getDept()
   },
 }

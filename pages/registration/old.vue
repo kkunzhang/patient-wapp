@@ -16,6 +16,7 @@
         <text @click="onClick(item)">{{ item.title }}</text>
       </view>
       <text v-if="secondData.length === 0">暂无数据</text>
+      
     </scroll-view>
   </view>
 </template>

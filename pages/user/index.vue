@@ -236,6 +236,9 @@ export default {
       // #endif
     },
   },
+  /** // todo暂时先刷新
+   * 这里为了解决小程序无法监听返回键bug.首次添加完就诊人在这里刷新出就诊人信息.
+   */
   onShow() {
     if (uni.getStorageSync('phone')) {
       this.getTenantPatientList()
