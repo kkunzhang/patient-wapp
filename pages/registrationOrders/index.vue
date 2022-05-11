@@ -17,11 +17,13 @@
       @click="onClick"
     >
     </u-tabs>
-    <view v-if="info.length === 0">
-      <view class="holder">
-        <p class="tips">暂无挂号信息</p>
-      </view>
-    </view>
+    <u-empty
+      v-if="info.length === 0"
+      mode="data"
+      icon="/static/images/none.png"
+    >
+      暂无挂号信息
+    </u-empty>
     <view v-else>
       <pay-card
         :list="info"
@@ -34,7 +36,7 @@
 </template>
 <script>
 import payCard from './components/pay-card.vue'
-import { reservationList, reservationDetail } from '@/api/modules/registration'
+import { reservationList } from '@/api/modules/registration'
 export default {
   components: { payCard },
   data() {

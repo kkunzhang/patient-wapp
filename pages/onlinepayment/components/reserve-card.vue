@@ -28,13 +28,14 @@
         </view>
         <view>
           <text>开单时间</text>
-          <text>{{ info.prescriptionTime || info.prescriptionTime }}</text>
+          <text>{{ info.prescriptionTime | getTime }}</text>
         </view>
       </view>
     </uni-card>
   </view>
 </template>
 <script>
+import { formatDate } from '@utils/utils'
 export default {
   data() {
     return {}
@@ -46,6 +47,11 @@ export default {
       default() {
         return {}
       },
+    },
+  },
+  filters: {
+    getTime(value) {
+      return formatDate(value, '1')
     },
   },
 }

@@ -1,10 +1,17 @@
 <template>
   <view>
-    <view v-if="info.length === 0">
+    <!-- <view v-if="info.length === 0">
       <view class="holder">
         <p class="tips">暂无信息</p>
       </view>
-    </view>
+    </view> -->
+    <u-empty
+      v-if="info.length === 0"
+      mode="data"
+      icon="/static/images/none.png"
+    >
+      暂无数据
+    </u-empty>
     <view v-else>
       <pay-card
         :list="info"
@@ -25,7 +32,6 @@ export default {
       page: '1',
       pageSize: '10',
       flag: false,
-      prescriptionId: '1234',
     }
   },
   methods: {

@@ -69,6 +69,7 @@ export default {
         header: this.config.header,
         method: options.method,
         success: (response) => {
+          if (!hideLoading) uni.hideLoading();
           let res = response.data;
           if (res.code === 100000 || res.code === 10000) {
             resolve(res);
@@ -81,10 +82,10 @@ export default {
             } else {
               this.showToast(res);
             }
-            reject('[' + res + '] 系统处理失败');
           }
         },
         fail: (error) => {
+          if (!hideLoading) uni.hideLoading();
           console.log(error);
           if (error && error.response) {
             reject(error.response);
@@ -92,7 +93,6 @@ export default {
           }
         },
         complete: () => {
-          if (!hideLoading) uni.hideLoading();
         },
       });
     });
@@ -141,11 +141,11 @@ export default {
         uni.showToast({
           title: error.msg,
           icon: 'none',
-          duration: 2800,
+          duration: 2000,
           complete: function () {
             setTimeout(function () {
               uni.hideToast();
-            }, 2800);
+            }, 2000);
           },
         });
       }

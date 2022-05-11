@@ -27,7 +27,9 @@
         <text class="sec-card-top-item">{{ list.sex }}</text>
         <text class="sec-card-top-item">{{ list.age }} 岁 </text>
         <text class="sec-card-top-item">{{ list.phone }} </text>
-        <text class="sec-card-top-item">就诊卡号:176102 </text>
+        <text class="sec-card-top-item"
+          >就诊卡号:{{ list.hospitalPatientId }}}
+        </text>
       </view>
     </view>
   </view>

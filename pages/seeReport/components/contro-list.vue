@@ -9,7 +9,7 @@
       <view class="box-content-item">
         <view>
           <button class="mini-btn" type="primary" size="mini">
-            {{ item.reportStatus }}
+            {{ item.reportStatus | filterType }}
           </button>
         </view>
         <view class="box-content-title">
@@ -32,6 +32,19 @@ export default {
   methods: {
     onClick(val) {
       this.$emit('onClick', val)
+    },
+  },
+  filters: {
+    filterType(value) {
+      let type
+      if (value == 10) {
+        type = '待付款'
+      } else if (value == 20) {
+        type = '已取消'
+      } else if (value == 50) {
+        type = '已完成'
+      }
+      return type
     },
   },
 

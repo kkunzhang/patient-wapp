@@ -5,6 +5,9 @@
       @onClick="toDetail"
       :isShowPayTime="false"
     ></pay-card>
+    <u-empty v-if="showEmptyFlag" mode="data" icon="/static/images/none.png">
+      暂无数据
+    </u-empty>
   </view>
 </template>
 
@@ -20,6 +23,7 @@ export default {
         hospitalPatientId: '',
       },
       info: [],
+      showEmptyFlag: false,
     }
   },
   methods: {
@@ -39,10 +43,10 @@ export default {
         patientId: this.data.hospitalPatientId,
       }
       const data = await getPayList(params)
-      console.log(data)
-
       if (data.data.length > 0) {
         this.info = data.data
+      } else {
+        this.showEmptyFlag = true
       }
     },
   },

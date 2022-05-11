@@ -45,19 +45,17 @@
     </uni-row>
     <uni-row class="demo-uni-row">
       <uni-col :span="14" :pull="0">
-        <view class="demo-uni-col dark" v-if="type == 1"
-          >申请科室 :<text>{{ info.writeDeptName }}</text></view
-        >
-        <view class="demo-uni-col dark" v-else
-          >申请科室 :<text>{{ info.deptName }}</text></view
+        <view class="demo-uni-col dark"
+          >申请科室 :<text>{{
+            info.writeDeptName || info.deptName
+          }}</text></view
         >
       </uni-col>
       <uni-col :span="10">
-        <view class="demo-uni-col dark" v-if="type == 1"
-          >申请医生 :<text>{{ info.writeDoctorName }}</text></view
-        >
-        <view class="demo-uni-col dark" v-else
-          >申请医生 :<text>{{ info.doctorName }}</text></view
+        <view class="demo-uni-col dark"
+          >申请医生 :<text>{{
+            info.writeDoctorName || info.doctorName
+          }}</text></view
         >
       </uni-col>
     </uni-row>
@@ -128,7 +126,9 @@
     <uni-row class="demo-uni-row">
       <uni-col :span="14">
         <view class="demo-uni-col dark"
-          >检查时间 :<text>{{ info.writeDate }}</text></view
+          >报告时间 :<text>{{
+            info.executeDate || info.reportDate
+          }}</text></view
         >
       </uni-col>
       <uni-col :span="10" :push="0">
