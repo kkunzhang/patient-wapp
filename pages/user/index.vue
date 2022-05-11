@@ -237,7 +237,9 @@ export default {
     },
   },
   onShow() {
-    this.getTenantPatientList()
+    if (uni.getStorageSync('phone')) {
+      this.getTenantPatientList()
+    }
   },
 }
 </script>
