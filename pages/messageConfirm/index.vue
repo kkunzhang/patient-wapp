@@ -57,10 +57,29 @@ export default {
       registrationNo: '',
       //科室编码
       deptId: '',
+      addFlag: false,
     }
   },
   onLoad(options) {
     this.getDoctorInfo(options)
+  },
+  onShow() {
+    if (uni.getStorageSync('isAdd')) {
+      this.addFlag = uni.getStorageSync('isAdd')
+      console.log('已经添加')
+      uni.removeStorageSync('isAdd')
+    }
+  },
+  watch: {
+    addFlag: {
+      handler(newVal, oldVal) {
+        if (newVal) {
+          console.log('过来了')
+          this.getTenantPatientList()
+        }
+      },
+      // immediate: true,
+    },
   },
   methods: {
     //获取医生预约等详细信息

@@ -87,20 +87,30 @@ export default {
       this.show = false
       this.$tools.toast('操作成功', 'suc')
     },
-  },
-  onShow() {
-    console.log('2222')
-  },
-  onLoad() {
-    console.log('3333')
-  },
-  created() {
-    console.log('4444')
+    //刷新页面
+    getPatientListTofresh() {
+      this.getTenantPatientList()
+    },
   },
   props: {
     href: {
       type: String,
       default: '/pages/onlinepayment/list',
+    },
+    addFlag: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  watch: {
+    addFlag: {
+      handler(newVal, oldVal) {
+        if (newVal) {
+          console.log('过来了')
+          this.getPatientListTofresh()
+        }
+      },
+      // immediate: true,
     },
   },
 }

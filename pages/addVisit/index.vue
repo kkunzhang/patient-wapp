@@ -258,6 +258,7 @@ export default {
           title: '添加成功',
           showCancel: false,
           success: function () {
+            uni.setStorageSync('isAdd', true)
             uni.navigateBack({
               delta: 1,
             })
@@ -286,7 +287,7 @@ export default {
     },
   },
   onUnload() {
-    console.log('添加就诊人页面关闭')
+    console.log('就诊人页面关闭')
   },
 }
 </script>

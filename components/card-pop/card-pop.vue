@@ -123,15 +123,7 @@ export default {
       this.$emit('submitPatientId', this.defaultPatientList)
     },
   },
-  onShow() {
-    console.log('2222')
-  },
-  onLoad() {
-    console.log('3333')
-  },
-  created(){
-    console.log('4444')
-  }
+
 }
 </script>
 <style lang="scss">

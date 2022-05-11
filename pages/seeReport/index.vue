@@ -1,6 +1,8 @@
 <template>
   <view>
-    <cp-get-patient-list :href="href">报告查询</cp-get-patient-list>
+    <cp-get-patient-list :href="href" :addFlag="addFlag"
+      >报告查询</cp-get-patient-list
+    >
   </view>
 </template>  
 
@@ -12,6 +14,13 @@ export default {
     }
   },
   onLoad() {},
+  onShow() {
+    if (uni.getStorageSync('isAdd')) {
+      this.addFlag = uni.getStorageSync('isAdd')
+      console.log('已经添加')
+      uni.removeStorageSync('isAdd')
+    }
+  },
 }
 </script>
 

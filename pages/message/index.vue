@@ -1,20 +1,51 @@
 <template>
-  <view>
+  <view class="page">
     <view>
-      <view class="holder">
-        <image mode="aspectFit" src="/static/images/empty.png"></image>
-        <p class="tips">敬请期待</p>
-      </view>
+      <uni-card
+        v-for="(item, index) in info"
+        :key="index"
+        :title="item.title"
+        :sub-title="item.subTitle"
+        :extra="item.extra"
+        :thumbnail="item.url"
+      >
+        <text>擅长:{{ item.patient }}</text>
+      </uni-card>
     </view>
   </view>
 </template>
 
 <script>
+// pages/message/index.js
 export default {
-  components: {},
   data() {
-    return {}
+    return {
+      info: [
+        {
+          url: '/static/images/service-notification.png',
+          title: '周大生',
+          subTitle: '北京人民医院',
+          extra: '口腔科',
+          patient: '针灸',
+        },
+        {
+          url: '/static/images/service-notification.png',
+          title: '周大生  专家',
+          subTitle: '北京人民医院',
+          extra: '口腔科',
+          patient: '针灸',
+        },
+        {
+          url: '/static/images/service-notification.png',
+          title: '周大生',
+          subTitle: '北京人民医院',
+          extra: '口腔科',
+          patient: '针灸',
+        },
+      ],
+    }
   },
+  components: {},
   /**
    * 生命周期函数--监听页面加载
    */
@@ -47,18 +78,18 @@ export default {
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {},
-  methods: {},
+  methods: {
+    /**
+     * 页面的初始数据
+     */
+    onlineinfo() {
+      // wx.navigateTo({
+      //   url: '/pages/onlinepayment/index',
+      //   })
+      console.log('跳转消息详情')
+    },
+  },
 }
 </script>
-<style lang="scss" scoped>
-.holder {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  .tips {
-    color: #ccc;
-    font-size: 22px;
-    padding-top: 30px;
-  }
-}
+<style>
 </style>

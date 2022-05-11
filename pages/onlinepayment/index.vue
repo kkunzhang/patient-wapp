@@ -1,6 +1,8 @@
 <template>
   <view>
-    <cp-get-patient-list :href="href">待缴项目查询</cp-get-patient-list>
+    <cp-get-patient-list :href="href" :addFlag="addFlag"
+      >待缴项目查询</cp-get-patient-list
+    >
   </view>
 </template>  
 
@@ -9,11 +11,15 @@ export default {
   data() {
     return {
       href: '/pages/onlinepayment/list',
+      addFlag: false,
     }
   },
-  // todo 这里查询传进去
   onShow() {
-    console.log('12222')
+    if (uni.getStorageSync('isAdd')) {
+      this.addFlag = uni.getStorageSync('isAdd')
+      console.log('已经添加')
+      uni.removeStorageSync('isAdd')
+    }
   },
 }
 </script>
