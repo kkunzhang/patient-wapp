@@ -53,7 +53,7 @@ export const getTenantPatientList = {
   mounted () { },
   created () {
     if (uni.getStorageSync('phone')) {
-      console.log('获取就怎人');
+      console.log('获取就诊人');
       this.getTenantPatientList();
     }
   },

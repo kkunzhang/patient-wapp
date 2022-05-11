@@ -1,7 +1,10 @@
 import tools from '@/utils/tools';
+import validate from '@/utils/ys-validate.js'
+
 export default {
-  install(Vue) {
+  install (Vue) {
     Vue.prototype.$tools = tools;
+    Vue.prototype.$validate = validate
     /**
      *  封装全局登录函数,目前后端的接口格式限制
      * @param {跳转路径} backpage

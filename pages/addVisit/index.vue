@@ -120,59 +120,6 @@ export default {
       // 校验规则
       rules: {
         validateTrigger: 'bind',
-        name: {
-          rules: [
-            {
-              required: true,
-              errorMessage: '姓名不能为空',
-            },
-            {
-              validateFunction: function (rule, value, data, callback) {
-                const reg = /^(?:[\u4e00-\u9fa5·]{2,16})$/
-                if (reg.test(value) === false && value) {
-                  callback('请输入正确的姓名信息')
-                }
-                return true
-              },
-            },
-          ],
-        },
-        cardNumber: {
-          rules: [
-            {
-              required: true,
-              errorMessage: '身份证号不能为空',
-            },
-            {
-              validateFunction: function (rule, value, data, callback) {
-                // const reg =
-                //   /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
-                // if (reg.test(value) === false && value) {
-                //   callback('请输入正确格式的身份证号码')
-                // }
-                callback('请输入正确格式的身份证号码')
-                return true
-              },
-            },
-          ],
-        },
-        phone: {
-          rules: [
-            {
-              required: true,
-              errorMessage: '手机号不能为空',
-            },
-            {
-              validateFunction: function (rule, value, data, callback) {
-                let iphoneReg = /^1[0-9]{10}$/
-                if (!iphoneReg.test(value)) {
-                  callback('手机号码格式不正确，请重新填写')
-                }
-                return true
-              },
-            },
-          ],
-        },
         code: {
           rules: [
             {
@@ -198,20 +145,15 @@ export default {
     //获取验证码
     getSmsCode() {
       //先验证电话号
-      if (this.isCanClick) {
-        if (this.disabled) {
-          return
-        }
+      if (!this.$validate.isPhone(this.valiFormData.phone)) {
+        uni.showToast({
+          icon: 'none',
+          title: '请输入正确的手机号',
+        })
+      } else {
         this.disabled = true
         this.sendSmsCode()
         this.setInterValFunc()
-      } else {
-        uni.showToast({
-          icon: 'none',
-          title: '请输入正确格式的手机号码',
-          duration: 2000,
-          position: 'top',
-        })
       }
     },
     //发送验证码
@@ -248,19 +190,54 @@ export default {
         this.valiFormData.code = e
       })
     },
+    checkAdd() {
+      let loginRules = [
+        {
+          name: 'name',
+          required: true,
+          type: 'regex',
+          errmsg: '请输入正确的名字',
+          regex: /^(?:[\u4e00-\u9fa5·]{2,16})$/,
+        },
+        {
+          name: 'cardNumber',
+          required: true,
+          type: 'regex',
+          errmsg: '请输入正确的身份证号码',
+          regex:
+            /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+        },
+        {
+          name: 'phone',
+          required: true,
+          type: 'phone',
+          errmsg: '请输入正确的手机号!!',
+        },
+        { name: 'code', type: 'required', errmsg: '请输入验证码' },
+        {
+          name: 'code',
+          type: 'lengthRange',
+          min: 6,
+          max: 6,
+          errmsg: '请正确输入验证码',
+        },
+      ]
+      let valLoginRes = this.$validate.validate(this.valiFormData, loginRules)
+      if (!valLoginRes.isOk) {
+        uni.showToast({
+          icon: 'none',
+          title: valLoginRes.errmsg,
+        })
+        return false
+      } else {
+        return true
+      }
+    },
     onSubmit() {
-      this.$refs.valiForm
-        .validate()
-        .then((res) => {
-          console.log(res)
-          uni.showToast({
-            title: `校验通过`,
-          })
-          this.addPatient(res.cardNumber)
-        })
-        .catch((err) => {
-          console.log('err', err)
-        })
+      let isSubmit = this.checkAdd()
+      if (isSubmit) {
+        this.addPatient(this.valiFormData.cardNumber)
+      }
     },
     //添加就诊人
     async addPatient(card) {
@@ -275,12 +252,19 @@ export default {
         birthday: _this.valiFormData.birthday,
         isDefault: _this.valiFormData.isDefault,
       }
-      console.log(params)
-
       const data = await addPatient(params)
       if (data.code == 100000) {
-        this.$tools.message('添加成功', 'suc')
+        uni.showModal({
+          title: '添加成功',
+          showCancel: false,
+          success: function () {
+            uni.navigateBack({
+              delta: 1,
+            })
+          },
+        })
       }
+
       console.log(data)
     },
     //获取身份证信息
@@ -294,9 +278,6 @@ export default {
         this.valiFormData.sex = ret.sex
       }
     },
-  },
-  onReady() {
-    this.$refs.valiForm.setRules(this.rules)
   },
   props: {
     tabCur: {

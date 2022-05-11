@@ -67,6 +67,7 @@ export default {
           path: '/static/images/remote-consultation.png',
         },
       ],
+      isAddFlag: false,
     }
   },
   methods: {

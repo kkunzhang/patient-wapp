@@ -236,6 +236,9 @@ export default {
       // #endif
     },
   },
+  onShow() {
+    this.getTenantPatientList()
+  },
 }
 </script>
 <style lang="scss">
