@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "缴费列表",
   "usingComponents": {
-    "pay-card": "/components/pay-card/pay-card"
+    "pay-card": "/components/pay-card/pay-card",
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty"
   }
 }

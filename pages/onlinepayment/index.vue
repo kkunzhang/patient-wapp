@@ -11,7 +11,10 @@ export default {
       href: '/pages/onlinepayment/list',
     }
   },
-  onLoad() {},
+  // todo 这里查询传进去
+  onShow() {
+    console.log('12222')
+  },
 }
 </script>
 

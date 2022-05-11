@@ -1,1 +1,1 @@
-<view><pay-card vue-id="b8def95a-1" list="{{info}}" isShowPayTime="{{false}}" data-event-opts="{{[['^onClick',[['toDetail']]]]}}" bind:onClick="__e" bind:__l="__l"></pay-card></view>
+<view><pay-card vue-id="b8def95a-1" list="{{info}}" isShowPayTime="{{false}}" data-event-opts="{{[['^onClick',[['toDetail']]]]}}" bind:onClick="__e" bind:__l="__l"></pay-card><block wx:if="{{showEmptyFlag}}"><u-empty vue-id="b8def95a-2" mode="data" icon="/static/images/none.png" bind:__l="__l" vue-slots="{{['default']}}">暂无数据</u-empty></block></view>

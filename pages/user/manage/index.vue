@@ -118,6 +118,11 @@ export default {
       }
     },
   },
+  onShow() {
+    if (uni.getStorageSync('phone')) {
+      this.getTenantPatientList()
+    }
+  },
 }
 </script>
 <style lang="scss">

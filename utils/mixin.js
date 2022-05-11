@@ -28,6 +28,8 @@ export const getTenantPatientList = {
       if (data.data.records) {
         this.patientList = data.data.records;
         this.checkDefaultPatient(data.data.records);
+      } else {
+        this.loading = false;
       }
       console.log(data);
     },

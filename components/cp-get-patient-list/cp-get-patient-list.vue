@@ -88,7 +88,15 @@ export default {
       this.$tools.toast('操作成功', 'suc')
     },
   },
-
+  onShow() {
+    console.log('2222')
+  },
+  onLoad() {
+    console.log('3333')
+  },
+  created() {
+    console.log('4444')
+  },
   props: {
     href: {
       type: String,

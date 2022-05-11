@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "处方订单",
   "usingComponents": {
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty",
     "pay-card": "/pages/prescriptionOrders/components/pay-card"
   }
 }

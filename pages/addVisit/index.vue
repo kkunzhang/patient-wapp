@@ -285,6 +285,9 @@ export default {
       default: 0,
     },
   },
+  onUnload() {
+    console.log('添加就诊人页面关闭')
+  },
 }
 </script>
 
