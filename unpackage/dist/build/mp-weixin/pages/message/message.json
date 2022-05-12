@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "全国医生",
   "usingComponents": {
-    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card"
+    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
+    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar"
   }
 }

@@ -89,7 +89,7 @@ export default {
       this.doctorInfo = data
     },
     onSubmit: debounce(function () {
-      if (!patientId) {
+      if (!this.patientId) {
         uni.showToast({
           title: '请先添加就诊人',
           duration: 3000,

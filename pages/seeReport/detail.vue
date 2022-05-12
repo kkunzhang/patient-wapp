@@ -53,9 +53,7 @@
       </uni-col>
       <uni-col :span="10">
         <view class="demo-uni-col dark"
-          >申请医生 :<text>{{
-            info.writeDoctorName || info.doctorName
-          }}</text></view
+          >申请医生 :<text>{{ info.writeDoctorName }}</text></view
         >
       </uni-col>
     </uni-row>
@@ -114,7 +112,9 @@
     <uni-row class="demo-uni-row">
       <uni-col :span="14" :pull="0">
         <view class="demo-uni-col dark"
-          >报告医师 :<text>{{ info.executeDoctorName }}</text></view
+          >报告医师 :<text>{{
+            info.executeDoctorName || info.doctorName
+          }}</text></view
         >
       </uni-col>
       <uni-col :span="10">
