@@ -48,17 +48,17 @@ export default {
         method: 'POST',
         success: (response) => {
           console.log(response.data.data)
-          this.info = response.data.data
-          this.changeData()
+          this.changeData(response.data.data)
         },
         fail: (error) => {},
         complete: () => {},
       })
     },
-    changeData() {
-      this.info.forEach((element) => {
+    changeData(data) {
+      data.forEach((element) => {
         element.name = element.name + '  ' + element.title
       })
+      this.info = data
     },
   },
   onLoad() {

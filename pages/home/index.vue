@@ -203,7 +203,9 @@ export default {
           break
         case '全国医生':
           // this.onNavigateTo('/pages/doctorList/index')
-          this.onNavigateTo('/pages/message/message')
+          uni.navigateTo({
+            url: '/pages/message/message',
+          })
           break
         case '远程会诊':
           this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')

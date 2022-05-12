@@ -15,11 +15,10 @@ export default {
     }
   },
   onShow() {
-    if (uni.getStorageSync('isAdd')) {
-      this.addFlag = uni.getStorageSync('isAdd')
-      console.log('已经添加')
-      uni.removeStorageSync('isAdd')
-    }
+    this.addFlag = true
+  },
+  onHide() {
+    this.addFlag = false
   },
 }
 </script>

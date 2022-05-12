@@ -6,6 +6,7 @@
         <uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
           <uni-forms-item label="姓名" required name="name">
             <uni-easyinput
+              trim="all"
               placeholder="请输入姓名"
               class="input-bg"
               placeholder-style="color: rgb(192, 196, 204);font-size: 30rpx;font-weight: 400;"
@@ -27,15 +28,16 @@
             name="cardNumber"
           >
             <uni-easyinput
+              trim="all"
               placeholder="请输入身份证号"
               border="surround"
               clearable
               v-model="valiFormData.cardNumber"
-              type="number"
             />
           </uni-forms-item>
           <uni-forms-item label="手机号" type="number" required name="phone">
             <uni-easyinput
+              trim="all"
               placeholder="请输入手机号"
               border="surround"
               clearable
@@ -47,6 +49,7 @@
             <view class="code-box">
               <view class="code-input">
                 <uni-easyinput
+                  trim="all"
                   @input="smsCode"
                   v-model="valiFormData.code"
                   type="number"
@@ -268,7 +271,6 @@ export default {
           title: '添加成功',
           showCancel: false,
           success: function () {
-            uni.setStorageSync('isAdd', true)
             uni.navigateBack({
               delta: 1,
             })

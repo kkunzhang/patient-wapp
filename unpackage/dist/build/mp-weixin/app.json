@@ -20,6 +20,7 @@
     "pages/seeReport/index",
     "pages/seeReport/detail",
     "pages/doctorList/index",
+    "pages/message/message",
     "pages/doctorList/detail",
     "pages/registrationOrders/index",
     "pages/prescriptionOrders/index",

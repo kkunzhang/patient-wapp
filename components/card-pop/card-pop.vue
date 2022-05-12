@@ -14,13 +14,11 @@
           <view
             class="card-user-info"
             :style="{
-              backgroundColor: item.patientId == patientId ? color : colorOther,
+              backgroundColor: item.patientId == popId ? color : colorOther,
             }"
           >
             <!-- :style="{ backgroundColor: index === current ? color : colorOther }" -->
             <view class="center-item">
-              <!-- 卡片文字 -->
-
               <view>
                 <view class="card-item-add">
                   <text>{{ item.name }}</text>
@@ -32,14 +30,13 @@
                   <text>{{ item.birthday }} </text>
                 </view>
               </view>
-
               <!-- 选中按钮 -->
               <radio-group @change="radioChange">
                 <label class="uni-list-cell uni-list-cell-pd">
                   <view class="radio-right">
                     <radio
                       :value="item.patientId.toString()"
-                      :checked="item.patientId == patientId"
+                      :checked="item.patientId == popId"
                     />
                     <!-- :checked="index === current" -->
                   </view>
@@ -59,17 +56,6 @@
 import addVisiter from '@/components/add-visiter/add-visiter.vue'
 export default {
   components: { addVisiter },
-  data() {
-    return {
-      height: null, //获取的状态栏高度
-      color: 'skyblue',
-      colorOther: '#f2f2f2',
-      value: 0,
-      current: 1,
-      show: false,
-      defaultPatientList: [],
-    }
-  },
   props: {
     isShow: {
       type: Boolean,
@@ -86,16 +72,41 @@ export default {
       },
     },
     patientId: {
-      type: Number,
+      type: String,
       default() {
-        return 0
+        return ''
       },
     },
+  },
+  data() {
+    return {
+      height: null, //获取的状态栏高度
+      color: 'skyblue',
+      colorOther: '#f2f2f2',
+      value: 0,
+      current: 1,
+      show: false,
+      defaultPatientList: [],
+      popId: this.patientId,
+    }
+  },
+  created() {
+    this.intId = setTimeout(() => {
+      this.$nextTick(() => {
+        this.popId = this.patientId
+      })
+    }, 1000)
+    console.log('夹杂cread')
   },
   watch: {
     isShow: {
       handler(newVal, oldVal) {
         this.show = newVal
+      },
+    },
+    patientId: {
+      handler(newVal, oldVal) {
+        this.popId = this.patientId
       },
     },
   },
@@ -105,7 +116,7 @@ export default {
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i].patientId == evt.detail.value) {
           this.current = i
-          this.patientId = evt.detail.value
+          this.popId = evt.detail.value
           this.defaultPatientList = this.items[i]
           console.log(evt.detail)
 
@@ -123,13 +134,14 @@ export default {
       this.$emit('submitPatientId', this.defaultPatientList)
     },
   },
-
 }
 </script>
 <style lang="scss">
 .center {
   margin-bottom: 100%;
   margin-top: 60rpx;
+  // height: 100vh;
+  // overflow-y: scroll;
   .center-item {
     display: flex;
     align-items: center;
