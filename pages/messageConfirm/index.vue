@@ -90,7 +90,14 @@ export default {
       this.doctorInfo = data
     },
     onSubmit: debounce(function () {
-      this.order()
+      if (!patientId) {
+        uni.showToast({
+          title: '请先添加就诊人',
+          duration: 3000,
+        })
+      } else {
+        this.order()
+      }
     }),
     //下单
     async order() {

@@ -1,1 +1,1 @@
-<view><cp-get-patient-list vue-id="44253d65-1" href="{{href}}" bind:__l="__l" vue-slots="{{['default']}}">报告查询</cp-get-patient-list></view>
+<view><cp-get-patient-list vue-id="44253d65-1" href="{{href}}" addFlag="{{addFlag}}" bind:__l="__l" vue-slots="{{['default']}}">报告查询</cp-get-patient-list></view>
