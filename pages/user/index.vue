@@ -27,9 +27,14 @@
     <uni-card>
       <view class="box-tip">
         <view class="card-title">就诊人管理</view>
-        <view v-if="phone" @click="onEdit()">全部></view>
+        <view v-if="phone && defaultPatientList.patientId" @click="onEdit()"
+          >全部></view
+        >
       </view>
-      <view v-if="phone && !loading" class="box-outside-warp">
+      <view
+        v-if="phone && !loading && defaultPatientList.patientId"
+        class="box-outside-warp"
+      >
         <!-- 就诊卡片 -->
         <patien-card :list="defaultPatientList"></patien-card>
         <!-- 卡片按钮 -->

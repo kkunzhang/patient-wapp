@@ -23,9 +23,10 @@ export const getTenantPatientList = {
   methods: {
     //获取就诊人列表
     async getTenantPatientList () {
+      this.initPatient()
       const params = {};
       const data = await getPatientList(params);
-      if (data.data.records) {
+      if (data.data.records.length > 0) {
         this.patientList = data.data.records;
         this.checkDefaultPatient(data.data.records);
       } else {
@@ -51,10 +52,17 @@ export const getTenantPatientList = {
       }
       this.loading = false;
     },
+    initPatient () {
+      this.patientId = ''
+      this.defaultPatientList = {}
+      this.hospitalPatientId = ''
+      this.patientList = []
+    }
   },
   mounted () { },
   created () {
     if (uni.getStorageSync('phone')) {
+
       console.log('获取就诊人');
       this.getTenantPatientList();
     }
