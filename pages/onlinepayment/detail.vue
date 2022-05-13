@@ -18,12 +18,11 @@ import priceCard from '@/components/pay-card/price-card.vue'
 import reserveCard from './components/reserve-card.vue'
 import recipe from './components/recipe.vue'
 import { getPayDetail, savePrescription } from '@/api/modules/onlinePay'
-import { getTenantPatientList } from '@/utils/mixin.js'
 import { debounce } from '@utils/utils'
 import { toPayMpWeiXin } from '@/utils/pay.js'
 export default {
   components: { cardItem, priceCard, reserveCard, recipe },
-  mixins: [getTenantPatientList, toPayMpWeiXin],
+  mixins: [toPayMpWeiXin],
   data() {
     return {
       radio: '1',
@@ -44,9 +43,12 @@ export default {
       this.savePrescription()
     }),
     //保存信息,获取订单
+    /**
+     *此patientId，就是hisId，韩颖处理过了
+     */
     async savePrescription() {
       const params = {
-        patientId: this.hospitalPatientId,
+        patientId: this.patientId,
         prescriptionId: this.prescriptionId,
       }
       const data = await savePrescription(params)
@@ -88,6 +90,7 @@ export default {
   },
   onLoad(options) {
     this.prescriptionId = options.prescriptionId
+    this.patientId = options.patientId
     console.log(options)
     this.getPayDetail(options.prescriptionId, options.patientId)
   },

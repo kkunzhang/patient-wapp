@@ -13,7 +13,7 @@ export const addPatient = (data) => {
  *  获取就诊人列表
  *  @return {Array}
  */
-export const getPatientList = (data, isLoading = false) => {
+export const getPatientList = (data, isLoading = true) => {
   return http.get({
     url: '/mem/tenant/patient',
     data,
