@@ -208,16 +208,24 @@ export default {
           })
           break
         case '远程会诊':
-          this.$tools.message(
-            '前往下载“庆阳市西峰区人民医院患者端”APP，即可开始远程问诊',
-            ' '
-          )
+          uni.showModal({
+            title: '该服务仅支持App内使用',
+            content:
+              '前往下载“庆阳市西峰区人民医院患者端”APP，即可开始远程会诊',
+            showCancel: false,
+            confirmColor: '#5271FF',
+            success: (result) => {},
+          })
           break
         case '远程门诊':
-          this.$tools.message(
-            '前往下载“庆阳市西峰区人民医院患者端”APP，即可开始远程门诊',
-            ' '
-          )
+          uni.showModal({
+            title: '该服务仅支持App内使用',
+            content:
+              '前往下载“庆阳市西峰区人民医院患者端”APP，即可开始远程门诊',
+            showCancel: false,
+            confirmColor: '#5271FF',
+            success: (result) => {},
+          })
           break
         default:
           console.log(item.id)
