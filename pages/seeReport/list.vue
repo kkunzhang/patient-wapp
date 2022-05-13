@@ -9,13 +9,15 @@
         @clickItem="onClickItem"
         styleType="button"
       ></uni-segmented-control>
-      <!-- 检查报告 0-->
-      <view v-show="current === 0">
-        <contro-list :info="info" @onClick="onClick"></contro-list>
-      </view>
-      <!-- 检验报告 1-->
-      <view v-show="current === 1">
-        <contro-list :info="info" @onClick="onClick"></contro-list>
+      <view>
+        <u-empty
+          v-if="info.length === 0"
+          mode="data"
+          icon="/static/images/none.png"
+        >
+          暂无数据
+        </u-empty>
+        <contro-list v-else :info="info" @onClick="onClick"></contro-list>
       </view>
     </uni-card>
   </view>
@@ -24,9 +26,7 @@
 <script>
 import controList from './components/contro-list.vue'
 import cardItem from '@/components/card-item/card-item.vue'
-import {
-  getReportResult,
-} from '@api/modules/report'
+import { getReportResult } from '@api/modules/report'
 export default {
   data() {
     return {

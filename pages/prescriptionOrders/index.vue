@@ -1,10 +1,5 @@
 <template>
   <view>
-    <!-- <view v-if="info.length === 0">
-      <view class="holder">
-        <p class="tips">暂无信息</p>
-      </view>
-    </view> -->
     <u-empty
       v-if="info.length === 0"
       mode="data"
@@ -39,26 +34,11 @@ export default {
       this.info = []
       this.page = '1'
     },
-    onSubmit() {
-      console.log('跳转去支付')
-      uni.navigateTo({
-        url:
-          `/pages/onlinepayment/subMessage?data=` +
-          encodeURIComponent(JSON.stringify(this.info)),
-      })
-    },
     //获取详细信息
     async getDetail(item) {
-      const params = {
-        prescriptionNo: item.prescriptionNo,
-      }
-      const data = await prescriptionDetail(params)
-      if (data.code == 100000) {
-        this.info = { ...data.data, ...params }
-        uni.navigateTo({
-          url: `/pages/onlinepayment/subMessage?prescriptionNo=${item.prescriptionNo}`,
-        })
-      }
+      uni.navigateTo({
+        url: `/pages/onlinepayment/subMessage?prescriptionNo=${item.prescriptionNo}`,
+      })
     },
     async getList() {
       let params = {
@@ -85,7 +65,7 @@ export default {
     },
   },
   onLoad(options) {
-    this.info = []
+    this.onClean()
     this.getList()
   },
 }

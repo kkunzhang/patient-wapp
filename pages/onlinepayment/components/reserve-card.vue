@@ -51,7 +51,9 @@ export default {
   },
   filters: {
     getTime(value) {
-      return formatDate(value, '1')
+      if (value) {
+        return formatDate(value, '1')
+      }
     },
   },
 }

@@ -9,7 +9,7 @@
         </view>
         <view>
           <text>订单类型</text>
-          <text>{{ info.registrationStatus | filterType }}</text>
+          <text>{{ info.registerType }}</text>
         </view>
         <view>
           <text>下单时间</text>
@@ -45,13 +45,15 @@ export default {
   },
   filters: {
     filterType(value) {
-      let type
+      let type = ''
       if (value == 10) {
         type = '待付款'
       } else if (value == 20) {
         type = '已取消'
       } else if (value == 50) {
         type = '已完成'
+      } else if (value == 30) {
+        type = '处理中'
       }
       return type
     },

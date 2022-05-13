@@ -5,9 +5,12 @@
       <uni-card class="my-uni-card" :border="false">
         <view class="doctor-card">
           <view class="doctor-card-pic">
-            <!-- src="/static/images/doc.png" -->
-            <!-- :src="item.image"  -->
-            <u-avatar shape="square" size="60" :src="item.image"></u-avatar>
+            <image
+              style="width: 120rpx; height: 120rpx; border-radius: 8rpx"
+              :src="item.image"
+              lazy-load
+            >
+            </image>
             <view class="card-message">
               <view>
                 <text>{{ item.name }}</text>

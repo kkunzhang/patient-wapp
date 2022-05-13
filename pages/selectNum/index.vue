@@ -77,6 +77,9 @@ export default {
       this.getReservation(index)
     },
   },
+  onShow() {
+    this.getReservation()
+  },
 }
 </script>
 <style lang="scss">

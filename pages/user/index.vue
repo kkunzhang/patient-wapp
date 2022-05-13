@@ -298,24 +298,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  .fir-card-top-warp {
-    display: flex;
-    flex-wrap: wrap;
-    .fir-card-top {
-      display: flex;
-      align-items: center;
-      .fir-card-top-item {
-        margin: 15rpx;
-      }
-      .sec-card-top-item {
-        margin: 15rpx 0 15rpx 12rpx;
-        position: relative;
-        top: -40rpx;
-        font-size: 34rpx;
-      }
-    }
-  }
-
   .box-outside {
     display: flex;
     justify-content: flex-end;

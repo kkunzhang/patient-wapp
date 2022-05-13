@@ -6,7 +6,8 @@
           <view style="display: flex">
             <view class="right-tips" v-if="item.status == 50">已完成 </view>
             <view class="right-tips" v-if="item.status == 20">已取消 </view>
-            <view class="right-tips" v-if="item.status == 10">处理中 </view>
+            <view class="right-tips" v-if="item.status == 10">待支付 </view>
+            <view class="right-tips" v-if="item.status == 30">处理中 </view>
           </view>
         </view>
         <view class="card-num">

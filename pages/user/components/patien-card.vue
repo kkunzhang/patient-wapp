@@ -28,7 +28,7 @@
         <text class="sec-card-top-item">{{ list.age }} 岁 </text>
         <text class="sec-card-top-item">{{ list.phone }} </text>
         <text class="sec-card-top-item"
-          >就诊卡号:{{ list.hospitalCardId }}
+          >就诊卡号: {{ list.hospitalCardId }}
         </text>
       </view>
     </view>
@@ -52,3 +52,22 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+.fir-card-top-warp {
+  display: flex;
+  flex-wrap: wrap;
+  .fir-card-top {
+    display: flex;
+    align-items: center;
+    .fir-card-top-item {
+      margin: 15rpx;
+    }
+    .sec-card-top-item {
+      margin: 15rpx 0 15rpx 12rpx;
+      position: relative;
+      top: -40rpx;
+      font-size: 32rpx;
+    }
+  }
+}
+</style>

@@ -3,7 +3,7 @@
     <view v-for="(item, index) in list" @click="onClick(item)" :key="index">
       <uni-card class="my-uni-card">
         <view class="card-item-add">
-          <view style="font-size: large">{{ item.registerData }}</view>
+          <view style="font-size: large">{{ item.createTime }}</view>
           <view style="display: flex">
             <view class="right-tips">{{
               item.prescriptionStatus | filterType
@@ -48,13 +48,15 @@ export default {
   },
   filters: {
     filterType(value) {
-      let type
+      let type = ''
       if (value == 10) {
         type = '待付款'
       } else if (value == 20) {
         type = '已取消'
       } else if (value == 50) {
         type = '已完成'
+      } else if (value == 30) {
+        type = '处理中'
       }
       return type
     },
