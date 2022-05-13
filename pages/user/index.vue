@@ -43,7 +43,7 @@
           v-for="(item, index) in navs"
           :key="index"
         >
-          <view class="box-outside" style="margin-top: -40rpx">
+          <view class="card-buttom" style="margin-top: -40rpx">
             <button class="mini-btn" type="primary" size="mini">
               {{ item.title }}
             </button>
@@ -88,6 +88,7 @@
       <view class="card-title">常用工具</view>
       <view class="box-outside-warp">
         <view
+          class="padding-sm"
           @click="onClick(item, index)"
           v-for="(item, index) in navs3"
           :key="index"
@@ -298,13 +299,11 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  .padding-sm {
+    width: 25%;
+    text-align: center;
+  }
   .box-outside {
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 30rpx;
-    padding: 16rpx;
     .bg-img {
       width: 100rpx;
       height: 100rpx;
@@ -312,10 +311,22 @@ export default {
     .box-title {
       padding-bottom: 20rpx;
     }
+  }
+  .card-buttom {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30rpx;
+    padding: 16rpx;
     .mini-btn {
       border-radius: 30rpx !important;
     }
   }
+}
+.box-outside-warp::after {
+  content: '';
+  width: 25%;
 }
 .card-item-add-bt {
   margin-top: 40rpx;

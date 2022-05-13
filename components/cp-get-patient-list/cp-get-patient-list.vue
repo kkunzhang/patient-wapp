@@ -23,7 +23,7 @@
       <button type="primary" @click="onClick()">查询</button>
     </view>
     <!-- 描述 -->
-    <view class="bt-bottom">
+    <view class="bt-bottom" v-if="isShowText">
       <span v-html="content"> {{ content }} </span>
     </view>
     <!-- 弹窗 -->
@@ -100,6 +100,10 @@ export default {
     addFlag: {
       type: Boolean,
       default: false,
+    },
+    isShowText: {
+      type: Boolean,
+      default: true,
     },
   },
   watch: {

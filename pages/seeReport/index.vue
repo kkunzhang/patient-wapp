@@ -1,6 +1,6 @@
 <template>
   <view>
-    <cp-get-patient-list :href="href" :addFlag="addFlag"
+    <cp-get-patient-list :href="href" :addFlag="addFlag" :isShowText="false"
       >报告查询</cp-get-patient-list
     >
   </view>

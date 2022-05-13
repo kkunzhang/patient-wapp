@@ -282,7 +282,7 @@ export default {
     align-content: space-around;
     flex-wrap: wrap;
     margin-left: 32rpx;
-    font-size: 1rem;
+    // font-size: 1rem;
   }
   .fast-enter {
     margin: 20rpx 20rpx 0rpx 20rpx;
@@ -318,13 +318,17 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    .padding-sm {
+      width: 25%;
+      text-align: center;
+    }
     .box-outside {
-      display: flex;
-      justify-content: flex-end;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 10rpx;
-      padding: 16rpx;
+      // display: flex;
+      // justify-content: flex-end;
+      // flex-direction: column;
+      // align-items: center;
+      // margin-top: 10rpx;
+      // padding: 16rpx;
       .bg-img {
         width: 100rpx;
         height: 100rpx;
@@ -333,6 +337,10 @@ export default {
         padding-bottom: 20rpx;
       }
     }
+  }
+  .box-outside-warp::after {
+    content: '';
+    width: 50%;
   }
 }
 </style>
