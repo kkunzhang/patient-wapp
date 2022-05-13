@@ -21,7 +21,7 @@ export default {
       title: 'Hello',
     }
   },
-  onLoad() { },
+  onLoad() {},
   methods: {
     //在这里不需要获取用户的昵称和头像，直接通过uni.login方法获取code，再获取openid
     getUserOpenId() {
@@ -57,14 +57,14 @@ export default {
           console.log('success:' + JSON.stringify(res))
           uni.showToast({
             title: '支付成功',
-            duration: 3000,
+            duration: 2500,
           })
         },
         fail(err) {
           console.log('fail:' + JSON.stringify(err))
           uni.showToast({
             title: '取消支付',
-            duration: 3000,
+            duration: 2500,
           })
         },
       })

@@ -1,30 +1,44 @@
 <template>
   <view>
     <!-- 医生号源信息 -->
-    <view v-for="(item, index) in info" :key="index">
-      <uni-card class="my-uni-card" :border="false">
-        <view class="doctor-card">
-          <view class="doctor-card-pic">
-            <image
-              style="width: 120rpx; height: 120rpx; border-radius: 8rpx"
-              :src="item.image"
-              lazy-load
-            >
-            </image>
-            <view class="card-message">
-              <view>
-                <text>{{ item.name }}</text>
-                <text>{{ item.title }}</text>
+    <!-- <u-sticky offset-top="200">
+      <text>塞下秋来风景异，衡阳雁去无留意</text>
+    </u-sticky> -->
+    <view style="width: 100%; position: fixed; z-index: 11">
+      <uni-notice-bar
+        class="bb"
+        show-icon
+        scrollable
+        :speed="50"
+        text="前往下载“庆阳市西峰区人民医院患者端”APP可咨询全国三甲专家"
+      />
+    </view>
+    <view style="padding-top: 80rpx">
+      <view v-for="(item, index) in info" :key="index">
+        <uni-card class="my-uni-card" :border="false">
+          <view class="doctor-card">
+            <view class="doctor-card-pic">
+              <image
+                style="width: 120rpx; height: 120rpx; border-radius: 8rpx"
+                :src="item.image"
+                lazy-load
+              >
+              </image>
+              <view class="card-message">
+                <view>
+                  <text>{{ item.name }}</text>
+                  <text>{{ item.title }}</text>
+                </view>
+                <view style="margin-left: 4rpx"> {{ item.departName }} </view>
+                <view style="margin-left: 4rpx"> {{ item.hospitalName }} </view>
               </view>
-              <view style="margin-left: 4rpx"> {{ item.departName }} </view>
-              <view style="margin-left: 4rpx"> {{ item.hospitalName }} </view>
+            </view>
+            <view class="card-num uni-lastmsg">
+              <view>擅长：{{ item.special }}</view>
             </view>
           </view>
-          <view class="card-num uni-lastmsg">
-            <view>擅长：{{ item.special }}</view>
-          </view>
-        </view>
-      </uni-card>
+        </uni-card>
+      </view>
     </view>
   </view>
 </template>  

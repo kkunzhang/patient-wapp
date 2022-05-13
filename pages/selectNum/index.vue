@@ -10,6 +10,7 @@
       :speed="50"
       text="医生出诊时间      08:00-12:00    14:30-17:30"
     ></uni-notice-bar>
+    
     <!-- 医生号源信息 -->
     <view v-for="(item, index) in reservationList" :key="index">
       <card :info="item" @onClick="order"></card>

@@ -74,4 +74,15 @@ export const savePrescription = (data) => {
     // hideLoading: true
   });
 };
+/**
+ *  取消订单
+ *  @return {Array}
+ */
+export const cancelReservation = (data) => {
+  return http.post({
+    url: '/his-xfqrmyy/register/reservation/cancel',
+    data,
+    // hideLoading: true
+  });
+};
 

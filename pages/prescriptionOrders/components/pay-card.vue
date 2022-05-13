@@ -3,7 +3,7 @@
     <view v-for="(item, index) in list" @click="onClick(item)" :key="index">
       <uni-card class="my-uni-card">
         <view class="card-item-add">
-          <view style="font-size: large">{{ item.createTime }}</view>
+          <view style="font-size: large">{{ item.createTime | getTime }}</view>
           <view style="display: flex">
             <view class="right-tips">{{
               item.prescriptionStatus | filterType
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { formatDate } from '@utils/utils'
 export default {
   data() {
     return {}
@@ -59,6 +60,11 @@ export default {
         type = '处理中'
       }
       return type
+    },
+    getTime(value) {
+      if (value) {
+        return formatDate(value, '1')
+      }
     },
   },
   props: {

@@ -25,6 +25,7 @@ export default {
     fail () { },
     complete () { },
   },
+  whiteListRet: [307003, 100000, 10000],
   // 请求拦截器
   interceptor: {
     request: null,
@@ -69,9 +70,10 @@ export default {
         header: this.config.header,
         method: options.method,
         success: (response) => {
+          console.log(response);
           if (!hideLoading) uni.hideLoading();
           let res = response.data;
-          if (res.code === 100000 || res.code === 10000) {
+          if (this.whiteListRet.includes(res.code)) {
             resolve(res);
           } else {
             // 返回值非 200，强制显示提示信息

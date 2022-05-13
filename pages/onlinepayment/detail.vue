@@ -42,7 +42,7 @@ export default {
       //生成订单
       this.savePrescription()
     }),
-    //保存信息,获取订单
+    //订单号
     /**
      *此patientId，就是hisId，韩颖处理过了
      */

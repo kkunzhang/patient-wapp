@@ -107,13 +107,23 @@ export default {
         doctorId: this.doctorInfo.doctorId,
         registerData: this.doctorInfo.registerDate,
       }
-      console.log(params)
       const data = await reservationLock(JSON.stringify(params))
-      console.log(data)
-      if (data.data.length > 0) {
+
+      if (data.code === 100000) {
+        this.registrationNo = data.data
+        this.toPay()
+      } else if (data.code === 307003) {
         this.registrationNo = data.data
         console.log(this.registrationNo)
-        this.toPay()
+        this.$tools
+          .showModal('', '您已预约当天的科室，是否去支付?', '取消', '支付')
+          .then((res) => {
+            if (res) {
+              uni.navigateTo({
+                url: `/pages/registrationInfo/index?registrationNo=${this.registrationNo}`,
+              })
+            }
+          })
       }
     },
     //支付

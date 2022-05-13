@@ -13,7 +13,15 @@
       <!-- 结算信息 -->
       <price-card :info="info">结算信息</price-card>
     </view>
-    <cp-button @onSubmit="onSubmit" v-if="isShow">去支付</cp-button>
+    <!-- <cp-button @onSubmit="onSubmit" v-if="isShow">去支付</cp-button> -->
+    <view class="bt-box">
+      <button class="bt1" plain="true" type="primary" @click="onCancel">
+        <slot name="one"> 取消 </slot>
+      </button>
+      <button class="bt2" type="primary" @click="onSubmit">
+        <slot name="two"> 去支付 </slot>
+      </button>
+    </view>
   </view>
 </template>
 
@@ -25,6 +33,7 @@ import priceCard from '@/components/pay-card/price-card.vue'
 import { reservationDetail } from '@/api/modules/registration'
 import { toPayMpWeiXin } from '@/utils/pay.js'
 import { debounce } from '@utils/utils'
+import { cancelReservation } from '@/api/modules/onlinePay'
 export default {
   data() {
     return {
@@ -42,6 +51,22 @@ export default {
     onSubmit: debounce(function () {
       this.toPay()
     }),
+    onCancel() {
+      this.$tools.showModal('', '确定取消挂号?').then((res) => {
+        if (res) {
+          this.cancelReservation()
+        }
+      })
+    },
+    // 取消挂号
+    async cancelReservation() {
+      const data = await this.cancelReservation(this.info.registrationId)
+      if (data.code === 100000) {
+        uni.navigateTo({
+          url: `/pages/registration/index`,
+        })
+      }
+    },
     //支付
     async toPay() {
       if (this.registrationNo) {
@@ -93,4 +118,16 @@ export default {
 }
 </script>
 <style lang="scss">
+.bt-box {
+  width: 100%;
+  display: flex;
+  position: fixed;
+  bottom: 5rpx;
+  .bt1 {
+    width: 30%;
+  }
+  .bt2 {
+    width: 70%;
+  }
+}
 </style>
