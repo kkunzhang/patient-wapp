@@ -19,8 +19,8 @@
       <view class="payment-item">
         <view>
           <text>优惠券</text>
-          <text v-if="!discountFee">未使用</text>
-          <text v-if="!discountFee" class="coupon">无可用券</text>
+          <text v-if="!info.discountFee">未使用</text>
+          <text v-if="!info.discountFee" class="coupon">无可用券</text>
           <text v-else>￥{{ info.discountFee }}</text>
         </view>
       </view>
