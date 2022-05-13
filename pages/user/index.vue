@@ -247,7 +247,7 @@ export default {
    */
   onShow() {
     if (uni.getStorageSync('phone')) {
-      this.getTenantPatientList()
+      this.getTenantPatientList(true)
     }
   },
 }

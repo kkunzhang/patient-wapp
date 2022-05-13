@@ -13,10 +13,11 @@ export const addPatient = (data) => {
  *  获取就诊人列表
  *  @return {Array}
  */
-export const getPatientList = (data) => {
+export const getPatientList = (data, isLoading = false) => {
   return http.get({
     url: '/mem/tenant/patient',
     data,
+    hideLoading: isLoading
   });
 };
 /**

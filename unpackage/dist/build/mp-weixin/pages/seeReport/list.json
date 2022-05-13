@@ -4,6 +4,7 @@
     "card-item": "/components/card-item/card-item",
     "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
     "uni-segmented-control": "/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control",
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty",
     "contro-list": "/pages/seeReport/components/contro-list"
   }
 }

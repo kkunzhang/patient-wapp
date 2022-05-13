@@ -39,6 +39,7 @@ export default {
       deptId: '',
       reservationList: [], //号源列表
       icon: '/static/images/none.png',
+      dateIndex: 0,
     }
   },
   onLoad(options) {
@@ -46,12 +47,11 @@ export default {
     //获取七天后时间
     this.dataInfo = formatWeekInfo()
     //获取号源
-    this.getReservation()
+    this.getReservation(this.dateIndex)
   },
   methods: {
     //获取号源
-    async getReservation(index) {
-      this.reservationList = []
+    async getReservation(index, isLoading = false) {
       const params = {
         deptId: this.deptId,
         doctorId: '',
@@ -59,14 +59,15 @@ export default {
           ? this.dataInfo[index]['infoTime']
           : this.dataInfo[0]['infoTime'],
       }
-      const data = await getReservation(params)
+      const data = await getReservation(params, isLoading)
       if (data.data.length > 0) {
         this.reservationList = data.data
+      } else {
+        this.reservationList = []
       }
     },
     // 预约
     order(val) {
-      console.log(val)
       uni.navigateTo({
         url: `/pages/messageConfirm/index?data=${encodeURIComponent(
           JSON.stringify(val)
@@ -74,11 +75,14 @@ export default {
       })
     },
     onClickDate(index) {
+      this.dateIndex = index
       this.getReservation(index)
     },
   },
   onShow() {
-    this.getReservation()
+    console.log(this.dateIndex)
+
+    this.getReservation(this.dateIndex, true)
   },
 }
 </script>

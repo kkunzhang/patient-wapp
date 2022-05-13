@@ -23,11 +23,11 @@ export const getPayDetail = (data) => {
  *  查询号源信息
  *  @return {Array}
  */
-export const getReservation = (data) => {
+export const getReservation = (data, isLoading = false) => {
   return http.get({
     url: '/his-xfqrmyy/register/reservation',
     data,
-    // hideLoading: true
+    hideLoading: isLoading
   });
 };
 /**

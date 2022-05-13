@@ -62,10 +62,10 @@ const showModal = (title = '提示', content = '确认执行该操作吗?', canc
       })
     })
 };
-const message = (content, confrimText) => {
+const message = (content, confrimText, title = '提示') => {
   return new Promise((res) => {
     uni.showModal({
-      title: '提示',
+      title: title,
       content,
       showCancel: false,
       confirmColor: config.modalColor,

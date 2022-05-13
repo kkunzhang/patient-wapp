@@ -1,0 +1,1 @@
+.fir-card-top-warp{display:flex;flex-wrap:wrap}.fir-card-top-warp .fir-card-top{display:flex;align-items:center}.fir-card-top-warp .fir-card-top .fir-card-top-item{margin:15rpx}.fir-card-top-warp .fir-card-top .sec-card-top-item{margin:15rpx 0 15rpx 12rpx;position:relative;top:-40rpx;font-size:32rpx}

@@ -208,10 +208,16 @@ export default {
           })
           break
         case '远程会诊':
-          this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')
+          this.$tools.message(
+            '前往下载“庆阳市西峰区人民医院患者端”APP，即可开始远程问诊',
+            ' '
+          )
           break
         case '远程门诊':
-          this.$tools.message('请到应用商店下载庆阳市西峰区人民医院', 'suc')
+          this.$tools.message(
+            '前往下载“庆阳市西峰区人民医院患者端”APP，即可开始远程门诊',
+            ' '
+          )
           break
         default:
           console.log(item.id)

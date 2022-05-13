@@ -87,7 +87,7 @@ export default {
           if (cardItem.isDefault) {
             this.$tools.message('该就诊人已是默认就诊人', 'suc')
           } else {
-            this.$tools.showModal('', '确认设置为默认?').then((res) => {
+            this.$tools.showModal('', '确认设置为默认就诊人?').then((res) => {
               if (res) {
                 this.setPatient(cardItem.patientId)
               }
