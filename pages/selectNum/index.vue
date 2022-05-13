@@ -27,7 +27,7 @@
 import card from '@/components/doctor/card.vue'
 import selectDate from './components/select-date.vue'
 import { formatWeekInfo } from '@utils/utils'
-import { getReservation } from '@/api/modules/registration'
+import { getReservation } from '@/api/modules/onlinePay'
 export default {
   components: {
     card,
@@ -80,8 +80,6 @@ export default {
     },
   },
   onShow() {
-    console.log(this.dateIndex)
-
     this.getReservation(this.dateIndex, true)
   },
 }

@@ -19,17 +19,7 @@ export const getDoctor = (data) => {
     data,
   });
 };
-/**
- *  查询号源信息
- *  @return {Array}
- */
-export const getReservation = (data) => {
-  return http.get({
-    url: '/his-xfqrmyy/register/reservation',
-    data,
-    // hideLoading: true
-  });
-};
+
 /**
  *  挂号生成订单
  *  @return {Array}
