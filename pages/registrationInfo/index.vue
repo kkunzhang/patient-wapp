@@ -14,7 +14,7 @@
       <price-card :info="info">结算信息</price-card>
     </view>
     <!-- <cp-button @onSubmit="onSubmit" v-if="isShow">去支付</cp-button> -->
-    <view class="bt-box">
+    <view class="bt-box" v-if="isShow">
       <button class="bt1" plain="true" type="primary" @click="onCancel">
         <slot name="one"> 取消 </slot>
       </button>
