@@ -110,6 +110,9 @@ export default {
         this.registrationNo = data.data
         this.toPay()
       } else if (data.code === 307003) {
+        let msg = data.msg
+        this.$tools.message(msg)
+      } else if (data.code === 307004) {
         if (data.data) {
           this.registrationNo = data.data
           console.log(this.registrationNo)
@@ -123,8 +126,7 @@ export default {
               }
             })
         } else {
-          let msg = data.msg
-          this.$tools.message(msg)
+          this.$tools.message('报错:307004;data返回空')
         }
       }
     },

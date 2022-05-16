@@ -61,12 +61,20 @@ export default {
     },
     // 取消挂号
     async cancelReservation() {
-      console.log('222')
-
       const data = await cancelReservation(this.info.registrationId)
       if (data.code === 100000) {
-        uni.navigateTo({
-          url: `/pages/registration/index`,
+        uni.showToast({
+          title: '取消成功',
+          icon: 'none',
+          duration: 1500,
+          complete: function () {
+            setTimeout(function () {
+              uni.hideToast()
+              uni.redirectTo({
+                url: `/pages/registration/index`,
+              })
+            }, 1500)
+          },
         })
       } else {
         uni.showToast({

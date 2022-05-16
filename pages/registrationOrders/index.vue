@@ -107,7 +107,8 @@ export default {
       }
     },
   },
-  onLoad(options) {
+  onShow(options) {
+    this.onClean()
     this.getList()
   },
 }

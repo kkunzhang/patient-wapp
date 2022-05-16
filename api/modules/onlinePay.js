@@ -80,9 +80,9 @@ export const savePrescription = (data) => {
  */
 export const cancelReservation = (data) => {
   return http.post({
-    url: '/his-xfqrmyy/register/reservation/cancel',
-    data,
+    url: '/his-xfqrmyy/register/reservation/cancel?registrationId=' + data,
     // hideLoading: true
   });
 };
+
 
