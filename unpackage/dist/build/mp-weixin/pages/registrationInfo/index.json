@@ -2,7 +2,6 @@
   "navigationBarTitleText": "订单详情",
   "usingComponents": {
     "pay-card": "/components/pay-card/pay-card-status",
-    "cp-button": "/components/cp-button/cp-button",
     "registration-card": "/pages/registrationInfo/components/registration-card",
     "order-card": "/pages/registrationInfo/components/order-card",
     "price-card": "/components/pay-card/price-card"

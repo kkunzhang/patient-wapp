@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <uni-card class="my-uni-card">
+    <uni-card :border="false">
       <view @click="onClick()" class="center-item">
         <view>
           <view class="card-item-add">

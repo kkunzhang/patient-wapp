@@ -54,16 +54,24 @@ export default {
     onCancel() {
       this.$tools.showModal('', '确定取消挂号?').then((res) => {
         if (res) {
+          console.log(res)
           this.cancelReservation()
         }
       })
     },
     // 取消挂号
     async cancelReservation() {
-      const data = await this.cancelReservation(this.info.registrationId)
+      console.log('222')
+
+      const data = await cancelReservation(this.info.registrationId)
       if (data.code === 100000) {
         uni.navigateTo({
           url: `/pages/registration/index`,
+        })
+      } else {
+        uni.showToast({
+          title: '操作失败',
+          duration: 3000,
         })
       }
     },

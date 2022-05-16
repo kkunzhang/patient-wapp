@@ -10,7 +10,7 @@
       :speed="50"
       text="医生出诊时间      08:00-12:00    14:30-17:30"
     ></uni-notice-bar>
-    
+
     <!-- 医生号源信息 -->
     <view v-for="(item, index) in reservationList" :key="index">
       <card :info="item" @onClick="order"></card>
@@ -47,8 +47,6 @@ export default {
     this.deptId = options.id
     //获取七天后时间
     this.dataInfo = formatWeekInfo()
-    //获取号源
-    this.getReservation(this.dateIndex)
   },
   methods: {
     //获取号源
@@ -81,6 +79,7 @@ export default {
     },
   },
   onShow() {
+    //获取号源
     this.getReservation(this.dateIndex, true)
   },
 }

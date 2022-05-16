@@ -3,14 +3,11 @@
     <!--顶部卡片 -->
     <card :isShow="false" :info="doctorInfo"></card>
     <!--添加就诊人 -->
-    <view>
-      <u-skeleton rows="2" :loading="loading" :animate="true" :title="false">
-        <add-visiter v-if="!patientId"></add-visiter>
-        <!-- 已有就诊人，非第一次添加 -->
-        <card-item v-else @openPop="onOpen" :list="defaultPatientList">
-        </card-item>
-      </u-skeleton>
-    </view>
+    <!-- <u-skeleton :loading="loading" :animate="false" :title="false"> -->
+    <add-visiter v-if="!patientId"></add-visiter>
+    <!-- 已有就诊人，非第一次添加 -->
+    <card-item v-else @openPop="onOpen" :list="defaultPatientList"> </card-item>
+    <!-- </u-skeleton> -->
     <reserve-card :info="doctorInfo"></reserve-card>
     <!-- 支付信息 -->
     <price-card :info="doctorInfo"></price-card>
