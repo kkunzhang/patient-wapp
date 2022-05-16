@@ -36,11 +36,11 @@ export default {
     return {
       info: [
         {
-          url: '/static/images/banner1.jpg',
+          url: '/static/images/banner1.jpeg',
           content: '内容 A',
         },
         {
-          url: '/static/images/banner1.jpg',
+          url: '/static/images/banner1.jpeg',
           content: '内容 B',
         },
       ],
