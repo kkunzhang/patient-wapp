@@ -110,17 +110,22 @@ export default {
         this.registrationNo = data.data
         this.toPay()
       } else if (data.code === 307003) {
-        this.registrationNo = data.data
-        console.log(this.registrationNo)
-        this.$tools
-          .showModal('', '您已预约当天的科室，是否去支付?', '取消', '支付')
-          .then((res) => {
-            if (res) {
-              uni.navigateTo({
-                url: `/pages/registrationInfo/index?registrationNo=${this.registrationNo}`,
-              })
-            }
-          })
+        if (data.data) {
+          this.registrationNo = data.data
+          console.log(this.registrationNo)
+          this.$tools
+            .showModal('', '您已预约当天的科室，是否去支付?', '取消', '支付')
+            .then((res) => {
+              if (res) {
+                uni.navigateTo({
+                  url: `/pages/registrationInfo/index?registrationNo=${this.registrationNo}`,
+                })
+              }
+            })
+        } else {
+          let msg = data.msg
+          this.$tools.message(msg)
+        }
       }
     },
     //支付

@@ -36,7 +36,7 @@ export default {
     return {
       info: [
         {
-          url: '/static/images/banner1.jpeg',
+          url: '/static/images/banner1.jpg',
           content: '内容 A',
         },
         {
