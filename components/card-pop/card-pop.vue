@@ -8,46 +8,49 @@
       closeIconPos="top-left"
       :safeAreaInsetBottom="true"
     >
-      <view class="center" :style="{ height: height + 65 + 'px' }">
-        <!-- 循环 -->
-        <view v-for="(item, index) in items" :key="index">
-          <view
-            class="card-user-info"
-            :style="{
-              backgroundColor: item.patientId == popId ? color : colorOther,
-            }"
-          >
-            <!-- :style="{ backgroundColor: index === current ? color : colorOther }" -->
-            <view class="center-item">
-              <view>
-                <view class="card-item-add">
-                  <text>{{ item.name }}</text>
-                  <view>{{ item.phone }}</view>
-                </view>
-                <view class="fir-card-top">
-                  <text>{{ item.sex }} </text>
-                  <text>{{ item.age }} 岁 </text>
-                  <text>{{ item.birthday }} </text>
-                </view>
-              </view>
-              <!-- 选中按钮 -->
-              <radio-group @change="radioChange">
-                <label class="uni-list-cell uni-list-cell-pd">
-                  <view class="radio-right">
-                    <radio
-                      :value="item.patientId.toString()"
-                      :checked="item.patientId == popId"
-                    />
-                    <!-- :checked="index === current" -->
+      <scroll-view scroll-y="true" style="height: 56vh; margin-bottom: 20rpx">
+        <view class="center">
+          <!-- :style="{ height: height + 130 + 'rpx' }" -->
+          <!-- 循环 -->
+          <view v-for="(item, index) in items" :key="index">
+            <view
+              class="card-user-info"
+              :style="{
+                backgroundColor: item.patientId == popId ? color : colorOther,
+              }"
+            >
+              <!-- :style="{ backgroundColor: index === current ? color : colorOther }" -->
+              <view class="center-item">
+                <view>
+                  <view class="card-item-add">
+                    <text>{{ item.name }}</text>
+                    <view>{{ item.phone }}</view>
                   </view>
-                </label>
-              </radio-group>
-              <!-- 选中按钮结束 -->
+                  <view class="fir-card-top">
+                    <text>{{ item.sex }} </text>
+                    <text>{{ item.age }} 岁 </text>
+                    <text>{{ item.birthday }} </text>
+                  </view>
+                </view>
+                <!-- 选中按钮 -->
+                <radio-group @change="radioChange">
+                  <label class="uni-list-cell uni-list-cell-pd">
+                    <view class="radio-right">
+                      <radio
+                        :value="item.patientId.toString()"
+                        :checked="item.patientId == popId"
+                      />
+                      <!-- :checked="index === current" -->
+                    </view>
+                  </label>
+                </radio-group>
+                <!-- 选中按钮结束 -->
+              </view>
             </view>
           </view>
+          <add-visiter v-if="isShowAdd"></add-visiter>
         </view>
-        <add-visiter v-if="isShowAdd"></add-visiter>
-      </view>
+      </scroll-view>
       <cp-button @onSubmit="onSubmit">提交</cp-button>
     </u-popup>
   </view>
@@ -119,7 +122,6 @@ export default {
           this.popId = evt.detail.value
           this.defaultPatientList = this.items[i]
           console.log(evt.detail)
-
           break
         }
       }

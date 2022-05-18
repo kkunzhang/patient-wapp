@@ -20,14 +20,15 @@
 </template>
 
 <script>
+import { debounce } from '@utils/utils'
 export default {
   data() {
     return {}
   },
   methods: {
-    onClick() {
+    onClick: debounce(function (item) {
       this.$emit('openPop', 1)
-    },
+    }),
   },
   props: {
     list: {
