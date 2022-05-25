@@ -171,6 +171,18 @@
       "style": {
         "navigationBarTitleText": "修改号码"
       }
+    },
+    {
+      "path": "pages/refund/index",
+      "style": {
+        "navigationBarTitleText": "退款订单"
+      }
+    },
+    {
+      "path": "pages/refund/detail",
+      "style": {
+        "navigationBarTitleText": "退款订单"
+      }
     }
   ],
   "tabBar": {

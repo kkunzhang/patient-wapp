@@ -25,7 +25,7 @@ export default {
     fail () { },
     complete () { },
   },
-  whiteListRet: [307003, 100000, 10000,307004],
+  whiteListRet: [307003, 100000, 10000, 307004, 307006, 307007],
   // 请求拦截器
   interceptor: {
     request: null,

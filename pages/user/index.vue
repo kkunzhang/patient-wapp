@@ -25,43 +25,45 @@
     </view>
     <!--就诊人管理-->
     <uni-card>
-      <view class="box-tip">
-        <view class="card-title">就诊人管理</view>
-        <view v-if="phone && defaultPatientList.patientId" @click="onEdit()"
-          >全部></view
-        >
-      </view>
-      <view
-        v-if="phone && !loading && defaultPatientList.patientId"
-        class="box-outside-warp"
-      >
-        <!-- 就诊卡片 -->
-        <patien-card :list="defaultPatientList"></patien-card>
-        <!-- 卡片按钮 -->
+      <u-skeleton rows="3" :loading="loading" :animate="true" :title="false">
+        <view class="box-tip">
+          <view class="card-title">就诊人管理</view>
+          <view v-if="phone && defaultPatientList.patientId" @click="onEdit()"
+            >全部></view
+          >
+        </view>
         <view
-          @click="onClick(item, index)"
-          v-for="(item, index) in navs"
-          :key="index"
+          v-if="phone && defaultPatientList.patientId"
+          class="box-outside-warp"
         >
-          <view class="card-buttom" style="margin-top: -40rpx">
-            <button class="mini-btn" type="primary" size="mini">
-              {{ item.title }}
-            </button>
+          <!-- 就诊卡片 -->
+          <patien-card :list="defaultPatientList"></patien-card>
+          <!-- 卡片按钮 -->
+          <view
+            @click="onClick(item, index)"
+            v-for="(item, index) in navs"
+            :key="index"
+          >
+            <view class="card-buttom" style="margin-top: -40rpx">
+              <button class="mini-btn" type="primary" size="mini">
+                {{ item.title }}
+              </button>
+            </view>
           </view>
         </view>
-      </view>
-      <view v-else class="card-item-add-bt">
-        <button type="primary" plain="true" @click="onEdit()">
-          <view class="card-item-add"
-            ><uni-icons
-              type="plus-filled"
-              color="#1aad19"
-              size="36"
-            ></uni-icons>
-            添加就诊人</view
-          >
-        </button>
-      </view>
+        <view v-else class="card-item-add-bt">
+          <button type="primary" plain="true" @click="onEdit()">
+            <view class="card-item-add"
+              ><uni-icons
+                type="plus-filled"
+                color="#1aad19"
+                size="36"
+              ></uni-icons>
+              添加就诊人</view
+            >
+          </button>
+        </view>
+      </u-skeleton>
     </uni-card>
 
     <!--订单管理-->
@@ -160,6 +162,11 @@ export default {
           title: '处方订单',
           path: '/static/images/prescription.png',
         },
+        {
+          icon: 'iconfont icon-shipin',
+          title: '退款订单',
+          path: '/static/images/tuikuan.png',
+        },
       ],
       navs3: [
         {
@@ -212,6 +219,9 @@ export default {
           break
         case '处方订单':
           this.onNavigateTo('/pages/prescriptionOrders/index')
+          break
+        case '退款订单':
+          this.onNavigateTo('/pages/refund/index')
           break
         // case '我的医生':
         //   this.onNavigateTo('/pages/user/myDoctor/index')

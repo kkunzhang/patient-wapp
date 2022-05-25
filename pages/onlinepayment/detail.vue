@@ -1,15 +1,17 @@
 <template>
   <view>
-    <card-item :list="info.patientInfo" :isShowButton="false"> </card-item>
-    <!-- 处方信息 -->
-    <reserve-card :info="info"> </reserve-card>
-    <!-- 处方明细 -->
-    <recipe :info="drugDetailDto" :totalFee="info.totalFee"> </recipe>
-    <!-- 支付信息 -->
-    <price-card :info="info"></price-card>
-    <!-- 支付方式 -->
-    <cp-pay-type></cp-pay-type>
-    <cp-button @onSubmit="onSubmit">确认缴费</cp-button>
+    <u-skeleton rows="10" :loading="loading" :animate="true" :title="false">
+      <card-item :list="info.patientInfo" :isShowButton="false"> </card-item>
+      <!-- 处方信息 -->
+      <reserve-card :info="info"> </reserve-card>
+      <!-- 处方明细 -->
+      <recipe :info="drugDetailDto" :totalFee="info.totalFee"> </recipe>
+      <!-- 支付信息 -->
+      <price-card :info="info"></price-card>
+      <!-- 支付方式 -->
+      <cp-pay-type></cp-pay-type>
+      <cp-button @onSubmit="onSubmit">确认缴费</cp-button>
+    </u-skeleton>
   </view>
 </template>
 <script>
@@ -34,6 +36,7 @@ export default {
       patientId: '',
       hospitalPatientId: '',
       orderNum: '',
+      loading: true,
     }
   },
   methods: {
@@ -86,6 +89,7 @@ export default {
         this.drugDetailDto = this.info.drugDetailDto
         console.log(this.info)
       }
+      this.loading = false
     },
   },
   onLoad(options) {
@@ -93,6 +97,9 @@ export default {
     this.patientId = options.patientId
     console.log(options)
     this.getPayDetail(options.prescriptionId, options.patientId)
+    setTimeout(() => {
+      this.loading = false
+    }, 3000)
   },
 }
 </script>

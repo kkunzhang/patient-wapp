@@ -1,20 +1,22 @@
 <template>
   <view>
-    <!-- 操作信息 -->
-    <pay-card-prescription
-      :item="payStatus"
-      :isFull="true"
-    ></pay-card-prescription>
-    <!-- 个人信息 -->
-    <card-item :isShowButton="false" :list="infoUser"> </card-item>
-    <!-- 处方信息 -->
-    <reserve-card :info="info"> </reserve-card>
-    <!-- 处方明细 -->
-    <recipe :info="drugDetailDto" :totalFee="info.totalFee"> </recipe>
-    <!-- 支付信息 -->
-    <price-card :info="info"></price-card>
-    <!-- 支付方式 -->
-    <cp-pay-type></cp-pay-type>
+    <u-skeleton rows="10" :loading="loading" :animate="true" :title="false">
+      <!-- 操作信息 -->
+      <pay-card-prescription
+        :item="payStatus"
+        :isFull="true"
+      ></pay-card-prescription>
+      <!-- 个人信息 -->
+      <card-item :isShowButton="false" :list="infoUser"> </card-item>
+      <!-- 处方信息 -->
+      <reserve-card :info="info"> </reserve-card>
+      <!-- 处方明细 -->
+      <recipe :info="drugDetailDto" :totalFee="info.totalFee"> </recipe>
+      <!-- 支付信息 -->
+      <price-card :info="info"></price-card>
+      <!-- 支付方式 -->
+      <cp-pay-type></cp-pay-type>
+    </u-skeleton>
   </view>
 </template>
 <script>
@@ -42,6 +44,7 @@ export default {
       prescriptionNo: '',
       infoUser: '',
       info: '',
+      loading: true,
     }
   },
   methods: {
@@ -57,11 +60,15 @@ export default {
         this.drugDetailDto = this.info.drugDetailDto
         this.infoUser = this.info.patientInfo
       }
+      this.loading = false
     },
   },
   onLoad(options) {
     this.prescriptionNo = options.prescriptionNo
     this.prescriptionDetail()
+    setTimeout(() => {
+      this.loading = false
+    }, 3000)
   },
 }
 </script>

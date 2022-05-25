@@ -47,7 +47,7 @@ export default {
     Microsoft YaHei, SimSun, sans-serif;
   background-color: #19be6b;
   border: 1rpx solid #dcdcdc;
-  line-height: 125rpx;
+  line-height: 65rpx;
   view {
     color: #ffffff;
   }

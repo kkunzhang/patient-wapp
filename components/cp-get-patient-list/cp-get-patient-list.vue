@@ -24,7 +24,7 @@
     </view>
     <!-- 描述 -->
     <view class="bt-bottom" v-if="isShowText">
-      <span v-html="content"> {{ content }} </span>
+      <span v-html="contentText"> </span>
     </view>
     <!-- 弹窗 -->
     <card-pop
@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       show: false,
-      content: `温馨提示 <br>
+      contentText: `温馨提示 <br>
       1、仅支持待缴费用的查询。<br>
 
       2、目前仅支持非医保患者在线缴费，医保患者请到院内自助机或窗口缴费。<br>
@@ -126,7 +126,7 @@ export default {
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
     font-weight: 700;
     font-style: normal;
-    padding: 200rpx 20rpx 60rpx;
+    padding: 200rpx 100rpx 20rpx 20rpx;
     font-size: 60rpx;
   }
   .button {

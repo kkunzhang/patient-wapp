@@ -43,5 +43,9 @@ page {
   -webkit-transform: matrix(-0.71, 0.71, 0.71, 0.71, 0, 0);
   transform: matrix(-0.71, 0.71, 0.71, 0.71, 0, 0);
 }
+.price {
+  color: rgba(255, 95, 86, 1);
+  font-size: 35rpx;
+}
 /* #endif */
 </style>

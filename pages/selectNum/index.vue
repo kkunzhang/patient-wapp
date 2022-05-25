@@ -12,16 +12,18 @@
     ></uni-notice-bar>
 
     <!-- 医生号源信息 -->
-    <view v-for="(item, index) in reservationList" :key="index">
-      <card :info="item" @onClick="order"></card>
-    </view>
-    <u-empty
-      v-if="reservationList.length === 0"
-      mode="data"
-      icon="/static/images/none.png"
-    >
-      暂无医生出诊
-    </u-empty>
+    <u-skeleton rows="10" :loading="loading" :animate="true" :title="false">
+      <view v-for="(item, index) in reservationList" :key="index">
+        <card :info="item" @onClick="order"></card>
+      </view>
+      <u-empty
+        v-if="reservationList.length === 0"
+        mode="data"
+        icon="/static/images/none.png"
+      >
+        暂无医生出诊
+      </u-empty>
+    </u-skeleton>
   </view>
 </template>
 <script>
@@ -41,6 +43,7 @@ export default {
       reservationList: [], //号源列表
       icon: '/static/images/none.png',
       dateIndex: 0,
+      loading: true,
     }
   },
   onLoad(options) {
@@ -64,6 +67,7 @@ export default {
       } else {
         this.reservationList = []
       }
+      this.loading = false
     },
     // 预约
     order(val) {
@@ -81,6 +85,9 @@ export default {
   onShow() {
     //获取号源
     this.getReservation(this.dateIndex, true)
+    setTimeout(() => {
+      this.loading = false
+    }, 3000)
   },
 }
 </script>

@@ -17,21 +17,23 @@
       @click="onClick"
     >
     </u-tabs>
-    <u-empty
-      v-if="info.length === 0"
-      mode="data"
-      icon="/static/images/none.png"
-    >
-      暂无挂号信息
-    </u-empty>
-    <view v-else>
-      <pay-card
-        :list="info"
-        @onClick="getInfo"
-        :isShowPayTime="true"
-      ></pay-card>
-      <!-- <view class="isOver" v-if="flag">-----我是有底线的-----</view> -->
-    </view>
+    <u-skeleton rows="10" :loading="loading" :animate="true" :title="false">
+      <u-empty
+        v-if="info.length === 0"
+        mode="data"
+        icon="/static/images/none.png"
+      >
+        暂无挂号信息
+      </u-empty>
+      <view v-else>
+        <pay-card
+          :list="info"
+          @onClick="getInfo"
+          :isShowPayTime="true"
+        ></pay-card>
+        <!-- <view class="isOver" v-if="flag">-----我是有底线的-----</view> -->
+      </view>
+    </u-skeleton>
   </view>
 </template>
 <script>
@@ -63,6 +65,7 @@ export default {
       page: '1',
       pageSize: '10',
       flag: false,
+      loading: true,
     }
   },
   methods: {
@@ -83,6 +86,7 @@ export default {
       })
     },
     async getList(status = '') {
+      this.loading = true
       let params = {
         registrationStatus: status,
         page: this.page,
@@ -94,6 +98,7 @@ export default {
         this.info = [...this.info, ...data.data.records]
         console.log(this.info)
       }
+      this.loading = false
     },
     //分页
     onReachBottom() {
@@ -110,6 +115,9 @@ export default {
   onShow(options) {
     this.onClean()
     this.getList()
+    setTimeout(() => {
+      this.loading = false
+    }, 3000)
   },
 }
 </script>
