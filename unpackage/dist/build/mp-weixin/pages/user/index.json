@@ -4,6 +4,7 @@
     "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar",
     "uni-title": "/uni_modules/uni-title/components/uni-title/uni-title",
     "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
+    "u-skeleton": "/uni_modules/uview-ui/components/u-skeleton/u-skeleton",
     "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons",
     "patien-card": "/pages/user/components/patien-card"
   }

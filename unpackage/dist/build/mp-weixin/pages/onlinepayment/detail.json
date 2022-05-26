@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "信息确认",
   "usingComponents": {
+    "u-skeleton": "/uni_modules/uview-ui/components/u-skeleton/u-skeleton",
     "card-item": "/components/card-item/card-item",
     "cp-pay-type": "/components/cp-pay-type/cp-pay-type",
     "cp-button": "/components/cp-button/cp-button",

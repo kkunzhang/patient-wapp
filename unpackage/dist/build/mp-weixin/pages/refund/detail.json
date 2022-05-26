@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "退款订单",
+  "usingComponents": {
+    "u-skeleton": "/uni_modules/uview-ui/components/u-skeleton/u-skeleton",
+    "registration-card": "/pages/refund/components/registration-card",
+    "order-card": "/pages/refund/components/order-card",
+    "refund-status": "/pages/refund/components/refund-status",
+    "reserve-card": "/pages/refund/components/reserve-card",
+    "refund-card-detail": "/pages/refund/components/refund-card-detail"
+  }
+}

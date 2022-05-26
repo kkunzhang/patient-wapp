@@ -27,7 +27,9 @@
     "pages/user/myDoctor/index",
     "pages/user/myWith/index",
     "pages/user/manage/index",
-    "pages/user/manage/changePhone"
+    "pages/user/manage/changePhone",
+    "pages/refund/index",
+    "pages/refund/detail"
   ],
   "subPackages": [],
   "window": {

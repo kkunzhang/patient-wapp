@@ -32,9 +32,13 @@
             <text>退款原因</text>
             <text>{{ info.refundReason }}</text>
           </view>
-          <view>
+          <view v-if="info.refundExplain">
             <text>退款说明</text>
-            <text v-if="info.refundExplain">{{ info.refundExplain }}</text>
+            <text>{{ info.refundExplain }}</text>
+          </view>
+          <view v-if="info.refundFailDesc">
+            <text>失败说明</text>
+            <text>{{ info.refundFailDesc }}</text>
           </view>
         </view>
       </uni-card>

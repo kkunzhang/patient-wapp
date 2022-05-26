@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "订单详情",
   "usingComponents": {
+    "u-skeleton": "/uni_modules/uview-ui/components/u-skeleton/u-skeleton",
     "card-item": "/components/card-item/card-item",
     "cp-pay-type": "/components/cp-pay-type/cp-pay-type",
     "pay-card-prescription": "/components/pay-card/pay-card-prescription",
