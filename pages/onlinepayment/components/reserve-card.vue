@@ -8,7 +8,7 @@
       <view class="item-font-spacing">
         <view>
           <text>处方编号</text>
-          <text>{{ info.prescriptionNo }}</text>
+          <text>{{ info.hisPrescriptionId }}</text>
         </view>
         <view>
           <text>处方类型</text>

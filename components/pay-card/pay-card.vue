@@ -11,7 +11,7 @@
         <view class="item-font-spacing">
           <view>
             <text>处方编号</text>
-            <text>{{ item.prescriptionNo }}</text>
+            <text>{{ item.prescriptionId }}</text>
           </view>
           <view>
             <text>开单科室</text>
