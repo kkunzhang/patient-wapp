@@ -61,12 +61,27 @@ export default {
      *点击退款
      */
     onRefund: debounce(function () {
-      let msg = '提交退款申请后，您挂的号将不在被锁定，是否确认退款'
-      this.$tools.showModal('', msg).then((res) => {
-        if (res) {
-          this.toRefundApply()
-        }
-      })
+      if (this.info.refundFailCount > 1) {
+        this.$tools
+          .showModal(
+            '',
+            '多次线上退款不成功建议到院内窗口进行咨询',
+            '线下咨询',
+            '线上退款'
+          )
+          .then((res) => {
+            if (res) {
+              this.toRefundApply()
+            }
+          })
+      } else {
+        let msg = '提交退款申请后，您挂的号将不在被锁定，是否确认退款'
+        this.$tools.showModal('', msg).then((res) => {
+          if (res) {
+            this.toRefundApply()
+          }
+        })
+      }
     }),
     //点击取消挂号
     onCancel() {
@@ -86,20 +101,20 @@ export default {
       const data = await toRefundApply(this.registrationNo)
       console.log(data)
       if (data.code === 100000) {
-        setTimeout(function () {
-          uni.navigateTo({
-            url: `/pages/refund/detail?applyNo=${data.data}&redirectFlag=true`,
-          })
-        }, 500)
+        uni.navigateTo({
+          url: `/pages/refund/detail?applyNo=${data.data}&redirectFlag=true`,
+        })
       } else if (data.code === 307006) {
         uni.showToast({
           title: '已用号无法申请退款',
           duration: 3000,
+          icon: 'none',
         })
       } else if (data.code === 307007) {
         uni.showToast({
           title: '逾期未看诊，请前往医院窗口咨询',
           duration: 3000,
+          icon: 'none',
         })
       }
     },
@@ -115,7 +130,7 @@ export default {
             setTimeout(function () {
               uni.hideToast()
               uni.redirectTo({
-                url: `/pages/registration/index`,
+                url: `/pages/registrationOrders/index`,
               })
             }, 1500)
           },

@@ -79,6 +79,7 @@ export default {
     onClean() {
       this.info = []
       this.page = '1'
+      this.loading = true
     },
     getInfo(item) {
       //todo 获取全部数句
@@ -87,7 +88,6 @@ export default {
       })
     },
     async getList(status = '') {
-      this.loading = true
       let params = {
         registrationStatus: status,
         page: this.page,
@@ -117,6 +117,8 @@ export default {
   onShow() {
     this.onClean()
     this.getList(this.tipId)
+    console.log('222')
+
     setTimeout(() => {
       this.loading = false
     }, 3000)

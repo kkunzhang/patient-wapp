@@ -13,7 +13,7 @@
         <view class="item-font-spacing">
           <view>
             <text>处方编号</text>
-            <text>{{ item.prescriptionNo }}</text>
+            <text>{{ item.hisPrescriptionId }}</text>
           </view>
           <view>
             <text>就诊患者</text>
