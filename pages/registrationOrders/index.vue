@@ -66,6 +66,7 @@ export default {
       pageSize: '10',
       flag: false,
       loading: true,
+      tipId: '',
     }
   },
   methods: {
@@ -73,7 +74,7 @@ export default {
       //清除数据
       this.onClean()
       this.getList(item.id)
-      console.log(item)
+      this.tipId = item.id
     },
     onClean() {
       this.info = []
@@ -92,6 +93,7 @@ export default {
         page: this.page,
         pageSize: this.pageSize,
       }
+      console.log(params)
       const data = await reservationList(params)
       console.log(data)
       if (data.code == 100000) {
@@ -112,9 +114,9 @@ export default {
       }
     },
   },
-  onShow(options) {
+  onShow() {
     this.onClean()
-    this.getList()
+    this.getList(this.tipId)
     setTimeout(() => {
       this.loading = false
     }, 3000)
